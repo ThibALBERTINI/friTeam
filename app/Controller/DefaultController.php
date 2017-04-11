@@ -90,4 +90,17 @@ class DefaultController extends Controller
 		$this->showJson($tabAssociatif);
 	}
 
+		public function formation()
+	{		
+		// CONTROLLER
+		// TRAITEMENT DU FORMULAIRE DE NEWSLETTER
+		//$this->newsletterTraitement();
+		
+		// $this CONTIENT L'OBJET QUI SERT A APPELER LA METHODE
+		// LA METHODE show EST FOURNIE PAR LA CLASSE Controller
+		// DONT CETTE CLASSE HERITE
+		// show VA ACTIVER LA PARTIE VIEW POUR CREER LE HTML
+		$this->show("pages/admin-section-formation");
+	}
+
 }

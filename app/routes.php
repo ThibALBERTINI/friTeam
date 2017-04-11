@@ -17,16 +17,16 @@
 
 		// ROUTE POUR LA PAGE ADMIN
 		// ['GET|POST', 	'/admin/article',				'Admin#article',		'admin_article'], // UNE ROUTE
-		// ['GET|POST', 	'/admin/article/update/[:id]',	'Admin#articleUpdate',  'admin_article_update'], // UNE ROUTE
+		['GET|POST', 	'/admin/formation/update/[:id]',	'Admin#formationUpdate',  'admin_formation_update'], // UNE ROUTE
 
 		['GET|POST',    '/admin/', 					'Admin#home',     				'admin_home'],     // UNE ROUTE
-		['GET|POST', 	'/admin/friteam-equipe',	'Admin#friteam-equipe', 		'admin_friteam-equipe'], // UNE ROUTE
-		['GET|POST', 	'/admin/formation', 		'Admin#formation',				'admin_formation'],  // UNE ROUTE
-		['GET|POST', 	'/admin/formation/[:url]', 	'Admin#formation-detail', 		'admin_formation-detail'],  // UNE ROUTE
+		['GET|POST', 	'/admin/friteam-equipe',	'Admin#friteamEquipe', 		'admin_friteam-equipe'], // UNE ROUTE
+		//['GET|POST', 	'/admin/formation', 		'Admin#formation',				'admin_formation'],  // UNE ROUTE
+		['GET|POST', 	'/admin/formation/[:url]', 	'Admin#formation', 		'admin_formation_detail'],  // UNE ROUTE
 		['GET|POST', 	'/admin/accompagnement', 	'Admin#accompagnement', 		'admin_accompagnement'],  // UNE ROUTE
-		['GET|POST', 	'/admin/accompagnement/[:url]','Admin#accompagnement-detail','admin_accompagnement-detail'],  // UNE ROUTE
+		['GET|POST', 	'/admin/accompagnement/[:url]','Admin#accompagnementDetail','admin_accompagnement-detail'],  // UNE ROUTE
 		['GET|POST', 	'/admin/blog',				'Admin#blog',					'admin_blog'],  // UNE ROUTE
-		['GET|POST', 	'/admin/blog/[:url]',		'Admin#blog-detail',			'admin_blog-detail'],  // UNE ROUTE
+		['GET|POST', 	'/admin/blog/[:url]',		'Admin#blogDetail',			'admin_blog-detail'],  // UNE ROUTE
 		['GET|POST', 	'/admin/contact', 			'Admin#contact',  				'admin_contact'],  // UNE ROUTE
 		['GET|POST', 	'/admin/users', 			'Admin#users',  				'admin_users'],  // UNE ROUTE
 
@@ -37,3 +37,4 @@
 		//AJAX
 		['GET|POST', 	'/ajax', 'Default#ajax', 'default_ajax'],
 	);
+	
