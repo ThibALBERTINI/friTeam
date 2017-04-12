@@ -45,3 +45,26 @@ $(function(){
         ;
     });
 });
+
+$(function(){
+    // CETTE FONCTION SERA APPELEE PAR JQUERY
+    // QUAND LA PAGE SERA PRETE
+    
+    // JE VEUX BLOQUER LE FONCTIONNEMENT CLASSIQUE DU FORMULAIRE
+    // QUI A LA CLASSE .form-ajax
+    $(".supp").on("click", function(event){
+        // LE CODE DE CETTE FONCTION EST ACTIVE 
+        // QUAND LE VISITEUR CLIQUE SUR LE BOUTON SUBMIT
+        var supp = confirm("êtes vous certain de vouloir supprimer cet administrateur ?")
+        if(!supp) //si la personne ne veut pas, je bloque l'action
+        {
+        event.preventDefault();  // bloque le fonctionnement classique
+        }
+        // https://www.w3schools.com/jsref/event_preventdefault.asp
+        // BLOQUER LE FONCTIONNEMENT CLASSIQUE
+       
+        
+        
+    });
+});
+

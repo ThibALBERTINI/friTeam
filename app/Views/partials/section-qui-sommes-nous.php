@@ -1,4 +1,7 @@
-
+<?php
+$objetEquipeModel = new \Model\EquipeModel;
+//$tabEquipe = $objetEquipeModel->find($id);
+?>
 <section>
     <h2>QUI SOMMES-NOUS ?</h2>
 <?php
@@ -13,12 +16,12 @@
 // IL FAUT CREER UNE CLASSE ProfilModel
 //                              extends \W\Model\Model
 
-$objetProfilModel = new \Model\ProfilModel;
+$objetEquipeModel = new \Model\EquipeModel;
 
 // LA METHODE findAll EST DEFINIE DANS LA CLASSE \W\Model\Model
 // LA METHODE findAll RENVOIE UN TABLEAU DE TABLEAU
 // ON PEUT TRIER PAR UNE COLONNE DE LA TABLE
-$tabResult = $objetProfilModel->findAll("dateCreation", "DESC");
+$tabResult = $objetEquipeModel->findAll("id", "ASC");
 
 // JE PEUX PARCOURIR LA TABLE POUR RECUPERER CHAQUE LIGNE
 foreach($tabResult as $index => $tabInfo)
