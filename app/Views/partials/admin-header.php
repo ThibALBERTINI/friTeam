@@ -18,6 +18,7 @@
                     <li><a href="<?php echo $this->url('admin_accompagnement') ?>">Accompagnement</a></li>
                     <li><a href="<?php echo $this->url('admin_contact') ?>">Contact</a></li>
                     <li><a href="<?php echo $this->url('admin_logout') ?>">Se Déconnecter</a></li>
+                    <li><a href="<?php echo $this->url('admin_creer-admin') ?>">Créer / Supprimer un administrateur</a></li>
                 </ul>
             </nav>
         </header>

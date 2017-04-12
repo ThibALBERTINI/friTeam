@@ -20,18 +20,20 @@
 		// ['GET|POST', 	'/admin/article/update/[:id]',	'Admin#articleUpdate',  'admin_article_update'], // UNE ROUTE
 
 		['GET|POST',    '/admin/', 					'Admin#home',     				'admin_home'],     // UNE ROUTE
-		['GET|POST', 	'/admin/friteam-equipe',	'Admin#friteam-equipe', 		'admin_friteam-equipe'], // UNE ROUTE
+		['GET|POST', 	'/admin/friteam-equipe',	'Admin#friteamEquipe', 		'admin_friteam-equipe'], // UNE ROUTE
 		['GET|POST', 	'/admin/formation', 		'Admin#formation',				'admin_formation'],  // UNE ROUTE
-		['GET|POST', 	'/admin/formation/[:url]', 	'Admin#formation-detail', 		'admin_formation-detail'],  // UNE ROUTE
+		['GET|POST', 	'/admin/formation/[:url]', 	'Admin#formationDetail', 		'admin_formation-detail'],  // UNE ROUTE
 		['GET|POST', 	'/admin/accompagnement', 	'Admin#accompagnement', 		'admin_accompagnement'],  // UNE ROUTE
-		['GET|POST', 	'/admin/accompagnement/[:url]','Admin#accompagnement-detail','admin_accompagnement-detail'],  // UNE ROUTE
+		['GET|POST', 	'/admin/accompagnement/[:url]','Admin#accompagnementDetail','admin_accompagnement-detail'],  // UNE ROUTE
 		['GET|POST', 	'/admin/blog',				'Admin#blog',					'admin_blog'],  // UNE ROUTE
-		['GET|POST', 	'/admin/blog/[:url]',		'Admin#blog-detail',			'admin_blog-detail'],  // UNE ROUTE
+		['GET|POST', 	'/admin/blog/[:url]',		'Admin#blogDetail',			'admin_blog-detail'],  // UNE ROUTE
 		['GET|POST', 	'/admin/contact', 			'Admin#contact',  				'admin_contact'],  // UNE ROUTE
-		['GET|POST', 	'/admin/users', 			'Admin#users',  				'admin_users'],  // UNE ROUTE
+		['GET|POST', 	'/admin/creerAdmin', 		'Admin#creerAdmin',  			'admin_creer-admin'],  // UNE ROUTE
 
 		//ATTENTION IL FAUT CHANGER LE NOM DE LA ROUTE POUR LE LOGIN
 		['GET|POST', 	'/users/login',	'Users#login',  'users_login'], // UNE ROUTE
+		['GET|POST', 	'/users/loosePass',	'Users#loosePass',  'users_loosePass'], // UNE ROUTE
+		['GET|POST', 	'/users/newPass',	'Users#newPass',  'users_newPass'], // UNE ROUTE
 		['GET|POST', 	'/admin/logout', 'Admin#logout', 'admin_logout'],
 
 		//AJAX
