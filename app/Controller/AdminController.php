@@ -5,9 +5,81 @@ namespace Controller;
 use \W\Controller\Controller;
 use \Model\FormationModel;
 
+
 class AdminController
         extends Controller
 {
+
+    public function home()
+    {
+        $this->allowTo([ "admin", "super-admin" ]);
+    }// fin function home
+
+
+    public function friteam_equipe()
+    {
+        $this->allowTo([ "admin", "super-admin" ]);
+    }// fin function friteam-equipe
+
+
+    // public function formation()
+    // {
+    //      $this->allowTo([ "admin", "super-admin" ]);
+    // }// fin function formation
+
+
+    public function formation_detail()
+    {
+         $this->allowTo([ "admin", "super-admin" ]);
+    }// fin function formation-detail
+
+
+    public function accompagnement()
+    {
+         $this->allowTo([ "admin", "super-admin" ]);
+    } // fin function accompagnement
+
+
+    public function accompagnement_detail()
+    {
+         $this->allowTo([ "admin", "super-admin" ]);
+    }// fin function accompagnement-detail
+
+
+    public function blog()
+    {
+         $this->allowTo([ "admin", "super-admin" ]);
+    }// fin function blog
+
+
+    public function blog_detail()
+    {
+         $this->allowTo([ "admin", "super-admin" ]);
+    }// fin function blog-detail
+
+
+
+    public function contact()
+    {
+         $this->allowTo([ "admin", "super-admin" ]);
+    } // fin function contact
+
+
+    public function users()
+    {
+         $this->allowTo([ "admin", "super-admin" ]);
+    } // fin function users
+
+
+    public function logout()
+    {
+        $objetAuthentificationModel = new \W\Security\AuthentificationModel;
+        $objetAuthentificationModel->logUserOut();
+        
+        // REDIRIGER VERS LA PAGE DE LOGIN
+        $this->redirectToRoute("users_login");
+    }// fin function logout
+
     // methode pour la route
     // /admin/formation/update/[:id]
     // le framework W extrait la partie [:id] de l'url
@@ -19,6 +91,7 @@ class AdminController
         $message = "";
         if (isset($_POST["operation"]) && ($_POST["operation"] == "modifier"))
         {
+            $upload = upload($img);
             // RECUPERER LES INFOS DU FORMULAIRE
             // http://php.net/manual/en/function.trim.php
             $img               = trim($_POST["img_formation"]);
@@ -63,8 +136,8 @@ class AdminController
                 // $id_auteur      = 1;     // DEBUG
                 $dateCreation   = date("Y-m-d H:i:s");    // FORMAT DATETIME SQL
                 
-                // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL article
-                // JE CREE UN OBJET DE LA CLASSE ArticleModel
+                // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
+                // JE CREE UN OBJET DE LA CLASSE FormationModel
                 // NE PAS OUBLIER DE FAIRE use
                 $objetFormationModel = new formationModel;
                 // JE PEUX UTILISER LA METHODE update DE LA CLASSE \W\Model\Model
@@ -98,15 +171,13 @@ class AdminController
         }
         
         // VIEW
-        // AFFICHER LA PAGE QUI PERMET DE MODIFIER UN ARTICLE
+        // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
         $this->show("pages/admin_formation_update", [ "id" => $id, "message" => $message ]);
     }
 
-
-    ///STOP ICI AVANT LA PAUSE
     
     // LA METHODE ASSOCIEE A LA ROUTE /admin/formation/[:id]
-    public function formation ()
+    public function formation()
     {
         // INITIALISE LA VALEUR DE LA VARIABLE 
         $message = "";
@@ -122,7 +193,7 @@ class AdminController
 
             if ($id > 0)
             {
-                // ESSAYER D'EFFACER LA LIGNE DANS LA TABLE MYSQL article
+                // ESSAYER D'EFFACER LA LIGNE DANS LA TABLE MYSQL formation
                 // NE PAS OUBLIER DE FAIRE use
                 $objetFormationModel = new FormationModel;
                 $objetFormationModel->delete($id);
@@ -131,18 +202,8 @@ class AdminController
         
         if (isset($_POST["operation"]) && ($_POST["operation"] == "creer"))
         {
-            //array_map('strip_tags', $_POST);
-            
+            $upload = upload($img);
             // RECUPERER LES INFOS DU FORMULAIRE
-/*
-            $tabInfoAttendues = [ 
-                    "titre" => "",
-                    ];
-            foreach($tabInfoAttendues as $name)
-            {
-                $tabInfoAttendues[$name] = $_POST[$name];
-            }
-*/            
             // http://php.net/manual/en/function.trim.php
             $img               = trim($_POST["img_formation"]);
             $titre             = trim($_POST["titre_formation"]);
@@ -184,8 +245,8 @@ class AdminController
                 $id_auteur      = 1;     // DEBUG
                 $dateCreation   = date("Y-m-d H:i:s");    // FORMAT DATETIME SQL
                 
-                // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL article
-                // JE CREE UN OBJET DE LA CLASSE ArticleModel
+                // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
+                // JE CREE UN OBJET DE LA CLASSE FormationModel
                 // NE PAS OUBLIER DE FAIRE use
                 $objetFormationModel = new FormationModel;
                 // JE PEUX UTILISER LA METHODE insert DE LA CLASSE \W\Model\Model
@@ -207,7 +268,7 @@ class AdminController
                     ]);
                 
                 // OK
-                $message = "La Fiche Article à bien été créée";
+                $message = "La Fiche Formation à bien été créée";
             }
             else
             {
