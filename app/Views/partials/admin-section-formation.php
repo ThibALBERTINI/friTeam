@@ -1,6 +1,14 @@
-<?php 
+<!-- <?php 
+// ON VA ALLER CHERCHER LES INFOS DE LA FORMATION DANS LA TABLE MYSQL formation
+// APPROCHE PAR DELEGATION
+$objetFormationModel = new \Model\FormationModel;
+$tabFormation = $objetFormationModel->find($id);
 
-?>
+//if (!empty($tabFormation)) :
+    // ON CREE DES VARIABLES LOCALES AVEC LE MEME NOM 
+    // QUE LA CLE DANS LE TABLEAU ASSOCIATIF
+    extract($tabFormation);
+?> -->
 <section>
 	<h2>AJOUT D'UNE FICHE FORMATION</h2>
 	<form action="" method="POST" enctype="multipart/form-data">
@@ -86,7 +94,9 @@
 
 	</form>
 </section>
-
+<!-- <?php
+//endif;
+?> -->
 
 <section>
 	<h2>Liste des Formations déjà enregistrées dans la Base de Donnée</h2>
@@ -140,13 +150,14 @@
 		echo 
 <<<CODEHTML
 	<td><a href="$hrefModifier">MODIFIER</td>
-	<td><a href="$hrefSupprimer">SUPPRIMER</td>
-	</tr>
+ 	<td><a href="$hrefSupprimer">SUPPRIMER</td>
+ 	</tr>
 CODEHTML;
 
-	}
+}
 
- ?>
+?>
 		</tbody>
 	</table>
+
 </section>
