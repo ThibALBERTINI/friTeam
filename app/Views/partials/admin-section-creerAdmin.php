@@ -69,12 +69,14 @@ foreach($tabResult as $tabLigne)
     // BOUCLE POUR PARCOURIR CHAQUE COLONNE
     foreach($tabLigne as $nomColonne => $valeurColonne)
     {
+    	if($nomColonne != "password" && $nomColonne != "token")
+    	{
         // AFFICHER LA COLONNE
         echo "<th>$nomColonne</th>";
+        }
     }
      // AJOUTER LES COLONNES MODIFIER ET SUPPRIMER
-    echo "<th>MODIFIER</th>";
-    echo "<th>SUPPRIMER</th>";
+     echo "<th>SUPPRIMER</th>";
     
     echo "</tr>";
 }
@@ -93,8 +95,11 @@ foreach ($tabResult as $tabLigne)
 	//boucle pour parcourir chaque colonne
 	foreach($tabLigne as $nomColonne => $valeurColonne)
 	{
+		if($nomColonne != "password" && $nomColonne != "token")
+    	{
 		//Afficher la colonne
 		echo "<td>$valeurColonne</td>";
+	}
 	}
 // AJOUTER LES COLONNES MODIFIER ET SUPPRIMER
    $id = $tabLigne["id"];
@@ -103,7 +108,6 @@ foreach ($tabResult as $tabLigne)
 
     echo
 <<<CODEHTML
-    <td><a href="$hrefModifier">MODIFIER</a></td>
     <td><a href="$hrefSupprimer" class="supp">SUPPRIMER</a></td>
     </tr>
 CODEHTML;
