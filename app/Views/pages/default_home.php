@@ -1,7 +1,7 @@
-<?php 
+<?php
 
-$this->insert("partials/header");
-$this->insert("partials/section-home");
-$this->insert("partials/footer");
+  $this -> insert("partials/header-home");
+  $this -> insert("partials/section-home");
+  $this -> insert("partials/footer");
 
- ?>
+?>
