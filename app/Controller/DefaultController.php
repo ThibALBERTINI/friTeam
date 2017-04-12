@@ -8,7 +8,7 @@ class DefaultController extends Controller
 {
 	public function friteamEquipe()
 	{
-		
+		$this->show("pages/default_friteam-equipe");
 	}
 
 	/**
@@ -130,14 +130,14 @@ class DefaultController extends Controller
 			//Sécurité
 			//Vérifier que chaque information est conforme
 			if (is_string($civilite)	&& ( mb_strlen($civilite) > 0 )
-				is_string($nom)			&& ( mb_strlen($nom) > 0 )
-				is_string($prenom)		&& ( mb_strlen($prenom) > 0 )
-				is_string($email)		&& ( mb_strlen($email) > 0 )
-				is_string($tel)			&& ( mb_strlen($tel) > 0 )
-				is_string($adresse)		&& ( mb_strlen($adresse) > 0 )
-				is_string($cp)			&& ( mb_strlen($cp) > 0 )
-				is_string($ville)		&& ( mb_strlen($ville) > 0 )
-				is_string($message)		&& ( mb_strlen($message) > 0 )
+				&& is_string($nom)			&& ( mb_strlen($nom) > 0 )
+				&& is_string($prenom)		&& ( mb_strlen($prenom) > 0 )
+				&& is_string($email)		&& ( mb_strlen($email) > 0 )
+				&& is_string($tel)			&& ( mb_strlen($tel) > 0 )
+				&& is_string($adresse)		&& ( mb_strlen($adresse) > 0 )
+				&& is_string($cp)			&& ( mb_strlen($cp) > 0 )
+				&& is_string($ville)		&& ( mb_strlen($ville) > 0 )
+				&& is_string($message)		&& ( mb_strlen($message) > 0 )
 				)
 			{
 				//Enregistrer les information receuillies par le formulaire dans la base de données

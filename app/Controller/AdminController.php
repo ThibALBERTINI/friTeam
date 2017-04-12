@@ -5,6 +5,7 @@ namespace Controller;
 use \W\Controller\Controller;
 use \Model\AdminModel;
 use \Model\FormationModel;
+use \Model\EquipeModel;
 
 
 
@@ -168,7 +169,7 @@ class AdminController
             $lien              = trim($_POST["lien_catalogue"]);
             $url               = trim($_POST["url"]);
             
-            //$id_categorie       = trim($_POST["id_categorie"]);
+            // $id_categorie       = trim($_POST["id_categorie"]);
 
             // SECURITE
             // VERIFIER QUE CHAQUE INFO EST CONFORME
@@ -187,13 +188,13 @@ class AdminController
                     && is_string($programme)    && ( mb_strlen($programme) > 0 ) 
                     && is_string($lien)         && ( mb_strlen($lien) > 0 ) 
                     && is_string($url)          && ( mb_strlen($url) > 0 ) 
-                    //&& is_numeric($id_categorie) 
+                    // && is_numeric($id_categorie) 
                 )
             {
                 // OK ON A LES BONNES INFOS
                 // COMPLETER LES INFOS MANQUANTES
                 // $id_auteur      = 1;     // DEBUG
-                $dateCreation   = date("Y-m-d H:i:s");    // FORMAT DATETIME SQL
+                // $dateCreation   = date("Y-m-d H:i:s");    // FORMAT DATETIME SQL
                 
                 // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
                 // JE CREE UN OBJET DE LA CLASSE FormationModel
@@ -302,7 +303,7 @@ class AdminController
                 // OK ON A LES BONNES INFOS
                 // COMPLETER LES INFOS MANQUANTES
                 $id_auteur      = 1;     // DEBUG
-                $dateCreation   = date("Y-m-d H:i:s");    // FORMAT DATETIME SQL
+              //  $dateCreation   = date("Y-m-d H:i:s");    // FORMAT DATETIME SQL
                 
                 // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
                 // JE CREE UN OBJET DE LA CLASSE FormationModel
