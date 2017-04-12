@@ -8,7 +8,7 @@ class DefaultController extends Controller
 {
 	public function friteamEquipe()
 	{
-
+		$this->show("pages/default_friteam-equipe");
 	}
 
 	/**
