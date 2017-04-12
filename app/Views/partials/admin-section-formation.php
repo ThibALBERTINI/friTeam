@@ -7,7 +7,7 @@
 
 		<div class="form-group">
 			<label for="img_formation">Illustration</label><br>
-			<input type="text" name="img_formation" id="img_formation" class="form-control"><br>
+			<input type="file" name="img_formation" id="img_formation" class="form-control"><br>
 		</div>
 
 		<div class="form-group">

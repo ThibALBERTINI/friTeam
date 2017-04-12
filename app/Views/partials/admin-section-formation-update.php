@@ -1,5 +1,5 @@
 <?php
-// ON VA ALLER CHERCHER LES INFOS DE L'ARTICLE DANS LA TABLE MYSQL article
+// ON VA ALLER CHERCHER LES INFOS DE LA FORMATION DANS LA TABLE MYSQL formation
 // APPROCHE PAR DELEGATION
 $objetFormationModel = new \Model\FormationModel;
 $tabFormation = $objetFormationModel->find($id);
@@ -7,7 +7,7 @@ $tabFormation = $objetFormationModel->find($id);
 if (!empty($tabFormation)) :
     // ON CREE DES VARIABLES LOCALES AVEC LE MEME NOM 
     // QUE LA CLE DANS LE TABLEAU ASSOCIATIF
-    extract($tabArticle);
+    extract($tabFormation);
     
 ?>
 <section>

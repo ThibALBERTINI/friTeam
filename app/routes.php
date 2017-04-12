@@ -16,7 +16,7 @@
 		// AVEC W
 
 		// ROUTE POUR LA PAGE ADMIN
-		// ['GET|POST', 	'/admin/article',				'Admin#article',		'admin_article'], // UNE ROUTE
+		
 		['GET|POST', 	'/admin/formation/update/[:id]',	'Admin#formationUpdate',  'admin_formation_update'], // UNE ROUTE
 
 		['GET|POST',    '/admin/', 					'Admin#home',     				'admin_home'],     // UNE ROUTE
