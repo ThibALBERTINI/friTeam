@@ -11,51 +11,79 @@ use \Model\FormationModel;
 class AdminController
         extends Controller
 {
-	public function creerAdmin ()
+	public function creerAdmin ()  // supprimer et modifier compris
 	{
+		$message = "";
+
+        if (isset($_REQUEST["operation"]) && ($_REQUEST["operation"] == "supprimer"))
+        {
+            $id = intval(trim($_REQUEST["id"]));  // intval transforme un texte en nombre
+            if ($id > 0)
+            {
+                // ESSAYER D'EFFACER LA LIGNE DANS LA TABLE MYSQL article
+                // NE PAS OUBLIER DE FAIRE use
+                $objetAdminModel = new AdminModel;
+                $objetAdminModel->delete($id);
+            }// fin intval
+        }// fin if operation = supprimer
 
 		if (isset($_POST["operation"]) && ($_POST["operation"] == "creer"))  //vient du input hidden mais si le questionnaire est vide il sera stoppé par les verif is_string... (et les required de form)
 		{
-			//array_map('strip_tags', $POST);  //note est-ce nécessaire de nettoyer la partie admin?
-			 // RECUPERER LES INFOS DU FORMULAIRE
-          
-           
+
             $login              = $_POST["login"];
             $email              = $_POST["email"];
-            $password            = $_POST["password"];
-            $role              = $_POST["role"]; // recuperer la values
+            $password           = password_hash($_POST["password"], PASSWORD_DEFAULT);
+            $role              =  $_POST["role"];// recuperer la values
+           
+			//array_map('strip_tags', $POST);  //note est-ce nécessaire de nettoyer la partie admin?
+			 // RECUPERER LES INFOS DU FORMULAIRE
+           
+            $objetUsersModel = new \W\Model\UsersModel;
+            $exist= $objetUsersModel->getUserByUsernameOrEmail($login);
+            $exist2= $objetUsersModel->getUserByUsernameOrEmail($email);
+            
+            if($exist == 0 && $exist2 ==0)
+            {          
            
             
-            // SECURITE
-            // VERIFIER QUE CHAQUE INFO EST CONFORME
-            // http://php.net/manual/en/function.mb-strlen.php
-            if (is_string($login)           && ( mb_strlen($login) > 4 )
-                    && is_string($email)    && ( mb_strlen($email) > 4 ) 
+                // SECURITE
+                // VERIFIER QUE CHAQUE INFO EST CONFORME
+                // http://php.net/manual/en/function.mb-strlen.php
+                if (is_string($login)           && ( mb_strlen($login) > 4 )
+                        && is_string($email)    && ( mb_strlen($email) > 4 ) 
+                        
+                        && is_string($password)  && ( mb_strlen($password) > 4 ) 
+                       
+                    )//fin ifstring
+                {
+                   // OK ON A LES BONNES INFOS
                     
-                    && is_string($password)  && ( mb_strlen($password) > 4 ) 
-                   
-                )//fin ifstring
-            {
-               // OK ON A LES BONNES INFOS
-                
-                // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL admin
-                // JE CREE UN OBJET DE LA CLASSE ArticleModel
-                // NE PAS OUBLIER DE FAIRE use
-                $objetAdminModel = new AdminModel;
-                // JE PEUX UTILISER LA METHODE insert DE LA CLASSE \W\Model\Model
-                $objetAdminModel->insert([
-                    "login"         => $login, 
-                    "email"         => $email, 
-                    "password"       => $password, 
-                    "role"     => $role, 
-                    
-                    ]);
+                    // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL admin
+                    // JE CREE UN OBJET DE LA CLASSE ArticleModel
+                    // NE PAS OUBLIER DE FAIRE use
+                    $objetAdminModel = new AdminModel;
+                    // JE PEUX UTILISER LA METHODE insert DE LA CLASSE \W\Model\Model
+                    $objetAdminModel->insert([
+                        "login"         => $login, 
+                        "email"         => $email, 
+                        "password"       => $password, 
+                        "role"     => $role, 
+                        
+                        ]);
 
-                $message = "Vous avez créé l'administrateur" . $login;
-            }// fin ifstring
+                    $message = "Vous avez créé l'administrateur " . $login;
+                }// fin ifstring
+                
+                else 
+                {
+                   $message= "ERREUR : INFO INCORRECTE Attention aux tailles mini"; 
+                }
+
+            }
             else
             {
-            	$message= "ERREUR : INFO INCORRECTE";
+                $message= "Login ou adresse mail déjà utilisé(e)";
+            	
                 // UNE ERREUR transmettre à la partie view (en dessous $this->show)
             }
   
@@ -64,7 +92,7 @@ class AdminController
 		 //$this->allowTo([ "super-admin" ]);
 
 
-		$this->show("pages/admin_creer-admin");
+		$this->show("pages/admin_creer-admin", ["message" => $message ]);
 	} // fin function creer admin
 
 	

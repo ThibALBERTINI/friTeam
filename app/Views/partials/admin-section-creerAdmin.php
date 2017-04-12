@@ -104,9 +104,10 @@ foreach ($tabResult as $tabLigne)
     echo
 <<<CODEHTML
     <td><a href="$hrefModifier">MODIFIER</a></td>
-    <td><a href="$hrefSupprimer">SUPPRIMER</a></td>
+    <td><a href="$hrefSupprimer" class="supp">SUPPRIMER</a></td>
     </tr>
 CODEHTML;
+
 
 
 }
