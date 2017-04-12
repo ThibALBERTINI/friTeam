@@ -6,6 +6,10 @@ use \W\Controller\Controller;
 
 class DefaultController extends Controller
 {
+	public function friteamEquipe()
+	{
+		
+	}
 
 	/**
 	 * Page d'accueil par défaut
