@@ -1,9 +1,9 @@
     <!-- Qui Sommes-Nous ? -->
-    <div class="container-fluid qui-sommes-nous center-block" id="qui-sommes-nous">
+    <div class="container-fluid qui-sommes-nous" id="qui-sommes-nous">
       <div class="row">
 
         <!-- Texte Friteam -->
-        <div class="col-sm-12 col-md-6 col-centered">
+        <div class="col-sm-12 col-md-6">
           <h2 class="text-center">FRI TEAM C'est Quoi ?</h2>
 
           <div class="ligne"></div>

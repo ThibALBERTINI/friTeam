@@ -50,6 +50,10 @@
   transition: all ease 300ms !important;
 }
 
+.navbar-default ul li a.active {
+  color: green !important;
+}
+
 /*Diiferentes couleurs par item du menu*/
 .navbar-default ul li a.menu1::after {
     background-color: #BFBD3F;
@@ -578,36 +582,50 @@ span.companie {
 ********************
 *******************/
 
-div.flex {
-  width: 75%;
+
+/* Centrer les colonnes de la page formations*/
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+
+/*Mis en forme des cartes Formations*/
+div.carte-container {
   margin: 0 auto;
-  display: flex;
-  /*margin-top: 20px;*/
+  /*width: 100%;*/
 }
 
 div.carte-formation {
-  /*margin: 0 auto;*/
-  margin-left: 10px;
-  margin-right: 10px;
+  margin: 0 auto;
+  padding: 0;
+  margin-left: 15px;
+  margin-right: 15px;
   margin-top: 10px;
   margin-bottom: 30px;
   background-color: #FFFFFF;
-  height: 530px;
-  width: 320px;
+  height: 560px;
+  width: 310px;
   border-radius: 20px;
   overflow: hidden;
 
-  -moz-box-shadow: 1px 2px 3px 0px rgba(194,194,194,0.2);;
-  -webkit-box-shadow: 1px 2px 3px 0px rgba(194,194,194,0.2);;
-  -o-box-shadow: 1px 2px 3px 0px rgba(194,194,194,0.2);;
-  box-shadow: 1px 2px 3px 0px rgba(194,194,194,0.2);;
+  -moz-box-shadow: 0px 2px 6px 0px rgba(194,194,194,0.2);;
+  -webkit-box-shadow: 0px 2px 6px 0px rgba(194,194,194,0.2);;
+  -o-box-shadow: 0px 2px 6px 0px rgba(194,194,194,0.2);;
+  box-shadow: 0px 2px 6px 0px rgba(194,194,194,0.2);;
   filter:progid:DXImageTransform.Microsoft.Shadow(color=rgba(194,194,194,0.2);, Direction=165, Strength=8);
 }
 
 div.image img {
   overflow: hidden;
-  height: 100%;
-  width: 100%;
+  height: 200px;
+  min-width: 100%;
   /*border-top-left-radius: 20px;
   border-top-right-radius: 20px;*/
 }
@@ -726,4 +744,9 @@ PAGE CONTACT
   color: #FFFFFF;
   transition: all ease 300ms;
 
+}
+
+/*Message D'erreur*/
+div.message {
+  color: firebrick;
 }

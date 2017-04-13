@@ -29,10 +29,15 @@
 
         <!-- Civilité -->
         <div class="form-group">
-          <p>Civilité</p>
-          <label for="civilite_madame">Civilité</label>
-          <input type="radio" name="civilite_contact" id="civilite_madame" value="madame" class="form-control" required />
-          <input type="radio" name="civilite_contact" id="civilite_monsieur" value="monsieur" class="form-control" required />
+          <label>Civilité</label>
+          <div>
+            <input type="radio" name="civilite_contact" id="civilite_madame" value="madame" required />
+            <label for="civilite_madame">Madame</label>
+          </div>
+          <div>
+            <input type="radio" name="civilite_contact" id="civilite_monsieur" value="monsieur" required />
+            <label for="civilite_monsieur">Monsieur</label>
+          </div>
         </div>
 
           <!-- Nom -->
