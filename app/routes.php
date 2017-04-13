@@ -4,7 +4,7 @@
 	   // GET OU POST	URL NAVIGATEUR			CLASSE#METHODE					ID UNIQUE DE LA ROUTE
 		['GET|POST',    '/', 					'Default#home',     			'default_home'],     // UNE ROUTE
 		['GET|POST', 	'/friteam-equipe',		'Default#friteamEquipe', 		'default_friteam-equipe'], // UNE ROUTE
-		['GET|POST', 	'/formation', 			'Default#formation',			'default_formations'],  // UNE ROUTE
+		['GET|POST', 	'/formation', 			'Default#formation',			'default_formation'],  // UNE ROUTE
 		['GET|POST', 	'/formation/[:url]', 	'Default#formationDetail', 		'default_formation-detail'],  // UNE ROUTE
 		['GET|POST', 	'/accompagnement', 		'Default#accompagnement', 		'default_accompagnement'],  // UNE ROUTE
 		['GET|POST', 	'/accompagnement/[:url]','Default#accompagnementDetail','default_accompagnement-detail'],  // UNE ROUTE

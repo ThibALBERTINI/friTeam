@@ -10,6 +10,9 @@ $tabFormation = $objetFormationModel->find($id);
     extract($tabFormation);
 ?> -->
 <section>
+<div class="container-fluid">
+<div class="row">
+<div class="col-xs-12 col-md-6 col-md-offset-3">
 	<h2>AJOUT D'UNE FICHE FORMATION</h2>
 	<form action="" method="POST" enctype="multipart/form-data">
 
@@ -93,71 +96,97 @@ $tabFormation = $objetFormationModel->find($id);
 		</div>
 
 	</form>
+</div>
+</div>
+</div>
 </section>
 <!-- <?php
 //endif;
 ?> -->
 
 <section>
-	<h2>Liste des Formations déjà enregistrées dans la Base de Donnée</h2>
-	<table>
-		<thead>
-<?php
-	//création d'un nouvel objet
-	$objetFormationModel = new \Model\FormationModel;
-	//fincAll renvoie un tableau associatif de l'objet créé
-	$tabResult = $objetFormationModel->findAll("id", "DESC", 1);
-	//exploitation du tableau associatif avec boucle pour chaque ligne trouvée
-	foreach($tabResult as $tabLigne)
-	{
-		echo "<tr>";
-		//BOucle pour parcourir les colonnes
-		foreach($tabLigne as $nomColonne => $valeurColonne)
-		{
-			//affichage de la colonne
-			echo "<th>$nomColonne</th>";
-		}
-		//Ajouter les colonnes MODIFIER SUPPRIMER
-		echo "<th>MODIFIER</th>";
-		echo "<th>SUPPRIMER</th>";
+	<div class="container-fluid table-admin">
+		<div class="row">
+			<div class="col-xs-12 col-md-8 col-md-offset-2 ">
+				<h2>Liste des Formations déjà enregistrées dans la Base de Donnée</h2>
+				<div class="scroll-table">	
+					<table class="table table-striped table-responsive">
+						<thead>
+				<?php
+					//création d'un nouvel objet
+					$objetFormationModel = new \Model\FormationModel;
+					//fincAll renvoie un tableau associatif de l'objet créé
+					$tabResult = $objetFormationModel->findAll("id", "DESC", 1);
+					//exploitation du tableau associatif avec boucle pour chaque ligne trouvée
+					foreach($tabResult as $tabLigne)
+					{
+						echo "<tr>";
+						//BOucle pour parcourir les colonnes
+						foreach($tabLigne as $nomColonne => $valeurColonne)
+						{
+							switch ($nomColonne)
+							{
+				    			case "titre_formation":
+				    			case "date_formation":
+				    			case "intervenant_formation":
+				        			echo "<th>$nomColonne</th>";
+				        			break;
+							}
+							//affichage de la colonne
+							//echo "<th>$nomColonne</th>";
+						}
+						//Ajouter les colonnes MODIFIER SUPPRIMER
+						echo "<th>MODIFIER</th>";
+						echo "<th>SUPPRIMER</th>";
 
-		echo "</tr>";
-	}
+						echo "</tr>";
+					}
 
- ?>
-		</thead>
-		<tbody>
-<?php 
-	//acces a la table
-	$tabResult = $objetFormationModel->findAll("id", "DESC");
-	//Boucle pour parcourir chaque ligne
-	foreach($tabResult as $tabLigne)
-	{
-		echo "<tr>";
-		//boucle pour parcourir chaque colonne
-		foreach($tabLigne as $nomColonne => $valeurColonne)
-		{
-			echo "<td>$valeurColonne</td>";
-		}
+				 ?>
+						</thead>
+						<tbody>
+				<?php 
+					//acces a la table
+					$tabResult = $objetFormationModel->findAll("id", "DESC");
+					//Boucle pour parcourir chaque ligne
+					foreach($tabResult as $tabLigne)
+					{
+						echo "<tr>";
+						//boucle pour parcourir chaque colonne
+						foreach($tabLigne as $nomColonne => $valeurColonne)
+						{
+							switch ($nomColonne)
+							{
+				    			case "titre_formation":
+				    			case "date_formation":
+				    			case "intervenant_formation":
+				        			echo "<td>$valeurColonne</td>";
+				        			break;
+							}
+							//echo "<td>$valeurColonne</td>";
+						}
 
-		//je recupere l'id de la ligne courante
-		$id = $tabLigne["id"];
+						//je recupere l'id de la ligne courante
+						$id = $tabLigne["id"];
 
-		$hrefModifier = $this->url("admin_formation_update", [ "id" => $id ]);
-		$hrefSupprimer = "?id=$id&operation=supprimer";
+						$hrefModifier = $this->url("admin_formation_update", [ "id" => $id ]);
+						$hrefSupprimer = "?id=$id&operation=supprimer";
 
-		//Ajouter les colonnes MODIFIER et SUPPRIMER
-		echo 
+						//Ajouter les colonnes MODIFIER et SUPPRIMER
+						echo 
 <<<CODEHTML
 	<td><a href="$hrefModifier">MODIFIER</td>
  	<td><a href="$hrefSupprimer">SUPPRIMER</td>
  	</tr>
 CODEHTML;
 
-}
+				}
 
-?>
-		</tbody>
-	</table>
-
+				?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>

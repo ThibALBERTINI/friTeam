@@ -43,7 +43,7 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle menu3" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Nos Formations <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="<?php echo $this->url('default_formations') ?>">Toutes Nos Formations</a></li> <!-- Liens à former -->
+                  <li><a href="<?php echo $this->url('default_formation') ?>">Toutes Nos Formations</a></li> <!-- Liens à former -->
                   <li><a href="#">Fri Team Formations</a></li> <!-- Liens à former -->
                   <li><a href="#">Formations Complémentaires</a></li> <!-- Liens à former -->
                 </ul>

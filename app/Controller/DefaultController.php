@@ -170,7 +170,13 @@ class DefaultController extends Controller
 	public function formation()
 	{
 		$titrePage = "formation";
-		$this->show("pages/default_formations", [ "titrePage" => $titrePage ]);
+		$this->show("pages/default_formation", [ "titrePage" => $titrePage ]);
+	}
+
+	public function formationDetail($url)
+	{
+		$titrePage = "formation Detail";
+		$this->show("pages/default_formation-detail", [ "titrePage" => $titrePage, "url" => $url ]);
 	}
 
 }
