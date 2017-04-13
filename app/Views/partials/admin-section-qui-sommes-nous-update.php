@@ -31,7 +31,7 @@ if (!empty($tabProfil)) :
 ?>
 <section>
     <h3>FORMULAIRE DE MISE A JOUR DE L'EQUIPE</h3>
-    <form method="POST" action="">
+    <form method="POST" action="" enctype="multipart/form-data>
         
         <div class=form-group>
             <label for="titre">TITRE</label>

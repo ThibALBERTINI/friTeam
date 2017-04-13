@@ -1,7 +1,3 @@
-<?php
-$objetProfilModel = new \Model\ProfilModel;
-//$tabEquipe = $objetProfilModel->find($id);
-?>
 <section>
     <h2>QUI SOMMES-NOUS ?</h2>
 <?php
@@ -17,45 +13,44 @@ $objetProfilModel = new \Model\ProfilModel;
 //                              extends \W\Model\Model
 
 $objetProfilModel = new \Model\ProfilModel;
+$tabResult = $objetProfilModel->findAll("id", "ASC");
 
 // LA METHODE findAll EST DEFINIE DANS LA CLASSE \W\Model\Model
 // LA METHODE findAll RENVOIE UN TABLEAU DE TABLEAU
 // ON PEUT TRIER PAR UNE COLONNE DE LA TABLE
-$tabResult = $objetProfilModel->findAll("id", "ASC");
 
-// JE PEUX PARCOURIR LA TABLE POUR RECUPERER CHAQUE LIGNE
-foreach($tabResult as $index => $tabInfo)
+if (!empty($tabResult))
 {
-    // POUR CHAQUE LIGNE
-    // JE PEUX RECUPERER CHAQUE COLONNE DANS UNE VARIABLE PHP
-    $titre = $tabInfo["titre"];
-    $chapo = $tabInfo["chapo"];
-    $nom_profil = $tabInfo["nom_profil"];
-    $prenom_profil = $tabInfo["prenom_profil"];
-    $img_profil = $tabInfo["img_profil"];
-    $citation_profil = $tabInfo["citation_profil"];
-    $competence_profil = $tabInfo["competence_profil"];
-    $interets_profil = $tabInfo["interets_profil"];
-    $domaines_inter = $tabInfo["domaines_inter"];
-    $motivation_profil = $tabInfo["motivation_profil"];
-    $vision_profil = $tabInfo["vision_profil"];
-    $entreprise_profil = $tabInfo["entreprise_profil"];
-    $linkedin = $tabInfo["linkedin"];
-    // JE CONSTRUIS LE HREF POUR LE LIEN 
-    // EN PASSANT LA VALEUR A REMPLIR DANS LA PARTIE DYNAMIQUE DE LA ROUTE
-    $href  = $this->url("default_friteam-equipe", [ "url" => $url ]);
-    
-    // AFFICHER LE CODE HTML
-    // http://php.net/manual/fr/language.types.string.php#language.types.string.syntax.heredoc
-    // HEREDOC
+    // JE PEUX PARCOURIR LA TABLE POUR RECUPERER CHAQUE LIGNE
+    foreach($tabResult as $index => $tabInfo)
+    {
+        // POUR CHAQUE LIGNE
+        // JE PEUX RECUPERER CHAQUE COLONNE DANS UNE VARIABLE PHP
+
+        $nom = $tabInfo["nom_profil"];
+        $prenoml = $tabInfo["prenom_profil"];
+        $img = $tabInfo["img_profil"];
+        $citation_ = $tabInfo["citation_profil"];
+        $competence = $tabInfo["competence_profil"];
+        $interets = $tabInfo["interets_profil"];
+        $domaines = $tabInfo["domaines_inter"];
+        $motivation = $tabInfo["motivation_profil"];
+        $vision = $tabInfo["vision_profil"];
+        $entreprise = $tabInfo["entreprise_profil"];
+        $linkedin = $tabInfo["linkedin"];
+        // JE CONSTRUIS LE HREF POUR LE LIEN 
+        // EN PASSANT LA VALEUR A REMPLIR DANS LA PARTIE DYNAMIQUE DE LA ROUTE
+        
+        // AFFICHER LE CODE HTML
+        // http://php.net/manual/fr/language.types.string.php#language.types.string.syntax.heredoc
+        // HEREDOC
     echo
 <<<CODEHTML
     <article>
-        <h3><a href="$href">$titre</a></h3>
-        <div>$chapo</div>
+        <h3> $nom</h3>
     </article>
 CODEHTML;
-
+    }
 }
 
 // DEBUG

@@ -18,12 +18,13 @@
 		// ROUTE POUR LA PAGE ADMIN
 		
 
-		['GET|POST',    '/admin/', 					'Admin#home',     				'admin_home'],     // UNE ROUTE
-		['GET|POST', 	'/admin/friteam-equipe',	'Admin#friteamEquipe', 		'admin_friteam-equipe'], // UNE ROUTE
+		['GET|POST',    '/admin/', 						'Admin#home',     				'admin_home'],     // UNE ROUTE
+		['GET|POST', 	'/admin/friteam-equipe',		'Admin#friteamEquipe', 			'admin_friteam-equipe'], // UNE ROUTE
+		['GET|POST', 	'/admin/friteam-equipe-update',	'Admin#friteamEquipeUpdate', 	'admin_friteam-equipe-update'], // UNE ROUTE
 
-		['GET|POST', 	'/admin/formation', 		'Admin#formation',				'admin_formation'],  // UNE ROUTE
-		['GET|POST', 	'/admin/formation/[:url]', 	'Admin#formationDetail', 		'admin_formation_detail'],  // UNE ROUTE pour la création et l'affichage des formations déjà enregistrés dans la base de donnée
-		['GET|POST', 	'/admin/formation/update/[:id]',	'Admin#formationUpdate',  'admin_formation_update'], // UNE ROUTE pour la mise à jour des formation (récupérée par l'id)
+		['GET|POST', 	'/admin/formation', 			'Admin#formation',				'admin_formation'],  // UNE ROUTE
+		['GET|POST', 	'/admin/formation/[:url]', 		'Admin#formationDetail', 		'admin_formation_detail'],  // UNE ROUTE pour la création et l'affichage des formations déjà enregistrés dans la base de donnée
+		['GET|POST', 	'/admin/formation/update/[:id]','Admin#formationUpdate',  		'admin_formation_update'], // UNE ROUTE pour la mise à jour des formation (récupérée par l'id)
 
 		['GET|POST', 	'/admin/accompagnement', 	'Admin#accompagnement', 		'admin_accompagnement'],  // UNE ROUTE
 		['GET|POST', 	'/admin/accompagnement/[:url]','Admin#accompagnementDetail','admin_accompagnement-detail'],  // UNE ROUTE
