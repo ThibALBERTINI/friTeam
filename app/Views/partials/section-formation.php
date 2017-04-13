@@ -30,7 +30,7 @@ if(!empty($tabResult))
   foreach ($tabResult as $index => $tabInfo)
   {
     $titre = $tabInfo["titre_formation"];
-    $img = $tabInfo["img_formation"];
+    $img = $tabInfo["img"];
     $date = $tabInfo["date_formation"];
     $duree = $tabInfo["duree_formation"];
     $chapo = $tabInfo["chapo_formation"];

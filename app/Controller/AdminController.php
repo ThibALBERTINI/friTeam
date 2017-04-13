@@ -198,7 +198,7 @@ class AdminController
                 $objetFormationModel = new FormationModel;
                 // JE PEUX UTILISER LA METHODE insert DE LA CLASSE \W\Model\Model
                 $objetFormationModel->insert([
-                        "img_formation"         => $img,
+                        "img"         => $img,
                         "titre_formation"       => $titre,
                         "presentation_formation"=> $presentation,
                         "chapo_formation"       => $chapo,
@@ -235,13 +235,13 @@ class AdminController
     public function upload()
     {
         $repertoire = "assets/img/"; //repertoire où le fichier va être stocké
-        $fichier = $repertoire . basename($_FILES["img_formation"]["name"]); //chemin du fichier uploadé
+        $fichier = $repertoire . basename($_FILES["img"]["name"]); //chemin du fichier uploadé
         $uploadOk = 1;
         $imageFileType = pathinfo($fichier,PATHINFO_EXTENSION); //récupère l'extension du fichier
         // Verifier que l'image existe dans l'upload
         if(isset($_POST["submit"])) 
         {
-            $check = getimagesize($_FILES["img_formation"]["tmp_name"]);
+            $check = getimagesize($_FILES["img"]["tmp_name"]);
             if($check !== false) 
             {
                 $message = "Le fichier uploadé est une image - " . $check["mime"] . ".";
@@ -277,12 +277,12 @@ class AdminController
             // if everything is ok, try to upload file
         } else 
         {
-            if (move_uploaded_file($_FILES["img_formation"]["tmp_name"], $fichier)) 
+            if (move_uploaded_file($_FILES["img"]["tmp_name"], $fichier)) 
             {
-                $message = "Votre fichier : ". basename( $_FILES["img_formation"]["name"]). " à été enregistré.";
+                $message = "Votre fichier : ". basename( $_FILES["img"]["name"]). " à été enregistré.";
             } else 
             {
-                $message = "Désolé, votre fichier : ". basename( $_FILES["img_formation"]["name"]). " n'a pas pu être téléchargé.";
+                $message = "Désolé, votre fichier : ". basename( $_FILES["img"]["name"]). " n'a pas pu être téléchargé.";
             }
         }
 
