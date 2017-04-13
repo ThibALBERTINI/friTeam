@@ -4,7 +4,7 @@ namespace Model;
 
 use \W\Model\Model;
 
-class EquipeModel
+class ProfilModel
         extends Model
 {
 	/**

@@ -5,7 +5,7 @@ namespace Controller;
 use \W\Controller\Controller;
 use \Model\AdminModel;
 use \Model\FormationModel;
-use \Model\EquipeModel;
+use \Model\ProfilModel;
 
 
 

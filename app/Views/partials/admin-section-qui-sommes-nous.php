@@ -1,6 +1,13 @@
 <?php
-$objetEquipeModel = new \Model\EquipeModel;
-$tabEquipe = $objetEquipeModel->find($id);
+// ON VA ALLER CHERCHER LES INFOS DE LA FORMATION DANS LA TABLE MYSQL formation
+// APPROCHE PAR DELEGATION
+$objetProfilModel = new \Model\ProfilModel;
+$tabEquipe = $objetProfilModel->find($id);
+
+//if (!empty($tabProfil)) :
+    // ON CREE DES VARIABLES LOCALES AVEC LE MEME NOM 
+    // QUE LA CLE DANS LE TABLEAU ASSOCIATIF
+    extract($tabProfil);
 ?>
 <section>
     <h2>QUI SOMMES NOUS ?</h2>
@@ -82,10 +89,10 @@ $tabEquipe = $objetEquipeModel->find($id);
         <thead>
 <?php
 // SI JE VEUX ACCEDER A LA TABLE Equipe
-// IL FAUT UTILISER LA CLASSE \Model\EquipeModel
-$objetEquipeModel = new \Model\EquipeModel;
+// IL FAUT UTILISER LA CLASSE \Model\ProfilModel
+$objetProfilModel = new \Model\ProfilModel;
 
-$tabResult = $objetEquipeModel->findAll("id", "DESC", 1); // ON NE VEUT QU'UNE LIGNE
+$tabResult = $objetProfilModel->findAll("id", "DESC", 1); // ON NE VEUT QU'UNE LIGNE
 // BOUCLE POUR PARCOURIR CHAQUE LIGNE TROUVEE
 foreach($tabResult as $tabLigne)
 {
@@ -108,8 +115,8 @@ foreach($tabResult as $tabLigne)
         <tbody>
 <?php
 // SI JE VEUX ACCEDER A LA TABLE Equipe
-// IL FAUT UTILISER LA CLASSE \Model\EquipeModel
-$tabResult = $objetEquipeModel->findAll("id", "DESC");
+// IL FAUT UTILISER LA CLASSE \Model\ProfilModel
+$tabResult = $objetProfilModel->findAll("id", "DESC");
 // BOUCLE POUR PARCOURIR CHAQUE LIGNE TROUVEE
 foreach($tabResult as $tabLigne)
 {
