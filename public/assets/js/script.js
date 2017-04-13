@@ -70,7 +70,7 @@ $(function(){
 
 
 
-/////////////// Code JQUERY elodie
+/////////////// Code JQUERY Elodie
 
 (function($) {
     "use strict"; // Start of use strict
@@ -88,7 +88,7 @@ $(function(){
     $('body').scrollspy({
         target: '.navbar-fixed-top',
         offset: 51
-    })
+    });
 
     // Closes the Responsive Menu on Menu Item Click
     $('.navbar-collapse ul li a').click(function() {

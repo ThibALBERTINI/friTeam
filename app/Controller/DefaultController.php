@@ -6,9 +6,11 @@ use \W\Controller\Controller;
 
 class DefaultController extends Controller
 {
+	public $titrePage = "";
 	public function friteamEquipe()
 	{
-		$this->show("pages/default_friteam-equipe");
+		$titrePage = "qui-sommes nous ?";
+		$this->show("pages/default_friteam-equipe", [ "titrePage" => $titrePage ]);
 	}
 
 	/**
@@ -161,12 +163,14 @@ class DefaultController extends Controller
 		// 		$message = "Erreur lors de l'enregistrement";
 		// 	}
 		// }
-		$this->show("pages/default_contact", [ "message" => $message ]);
+		$titrePage = "contact";
+		$this->show("pages/default_contact", [ "message" => $message, "titrePage" => $titrePage ]);
 	}
 
 	public function formation()
 	{
-		$this->show("pages/default_formations");
+		$titrePage = "formation";
+		$this->show("pages/default_formations", [ "titrePage" => $titrePage ]);
 	}
 
 }

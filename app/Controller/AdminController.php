@@ -14,6 +14,7 @@ class AdminController
 {
     //PROPRIETE
     public $message = "";
+    public $titrePage = "";
 
     public function creerAdmin ()  // supprimer et modifier compris
     {
@@ -106,9 +107,10 @@ class AdminController
     }// fin function home
 
 
-    public function friteam_equipe()
+    public function friteamEquipe()
     {
-
+        $titrePage = "qui-sommes nous ?";
+        $this->show("pages/admin_creer-admin", ["message" => $message, "titrePage" => $titrePage ]);
         $this->allowTo([ "admin", "super-admin" ]);
     }// fin function friteam-equipe
 
@@ -225,7 +227,8 @@ class AdminController
         
         // AFFICHER LA PAGE
         // JE TRANSMETS LE MESSAGE A LA PARTIE VIEW
-        $this->show("pages/admin_formation_detail", [ "message" => $message, "id" => $id ]);
+        $titrePage = "formation";
+        $this->show("pages/admin_formation_detail", [ "message" => $message, "id" => $id, "titrePage" => $titrePage ]);
         $this->allowTo([ "admin", "super-admin" ]);
     }// fin function formation-detail
 
@@ -379,7 +382,8 @@ class AdminController
         
         // VIEW
         // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
-        $this->show("pages/admin_formation_update", [ "id" => $id, "message" => $message, "message_upload" => $this->message ]);
+        $titrePage = "modification formation (fiches)";
+        $this->show("pages/admin_formation_update", [ "id" => $id, "message" => $message, "message_upload" => $this->message, "titrePage" => $titrePage ]);
         $this->allowTo([ "admin", "super-admin" ]);
     }
 
