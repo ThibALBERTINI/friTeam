@@ -86,6 +86,9 @@ public function login ()
                     $token = md5($email); //génération d'une chaine cryptée en MD5()
                     //echo $token;
                     //envoi du mail
+
+                    $objetAdminModel= new \Model\AdminModel;
+                    $rqToken= $objetAdminModel->update(array("token"=>$token), $id);
                         
                     $mail = new \PHPMailer(); //création d'un objet de type mail
                     $mail->isSMTP(); //connexion directe au serveur SMTP
@@ -116,14 +119,7 @@ public function login ()
                     }
                     else
                     {   
-                        //mise à jour table clients pour l'étape de réinitialisation
-                        $rqToken = "UPDATE admin
-                                                SET token = ?
-                                                WHERE id = ?";
-                        $stmtToken = $bdd->prepare($rqToken);
-                        $paramToken = array($token, $id);
-                        $stmtToken->execute($paramToken);
-                        echo 'Vérifiez votre boite mail...';    
+                        $message ='Vérifiez votre boite mail...';    
                     }
                 
             
@@ -135,8 +131,9 @@ public function login ()
                 }
             } // fin if(isset submit
         
-             $this->show("pages/users_loosePass", [ "message" => $message ]);
+             
         }//fin isset btnsub
+        $this->show("pages/users_loosePass", [ "message" => $message ]);
     } // fin loosePass
 
 
