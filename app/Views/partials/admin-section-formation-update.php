@@ -17,8 +17,8 @@ if (!empty($tabFormation)) :
     <form method="POST" action="" enctype="multipart/form-data">
 
         <div class="form-group">
-            <label for="img_formation">Illustration</label><br>
-            <input type="file" name="img_formation" id="img_formation" class="form-control" value="<?php echo $img_formation ?>"><br>
+            <label for="img">Illustration</label><br>
+            <input type="file" name="img" id="img" class="form-control" value="Choissisez une autre image"><br>
         </div>
 
         <div class="form-group">

@@ -1,10 +1,24 @@
+<!-- <?php 
+// ON VA ALLER CHERCHER LES INFOS DE LA FORMATION DANS LA TABLE MYSQL formation
+// APPROCHE PAR DELEGATION
+$objetFormationModel = new \Model\FormationModel;
+$tabFormation = $objetFormationModel->find($id);
+
+//if (!empty($tabFormation)) :
+    // ON CREE DES VARIABLES LOCALES AVEC LE MEME NOM 
+    // QUE LA CLE DANS LE TABLEAU ASSOCIATIF
+    extract($tabFormation);
+?> -->
 <section>
+<div class="container-fluid">
+<div class="row">
+<div class="col-xs-12 col-md-6 col-md-offset-3">
     <h2>AJOUT D'UN PROFIL</h2>
     <form method="POST" action="" enctype="multipart/form-data">
 
         <div class=form-group>   
-            <label for="img_profil">CHEMIN PHOTO</label>
-            <input type="file" name="img_profil" id="img_profil" class="form-control"><br>
+            <label for="img">CHEMIN PHOTO</label>
+            <input type="file" name="img" id="img" class="form-control"><br>
         </div>
         <div class=form-group>   
             <label for="nom_profil">NOM</label>
@@ -79,7 +93,7 @@ foreach($tabResult as $tabLigne)
     {
         switch ($nomColonne)
         {
-            case "img_profil":
+            case "img":
             case "nom_profil":
             case "prenom_profil":
                 echo "<th>$nomColonne</th>";
@@ -109,7 +123,7 @@ foreach($tabResult as $tabLigne)
     {
         switch ($nomColonne)
         {
-            case "img_profil":
+            case "img":
             case "nom_profil":
             case "prenom_profil":
                 echo "<th>$valeurColonne</th>";

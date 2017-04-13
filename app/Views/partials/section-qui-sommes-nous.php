@@ -29,11 +29,11 @@ if (!empty($tabResult))
 
         $nom = $tabInfo["nom_profil"];
         $prenoml = $tabInfo["prenom_profil"];
-        $img = $tabInfo["img_profil"];
+        $img = $tabInfo["img"];
         $citation_ = $tabInfo["citation_profil"];
         $competence = $tabInfo["competence_profil"];
         $interets = $tabInfo["interets_profil"];
-        $domaines = $tabInfo["domaines_inter"];
+        $intervention = $tabInfo["domaines_inter"];
         $motivation = $tabInfo["motivation_profil"];
         $vision = $tabInfo["vision_profil"];
         $entreprise = $tabInfo["entreprise_profil"];
@@ -48,6 +48,7 @@ if (!empty($tabResult))
 <<<CODEHTML
     <article>
         <h3> $nom</h3>
+        <img src="$img" alt="imùg">
     </article>
 CODEHTML;
     }

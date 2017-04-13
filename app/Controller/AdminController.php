@@ -109,9 +109,104 @@ class AdminController
 
     public function friteamEquipe()
     {
+         // INITIALISE LA VALEUR DE LA VARIABLE 
+        $message = "";
+        $id = "";
+
+        if (isset($_REQUEST["operation"]) && ($_REQUEST["operation"] == "supprimer"))
+        {
+            // ON VEUT SUPPRIMER UNE LIGNE
+            // ON RECUPERE L'ID DU FORMULAIRE
+            // http://php.net/manual/fr/function.intval.php
+            $id = intval(trim($_REQUEST["id"]));
+
+            if ($id > 0)
+            {
+                // ESSAYER D'EFFACER LA LIGNE DANS LA TABLE MYSQL formation
+                // NE PAS OUBLIER DE FAIRE use
+                $objetFormationModel = new ProfilModel;
+                $objetFormationModel->delete($id);
+            }
+        }
+        
+
+        if (isset($_POST["operation"]) && ($_POST["operation"] == "creer"))
+        {
+            // RECUPERER LES INFOS DU FORMULAIRE
+            // http://php.net/manual/en/function.trim.php
+            //$img               = trim($_POST["img_formation"]);
+            $nom            = trim($_POST["nom_profil"]);
+            $prenom      = trim($_POST["prenom_profil"]);
+            $citation             = trim($_POST["citation_profil"]);
+            $competence          = trim($_POST["competence_profil"]);
+            $interets            = trim($_POST["interets_profil"]);
+            $intervention         = trim($_POST["domaines_inter"]);
+            $motivation             = trim($_POST["motivation_profil"]);
+            $vision              = trim($_POST["vision_profil"]);
+            $entreprise              = trim($_POST["entreprise_profil"]);
+            $linkedin       = trim($_POST["linkedin"]);
+            
+            // $id_categorie       = trim($_POST["id_categorie"]);
+
+            // SECURITE
+            // VERIFIER QUE CHAQUE INFO EST CONFORME
+            // http://php.net/manual/en/function.mb-strlen.php
+            if (is_string($nom)        && ( mb_strlen($nom) > 0 ) 
+                    && is_string($prenom) && ( mb_strlen($prenom) > 0 ) 
+                    && is_string($citation)        && ( mb_strlen($citation) > 0 ) 
+                    && is_string($competence)     && ( mb_strlen($competence) > 0 ) 
+                    && is_string($interets)       && ( mb_strlen($interets) > 0 ) 
+                    && is_string($intervention)    && ( mb_strlen($intervention) > 0 ) 
+                    && is_string($motivation)        && ( mb_strlen($motivation) > 0 )
+                    && is_string($vision)         && ( mb_strlen($vision) > 0 ) 
+                    && is_string($entreprise)         && ( mb_strlen($entreprise) > 0 ) 
+                    && is_string($linkedin)  && ( mb_strlen($linkedin) > 0 ) 
+                    // && is_numeric($id_categorie) 
+                )
+            {
+                // OK ON A LES BONNES INFOS
+                // COMPLETER LES INFOS MANQUANTES
+
+                $id_auteur      = 1;     // DEBUG
+                //$dateCreation   = date("Y-m-d H:i:s");    // FORMAT DATETIME SQL
+                $img = $this->upload();
+                
+                // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
+                // JE CREE UN OBJET DE LA CLASSE FormationModel
+                // NE PAS OUBLIER DE FAIRE use
+                $objetFormationModel = new ProfilModel;
+                // JE PEUX UTILISER LA METHODE insert DE LA CLASSE \W\Model\Model
+                $objetFormationModel->insert([
+                        "img"                   => $img,
+                        "nom_profil"       => $nom,
+                        "prenom_profil"=> $prenom,
+                        "citation_profil"       => $citation,
+                        "competence_profil"    => $competence,
+                        "interets_profil"      => $interets,
+                        "domaines_inter"  => $intervention,
+                        "motivation_profil"       => $motivation,
+                        "vision_profil"        => $vision,
+                        "entreprise_profil"        => $entreprise,
+                        "linkedin" => $linkedin,
+                    ]);
+                
+                // OK
+                $message = "La Fiche Formation à bien été créée";
+            }
+            else
+            {
+                // KO
+                // UNE ERREUR
+                $message = "ERREUR lors de la création";
+            }
+        }
+        
+        // AFFICHER LA PAGE
+        // JE TRANSMETS LE MESSAGE A LA PARTIE VIEW
         $titrePage = "qui-sommes nous ?";
-        $this->show("pages/admin_creer-admin", ["message" => $message, "titrePage" => $titrePage ]);
+        $this->show("pages/admin_friteam-equipe", [ "message" => $message, "id" => $id, "titrePage" => $titrePage ]);
         $this->allowTo([ "admin", "super-admin" ]);
+
     }// fin function friteam-equipe
 
 
@@ -352,7 +447,7 @@ class AdminController
                 $objetFormationModel = new formationModel;
                 // JE PEUX UTILISER LA METHODE update DE LA CLASSE \W\Model\Model
                 $objetFormationModel->update([
-                "img_formation"         => $img,
+                "img"         => $img,
                 "titre_formation"       => $titre,
                 "presentation_formation"=> $presentation,
                 "chapo_formation"       => $chapo,
