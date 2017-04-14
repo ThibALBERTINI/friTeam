@@ -5,7 +5,7 @@ namespace Model;
 use \W\Model\Model;
 
 class ProfilModel
-        extends Model
+        extends MonModel
 {
 	
 }

@@ -42,18 +42,19 @@ class UsersController
                         // JE VAIS MEMORISER CES INFOS DANS UNE SESSION
                         $objetAuthentificationModel->logUserIn($tabAdmin);
                         
+
                         // ON PEUT FAIRE UNE REDIRECTION VERS UNE PAGE PROTEGEE
-                        // ...
+                        $this->redirectToRoute('admin_postLogin');
                     }
                     else
                     {
                         // KO
-                        $message = "IDENTIFIANTS INCORRECTS";
+                        $message = '<p class="erreur"> IDENTIFIANTS INCORRECTS</p>';
                     }
                 }
                 else
                 {
-                    $message = "INFO INCORRECTE";
+                    $message = '<p class="erreur">INFO INCORRECTE </p>';
                 }
             }
             
@@ -74,7 +75,7 @@ class UsersController
                 $usernameOrEmail = trim(strip_tags($_POST['usernameOrEmail']));
            
                 $objetUsersModel = new \W\Model\UsersModel;
-                $exist= $objetUsersModel->getUserByUsernameOrEmail($usernameOrEmail);  //$exist est le tableau fetch
+                $exist= $objetUsersModel->getUserByUsernameOrEmail($usernameOrEmail);  //$exist est le tableau fetch comprenant toute la ligne d'un admin
                 
             
                 if(isset($exist["email"]))
@@ -115,11 +116,11 @@ class UsersController
                                                  </html>';
                     if(!$mail->send()) //si problème pendant l'envoi
                     {
-                        $message = 'erreur envoi '.$mail->ErrorInfo;
+                        $message = '<p class="erreur"> erreur envoi '.$mail->ErrorInfo. '</p>';
                     }
                     else
                     {   
-                        $message ='Vérifiez votre boite mail...';    
+                        $message ='<p class="succes">Vérifiez votre boite mail...</p>';    
                     }
                 
             
@@ -127,7 +128,7 @@ class UsersController
                 }//fin ifisset mail 
                 else
                 {
-                    $message = "Vous devez renseigner au moins un identifiant";
+                    $message = '<p class="erreur"> Vous devez renseigner au moins un identifiant</p>';
                 }
             } // fin if(isset submit
 
@@ -136,7 +137,7 @@ class UsersController
         $this->show("pages/users_loosePass", [ "message" => $message ]);
     } // fin loosePass
 
-    public function newPass()
+    public function newPass() //suite envoi mail et reception token
     {
         $message = "";
         $login= "";
@@ -146,33 +147,35 @@ class UsersController
             $token = strip_tags($_GET['token']);
             if(isset($token))
             {
-                $objetUsersModel = new \W\Model\UsersModel;
-                $tabToken=$objetUsersModel->search(array ("token"=>$token, "login", "id", "password"));
+                $objetAdminModel = new \Model\AdminModel;
+                $tabToken=$objetAdminModel->findBy("token", $token);
                 $login=$tabToken['login'];
+                $passwordN=$tabToken['password'];
+                $id=$tabToken['id'];
 
                 if($_POST["passwordNew"] == $_POST["confirmPasswordNew"])
                 {
-                    $passwordN=$_POST["passwordNew"];
-                    $passChanged=$objetUsersModel->update(array("password"=>$passwordN), $id);
+                    $passwordN=password_hash($_POST["passwordNew"], PASSWORD_DEFAULT);
+                    $passChanged=$objetAdminModel->update(array("password"=>$passwordN), $id);
 
                     if(!$passChanged)
                     {
-                        $message = '<p>Désolé le mot de passe n\'a pas été changé';
+                        $message = '<p class="erreur">Désolé le mot de passe n\'a pas été changé, merci de recommencer </p>';
                     }
                     else
                     {
-                        $message = '<p>Votre mot de passe a été mis à jour</p>';
+                        $message = '<p class="succes">Votre mot de passe a été mis à jour </p>';
                     }
-                }
+                }// fin pasword = confirmpassword
                 else
                 {
-                    $message = "erreur de saisie les mots de passe sont différents";
+                    $message = '<p class="erreur">erreur de saisie les mots de passe sont différents </p>';
                 }
                       
             }// fin if isset token
             else
                 {
-                    $message = "vous n'avez pas été identifié, merci de recommencer l'étape de modification du mot de passe";
+                    $message = '<p class="erreur"> vous n\'avez pas été identifié, merci de recommencer l\'étape de modification du mot de passe </p>';
                 }
         }// fin ifisset btnsub
         $this->show("pages/users_newPass", [ "message" => $message, "login" => $login ]);

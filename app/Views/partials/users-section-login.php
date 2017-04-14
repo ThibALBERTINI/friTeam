@@ -25,7 +25,7 @@
                 </form>
                 <p class="text-center">
                 <a href="<?php echo $this->url('users_loosePass') ?>"> Mot de passe perdu ? </a> <br> <br>
-                <a href="<?php echo $this->url('users_loosePass') ?>"> Modifier votre mot de passe</a>
+                
             </p>
             </section>
         </div>

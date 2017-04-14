@@ -6,6 +6,8 @@ use \W\Controller\Controller;
 use \Model\AdminModel;
 use \Model\FormationModel;
 use \Model\ProfilModel;
+use \Model\ActualiteModel;
+use \Model\AccompagnementModel;
 
 
 
@@ -64,7 +66,7 @@ class AdminController
                    // OK ON A LES BONNES INFOS
 
                     // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL admin
-                    // JE CREE UN OBJET DE LA CLASSE ArticleModel
+                    // JE CREE UN OBJET DE LA CLASSE ActualiteModel
                     // NE PAS OUBLIER DE FAIRE use
                     $objetAdminModel = new AdminModel;
                     // JE PEUX UTILISER LA METHODE insert DE LA CLASSE \W\Model\Model
@@ -76,7 +78,7 @@ class AdminController
 
                         ]);
 
-                    $message = "Vous avez créé l'administrateur " . $login;
+                    $message = '<p class="succes"> Vous avez créé l\'administrateur ' . $login . '</p>';
                 }// fin ifstring
 
                 else
@@ -100,10 +102,79 @@ class AdminController
         $this->show("pages/admin_creer-admin", ["message" => $message ]);
     } // fin function creer admin
 
+    public function modifPass ()
+    {
+        //$this->allowTo([ "admin", "super-admin" ]);
+        $message = "";
+
+        if(isset($_POST['btnSub']))
+        {
+            // RECUPERER LES INFOS
+            $connectedAdmin = $this->getUser();
+            $login      = trim($connectedAdmin ["login"]);
+            $idAdmin      = trim($connectedAdmin ["id"]);
+            $passwordOld   = trim($_REQUEST["passwordOld"]);
+            $passwordNew   = trim($_REQUEST["passwordNew"]);
+            $confirmPasswordNew   = trim($_REQUEST["confirmPasswordNew"]);
+
+            // UN PEU DE SECURITE
+                if (is_string($login)            && ( mb_strlen($login) > 4 )
+                    && is_string($passwordNew)  && ( mb_strlen($passwordNew) > 4 )
+                   )
+                {
+                    // ON VA VERIFIER SI LES INFOS CORRESPONDENT A UNE LIGNE DANS LA TABLE MYSQL
+                    // ON VA UTILISER LA CLASSE \W\Security\AuthentificationModel
+                    $objetAuthentificationModel = new \W\Security\AuthentificationModel;
+                    // $idUser => 0 SI AUCUNE LIGNE NE CORRESPOND
+                    // $idUser => id DE LA LIGNE TROUVEE
+                    $idAdmin = $objetAuthentificationModel->isValidLoginInfo($login, $passwordOld);
+                    if ($idAdmin > 0)
+                    {
+                        if($passwordNew==$confirmPasswordNew)
+                        {
+                            $objetAdminModel=new \Model\AdminModel;
+                            $passwordN=password_hash($passwordNew, PASSWORD_DEFAULT);
+                            $passChanged=$objetAdminModel->update(array("password"=>$passwordN), $idAdmin);
+
+                            if(!$passChanged)
+                            {
+                                $message = 'Désolé le mot de passe n\'a pas été changé, merci de recommencer la procédure';
+                            }
+                            else
+                            {
+                                $message = 'Votre mot de passe a été mis à jour';
+                            }
+                        }// fin pasword = confirmpassword
+                        else
+                        {
+                            $message = 'erreur de saisie les mots de passe sont différents';
+                        }
+                    }// fin if mdp ok
+                    else
+                    {
+                        $message= 'Votre mot de passe est incorrect, si vous l\'avez oublié utilisez la procédure mot de passe oublié';
+                    }
+                } // fin if string login et password
+                else
+                    {
+                     $message= 'Les données ne sont pas exploitables merci de les saisir à nouveau';
+                    }
+
+        } // fin if isset btnsub
+        $this->show("pages/admin_modif_pass", ["message" => $message]);
+    } // fin function modifPass
+
+public function postLogin()
+    {
+        //$this->allowTo([ "admin", "super-admin" ]);
+        $this->show("pages/admin_postLogin", ["message" => $message]);
+    }// fin function home
+
 
     public function home()
     {
-        $this->allowTo([ "admin", "super-admin" ]);
+        //$this->allowTo([ "admin", "super-admin" ]);
+        $this->show("pages/admin_home");
     }// fin function home
 
 
@@ -134,19 +205,18 @@ class AdminController
         {
             // RECUPERER LES INFOS DU FORMULAIRE
             // http://php.net/manual/en/function.trim.php
-            //$img               = trim($_POST["img_formation"]);
-            $nom            = trim($_POST["nom_profil"]);
-            $prenom      = trim($_POST["prenom_profil"]);
-            $citation             = trim($_POST["citation_profil"]);
-            $competence          = trim($_POST["competence_profil"]);
-            $interets            = trim($_POST["interets_profil"]);
-            $intervention         = trim($_POST["domaines_inter"]);
-            $motivation             = trim($_POST["motivation_profil"]);
-            $vision              = trim($_POST["vision_profil"]);
-            $entreprise              = trim($_POST["entreprise_profil"]);
-            $linkedin       = trim($_POST["linkedin"]);
+            //$img               = trim($_POST["img"]);
+            $nom                = trim($_POST["nom_profil"]);
+            $prenom             = trim($_POST["prenom_profil"]);
+            $citation           = trim($_POST["citation_profil"]);
+            $competence         = trim($_POST["competence_profil"]);
+            $interets           = trim($_POST["interets_profil"]);
+            $intervention       = trim($_POST["domaines_inter"]);
+            $motivation         = trim($_POST["motivation_profil"]);
+            $vision             = trim($_POST["vision_profil"]);
+            $entreprise         = trim($_POST["entreprise_profil"]);
+            $linkedin           = trim($_POST["linkedin"]);
 
-            // $id_categorie       = trim($_POST["id_categorie"]);
 
             // SECURITE
             // VERIFIER QUE CHAQUE INFO EST CONFORME
@@ -178,20 +248,20 @@ class AdminController
                 // JE PEUX UTILISER LA METHODE insert DE LA CLASSE \W\Model\Model
                 $objetFormationModel->insert([
                         "img"                   => $img,
-                        "nom_profil"       => $nom,
-                        "prenom_profil"=> $prenom,
+                        "nom_profil"            => $nom,
+                        "prenom_profil"         => $prenom,
                         "citation_profil"       => $citation,
-                        "competence_profil"    => $competence,
-                        "interets_profil"      => $interets,
-                        "domaines_inter"  => $intervention,
-                        "motivation_profil"       => $motivation,
-                        "vision_profil"        => $vision,
-                        "entreprise_profil"        => $entreprise,
-                        "linkedin" => $linkedin,
+                        "competence_profil"     => $competence,
+                        "interets_profil"       => $interets,
+                        "domaines_inter"        => $intervention,
+                        "motivation_profil"     => $motivation,
+                        "vision_profil"         => $vision,
+                        "entreprise_profil"     => $entreprise,
+                        "linkedin"              => $linkedin,
                     ]);
 
                 // OK
-                $message = "La Fiche Formation à bien été créée";
+                $message = "La Fiche Profil à bien été créée";
             }
             else
             {
@@ -293,7 +363,7 @@ class AdminController
                 $objetFormationModel = new FormationModel;
                 // JE PEUX UTILISER LA METHODE insert DE LA CLASSE \W\Model\Model
                 $objetFormationModel->insert([
-                        "img"         => $img,
+                        "img"                   => str_replace("assets/", "", $img),
                         "titre_formation"       => $titre,
                         "presentation_formation"=> $presentation,
                         "chapo_formation"       => $chapo,
@@ -308,7 +378,6 @@ class AdminController
                         "lien_catalogue"        => $lien,
                         "url"                   => $url,
                     ], false);
-
                 // OK
                 $message = "La Fiche Formation à bien été créée";
             }
@@ -325,7 +394,7 @@ class AdminController
         $titrePage = "formation";
         $this->show("pages/admin_formation_detail", [ "message" => $message, "id" => $id, "titrePage" => $titrePage ]);
         $this->allowTo([ "admin", "super-admin" ]);
-    }// fin function formation-detail
+    }// fin function formationDetail
 
     public function upload()
     {
@@ -447,7 +516,7 @@ class AdminController
                 $objetFormationModel = new formationModel;
                 // JE PEUX UTILISER LA METHODE update DE LA CLASSE \W\Model\Model
                 $objetFormationModel->update([
-                "img"         => $img,
+                "img"                   => str_replace("assets/", "", $img),
                 "titre_formation"       => $titre,
                 "presentation_formation"=> $presentation,
                 "chapo_formation"       => $chapo,
@@ -478,32 +547,424 @@ class AdminController
         // VIEW
         // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
         $titrePage = "modification formation (fiches)";
-        $this->show("pages/admin_formation_update", [ "id" => $id, "message" => $message, "message_upload" => $this->message, "titrePage" => $titrePage ]);
+        $this->show("pages/admin_formation_update", [ "id" => $id, "message" => $message, "titrePage" => $titrePage ]);
         $this->allowTo([ "admin", "super-admin" ]);
-    }
+    } // fin function formationUpdate($id)
 
-    public function accompagnement()
+
+    public function friteamEquipeUpdate($id)
     {
-         $this->allowTo([ "admin", "super-admin" ]);
+        $message = "";
+        // CONTROLLER
+        // ICI IL FAUDRA TRAITER LE FORMULAIRE DE UPDATE
+
+                // JE PEUX TRAITER LE FORMULAIRE
+        // (SI IL Y A UN FORMULAIRE A TRAITER)
+
+        if (isset($_POST["operation"]) && ($_POST["operation"] == "modifier"))
+        {
+            // RECUPERER LES INFOS DU FORMULAIRE
+            // http://php.net/manual/en/function.trim.php
+            //$img               = trim($_POST["img"]);
+            $nom                = trim($_POST["nom_profil"]);
+            $prenom             = trim($_POST["prenom_profil"]);
+            $citation           = trim($_POST["citation_profil"]);
+            $competence         = trim($_POST["competence_profil"]);
+            $interets           = trim($_POST["interets_profil"]);
+            $intervention       = trim($_POST["domaines_inter"]);
+            $motivation         = trim($_POST["motivation_profil"]);
+            $vision             = trim($_POST["vision_profil"]);
+            $entreprise         = trim($_POST["entreprise_profil"]);
+            $linkedin           = trim($_POST["linkedin"]);
+            print_r($_POST);
+
+            // SECURITE
+            // VERIFIER QUE CHAQUE INFO EST CONFORME
+            // http://php.net/manual/en/function.mb-strlen.php
+            if (is_string($nom)        && ( mb_strlen($nom) > 0 )
+                    && is_string($prenom)       && ( mb_strlen($prenom) > 0 )
+                    && is_string($citation)     && ( mb_strlen($citation) > 0 )
+                    && is_string($competence)   && ( mb_strlen($competence) > 0 )
+                    && is_string($interets)     && ( mb_strlen($interets) > 0 )
+                    && is_string($intervention) && ( mb_strlen($intervention) > 0 )
+                    && is_string($motivation)   && ( mb_strlen($motivation) > 0 )
+                    && is_string($vision)       && ( mb_strlen($vision) > 0 )
+                    && is_string($entreprise)   && ( mb_strlen($entreprise) > 0 )
+                    && is_string($linkedin)     && ( mb_strlen($linkedin) > 0 )
+                    //&& is_numeric($id_categorie)
+                )
+            {
+                // OK ON A LES BONNES INFOS
+                // COMPLETER LES INFOS MANQUANTES
+
+                // $id_auteur      = 1;     // DEBUG
+                //$dateCreation   = date("Y-m-d H:i:s");    // FORMAT DATETIME SQL
+
+                // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
+                // JE CREE UN OBJET DE LA CLASSE ProfilModel
+                // NE PAS OUBLIER DE FAIRE use
+                $img = $this->upload();
+                $objetProfilModel = new profilModel;
+                // JE PEUX UTILISER LA METHODE update DE LA CLASSE \W\Model\Model
+                $objetProfilModel->update([
+                        "img"                   => $img,
+                        "nom_profil"            => $nom,
+                        "prenom_profil"         => $prenom,
+                        "citation_profil"       => $citation,
+                        "competence_profil"     => $competence,
+                        "interets_profil"       => $interets,
+                        "domaines_inter"        => $intervention,
+                        "motivation_profil"     => $motivation,
+                        "vision_profil"         => $vision,
+                        "entreprise_profil"     => $entreprise,
+                        "linkedin"              => $linkedin,
+                ],
+                $id);
+
+                // OK
+                $message = "La fiche à été correctement modifiée";
+            }
+            else
+            {
+                // KO
+                // UNE ERREUR
+                $message = "ERREUR lors de la mise à jour";
+            }
+        }
+
+        // VIEW
+        // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
+        $titrePage = "modification profil (fiches)";
+        $this->show("pages/admin_friteam-equipe-update", [ "id" => $id, "message" => $message, "message_upload" => $this->message, "titrePage" => $titrePage ]);
+        $this->allowTo([ "admin", "super-admin" ]);
+    } // fin function friteamEquipeUpdate($id)
+
+
+    public function accompagnement($id)
+    {
+        $message = "";
+        // CONTROLLER
+        // ICI IL FAUDRA TRAITER LE FORMULAIRE DE UPDATE
+
+                // JE PEUX TRAITER LE FORMULAIRE
+        // (SI IL Y A UN FORMULAIRE A TRAITER)
+
+        if (isset($_POST["operation"]) && ($_POST["operation"] == "modifier"))
+        {
+            // RECUPERER LES INFOS DU FORMULAIRE
+            // http://php.net/manual/en/function.trim.php
+            //$img               = trim($_POST["img_formation"]);
+            $titre         = trim($_POST["titre_acc"]);
+            $citation      = trim($_POST["citation_acc"]);
+            $resume        = trim($_POST["resume_acc"]);
+            $presentation  = trim($_POST["presentation_acc"]);
+            $formateur     = trim($_POST["formateur_acc"]);
+            $utilite       = trim($_POST["utilite_acc"]);
+            $url           = trim($_POST["url"]);
+
+            //$id_categorie       = trim($_POST["id_categorie"]);
+
+            // SECURITE
+            // VERIFIER QUE CHAQUE INFO EST CONFORME
+            // http://php.net/manual/en/function.mb-strlen.php
+          if    (is_string($titre)        && ( mb_strlen($titre) > 0 )
+                    && is_string($citation) && ( mb_strlen($citation) > 0 )
+                    && is_string($resume)        && ( mb_strlen($resume) > 0 )
+                    && is_string($presentation)     && ( mb_strlen($presentation) > 0 )
+                    && is_string($formateur)       && ( mb_strlen($formateur) > 0 )
+                    && is_string($utilite)    && ( mb_strlen($utilite) > 0 )
+                    && is_string($url)          && ( mb_strlen($url) > 0 )
+                    // && is_numeric($id_categorie)
+                )
+            {
+                // OK ON A LES BONNES INFOS
+                // COMPLETER LES INFOS MANQUANTES
+
+                // $id_auteur      = 1;     // DEBUG
+                //$dateCreation   = date("Y-m-d H:i:s");    // FORMAT DATETIME SQL
+
+                // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
+                // JE CREE UN OBJET DE LA CLASSE FormationModel
+                // NE PAS OUBLIER DE FAIRE use
+                $img = $this->upload();
+                $objetAccompagnementModel = new AccompagnementModel;
+                // JE PEUX UTILISER LA METHODE update DE LA CLASSE \W\Model\Model
+                $objetAccompagnementModel->update([
+                        "img"               => str_replace("assets/", "", $img),
+                        "titre_acc"         => $titre,
+                        "citation_acc"      => $citation,
+                        "resume_acc"        => $resume,
+                        "presentation_acc"  => $presentation,
+                        "formateur_acc"     => $formateur,
+                        "utilite_acc"       => $utilite,
+                        "url"               => $url,
+                ],
+                $id);
+
+                // OK
+                $message = "La fiche accompagnement à été correctement modifiée";
+            }
+            else
+            {
+                // KO
+                // UNE ERREUR
+                $message = "ERREUR lors de la mise à jour";
+            }
+        }
+
+        // VIEW
+        // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
+        $titrePage = "modification accompagnement (fiches)";
+        $this->show("pages/admin_accompagnement", [ "id" => $id, "message" => $message, "titrePage" => $titrePage ]);
+        $this->allowTo([ "admin", "super-admin" ]);
     } // fin function accompagnement
 
 
-    public function accompagnement_detail()
+    public function accompagnementDetail()
     {
-         $this->allowTo([ "admin", "super-admin" ]);
+                // INITIALISE LA VALEUR DE LA VARIABLE
+        $message = "";
+        $id = "";
+
+        if (isset($_REQUEST["operation"]) && ($_REQUEST["operation"] == "supprimer"))
+        {
+            // ON VEUT SUPPRIMER UNE LIGNE
+            // ON RECUPERE L'ID DU FORMULAIRE
+            // http://php.net/manual/fr/function.intval.php
+            $id = intval(trim($_REQUEST["id"]));
+
+            if ($id > 0)
+            {
+                // ESSAYER D'EFFACER LA LIGNE DANS LA TABLE MYSQL formation
+                // NE PAS OUBLIER DE FAIRE use
+                $objetAccompagnementModel = new AccompagnementModel;
+                $objetAccompagnementModel->delete($id);
+            }
+        }
+
+
+        if (isset($_POST["operation"]) && ($_POST["operation"] == "creer"))
+        {
+            // RECUPERER LES INFOS DU FORMULAIRE
+            // http://php.net/manual/en/function.trim.php
+            $titre         = trim($_POST["titre_acc"]);
+            $citation      = trim($_POST["citation_acc"]);
+            $resume        = trim($_POST["resume_acc"]);
+            $presentation  = trim($_POST["presentation_acc"]);
+            $formateur     = trim($_POST["formateur_acc"]);
+            $utilite       = trim($_POST["utilite_acc"]);
+            $url           = trim($_POST["url"]);
+
+            // SECURITE
+            // VERIFIER QUE CHAQUE INFO EST CONFORME
+            // http://php.net/manual/en/function.mb-strlen.php
+          if    (is_string($titre)        && ( mb_strlen($titre) > 0 )
+                    && is_string($citation) && ( mb_strlen($citation) > 0 )
+                    && is_string($resume)        && ( mb_strlen($resume) > 0 )
+                    && is_string($presentation)     && ( mb_strlen($presentation) > 0 )
+                    && is_string($formateur)       && ( mb_strlen($formateur) > 0 )
+                    && is_string($utilite)    && ( mb_strlen($utilite) > 0 )
+                    && is_string($url)          && ( mb_strlen($url) > 0 )
+                    // && is_numeric($id_categorie)
+                )
+            {
+                // OK ON A LES BONNES INFOS
+                // COMPLETER LES INFOS MANQUANTES
+
+                //$id_auteur      = 1;      DEBUG
+                //$dateCreation   = date("Y-m-d H:i:s");    // FORMAT DATETIME SQL
+                $img = $this->upload();
+
+                // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
+                // JE CREE UN OBJET DE LA CLASSE FormationModel
+                // NE PAS OUBLIER DE FAIRE use
+                $objetAccompagnementModel = new AccompagnementModel;
+                // JE PEUX UTILISER LA METHODE insert DE LA CLASSE \W\Model\Model
+                $objetAccompagnementModel->insert([
+                        "img"               => str_replace("assets/", "", $img),
+                        "titre_acc"         => $titre,
+                        "citation_acc"      => $citation,
+                        "resume_acc"        => $resume,
+                        "presentation_acc"  => $presentation,
+                        "formateur_acc"     => $formateur,
+                        "utilite_acc"       => $utilite,
+                        "url"               => $url,
+                    ]);
+
+                // OK
+                $message = "La Fiche Accompagnement à bien été créée";
+           }
+            else
+            {
+                // KO
+                // UNE ERREUR
+                $message = "ERREUR lors de la création";
+            }
+        }
+
+        // AFFICHER LA PAGE
+        // JE TRANSMETS LE MESSAGE A LA PARTIE VIEW
+        $titrePage = "accompagnement";
+        $this->show("pages/admin_accompagnement-detail", [ "message" => $message, "id" => $id, "titrePage" => $titrePage ]);
+        $this->allowTo([ "admin", "super-admin" ]);
     }// fin function accompagnement-detail
 
 
-    public function blog()
+    public function blog($id)
     {
-         $this->allowTo([ "admin", "super-admin" ]);
+        $message = "";
+        // CONTROLLER
+        // ICI IL FAUDRA TRAITER LE FORMULAIRE DE UPDATE
+
+                // JE PEUX TRAITER LE FORMULAIRE
+        // (SI IL Y A UN FORMULAIRE A TRAITER)
+
+        if (isset($_POST["operation"]) && ($_POST["operation"] == "modifier"))
+        {
+            // RECUPERER LES INFOS DU FORMULAIRE
+            // http://php.net/manual/en/function.trim.php
+            //$img               = trim($_POST["img_formation"]);
+            $titre              = trim($_POST["titre_actualite"]);
+            $chapo              = trim($_POST["chapo_actualite"]);
+            $contenu            = trim($_POST["contenu_actualite"]);
+            $auteur             = trim($_POST["auteur_actualite"]);
+            $url                = trim($_POST["url"]);
+
+            //$id_categorie       = trim($_POST["id_categorie"]);
+
+            // SECURITE
+            // VERIFIER QUE CHAQUE INFO EST CONFORME
+            // http://php.net/manual/en/function.mb-strlen.php
+            if (is_string($titre)           && ( mb_strlen($titre) > 0 )
+                    && is_string($chapo)    && ( mb_strlen($chapo) > 0 )
+                    && is_string($contenu)  && ( mb_strlen($contenu) > 0 )
+                    && is_string($auteur)   && ( mb_strlen($auteur) > 0 )
+                    && is_string($url)      && ( mb_strlen($url) > 0 )
+                )
+            {
+                // OK ON A LES BONNES INFOS
+                // COMPLETER LES INFOS MANQUANTES
+
+                // $id_auteur      = 1;     // DEBUG
+                //$dateCreation   = date("Y-m-d H:i:s");    // FORMAT DATETIME SQL
+
+                // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
+                // JE CREE UN OBJET DE LA CLASSE FormationModel
+                // NE PAS OUBLIER DE FAIRE use
+                $img = $this->upload();
+                $objetActualiteModel = new ActualiteModel;
+                // JE PEUX UTILISER LA METHODE update DE LA CLASSE \W\Model\Model
+                $objetActualiteModel->update([
+                    "img"                   => $img,
+                    "titre_actualite"       => $titre,
+                    "chapo_actualite"       => $chapo,
+                    "contenu_actualite"     => $contenu,
+                    "auteur_actualite"      => $auteur,
+                    "url"                   => $url,
+                ],
+                $id);
+
+                // OK
+                $message = "L'article' à été correctement modifié";
+            }
+            else
+            {
+                // KO
+                // UNE ERREUR
+                $message = "ERREUR lors de la mise à jour";
+            }
+        }
+
+        // VIEW
+        // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
+        $titrePage = "modification d'un article";
+        $this->show("pages/admin_blog", [ "id" => $id, "message" => $message, "titrePage" => $titrePage ]);
+        $this->allowTo([ "admin", "super-admin" ]);
     }// fin function blog
 
 
-    public function blog_detail()
+    public function blogDetail()
     {
-         $this->allowTo([ "admin", "super-admin" ]);
-    }// fin function blog-detail
+                // INITIALISE LA VALEUR DE LA VARIABLE
+        $message = "";
+        $id = "";
+
+        if (isset($_REQUEST["operation"]) && ($_REQUEST["operation"] == "supprimer"))
+        {
+            // ON VEUT SUPPRIMER UNE LIGNE
+            // ON RECUPERE L'ID DU FORMULAIRE
+            // http://php.net/manual/fr/function.intval.php
+            $id = intval(trim($_REQUEST["id"]));
+
+            if ($id > 0)
+            {
+                // ESSAYER D'EFFACER LA LIGNE DANS LA TABLE MYSQL formation
+                // NE PAS OUBLIER DE FAIRE use
+                $objetActualiteModel = new ActualiteModel;
+                $objetActualiteModel->delete($id);
+            }
+        }
+
+
+        if (isset($_POST["operation"]) && ($_POST["operation"] == "creer"))
+        {
+            // RECUPERER LES INFOS DU FORMULAIRE
+            $titre              = trim($_POST["titre_actualite"]);
+            $chapo              = trim($_POST["chapo_actualite"]);
+            $contenu            = trim($_POST["contenu_actualite"]);
+            $auteur             = trim($_POST["auteur_actualite"]);
+            $url                = trim($_POST["url"]);
+
+            // $id_categorie       = trim($_POST["id_categorie"]);
+
+            // SECURITE
+            // VERIFIER QUE CHAQUE INFO EST CONFORME
+            // http://php.net/manual/en/function.mb-strlen.php
+            if (is_string($titre)        && ( mb_strlen($titre) > 0 )
+                    && is_string($chapo) && ( mb_strlen($chapo) > 0 )
+                    && is_string($contenu)        && ( mb_strlen($contenu) > 0 )
+                    && is_string($auteur)     && ( mb_strlen($auteur) > 0 )
+                    && is_string($url)       && ( mb_strlen($url) > 0 )
+                )
+            {
+                // OK ON A LES BONNES INFOS
+                // COMPLETER LES INFOS MANQUANTES
+
+                $id_auteur      = 1;     // DEBUG
+                //$dateCreation   = date("Y-m-d H:i:s");    // FORMAT DATETIME SQL
+                $img = $this->upload();
+
+                // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
+                // JE CREE UN OBJET DE LA CLASSE FormationModel
+                // NE PAS OUBLIER DE FAIRE use
+                $objetActualiteModel = new ActualiteModel;
+                // JE PEUX UTILISER LA METHODE insert DE LA CLASSE \W\Model\Model
+                $objetActualiteModel->insert([
+                        "img"                   => $img,
+                        "titre_actualite"       => $titre,
+                        "chapo_actualite"       => $chapo,
+                        "contenu_actualite"     => $contenu,
+                        "auteur_actualite"      => $auteur,
+                        "url"                   => $url,
+                    ]);
+
+                // OK
+                $message = "L'article à bien été créé";
+            }
+            else
+            {
+                // KO
+                // UNE ERREUR
+                $message = "ERREUR lors de la création";
+            }
+        }
+
+        // AFFICHER LA PAGE
+        // JE TRANSMETS LE MESSAGE A LA PARTIE VIEW
+        $titrePage = "Actualité";
+        $this->show("pages/admin_blog-detail", [ "message" => $message, "id" => $id, "titrePage" => $titrePage ]);
+        $this->allowTo([ "admin", "super-admin" ]);
+    }// fin function blogDetail
 
     public function contact()
     {

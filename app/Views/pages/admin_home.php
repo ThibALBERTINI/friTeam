@@ -4,3 +4,5 @@
 $this->insert("partials/admin-header");
 $this->insert("partials/admin-section-home");
 $this->insert("partials/admin-footer");
+
+?>

@@ -94,7 +94,6 @@ if (!empty($tabFormation)) :
         
         <div class="message">
             <?php if (isset($message)) echo $message ?><br>
-            <?php if (isset($message_upload)) echo $message_upload ?><br>
         </div>
     </form>
     
@@ -103,7 +102,7 @@ if (!empty($tabFormation)) :
 <?php else: ?>
 
 <section>
-    <h3>AUCUN ARTICLE TROUVE</h3>
+    <h3>AUCUNE FORMATION TROUVEE</h3>
 </section>
 
 <?php endif; ?>
