@@ -9,63 +9,63 @@ class UsersController
 {
                     //  !!!  le logout se trouve dans adminController (à la fin)
 
-public function login ()
-    {
-        // TRAITEMENT DU FORMULAIRE DE LOGIN
-        $message = "";
-        
-        // TRAITER LE FORMULAIRE DE LOGIN
-        if (isset($_REQUEST["operation"]) && ($_REQUEST["operation"] == "login"))
+    public function login ()
         {
-            // RECUPERER LES INFOS
-            $login      = trim($_REQUEST["login"]);
-            $password   = trim($_REQUEST["password"]);
-            // UN PEU DE SECURITE
-            if (is_string($login)            && ( mb_strlen($login) > 4 )
-                    && is_string($password)  && ( mb_strlen($password) > 4 ) 
-               )
+            // TRAITEMENT DU FORMULAIRE DE LOGIN
+            $message = "";
+            
+            // TRAITER LE FORMULAIRE DE LOGIN
+            if (isset($_REQUEST["operation"]) && ($_REQUEST["operation"] == "login"))
             {
-                // ON VA VERIFIER SI LES INFOS CORRESPONDENT A UNE LIGNE DANS LA TABLE MYSQL
-                // ON VA UTILISER LA CLASSE \W\Security\AuthentificationModel
-                $objetAuthentificationModel = new \W\Security\AuthentificationModel;
-                // $idUser => 0 SI AUCUNE LIGNE NE CORRESPOND
-                // $idUser => id DE LA LIGNE TROUVEE 
-                $idAdmin = $objetAuthentificationModel->isValidLoginInfo($login, $password);
-                if ($idAdmin > 0)
+                // RECUPERER LES INFOS
+                $login      = trim($_REQUEST["login"]);
+                $password   = trim($_REQUEST["password"]);
+                // UN PEU DE SECURITE
+                if (is_string($login)            && ( mb_strlen($login) > 4 )
+                        && is_string($password)  && ( mb_strlen($password) > 4 ) 
+                   )
                 {
-                    // OK
-                    $message = "BIENVENUE  ". $login;
-                    
-                    $objetAdminModel = new \Model\AdminModel;
-                    // ON RECUPERE TOUTE LA LIGNE SUR L'UTILISATEUR
-                    $tabAdmin = $objetAdminModel->find($idAdmin);
-                    // JE VAIS MEMORISER CES INFOS DANS UNE SESSION
-                    $objetAuthentificationModel->logUserIn($tabAdmin);
-                    
-                    // ON PEUT FAIRE UNE REDIRECTION VERS UNE PAGE PROTEGEE
-                    // ...
+                    // ON VA VERIFIER SI LES INFOS CORRESPONDENT A UNE LIGNE DANS LA TABLE MYSQL
+                    // ON VA UTILISER LA CLASSE \W\Security\AuthentificationModel
+                    $objetAuthentificationModel = new \W\Security\AuthentificationModel;
+                    // $idUser => 0 SI AUCUNE LIGNE NE CORRESPOND
+                    // $idUser => id DE LA LIGNE TROUVEE 
+                    $idAdmin = $objetAuthentificationModel->isValidLoginInfo($login, $password);
+                    if ($idAdmin > 0)
+                    {
+                        // OK
+                        $message = "BIENVENUE  ". $login;
+                        
+                        $objetAdminModel = new \Model\AdminModel;
+                        // ON RECUPERE TOUTE LA LIGNE SUR L'UTILISATEUR
+                        $tabAdmin = $objetAdminModel->find($idAdmin);
+                        // JE VAIS MEMORISER CES INFOS DANS UNE SESSION
+                        $objetAuthentificationModel->logUserIn($tabAdmin);
+                        
+                        // ON PEUT FAIRE UNE REDIRECTION VERS UNE PAGE PROTEGEE
+                        // ...
+                    }
+                    else
+                    {
+                        // KO
+                        $message = "IDENTIFIANTS INCORRECTS";
+                    }
                 }
                 else
                 {
-                    // KO
-                    $message = "IDENTIFIANTS INCORRECTS";
+                    $message = "INFO INCORRECTE";
                 }
             }
-            else
-            {
-                $message = "INFO INCORRECTE";
-            }
-        }
-        
-        // VIEW
-        $this->show("pages/users_login", [ "message" => $message ]);
-    } // fin function login
+            
+            // VIEW
+            $this->show("pages/users_login", [ "message" => $message ]);
+        } // fin function login
 
-  
-      public function loosePass ()
-      {
-        $message = "";
-        
+      
+    public function loosePass ()
+    {
+    $message = "";
+
         if(isset($_POST['btnSub']))
         {
             if(isset($_POST['usernameOrEmail'])) 
@@ -86,6 +86,9 @@ public function login ()
                     $token = md5($email); //génération d'une chaine cryptée en MD5()
                     //echo $token;
                     //envoi du mail
+
+                    $objetAdminModel= new \Model\AdminModel;
+                    $rqToken= $objetAdminModel->update(array("token"=>$token), $id);
                         
                     $mail = new \PHPMailer(); //création d'un objet de type mail
                     $mail->isSMTP(); //connexion directe au serveur SMTP
@@ -116,14 +119,7 @@ public function login ()
                     }
                     else
                     {   
-                        //mise à jour table clients pour l'étape de réinitialisation
-                        $rqToken = "UPDATE admin
-                                                SET token = ?
-                                                WHERE id = ?";
-                        $stmtToken = $bdd->prepare($rqToken);
-                        $paramToken = array($token, $id);
-                        $stmtToken->execute($paramToken);
-                        echo 'Vérifiez votre boite mail...';    
+                        $message ='Vérifiez votre boite mail...';    
                     }
                 
             
@@ -134,54 +130,52 @@ public function login ()
                     $message = "Vous devez renseigner au moins un identifiant";
                 }
             } // fin if(isset submit
-        
-             $this->show("pages/users_loosePass", [ "message" => $message ]);
+
+             
         }//fin isset btnsub
+        $this->show("pages/users_loosePass", [ "message" => $message ]);
     } // fin loosePass
-
-
 
     public function newPass()
     {
         $message = "";
-        $token = strip_tags($_GET['token']);
-
-
-    //recherche de l'idClient correspondant au token
-        $rqClient = "SELECT id
-                    FROM admin
-                    WHERE token = ?";
-    $stmtClient = $dbh->prepare($rqClient);
-    $params = array($token);
-    $stmtClient->execute($params);
-    $idAdmin = $stmtClient->fetchColumn();
-    //si le client n'est pas absent de la table
-    if($idAdmin !== false)
-    {
-      //requete de mise à jour
-        $rqMaj = "UPDATE clients
-                            SET password = :password, token = NULL
-                            WHERE idClient = :idClient";
-        $stmtMaj = $bdd->prepare($rqMaj);
-        $params = array(':idClient' => $safe['idClient'],
-                                        ':password' => password_hash($safe['password'], PASSWORD_DEFAULT));
-        $resultat = $stmtMaj->execute($params);
-        //joli message pour dire que c'est OK
-        if($resultat !== false)
+        $login= "";
+        if(isset($_POST['btnSub']))
         {
-            $message = '<p>Votre mot de passe a été mis à jour</p>';
-        }
-        else 
-        {
-                $message = "erreur technique... Merci de recommencer l'étape de modification du mot de passe";
-        }
+            
+            $token = strip_tags($_GET['token']);
+            if(isset($token))
+            {
+                $objetUsersModel = new \W\Model\UsersModel;
+                $tabToken=$objetUsersModel->search(array ("token"=>$token, "login", "id", "password"));
+                $login=$tabToken['login'];
 
-    } // fin if$idAdmin
-    else
-    {
-        $message = "vous n'avez pas été identifié, merci de recommencer l'étape de modification du mot de passe";
-    }
-    $this->show("pages/users_newPass", [ "message" => $message ]);
+                if($_POST["passwordNew"] == $_POST["confirmPasswordNew"])
+                {
+                    $passwordN=$_POST["passwordNew"];
+                    $passChanged=$objetUsersModel->update(array("password"=>$passwordN), $id);
+
+                    if(!$passChanged)
+                    {
+                        $message = '<p>Désolé le mot de passe n\'a pas été changé';
+                    }
+                    else
+                    {
+                        $message = '<p>Votre mot de passe a été mis à jour</p>';
+                    }
+                }
+                else
+                {
+                    $message = "erreur de saisie les mots de passe sont différents";
+                }
+                      
+            }// fin if isset token
+            else
+                {
+                    $message = "vous n'avez pas été identifié, merci de recommencer l'étape de modification du mot de passe";
+                }
+        }// fin ifisset btnsub
+        $this->show("pages/users_newPass", [ "message" => $message, "login" => $login ]);
     }//fin function newPass
 
 

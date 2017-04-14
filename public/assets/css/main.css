@@ -754,3 +754,22 @@ PAGE CONTACT
 .succes {
   color: green;
 }
+
+/***************
+****************
+PAGES ADMIN CMS
+****************
+****************/
+
+.table-admin {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.table-admin h2 {
+    margin-bottom: 25px;
+}
+
+.scroll-table {
+  overflow-x: scroll;
+}

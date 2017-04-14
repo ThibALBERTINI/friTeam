@@ -59,7 +59,7 @@
 
       <!-- Header image + titre -->
       <div class="container-fluid header-principal text-center">
-        <h1 class="titre-page">CONTACT</h1>
+        <h1 class="titre-page"><?php echo $titrePage ?></h1>
       </div>
     </header>
 
