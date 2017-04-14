@@ -76,18 +76,18 @@ class AdminController
                         
                         ]);
 
-                    $message = "Vous avez créé l'administrateur " . $login;
+                    $message = '<p class="succes"> Vous avez créé l\'administrateur ' . $login . '</p>';
                 }// fin ifstring
                 
                 else 
                 {
-                   $message= "ERREUR : INFO INCORRECTE Attention aux tailles mini"; 
+                   $message= '<p class="erreur"> ERREUR : INFO INCORRECTE Attention aux tailles mini</p>'; 
                 }
 
             }
             else
             {
-                $message= "Login ou adresse mail déjà utilisé(e)";
+                $message= '<p class="erreur"> Login ou adresse mail déjà utilisé(e)</p>';
                 
                 // UNE ERREUR transmettre à la partie view (en dessous $this->show)
             }
@@ -100,10 +100,74 @@ class AdminController
         $this->show("pages/admin_creer-admin", ["message" => $message ]);
     } // fin function creer admin
 
-    
+    public function modifPass ()
+    {
+        //$this->allowTo([ "admin", "super-admin" ]);
+        $message = "";
+       
+        if(isset($_POST['btnSub']))
+        {
+            // RECUPERER LES INFOS
+            $connectedAdmin = $this->getUser();
+            $login      = trim($connectedAdmin ["login"]);
+            $idAdmin      = trim($connectedAdmin ["id"]);
+            $passwordOld   = trim($_REQUEST["passwordOld"]);
+            $passwordNew   = trim($_REQUEST["passwordNew"]);
+            $confirmPasswordNew   = trim($_REQUEST["confirmPasswordNew"]);
+
+            // UN PEU DE SECURITE
+                if (is_string($login)            && ( mb_strlen($login) > 4 )
+                    && is_string($passwordNew)  && ( mb_strlen($passwordNew) > 4 ) 
+                   )
+                {
+                    // ON VA VERIFIER SI LES INFOS CORRESPONDENT A UNE LIGNE DANS LA TABLE MYSQL
+                    // ON VA UTILISER LA CLASSE \W\Security\AuthentificationModel
+                    $objetAuthentificationModel = new \W\Security\AuthentificationModel;
+                    // $idUser => 0 SI AUCUNE LIGNE NE CORRESPOND
+                    // $idUser => id DE LA LIGNE TROUVEE 
+                    $idAdmin = $objetAuthentificationModel->isValidLoginInfo($login, $passwordOld);
+                    if ($idAdmin > 0)
+                    {
+                        if($passwordNew==$confirmPasswordNew)
+                        {
+                            $objetAdminModel=new \Model\AdminModel;
+                            $passwordN=password_hash($passwordNew, PASSWORD_DEFAULT);
+                            $passChanged=$objetAdminModel->update(array("password"=>$passwordN), $idAdmin);
+
+                            if(!$passChanged)
+                            {
+                                $message = '<p class="erreur">Désolé le mot de passe n\'a pas été changé, merci de recommencer la procédure </p>';
+                            }
+                            else
+                            {
+                                $message = '<p class="succes">Votre mot de passe a été mis à jour</p>';
+                            }
+                        }// fin pasword = confirmpassword
+                        else
+                        {
+                            $message = '<p class="erreur"> erreur de saisie les mots de passe sont différents</p>';
+                        }
+                    }// fin if mdp ok 
+                    else
+                    {
+                        $message= '<p class="erreur"> Votre mot de passe est incorrect, si vous l\'avez oublié utilisez la procédure mot de passe oublié </p>';
+                    }
+                } // fin if string login et password
+
+        } // fin if isset btnsub
+        $this->show("pages/admin_modif_pass", ["message" => $message]);
+    } // fin function modifPass
+
+public function postLogin()
+    {
+        //$this->allowTo([ "admin", "super-admin" ]);
+        $this->show("pages/admin_postLogin", ["message" => $message]);
+    }// fin function home
+
     public function home()
     {
-        $this->allowTo([ "admin", "super-admin" ]);
+        //$this->allowTo([ "admin", "super-admin" ]);
+        $this->show("pages/admin_home");
     }// fin function home
 
 

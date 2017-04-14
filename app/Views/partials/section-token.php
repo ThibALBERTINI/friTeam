@@ -1,7 +1,4 @@
-<?php
-//récupération du token dans l'url (+ nettoyage)
 
-	?>
 	<form method="post" action="updatePass.php">
 		<!-- < ? = est équivalent à < ? php echo -->
 		<input type="hidden" name="idClient" value="<?= $idClient; ?>" />
@@ -14,8 +11,4 @@
 						 class="btn btn-success" />
 		</div>
 	</form>
-	<?php
-}
-else echo 'token non trouvé';
-
-?>
+	

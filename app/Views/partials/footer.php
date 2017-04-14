@@ -21,6 +21,9 @@
           <li><a class="text-footer" href="#" role="button">Termes Et Conditions</a></li>
           <li><a class="text-footer" href="#" role="button">Mentions Légales</a></li>
         </ul>
+        <ul class="list-inline text-center">
+          <li><a class="text-footer" href="<?php echo $this->url('users_login') ?>" role="button">Connexion Administrateurs</a></li>
+        </ul>
       </div>
 
     </div>

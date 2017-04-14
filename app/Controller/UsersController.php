@@ -42,8 +42,9 @@ class UsersController
                         // JE VAIS MEMORISER CES INFOS DANS UNE SESSION
                         $objetAuthentificationModel->logUserIn($tabAdmin);
                         
+
                         // ON PEUT FAIRE UNE REDIRECTION VERS UNE PAGE PROTEGEE
-                        // ...
+                        $this->redirectToRoute('admin_postLogin');
                     }
                     else
                     {
@@ -74,7 +75,7 @@ class UsersController
                 $usernameOrEmail = trim(strip_tags($_POST['usernameOrEmail']));
            
                 $objetUsersModel = new \W\Model\UsersModel;
-                $exist= $objetUsersModel->getUserByUsernameOrEmail($usernameOrEmail);  //$exist est le tableau fetch
+                $exist= $objetUsersModel->getUserByUsernameOrEmail($usernameOrEmail);  //$exist est le tableau fetch comprenant toute la ligne d'un admin
                 
             
                 if(isset($exist["email"]))
@@ -136,7 +137,7 @@ class UsersController
         $this->show("pages/users_loosePass", [ "message" => $message ]);
     } // fin loosePass
 
-    public function newPass()
+    public function newPass() //suite envoi mail et reception token
     {
         $message = "";
         $login= "";
@@ -146,24 +147,26 @@ class UsersController
             $token = strip_tags($_GET['token']);
             if(isset($token))
             {
-                $objetUsersModel = new \W\Model\UsersModel;
-                $tabToken=$objetUsersModel->search(array ("token"=>$token, "login", "id", "password"));
+                $objetAdminModel = new \Model\AdminModel;
+                $tabToken=$objetAdminModel->findBy("token", $token);
                 $login=$tabToken['login'];
+                $passwordN=$tabToken['password'];
+                $id=$tabToken['id'];
 
                 if($_POST["passwordNew"] == $_POST["confirmPasswordNew"])
                 {
-                    $passwordN=$_POST["passwordNew"];
-                    $passChanged=$objetUsersModel->update(array("password"=>$passwordN), $id);
+                    $passwordN=password_hash($_POST["passwordNew"], PASSWORD_DEFAULT);
+                    $passChanged=$objetAdminModel->update(array("password"=>$passwordN), $id);
 
                     if(!$passChanged)
                     {
-                        $message = '<p>Désolé le mot de passe n\'a pas été changé';
+                        $message = '<p>Désolé le mot de passe n\'a pas été changé, merci de recommencer';
                     }
                     else
                     {
                         $message = '<p>Votre mot de passe a été mis à jour</p>';
                     }
-                }
+                }// fin pasword = confirmpassword
                 else
                 {
                     $message = "erreur de saisie les mots de passe sont différents";

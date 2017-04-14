@@ -32,9 +32,12 @@
 		['GET|POST', 	'/admin/blog/[:id]',		'Admin#blogDetail',			'admin_blog-detail'],  // UNE ROUTE pour la mise à jour des articles
 		['GET|POST', 	'/admin/contact', 			'Admin#contact',  				'admin_contact'],  // UNE ROUTE
 		['GET|POST', 	'/admin/creerAdmin', 		'Admin#creerAdmin',  			'admin_creer-admin'],  // UNE ROUTE
+		['GET|POST', 	'/admin/modifPass', 		'Admin#modifPass',  			'admin_modif_pass'],  // UNE ROUTE
 
 		//ATTENTION IL FAUT CHANGER LE NOM DE LA ROUTE POUR LE LOGIN
 		['GET|POST', 	'/users/login',	'Users#login',  'users_login'], // UNE ROUTE
+		['GET|POST', 	'/admin/postLogin',	'Admin#postLogin',  'admin_postLogin'], // UNE ROUTE
+
 		['GET|POST', 	'/users/loosePass',	'Users#loosePass',  'users_loosePass'], // UNE ROUTE
 		['GET|POST', 	'/users/newPass',	'Users#newPass',  'users_newPass'], // UNE ROUTE
 		['GET|POST', 	'/admin/logout', 'Admin#logout', 'admin_logout'],
