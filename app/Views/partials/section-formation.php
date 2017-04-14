@@ -18,9 +18,9 @@
 
 <div class="container carte-container">
   <div class="row row-centered">
-    
 
-<?php 
+
+<?php
 
 $objetFicheModel = new \Model\FormationModel;
 $tabResult = $objetFicheModel->findAll("id", "DESC");
@@ -38,12 +38,14 @@ if(!empty($tabResult))
     $url = $tabInfo["url"];
 
     $href = $this->url("default_formation-detail", [ "url" => $url ]);
+
+    $cheminAsset = $this->assetUrl("../");
 echo
 <<<CODEHTML
 
       <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 carte-formation col-centered">
         <div class="image">
-          <img src="$img" alt="image-carte">
+          <img src="$cheminAsset/$img" alt="image-carte">
         </div>
 
         <div class="contenu">

@@ -39,59 +39,59 @@ class AdminController
             $email              = $_POST["email"];
             $password           = password_hash($_POST["password"], PASSWORD_DEFAULT);
             $role              =  $_POST["role"];// recuperer la values
-           
+
             //array_map('strip_tags', $POST);  //note est-ce nécessaire de nettoyer la partie admin?
              // RECUPERER LES INFOS DU FORMULAIRE
-           
+
             $objetUsersModel = new \W\Model\UsersModel;
             $exist= $objetUsersModel->getUserByUsernameOrEmail($login);
             $exist2= $objetUsersModel->getUserByUsernameOrEmail($email);
-            
+
             if($exist == 0 && $exist2 ==0)
-            {          
-           
-            
+            {
+
+
                 // SECURITE
                 // VERIFIER QUE CHAQUE INFO EST CONFORME
                 // http://php.net/manual/en/function.mb-strlen.php
                 if (is_string($login)           && ( mb_strlen($login) > 4 )
-                        && is_string($email)    && ( mb_strlen($email) > 4 ) 
-                        
-                        && is_string($password)  && ( mb_strlen($password) > 4 ) 
-                       
+                        && is_string($email)    && ( mb_strlen($email) > 4 )
+
+                        && is_string($password)  && ( mb_strlen($password) > 4 )
+
                     )//fin ifstring
                 {
                    // OK ON A LES BONNES INFOS
-                    
+
                     // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL admin
                     // JE CREE UN OBJET DE LA CLASSE ArticleModel
                     // NE PAS OUBLIER DE FAIRE use
                     $objetAdminModel = new AdminModel;
                     // JE PEUX UTILISER LA METHODE insert DE LA CLASSE \W\Model\Model
                     $objetAdminModel->insert([
-                        "login"         => $login, 
-                        "email"         => $email, 
-                        "password"       => $password, 
-                        "role"     => $role, 
-                        
+                        "login"         => $login,
+                        "email"         => $email,
+                        "password"       => $password,
+                        "role"     => $role,
+
                         ]);
 
                     $message = "Vous avez créé l'administrateur " . $login;
                 }// fin ifstring
-                
-                else 
+
+                else
                 {
-                   $message= "ERREUR : INFO INCORRECTE Attention aux tailles mini"; 
+                   $message= "ERREUR : INFO INCORRECTE Attention aux tailles mini";
                 }
 
             }
             else
             {
                 $message= "Login ou adresse mail déjà utilisé(e)";
-                
+
                 // UNE ERREUR transmettre à la partie view (en dessous $this->show)
             }
-  
+
         }// fin if ISSET CREER
 
          //$this->allowTo([ "super-admin" ]);
@@ -100,7 +100,7 @@ class AdminController
         $this->show("pages/admin_creer-admin", ["message" => $message ]);
     } // fin function creer admin
 
-    
+
     public function home()
     {
         $this->allowTo([ "admin", "super-admin" ]);
@@ -109,7 +109,7 @@ class AdminController
 
     public function friteamEquipe()
     {
-         // INITIALISE LA VALEUR DE LA VARIABLE 
+         // INITIALISE LA VALEUR DE LA VARIABLE
         $message = "";
         $id = "";
 
@@ -128,7 +128,7 @@ class AdminController
                 $objetFormationModel->delete($id);
             }
         }
-        
+
 
         if (isset($_POST["operation"]) && ($_POST["operation"] == "creer"))
         {
@@ -145,23 +145,23 @@ class AdminController
             $vision              = trim($_POST["vision_profil"]);
             $entreprise              = trim($_POST["entreprise_profil"]);
             $linkedin       = trim($_POST["linkedin"]);
-            
+
             // $id_categorie       = trim($_POST["id_categorie"]);
 
             // SECURITE
             // VERIFIER QUE CHAQUE INFO EST CONFORME
             // http://php.net/manual/en/function.mb-strlen.php
-            if (is_string($nom)        && ( mb_strlen($nom) > 0 ) 
-                    && is_string($prenom) && ( mb_strlen($prenom) > 0 ) 
-                    && is_string($citation)        && ( mb_strlen($citation) > 0 ) 
-                    && is_string($competence)     && ( mb_strlen($competence) > 0 ) 
-                    && is_string($interets)       && ( mb_strlen($interets) > 0 ) 
-                    && is_string($intervention)    && ( mb_strlen($intervention) > 0 ) 
+            if (is_string($nom)        && ( mb_strlen($nom) > 0 )
+                    && is_string($prenom) && ( mb_strlen($prenom) > 0 )
+                    && is_string($citation)        && ( mb_strlen($citation) > 0 )
+                    && is_string($competence)     && ( mb_strlen($competence) > 0 )
+                    && is_string($interets)       && ( mb_strlen($interets) > 0 )
+                    && is_string($intervention)    && ( mb_strlen($intervention) > 0 )
                     && is_string($motivation)        && ( mb_strlen($motivation) > 0 )
-                    && is_string($vision)         && ( mb_strlen($vision) > 0 ) 
-                    && is_string($entreprise)         && ( mb_strlen($entreprise) > 0 ) 
-                    && is_string($linkedin)  && ( mb_strlen($linkedin) > 0 ) 
-                    // && is_numeric($id_categorie) 
+                    && is_string($vision)         && ( mb_strlen($vision) > 0 )
+                    && is_string($entreprise)         && ( mb_strlen($entreprise) > 0 )
+                    && is_string($linkedin)  && ( mb_strlen($linkedin) > 0 )
+                    // && is_numeric($id_categorie)
                 )
             {
                 // OK ON A LES BONNES INFOS
@@ -170,7 +170,7 @@ class AdminController
                 $id_auteur      = 1;     // DEBUG
                 //$dateCreation   = date("Y-m-d H:i:s");    // FORMAT DATETIME SQL
                 $img = $this->upload();
-                
+
                 // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
                 // JE CREE UN OBJET DE LA CLASSE FormationModel
                 // NE PAS OUBLIER DE FAIRE use
@@ -189,7 +189,7 @@ class AdminController
                         "entreprise_profil"        => $entreprise,
                         "linkedin" => $linkedin,
                     ]);
-                
+
                 // OK
                 $message = "La Fiche Formation à bien été créée";
             }
@@ -200,7 +200,7 @@ class AdminController
                 $message = "ERREUR lors de la création";
             }
         }
-        
+
         // AFFICHER LA PAGE
         // JE TRANSMETS LE MESSAGE A LA PARTIE VIEW
         $titrePage = "qui-sommes nous ?";
@@ -219,7 +219,7 @@ class AdminController
     // LA METHODE ASSOCIEE A LA ROUTE /admin/formation/[:id]
     public function formationDetail()
     {
-        // INITIALISE LA VALEUR DE LA VARIABLE 
+        // INITIALISE LA VALEUR DE LA VARIABLE
         $message = "";
         $id = "";
 
@@ -238,7 +238,7 @@ class AdminController
                 $objetFormationModel->delete($id);
             }
         }
-        
+
 
         if (isset($_POST["operation"]) && ($_POST["operation"] == "creer"))
         {
@@ -258,26 +258,26 @@ class AdminController
             $programme         = trim($_POST["programme_formation"]);
             $lien              = trim($_POST["lien_catalogue"]);
             $url               = trim($_POST["url"]);
-            
+
             // $id_categorie       = trim($_POST["id_categorie"]);
 
             // SECURITE
             // VERIFIER QUE CHAQUE INFO EST CONFORME
             // http://php.net/manual/en/function.mb-strlen.php
-            if (is_string($titre)        && ( mb_strlen($titre) > 0 ) 
-                    && is_string($presentation) && ( mb_strlen($presentation) > 0 ) 
-                    && is_string($chapo)        && ( mb_strlen($chapo) > 0 ) 
-                    && is_string($objectif)     && ( mb_strlen($objectif) > 0 ) 
-                    && is_string($public)       && ( mb_strlen($public) > 0 ) 
-                    && is_string($condition)    && ( mb_strlen($condition) > 0 ) 
+            if (is_string($titre)        && ( mb_strlen($titre) > 0 )
+                    && is_string($presentation) && ( mb_strlen($presentation) > 0 )
+                    && is_string($chapo)        && ( mb_strlen($chapo) > 0 )
+                    && is_string($objectif)     && ( mb_strlen($objectif) > 0 )
+                    && is_string($public)       && ( mb_strlen($public) > 0 )
+                    && is_string($condition)    && ( mb_strlen($condition) > 0 )
                     && is_string($duree)        && ( mb_strlen($duree) > 0 )
                     && is_string($date)         && ( mb_strlen($date) > 0 ) //attention date
                     && is_string($lieu)         && ( mb_strlen($lieu) > 0 ) // a voir : dans html, le type="date" de la balise <input> doit renvoyer un champs text sur certains navigateur
-                    && is_string($intervenant)  && ( mb_strlen($intervenant) > 0 ) 
-                    && is_string($programme)    && ( mb_strlen($programme) > 0 ) 
-                    && is_string($lien)         && ( mb_strlen($lien) > 0 ) 
-                    && is_string($url)          && ( mb_strlen($url) > 0 ) 
-                    // && is_numeric($id_categorie) 
+                    && is_string($intervenant)  && ( mb_strlen($intervenant) > 0 )
+                    && is_string($programme)    && ( mb_strlen($programme) > 0 )
+                    && is_string($lien)         && ( mb_strlen($lien) > 0 )
+                    && is_string($url)          && ( mb_strlen($url) > 0 )
+                    // && is_numeric($id_categorie)
                 )
             {
                 // OK ON A LES BONNES INFOS
@@ -286,7 +286,7 @@ class AdminController
                 $id_auteur      = 1;     // DEBUG
                 //$dateCreation   = date("Y-m-d H:i:s");    // FORMAT DATETIME SQL
                 $img = $this->upload();
-                
+
                 // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
                 // JE CREE UN OBJET DE LA CLASSE FormationModel
                 // NE PAS OUBLIER DE FAIRE use
@@ -307,8 +307,8 @@ class AdminController
                         "programme_formation"   => $programme,
                         "lien_catalogue"        => $lien,
                         "url"                   => $url,
-                    ]);
-                
+                    ], false);
+
                 // OK
                 $message = "La Fiche Formation à bien été créée";
             }
@@ -319,7 +319,7 @@ class AdminController
                 $message = "ERREUR lors de la création";
             }
         }
-        
+
         // AFFICHER LA PAGE
         // JE TRANSMETS LE MESSAGE A LA PARTIE VIEW
         $titrePage = "formation";
@@ -334,48 +334,48 @@ class AdminController
         $uploadOk = 1;
         $imageFileType = pathinfo($fichier,PATHINFO_EXTENSION); //récupère l'extension du fichier
         // Verifier que l'image existe dans l'upload
-        if(isset($_POST["submit"])) 
+        if(isset($_POST["submit"]))
         {
             $check = getimagesize($_FILES["img"]["tmp_name"]);
-            if($check !== false) 
+            if($check !== false)
             {
                 $message = "Le fichier uploadé est une image - " . $check["mime"] . ".";
                 $uploadOk = 1;
-            } else 
+            } else
             {
                 $message = "Le fichier uploadé n'est pas une image.";
                 $uploadOk = 0;
             }
         }
         // // Verifier si le fichier existe déjà
-        // if (file_exists($fichier)) 
+        // if (file_exists($fichier))
         // {
         //     echo "Désolé, le fichier existe déjà.";
         //     $uploadOk = 0;
         // }
         // Verifier la taille de l'image uploadé
-        if ($_FILES["img_formation"]["size"] > 500000) 
+        if ($_FILES["img_formation"]["size"] > 500000)
         {
             $message = "Votre image est trop lourde. Taille maximale autorisée : 500 ko.";
             $uploadOk = 0;
         }
         // Formats acceptés
-        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) 
+        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" )
         {
             $message = "Le fichier doit être au format .jpg ou .png ou .jpeg ou .gif";
             $uploadOk = 0;
         }
         // Vérifier si $uploadOk est à 0 à cause d'une erreur
-        if ($uploadOk == 0) 
+        if ($uploadOk == 0)
         {
             $message = "Désolé, votre fichier n'a pas pu être chargé.";
             // if everything is ok, try to upload file
-        } else 
+        } else
         {
-            if (move_uploaded_file($_FILES["img"]["tmp_name"], $fichier)) 
+            if (move_uploaded_file($_FILES["img"]["tmp_name"], $fichier))
             {
                 $message = "Votre fichier : ". basename( $_FILES["img"]["name"]). " à été enregistré.";
-            } else 
+            } else
             {
                 $message = "Désolé, votre fichier : ". basename( $_FILES["img"]["name"]). " n'a pas pu être téléchargé.";
             }
@@ -393,7 +393,7 @@ class AdminController
 
                 // JE PEUX TRAITER LE FORMULAIRE
         // (SI IL Y A UN FORMULAIRE A TRAITER)
-        
+
         if (isset($_POST["operation"]) && ($_POST["operation"] == "modifier"))
         {
             // RECUPERER LES INFOS DU FORMULAIRE
@@ -412,26 +412,26 @@ class AdminController
             $programme         = trim($_POST["programme_formation"]);
             $lien              = trim($_POST["lien_catalogue"]);
             $url               = trim($_POST["url"]);
-            
+
             //$id_categorie       = trim($_POST["id_categorie"]);
 
             // SECURITE
             // VERIFIER QUE CHAQUE INFO EST CONFORME
             // http://php.net/manual/en/function.mb-strlen.php
-            if (is_string($titre)        && ( mb_strlen($titre) > 0 ) 
-                    && is_string($presentation) && ( mb_strlen($presentation) > 0 ) 
-                    && is_string($chapo)        && ( mb_strlen($chapo) > 0 ) 
-                    && is_string($objectif)     && ( mb_strlen($objectif) > 0 ) 
-                    && is_string($public)       && ( mb_strlen($public) > 0 ) 
-                    && is_string($condition)    && ( mb_strlen($condition) > 0 ) 
+            if (is_string($titre)        && ( mb_strlen($titre) > 0 )
+                    && is_string($presentation) && ( mb_strlen($presentation) > 0 )
+                    && is_string($chapo)        && ( mb_strlen($chapo) > 0 )
+                    && is_string($objectif)     && ( mb_strlen($objectif) > 0 )
+                    && is_string($public)       && ( mb_strlen($public) > 0 )
+                    && is_string($condition)    && ( mb_strlen($condition) > 0 )
                     && is_string($duree)        && ( mb_strlen($duree) > 0 )
                     && is_string($date)         && ( mb_strlen($date) > 0 ) //attention date
                     && is_string($lieu)         && ( mb_strlen($lieu) > 0 ) // a voir : dans html, le type="date" de la balise <input> doit renvoyer un champs text sur certains navigateur
-                    && is_string($intervenant)  && ( mb_strlen($intervenant) > 0 ) 
-                    && is_string($programme)    && ( mb_strlen($programme) > 0 ) 
-                    && is_string($lien)         && ( mb_strlen($lien) > 0 ) 
-                    && is_string($url)          && ( mb_strlen($url) > 0 ) 
-                    //&& is_numeric($id_categorie) 
+                    && is_string($intervenant)  && ( mb_strlen($intervenant) > 0 )
+                    && is_string($programme)    && ( mb_strlen($programme) > 0 )
+                    && is_string($lien)         && ( mb_strlen($lien) > 0 )
+                    && is_string($url)          && ( mb_strlen($url) > 0 )
+                    //&& is_numeric($id_categorie)
                 )
             {
                 // OK ON A LES BONNES INFOS
@@ -439,7 +439,7 @@ class AdminController
 
                 // $id_auteur      = 1;     // DEBUG
                 //$dateCreation   = date("Y-m-d H:i:s");    // FORMAT DATETIME SQL
-                
+
                 // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
                 // JE CREE UN OBJET DE LA CLASSE FormationModel
                 // NE PAS OUBLIER DE FAIRE use
@@ -463,7 +463,7 @@ class AdminController
                 "url"                   => $url,
                 ],
                 $id);
-                
+
                 // OK
                 $message = "La fiche à été correctement modifiée";
             }
@@ -474,7 +474,7 @@ class AdminController
                 $message = "ERREUR lors de la mise à jour";
             }
         }
-        
+
         // VIEW
         // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
         $titrePage = "modification formation (fiches)";
@@ -522,7 +522,7 @@ class AdminController
         $objetAuthentificationModel = new \W\Security\AuthentificationModel;
 
         $objetAuthentificationModel->logUserOut();
-        
+
         // REDIRIGER VERS LA PAGE DE LOGIN
         $this->redirectToRoute("users_login");
     }// fin function logout
