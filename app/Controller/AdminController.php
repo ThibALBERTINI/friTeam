@@ -6,7 +6,8 @@ use \W\Controller\Controller;
 use \Model\AdminModel;
 use \Model\FormationModel;
 use \Model\ProfilModel;
-use \Model\ArticleModel;
+use \Model\ActualiteModel;
+use \Model\AccompagnementModel;
 
 
 
@@ -65,7 +66,7 @@ class AdminController
                    // OK ON A LES BONNES INFOS
                     
                     // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL admin
-                    // JE CREE UN OBJET DE LA CLASSE ArticleModel
+                    // JE CREE UN OBJET DE LA CLASSE ActualiteModel
                     // NE PAS OUBLIER DE FAIRE use
                     $objetAdminModel = new AdminModel;
                     // JE PEUX UTILISER LA METHODE insert DE LA CLASSE \W\Model\Model
@@ -260,7 +261,7 @@ public function postLogin()
                     ]);
                 
                 // OK
-                $message = "La Fiche Formation à bien été créée";
+                $message = "La Fiche Profil à bien été créée";
             }
             else
             {
@@ -362,7 +363,7 @@ public function postLogin()
                 $objetFormationModel = new FormationModel;
                 // JE PEUX UTILISER LA METHODE insert DE LA CLASSE \W\Model\Model
                 $objetFormationModel->insert([
-                        "img"         => $img,
+                        "img"                   => str_replace("assets/", "", $img),
                         "titre_formation"       => $titre,
                         "presentation_formation"=> $presentation,
                         "chapo_formation"       => $chapo,
@@ -376,7 +377,7 @@ public function postLogin()
                         "programme_formation"   => $programme,
                         "lien_catalogue"        => $lien,
                         "url"                   => $url,
-                    ]);
+                    ], false);
                 
                 // OK
                 $message = "La Fiche Formation à bien été créée";
@@ -423,7 +424,7 @@ public function postLogin()
         //     $uploadOk = 0;
         // }
         // Verifier la taille de l'image uploadé
-        if ($_FILES["img_formation"]["size"] > 500000000) 
+        if ($_FILES["img_formation"]["size"] > 500000) 
         {
             $message = "Votre image est trop lourde. Taille maximale autorisée : 500 ko.";
             $uploadOk = 0;
@@ -516,7 +517,7 @@ public function postLogin()
                 $objetFormationModel = new formationModel;
                 // JE PEUX UTILISER LA METHODE update DE LA CLASSE \W\Model\Model
                 $objetFormationModel->update([
-                "img"         => $img,
+                "img"                   => str_replace("assets/", "", $img),
                 "titre_formation"       => $titre,
                 "presentation_formation"=> $presentation,
                 "chapo_formation"       => $chapo,
@@ -551,21 +552,246 @@ public function postLogin()
         $this->allowTo([ "admin", "super-admin" ]);
     }
 
-    public function accompagnement()
+    public function accompagnement($id)
     {
-         $this->allowTo([ "admin", "super-admin" ]);
+        $message = "";
+        // CONTROLLER
+        // ICI IL FAUDRA TRAITER LE FORMULAIRE DE UPDATE
+
+                // JE PEUX TRAITER LE FORMULAIRE
+        // (SI IL Y A UN FORMULAIRE A TRAITER)
+        
+        if (isset($_POST["operation"]) && ($_POST["operation"] == "modifier"))
+        {
+            // RECUPERER LES INFOS DU FORMULAIRE
+            // http://php.net/manual/en/function.trim.php
+            //$img               = trim($_POST["img_formation"]);
+            $titre         = trim($_POST["titre_acc"]);
+            $citation      = trim($_POST["citation_acc"]);
+            $resume        = trim($_POST["resume_acc"]);
+            $presentation  = trim($_POST["presentation_acc"]);
+            $formateur     = trim($_POST["formateur_acc"]);
+            $utilite       = trim($_POST["utilite_acc"]);
+            $url           = trim($_POST["url"]);
+            
+            //$id_categorie       = trim($_POST["id_categorie"]);
+
+            // SECURITE
+            // VERIFIER QUE CHAQUE INFO EST CONFORME
+            // http://php.net/manual/en/function.mb-strlen.php
+          if    (is_string($titre)        && ( mb_strlen($titre) > 0 ) 
+                    && is_string($citation) && ( mb_strlen($citation) > 0 ) 
+                    && is_string($resume)        && ( mb_strlen($resume) > 0 ) 
+                    && is_string($presentation)     && ( mb_strlen($presentation) > 0 ) 
+                    && is_string($formateur)       && ( mb_strlen($formateur) > 0 ) 
+                    && is_string($utilite)    && ( mb_strlen($utilite) > 0 )
+                    && is_string($url)          && ( mb_strlen($url) > 0 ) 
+                    // && is_numeric($id_categorie) 
+                )
+            {
+                // OK ON A LES BONNES INFOS
+                // COMPLETER LES INFOS MANQUANTES
+
+                // $id_auteur      = 1;     // DEBUG
+                //$dateCreation   = date("Y-m-d H:i:s");    // FORMAT DATETIME SQL
+                
+                // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
+                // JE CREE UN OBJET DE LA CLASSE FormationModel
+                // NE PAS OUBLIER DE FAIRE use
+                $img = $this->upload();
+                $objetAccompagnementModel = new AccompagnementModel;
+                // JE PEUX UTILISER LA METHODE update DE LA CLASSE \W\Model\Model
+                $objetAccompagnementModel->update([
+                        "img"               => str_replace("assets/", "", $img),
+                        "titre_acc"         => $titre,
+                        "citation_acc"      => $citation,
+                        "resume_acc"        => $resume,
+                        "presentation_acc"  => $presentation,
+                        "formateur_acc"     => $formateur,
+                        "utilite_acc"       => $utilite,
+                        "url"               => $url,
+                ],
+                $id);
+                
+                // OK
+                $message = "La fiche accompagnement à été correctement modifiée";
+            }
+            else
+            {
+                // KO
+                // UNE ERREUR
+                $message = "ERREUR lors de la mise à jour";
+            }
+        }
+        
+        // VIEW
+        // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
+        $titrePage = "modification accompagnement (fiches)";
+        $this->show("pages/admin_accompagnement", [ "id" => $id, "message" => $message, "titrePage" => $titrePage ]);
+        $this->allowTo([ "admin", "super-admin" ]);
     } // fin function accompagnement
 
 
-    public function accompagnement_detail()
+    public function accompagnementDetail()
     {
-         $this->allowTo([ "admin", "super-admin" ]);
+                // INITIALISE LA VALEUR DE LA VARIABLE 
+        $message = "";
+        $id = "";
+
+        if (isset($_REQUEST["operation"]) && ($_REQUEST["operation"] == "supprimer"))
+        {
+            // ON VEUT SUPPRIMER UNE LIGNE
+            // ON RECUPERE L'ID DU FORMULAIRE
+            // http://php.net/manual/fr/function.intval.php
+            $id = intval(trim($_REQUEST["id"]));
+
+            if ($id > 0)
+            {
+                // ESSAYER D'EFFACER LA LIGNE DANS LA TABLE MYSQL formation
+                // NE PAS OUBLIER DE FAIRE use
+                $objetAccompagnementModel = new AccompagnementModel;
+                $objetAccompagnementModel->delete($id);
+            }
+        }
+        
+
+        if (isset($_POST["operation"]) && ($_POST["operation"] == "creer"))
+        {
+            // RECUPERER LES INFOS DU FORMULAIRE
+            // http://php.net/manual/en/function.trim.php
+            $titre         = trim($_POST["titre_acc"]);
+            $citation      = trim($_POST["citation_acc"]);
+            $resume        = trim($_POST["resume_acc"]);
+            $presentation  = trim($_POST["presentation_acc"]);
+            $formateur     = trim($_POST["formateur_acc"]);
+            $utilite       = trim($_POST["utilite_acc"]);
+            $url           = trim($_POST["url"]);
+
+            // SECURITE
+            // VERIFIER QUE CHAQUE INFO EST CONFORME
+            // http://php.net/manual/en/function.mb-strlen.php
+          if    (is_string($titre)        && ( mb_strlen($titre) > 0 ) 
+                    && is_string($citation) && ( mb_strlen($citation) > 0 ) 
+                    && is_string($resume)        && ( mb_strlen($resume) > 0 ) 
+                    && is_string($presentation)     && ( mb_strlen($presentation) > 0 ) 
+                    && is_string($formateur)       && ( mb_strlen($formateur) > 0 ) 
+                    && is_string($utilite)    && ( mb_strlen($utilite) > 0 )
+                    && is_string($url)          && ( mb_strlen($url) > 0 ) 
+                    // && is_numeric($id_categorie) 
+                )
+            {
+                // OK ON A LES BONNES INFOS
+                // COMPLETER LES INFOS MANQUANTES
+
+                //$id_auteur      = 1;      DEBUG
+                //$dateCreation   = date("Y-m-d H:i:s");    // FORMAT DATETIME SQL
+                $img = $this->upload();
+                
+                // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
+                // JE CREE UN OBJET DE LA CLASSE FormationModel
+                // NE PAS OUBLIER DE FAIRE use
+                $objetAccompagnementModel = new AccompagnementModel;
+                // JE PEUX UTILISER LA METHODE insert DE LA CLASSE \W\Model\Model
+                $objetAccompagnementModel->insert([
+                        "img"               => str_replace("assets/", "", $img),
+                        "titre_acc"         => $titre,
+                        "citation_acc"      => $citation,
+                        "resume_acc"        => $resume,
+                        "presentation_acc"  => $presentation,
+                        "formateur_acc"     => $formateur,
+                        "utilite_acc"       => $utilite,
+                        "url"               => $url,
+                    ]);
+                
+                // OK
+                $message = "La Fiche Accompagnement à bien été créée";
+           }
+            else
+            {
+                // KO
+                // UNE ERREUR
+                $message = "ERREUR lors de la création";
+            }
+        }
+        
+        // AFFICHER LA PAGE
+        // JE TRANSMETS LE MESSAGE A LA PARTIE VIEW
+        $titrePage = "accompagnement";
+        $this->show("pages/admin_accompagnement-detail", [ "message" => $message, "id" => $id, "titrePage" => $titrePage ]);
+        $this->allowTo([ "admin", "super-admin" ]);
     }// fin function accompagnement-detail
 
 
-    public function blog()
+    public function blog($id)
     {
-         $this->allowTo([ "admin", "super-admin" ]);
+        $message = "";
+        // CONTROLLER
+        // ICI IL FAUDRA TRAITER LE FORMULAIRE DE UPDATE
+
+                // JE PEUX TRAITER LE FORMULAIRE
+        // (SI IL Y A UN FORMULAIRE A TRAITER)
+        
+        if (isset($_POST["operation"]) && ($_POST["operation"] == "modifier"))
+        {
+            // RECUPERER LES INFOS DU FORMULAIRE
+            // http://php.net/manual/en/function.trim.php
+            //$img               = trim($_POST["img_formation"]);
+            $titre              = trim($_POST["titre_actualite"]);
+            $chapo              = trim($_POST["chapo_actualite"]);
+            $contenu            = trim($_POST["contenu_actualite"]);
+            $auteur             = trim($_POST["auteur_actualite"]);
+            $url                = trim($_POST["url"]);
+            
+            //$id_categorie       = trim($_POST["id_categorie"]);
+
+            // SECURITE
+            // VERIFIER QUE CHAQUE INFO EST CONFORME
+            // http://php.net/manual/en/function.mb-strlen.php
+            if (is_string($titre)           && ( mb_strlen($titre) > 0 ) 
+                    && is_string($chapo)    && ( mb_strlen($chapo) > 0 ) 
+                    && is_string($contenu)  && ( mb_strlen($contenu) > 0 ) 
+                    && is_string($auteur)   && ( mb_strlen($auteur) > 0 ) 
+                    && is_string($url)      && ( mb_strlen($url) > 0 ) 
+                )
+            {
+                // OK ON A LES BONNES INFOS
+                // COMPLETER LES INFOS MANQUANTES
+
+                // $id_auteur      = 1;     // DEBUG
+                //$dateCreation   = date("Y-m-d H:i:s");    // FORMAT DATETIME SQL
+                
+                // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
+                // JE CREE UN OBJET DE LA CLASSE FormationModel
+                // NE PAS OUBLIER DE FAIRE use
+                $img = $this->upload();
+                $objetActualiteModel = new ActualiteModel;
+                // JE PEUX UTILISER LA METHODE update DE LA CLASSE \W\Model\Model
+                $objetActualiteModel->update([
+                    "img"                   => $img,
+                    "titre_actualite"       => $titre,
+                    "chapo_actualite"       => $chapo,
+                    "contenu_actualite"     => $contenu,
+                    "auteur_actualite"      => $auteur,
+                    "url"                   => $url,
+                ],
+                $id);
+                
+                // OK
+                $message = "L'article' à été correctement modifié";
+            }
+            else
+            {
+                // KO
+                // UNE ERREUR
+                $message = "ERREUR lors de la mise à jour";
+            }
+        }
+        
+        // VIEW
+        // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
+        $titrePage = "modification d'un article";
+        $this->show("pages/admin_blog", [ "id" => $id, "message" => $message, "titrePage" => $titrePage ]);
+        $this->allowTo([ "admin", "super-admin" ]);
     }// fin function blog
 
 
@@ -586,8 +812,8 @@ public function postLogin()
             {
                 // ESSAYER D'EFFACER LA LIGNE DANS LA TABLE MYSQL formation
                 // NE PAS OUBLIER DE FAIRE use
-                $objetArticleModel = new ArcticleModel;
-                $objetArticleModel->delete($id);
+                $objetActualiteModel = new ActualiteModel;
+                $objetActualiteModel->delete($id);
             }
         }
         
@@ -623,9 +849,9 @@ public function postLogin()
                 // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
                 // JE CREE UN OBJET DE LA CLASSE FormationModel
                 // NE PAS OUBLIER DE FAIRE use
-                $objetArticleModel = new ArticleModel;
+                $objetActualiteModel = new ActualiteModel;
                 // JE PEUX UTILISER LA METHODE insert DE LA CLASSE \W\Model\Model
-                $objetArticleModel->insert([
+                $objetActualiteModel->insert([
                         "img"                   => $img,
                         "titre_actualite"       => $titre,
                         "chapo_actualite"       => $chapo,

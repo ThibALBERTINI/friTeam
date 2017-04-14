@@ -5,3 +5,5 @@ $this->insert("partials/admin-section-blog-update", [ "id" => $id, "message" => 
 $this->insert("partials/footer");
 
 //MàJ des articles
+
+?>

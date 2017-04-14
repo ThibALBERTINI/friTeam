@@ -88,7 +88,7 @@
 			?>            
 
 			<?php
-			//accès à la table articles il faut utilsier la classe ArticleModel
+			//accès à la table articles il faut utilsier la classe AdminModel
 			$objetAdminModel= new\Model\AdminModel;
 			$tabResult = $objetAdminModel->findAll("id", "DESC");
 

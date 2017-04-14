@@ -26,8 +26,9 @@
 		['GET|POST', 	'/admin/formation/[:url]', 		'Admin#formationDetail', 		'admin_formation_detail'],  // UNE ROUTE pour la création et l'affichage des formations déjà enregistrés dans la base de donnée
 		['GET|POST', 	'/admin/formation/update/[:id]','Admin#formationUpdate',  		'admin_formation_update'], // UNE ROUTE pour la mise à jour des formation (récupérée par l'id)
 
-		['GET|POST', 	'/admin/accompagnement', 	'Admin#accompagnement', 		'admin_accompagnement'],  // UNE ROUTE
-		['GET|POST', 	'/admin/accompagnement/[:url]','Admin#accompagnementDetail','admin_accompagnement-detail'],  // UNE ROUTE
+		['GET|POST', 	'/admin/accompagnement/update/[:id]', 	'Admin#accompagnement', 		'admin_accompagnement'],  // UNE ROUTE pour la mise à jour des accompagnements
+		['GET|POST', 	'/admin/accompagnement/[:url]','Admin#accompagnementDetail','admin_accompagnement-detail'],  // UNE ROUTE UNE ROUTE pour la création et l'affichage des accompagnements déjà enregistrés dans la base de donnée
+		
 		['GET|POST', 	'/admin/blog/[:id]',				'Admin#blog',					'admin_blog'],  // UNE ROUTE pour la mise à jour des articles
 		['GET|POST', 	'/admin/blog',		'Admin#blogDetail',			'admin_blog-detail'],  // UNE ROUTE pour la création et l'affichage des articles déjà enregistrés dans la base de donnée
 		['GET|POST', 	'/admin/contact', 			'Admin#contact',  				'admin_contact'],  // UNE ROUTE
