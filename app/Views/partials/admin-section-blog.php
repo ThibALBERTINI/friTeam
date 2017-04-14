@@ -10,57 +10,57 @@ $tabFormation = $objetFormationModel->find($id);
     extract($tabFormation);
 ?> -->
 <section>
-<div class="container-fluid">
-<div class="row">
-<div class="col-xs-12 col-md-6 col-md-offset-3">
-	<h2>AJOUT D'UN ARTICLE</h2>
-	<form action="" method="POST" enctype="multipart/form-data">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-md-6 col-md-offset-3">
+				<h2>AJOUT D'UN ARTICLE</h2>
+				<form action="" method="POST" enctype="multipart/form-data">
 
 
-		<div class="form-group">
-			<label for="titre_actualite">Titre de l'Article</label><br>
-			<input type="text" name="titre_actualite" id="titre_actualite" class="form-control" required><br>
+					<div class="form-group">
+						<label for="titre_actualite">Titre de l'Article</label><br>
+						<input type="text" name="titre_actualite" id="titre_actualite" class="form-control" required><br>
+					</div>
+
+
+					<div class="form-group">
+						<label for="chapo_actualite">Chapô</label><br>
+						<textarea type="text" name="chapo_actualite" id="chapo_actualite" class="form-control" required cols="60" rows="5"></textarea><br>
+					</div>
+
+					<div class="form-group">
+						<label for="contenu_actualite">Corps de l'article</label><br>
+						<textarea type="text" name="contenu_actualite" id="contenu_actualite" class="form-control" required cols="60" rows="5"></textarea><br>
+					</div>
+
+					<div class="form-group">
+						<label for="auteur_actualite">Auteur</label><br>
+						<input type="text" name="auteur_actualite" id="auteur_actualite" class="form-control" required><br>
+					</div>
+
+					<div class="form-group">
+						<label for="img">Illustration</label><br>
+						<input type="file" name="img" id="img" class="form-control"><br>
+					</div>
+
+					<div class="form-group">
+						<label for="url">URl</label><br>
+						<input type="text" name="url" id="url" class="form-control" required><br>
+					</div>
+
+					<button type="submit">Créer une nouvel Article</button>
+
+					<!-- Info technique pour préciser l'action que le visiteur veut réaliser -->
+					<input type="hidden" name="operation" value="creer">
+
+					<div class="message">
+						<?php if (isset($message)) echo $message ?>
+					</div>
+
+				</form>
+			</div>
 		</div>
-
-
-		<div class="form-group">
-			<label for="chapo_actualite">Chapô</label><br>
-			<textarea type="text" name="chapo_actualite" id="chapo_actualite" class="form-control" required cols="60" rows="5"></textarea><br>
-		</div>
-
-		<div class="form-group">
-			<label for="contenu_actualite">Corps de l'article</label><br>
-			<textarea type="text" name="contenu_actualite" id="contenu_actualite" class="form-control" required cols="60" rows="5"></textarea><br>
-		</div>
-
-		<div class="form-group">
-			<label for="auteur_actualite">Auteur</label><br>
-			<input type="text" name="auteur_actualite" id="auteur_actualite" class="form-control" required><br>
-		</div>
-
-		<div class="form-group">
-			<label for="img">Illustration</label><br>
-			<input type="file" name="img" id="img" class="form-control"><br>
-		</div>
-
-		<div class="form-group">
-			<label for="url">URl</label><br>
-			<input type="text" name="url" id="url" class="form-control" required><br>
-		</div>
-
-		<button type="submit">Créer une nouvel Article</button>
-
-		<!-- Info technique pour préciser l'action que le visiteur veut réaliser -->
-		<input type="hidden" name="operation" value="creer">
-
-		<div class="message">
-			<?php if (isset($message)) echo $message ?>
-		</div>
-
-	</form>
-</div>
-</div>
-</div>
+	</div>
 </section>
 <!-- <?php
 //endif;

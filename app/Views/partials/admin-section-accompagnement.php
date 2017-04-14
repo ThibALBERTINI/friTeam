@@ -111,7 +111,7 @@ $tabFormation = $objetFormationModel->find($id);
 						echo "</tr>";
 					}
 
-				 ?>
+				?>
 						</thead>
 						<tbody>
 				<?php 
