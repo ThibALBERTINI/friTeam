@@ -204,20 +204,19 @@ public function postLogin()
         {
             // RECUPERER LES INFOS DU FORMULAIRE
             // http://php.net/manual/en/function.trim.php
-            //$img               = trim($_POST["img_formation"]);
-            $nom            = trim($_POST["nom_profil"]);
-            $prenom      = trim($_POST["prenom_profil"]);
-            $citation             = trim($_POST["citation_profil"]);
-            $competence          = trim($_POST["competence_profil"]);
-            $interets            = trim($_POST["interets_profil"]);
-            $intervention         = trim($_POST["domaines_inter"]);
-            $motivation             = trim($_POST["motivation_profil"]);
-            $vision              = trim($_POST["vision_profil"]);
-            $entreprise              = trim($_POST["entreprise_profil"]);
-            $linkedin       = trim($_POST["linkedin"]);
+            //$img               = trim($_POST["img"]);
+            $nom                = trim($_POST["nom_profil"]);
+            $prenom             = trim($_POST["prenom_profil"]);
+            $citation           = trim($_POST["citation_profil"]);
+            $competence         = trim($_POST["competence_profil"]);
+            $interets           = trim($_POST["interets_profil"]);
+            $intervention       = trim($_POST["domaines_inter"]);
+            $motivation         = trim($_POST["motivation_profil"]);
+            $vision             = trim($_POST["vision_profil"]);
+            $entreprise         = trim($_POST["entreprise_profil"]);
+            $linkedin           = trim($_POST["linkedin"]);
             
-            // $id_categorie       = trim($_POST["id_categorie"]);
-
+           
             // SECURITE
             // VERIFIER QUE CHAQUE INFO EST CONFORME
             // http://php.net/manual/en/function.mb-strlen.php
@@ -248,16 +247,16 @@ public function postLogin()
                 // JE PEUX UTILISER LA METHODE insert DE LA CLASSE \W\Model\Model
                 $objetFormationModel->insert([
                         "img"                   => $img,
-                        "nom_profil"       => $nom,
-                        "prenom_profil"=> $prenom,
+                        "nom_profil"            => $nom,
+                        "prenom_profil"         => $prenom,
                         "citation_profil"       => $citation,
-                        "competence_profil"    => $competence,
-                        "interets_profil"      => $interets,
-                        "domaines_inter"  => $intervention,
-                        "motivation_profil"       => $motivation,
-                        "vision_profil"        => $vision,
-                        "entreprise_profil"        => $entreprise,
-                        "linkedin" => $linkedin,
+                        "competence_profil"     => $competence,
+                        "interets_profil"       => $interets,
+                        "domaines_inter"        => $intervention,
+                        "motivation_profil"     => $motivation,
+                        "vision_profil"         => $vision,
+                        "entreprise_profil"     => $entreprise,
+                        "linkedin"              => $linkedin,
                     ]);
                 
                 // OK
@@ -550,7 +549,96 @@ public function postLogin()
         $titrePage = "modification formation (fiches)";
         $this->show("pages/admin_formation_update", [ "id" => $id, "message" => $message, "titrePage" => $titrePage ]);
         $this->allowTo([ "admin", "super-admin" ]);
-    }
+    } // fin function formationUpdate($id)
+
+
+    public function friteamEquipeUpdate($id)
+    {
+        $message = "";
+        // CONTROLLER
+        // ICI IL FAUDRA TRAITER LE FORMULAIRE DE UPDATE
+
+                // JE PEUX TRAITER LE FORMULAIRE
+        // (SI IL Y A UN FORMULAIRE A TRAITER)
+        
+        if (isset($_POST["operation"]) && ($_POST["operation"] == "modifier"))
+        {
+            // RECUPERER LES INFOS DU FORMULAIRE
+            // http://php.net/manual/en/function.trim.php
+            //$img               = trim($_POST["img"]);
+            $nom                = trim($_POST["nom_profil"]);
+            $prenom             = trim($_POST["prenom_profil"]);
+            $citation           = trim($_POST["citation_profil"]);
+            $competence         = trim($_POST["competence_profil"]);
+            $interets           = trim($_POST["interets_profil"]);
+            $intervention       = trim($_POST["domaines_inter"]);
+            $motivation         = trim($_POST["motivation_profil"]);
+            $vision             = trim($_POST["vision_profil"]);
+            $entreprise         = trim($_POST["entreprise_profil"]);
+            $linkedin           = trim($_POST["linkedin"]);
+            print_r($_POST);
+
+            // SECURITE
+            // VERIFIER QUE CHAQUE INFO EST CONFORME
+            // http://php.net/manual/en/function.mb-strlen.php
+            if (is_string($nom)        && ( mb_strlen($nom) > 0 ) 
+                    && is_string($prenom)       && ( mb_strlen($prenom) > 0 ) 
+                    && is_string($citation)     && ( mb_strlen($citation) > 0 ) 
+                    && is_string($competence)   && ( mb_strlen($competence) > 0 ) 
+                    && is_string($interets)     && ( mb_strlen($interets) > 0 ) 
+                    && is_string($intervention) && ( mb_strlen($intervention) > 0 ) 
+                    && is_string($motivation)   && ( mb_strlen($motivation) > 0 )
+                    && is_string($vision)       && ( mb_strlen($vision) > 0 ) 
+                    && is_string($entreprise)   && ( mb_strlen($entreprise) > 0 ) 
+                    && is_string($linkedin)     && ( mb_strlen($linkedin) > 0 ) 
+                    //&& is_numeric($id_categorie) 
+                )
+            {
+                // OK ON A LES BONNES INFOS
+                // COMPLETER LES INFOS MANQUANTES
+
+                // $id_auteur      = 1;     // DEBUG
+                //$dateCreation   = date("Y-m-d H:i:s");    // FORMAT DATETIME SQL
+                
+                // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
+                // JE CREE UN OBJET DE LA CLASSE ProfilModel
+                // NE PAS OUBLIER DE FAIRE use
+                $img = $this->upload();
+                $objetProfilModel = new profilModel;
+                // JE PEUX UTILISER LA METHODE update DE LA CLASSE \W\Model\Model
+                $objetProfilModel->update([
+                        "img"                   => $img,
+                        "nom_profil"            => $nom,
+                        "prenom_profil"         => $prenom,
+                        "citation_profil"       => $citation,
+                        "competence_profil"     => $competence,
+                        "interets_profil"       => $interets,
+                        "domaines_inter"        => $intervention,
+                        "motivation_profil"     => $motivation,
+                        "vision_profil"         => $vision,
+                        "entreprise_profil"     => $entreprise,
+                        "linkedin"              => $linkedin,
+                ],
+                $id);
+                
+                // OK
+                $message = "La fiche à été correctement modifiée";
+            }
+            else
+            {
+                // KO
+                // UNE ERREUR
+                $message = "ERREUR lors de la mise à jour";
+            }
+        } 
+        
+        // VIEW
+        // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
+        $titrePage = "modification profil (fiches)";
+        $this->show("pages/admin_friteam-equipe-update", [ "id" => $id, "message" => $message, "message_upload" => $this->message, "titrePage" => $titrePage ]);
+        $this->allowTo([ "admin", "super-admin" ]);
+    } // fin function friteamEquipeUpdate($id)
+
 
     public function accompagnement($id)
     {
