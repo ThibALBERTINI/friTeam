@@ -49,12 +49,12 @@ class UsersController
                     else
                     {
                         // KO
-                        $message = "IDENTIFIANTS INCORRECTS";
+                        $message = '<p class="erreur"> IDENTIFIANTS INCORRECTS</p>';
                     }
                 }
                 else
                 {
-                    $message = "INFO INCORRECTE";
+                    $message = '<p class="erreur">INFO INCORRECTE </p>';
                 }
             }
             
@@ -116,11 +116,11 @@ class UsersController
                                                  </html>';
                     if(!$mail->send()) //si problème pendant l'envoi
                     {
-                        $message = 'erreur envoi '.$mail->ErrorInfo;
+                        $message = '<p class="erreur"> erreur envoi '.$mail->ErrorInfo. '</p>';
                     }
                     else
                     {   
-                        $message ='Vérifiez votre boite mail...';    
+                        $message ='<p class="succes">Vérifiez votre boite mail...</p>';    
                     }
                 
             
@@ -128,7 +128,7 @@ class UsersController
                 }//fin ifisset mail 
                 else
                 {
-                    $message = "Vous devez renseigner au moins un identifiant";
+                    $message = '<p class="erreur"> Vous devez renseigner au moins un identifiant</p>';
                 }
             } // fin if(isset submit
 
@@ -160,22 +160,22 @@ class UsersController
 
                     if(!$passChanged)
                     {
-                        $message = '<p>Désolé le mot de passe n\'a pas été changé, merci de recommencer';
+                        $message = '<p class="erreur">Désolé le mot de passe n\'a pas été changé, merci de recommencer </p>';
                     }
                     else
                     {
-                        $message = '<p>Votre mot de passe a été mis à jour</p>';
+                        $message = '<p class="succes">Votre mot de passe a été mis à jour </p>';
                     }
                 }// fin pasword = confirmpassword
                 else
                 {
-                    $message = "erreur de saisie les mots de passe sont différents";
+                    $message = '<p class="erreur">erreur de saisie les mots de passe sont différents </p>';
                 }
                       
             }// fin if isset token
             else
                 {
-                    $message = "vous n'avez pas été identifié, merci de recommencer l'étape de modification du mot de passe";
+                    $message = '<p class="erreur"> vous n\'avez pas été identifié, merci de recommencer l\'étape de modification du mot de passe </p>';
                 }
         }// fin ifisset btnsub
         $this->show("pages/users_newPass", [ "message" => $message, "login" => $login ]);

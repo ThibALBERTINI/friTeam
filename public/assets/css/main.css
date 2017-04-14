@@ -773,3 +773,22 @@ PAGES ADMIN CMS
 .scroll-table {
   overflow-x: scroll;
 }
+
+
+
+
+/****************************************
+      PAGES EQUIPE PROFIL
+********************************************/
+img.img-circle{
+  height : 200px;
+  width : 150px;
+  box-shadow: 3px 3px #BFBD3F;
+ 
+}
+
+
+ .ident{
+  margin: 0 auto;
+
+ }

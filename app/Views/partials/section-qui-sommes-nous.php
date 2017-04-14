@@ -1,63 +1,61 @@
 <section>
+    
+    <div class="container carte-container">
     <h2>QUI SOMMES-NOUS ?</h2>
-<?php
-// AVEC LE FRAMEWORK W
-// ON FAIT DE LA PROGRAMMATION ORIENTE OBJET
-// IL Y A LA CLASSE \W\Model\Model
-// PAR TABLE DANS MYSQL
-// ON VA CREER UNE CLASSE DANS LE NAMESPACE Model
-// ET NOTRE CLASSE VA HERITER DE LA CLASSE \W\Model\Model
-// PAR EXEMPLE:
-// SI ON A UNE TABLE profil
-// IL FAUT CREER UNE CLASSE ProfilModel
-//                              extends \W\Model\Model
 
-$objetProfilModel = new \Model\ProfilModel;
-$tabResult = $objetProfilModel->findAll("id", "ASC");
-
-// LA METHODE findAll EST DEFINIE DANS LA CLASSE \W\Model\Model
-// LA METHODE findAll RENVOIE UN TABLEAU DE TABLEAU
-// ON PEUT TRIER PAR UNE COLONNE DE LA TABLE
-
-if (!empty($tabResult))
-{
-    // JE PEUX PARCOURIR LA TABLE POUR RECUPERER CHAQUE LIGNE
-    foreach($tabResult as $index => $tabInfo)
-    {
-        // POUR CHAQUE LIGNE
-        // JE PEUX RECUPERER CHAQUE COLONNE DANS UNE VARIABLE PHP
-
-        $nom = $tabInfo["nom_profil"];
-        $prenoml = $tabInfo["prenom_profil"];
-        $img = $tabInfo["img"];
-        $citation_ = $tabInfo["citation_profil"];
-        $competence = $tabInfo["competence_profil"];
-        $interets = $tabInfo["interets_profil"];
-        $intervention = $tabInfo["domaines_inter"];
-        $motivation = $tabInfo["motivation_profil"];
-        $vision = $tabInfo["vision_profil"];
-        $entreprise = $tabInfo["entreprise_profil"];
-        $linkedin = $tabInfo["linkedin"];
-        // JE CONSTRUIS LE HREF POUR LE LIEN 
-        // EN PASSANT LA VALEUR A REMPLIR DANS LA PARTIE DYNAMIQUE DE LA ROUTE
+    
         
-        // AFFICHER LE CODE HTML
-        // http://php.net/manual/fr/language.types.string.php#language.types.string.syntax.heredoc
-        // HEREDOC
-    echo
-<<<CODEHTML
-    <article>
-        <h3> $nom</h3>
-        <img src="$img" alt="imùg">
-    </article>
-CODEHTML;
-    }
-}
 
-// DEBUG
-//echo "<pre>";
-//print_r($tabResult);
-//echo "</pre>";
+    <div class="row">
+       <div class="col-sm-2">
+         <img class="img-circle" src="<?php echo $this->assetUrl('img/identite.jpg') ?>">
+        </div>
+       <div class="col-sm-6">
+         <h4>$prenom $nom</h4>
+         <div class="citation">
+            <p class="citation"> $citation </p>          
+        </div>
+        </div>
+    </div>
 
-?>    
+    <div class="row row-centered">
+
+        <div class="col-xs-12 col-md-3 col-lg-3 col-centered img-profil">
+            
+        </div>
+
+        <div class="ident col-xs-12 col-md-6 col-lg-9">
+          
+        </div>
+    </div>
+
+    <div class="row row-centered">
+        
+        <div class="competence">
+            <p class="competence"> $competence </p>          
+        </div>
+        <div class="interets">
+            <p class="interets"> $interets </p>          
+        </div>
+        <div class="intervention">
+            <p class="intervention"> $intervention </p>          
+        </div>
+        <div class="motivation">
+            <p class="motivation"> $motivation </p>          
+        </div>
+        <div class="vision">
+            <p class="vision"> $vision </p>          
+        </div>
+        <div class="entrerpise">
+            <p class="entreprise"> $entreprise </p>          
+        </div>
+        <div class="linkedin">
+            <p class="linkedin"> $linkedin </p>          
+        </div>
+
+
+    </div>
+  
+</div>
+
 </section>

@@ -11,6 +11,7 @@ class DefaultController extends Controller
 	{
 		$titrePage = "qui-sommes nous ?";
 		$this->show("pages/default_friteam-equipe", [ "titrePage" => $titrePage ]);
+
 	}
 
 	/**
@@ -179,4 +180,5 @@ class DefaultController extends Controller
 		$this->show("pages/default_formation-detail", [ "titrePage" => $titrePage, "url" => $url ]);
 	}
 
+	
 }
