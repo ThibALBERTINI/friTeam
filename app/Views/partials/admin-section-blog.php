@@ -76,9 +76,9 @@ $tabFormation = $objetFormationModel->find($id);
 						<thead>
 				<?php
 					//création d'un nouvel objet
-					$objetArticleModel = new \Model\ArticleModel;
+					$objetActualiteModel = new \Model\ActualiteModel;
 					//fincAll renvoie un tableau associatif de l'objet créé
-					$tabResult = $objetArticleModel->findAll("id", "DESC", 1);
+					$tabResult = $objetActualiteModel->findAll("id", "DESC", 1);
 					//exploitation du tableau associatif avec boucle pour chaque ligne trouvée
 					foreach($tabResult as $tabLigne)
 					{
@@ -109,7 +109,7 @@ $tabFormation = $objetFormationModel->find($id);
 						<tbody>
 				<?php 
 					//acces a la table
-					$tabResult = $objetFormationModel->findAll("id", "DESC");
+					$tabResult = $objetActualiteModel->findAll("id", "DESC");
 					//Boucle pour parcourir chaque ligne
 					foreach($tabResult as $tabLigne)
 					{

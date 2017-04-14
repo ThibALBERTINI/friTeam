@@ -48,7 +48,7 @@ if (!empty($tabResult))
 <<<CODEHTML
     <article>
         <h3> $nom</h3>
-        <img src="$img" alt="imùg">
+        <img src="$img" alt="img">
     </article>
 CODEHTML;
     }

@@ -102,7 +102,7 @@ if (!empty($tabFormation)) :
 <?php else: ?>
 
 <section>
-    <h3>AUCUN ARTICLE TROUVE</h3>
+    <h3>AUCUNE FORMATION TROUVEE</h3>
 </section>
 
 <?php endif; ?>
