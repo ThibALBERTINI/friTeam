@@ -751,8 +751,8 @@ PAGE CONTACT
   color: firebrick;
 }
 
-.succes {
-  color: green;
+p.succes {
+  color: green !important;
 }
 
 /***************

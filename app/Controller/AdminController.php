@@ -141,7 +141,7 @@ class AdminController
                             }
                             else
                             {
-                                $message = '<p class="succes">Votre mot de passe a été mis à jour</p>';
+                                $message = '<p class="succes"> Votre mot de passe a été mis à jour</p>';
                             }
                         }// fin pasword = confirmpassword
                         else
@@ -154,6 +154,10 @@ class AdminController
                         $message= '<p class="erreur"> Votre mot de passe est incorrect, si vous l\'avez oublié utilisez la procédure mot de passe oublié </p>';
                     }
                 } // fin if string login et password
+                else
+                    {
+                     $message= '<p class="erreur"> Les données ne sont pas exploitables merci de les saisir à nouveau</p>';
+                    }
 
         } // fin if isset btnsub
         $this->show("pages/admin_modif_pass", ["message" => $message]);
