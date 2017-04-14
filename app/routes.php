@@ -20,7 +20,7 @@
 
 		['GET|POST',    '/admin/', 						'Admin#home',     				'admin_home'],     // UNE ROUTE
 		['GET|POST', 	'/admin/friteam-equipe',		'Admin#friteamEquipe', 			'admin_friteam-equipe'], // UNE ROUTE
-		['GET|POST', 	'/admin/friteam-equipe-update',	'Admin#friteamEquipeUpdate', 	'admin_friteam-equipe-update'], // UNE ROUTE
+		['GET|POST', 	'/admin/friteam-equipe-update/[:id]',	'Admin#friteamEquipeUpdate', 	'admin_friteam-equipe-update'], // UNE ROUTE
 
 		['GET|POST', 	'/admin/formation', 			'Admin#formation',				'admin_formation'],  // UNE ROUTE
 		['GET|POST', 	'/admin/formation/[:url]', 		'Admin#formationDetail', 		'admin_formation_detail'],  // UNE ROUTE pour la création et l'affichage des formations déjà enregistrés dans la base de donnée

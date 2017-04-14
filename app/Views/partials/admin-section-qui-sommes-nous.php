@@ -61,7 +61,7 @@ $tabFormation = $objetFormationModel->find($id);
             <input type="text" name="linkedin" id="linkedin" class="form-control"><br>
         </div>
         <div class=form-group>
-            <button type="submit">CREER</button>
+            <button type="submit">CREER LE PROFIL</button>
         </div>
         
         <!-- INFO TECHNIQUE POUR PRECISER L'ACTION QUE LE VISITEUR VEUT REALISER -->
