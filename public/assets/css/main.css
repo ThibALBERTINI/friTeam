@@ -747,6 +747,10 @@ PAGE CONTACT
 }
 
 /*Message D'erreur*/
-div.message {
+.erreur {
   color: firebrick;
+}
+
+.succes {
+  color: green;
 }
