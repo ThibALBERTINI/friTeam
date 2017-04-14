@@ -23,7 +23,7 @@
 <?php 
 
 $objetFicheModel = new \Model\FormationModel;
-$tabResult = $objetFicheModel->findAll("id", "DESC");
+$tabResult = $objetFicheModel->findAll("date_formation", "ASC");
 
 if(!empty($tabResult))
 {

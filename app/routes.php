@@ -28,8 +28,8 @@
 
 		['GET|POST', 	'/admin/accompagnement', 	'Admin#accompagnement', 		'admin_accompagnement'],  // UNE ROUTE
 		['GET|POST', 	'/admin/accompagnement/[:url]','Admin#accompagnementDetail','admin_accompagnement-detail'],  // UNE ROUTE
-		['GET|POST', 	'/admin/blog',				'Admin#blog',					'admin_blog'],  // UNE ROUTE pour la création et l'affichage des articles déjà enregistrés dans la base de donnée
-		['GET|POST', 	'/admin/blog/[:id]',		'Admin#blogDetail',			'admin_blog-detail'],  // UNE ROUTE pour la mise à jour des articles
+		['GET|POST', 	'/admin/blog/[:id]',				'Admin#blog',					'admin_blog'],  // UNE ROUTE pour la mise à jour des articles
+		['GET|POST', 	'/admin/blog',		'Admin#blogDetail',			'admin_blog-detail'],  // UNE ROUTE pour la création et l'affichage des articles déjà enregistrés dans la base de donnée
 		['GET|POST', 	'/admin/contact', 			'Admin#contact',  				'admin_contact'],  // UNE ROUTE
 		['GET|POST', 	'/admin/creerAdmin', 		'Admin#creerAdmin',  			'admin_creer-admin'],  // UNE ROUTE
 		['GET|POST', 	'/admin/modifPass', 		'Admin#modifPass',  			'admin_modif_pass'],  // UNE ROUTE

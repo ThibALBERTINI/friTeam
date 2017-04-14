@@ -6,6 +6,7 @@ use \W\Controller\Controller;
 use \Model\AdminModel;
 use \Model\FormationModel;
 use \Model\ProfilModel;
+use \Model\ArticleModel;
 
 
 
@@ -389,7 +390,7 @@ public function postLogin()
         $titrePage = "formation";
         $this->show("pages/admin_formation_detail", [ "message" => $message, "id" => $id, "titrePage" => $titrePage ]);
         $this->allowTo([ "admin", "super-admin" ]);
-    }// fin function formation-detail
+    }// fin function formationDetail
 
     public function upload()
     {
@@ -418,7 +419,7 @@ public function postLogin()
         //     $uploadOk = 0;
         // }
         // Verifier la taille de l'image uploadé
-        if ($_FILES["img_formation"]["size"] > 500000) 
+        if ($_FILES["img_formation"]["size"] > 500000000) 
         {
             $message = "Votre image est trop lourde. Taille maximale autorisée : 500 ko.";
             $uploadOk = 0;
@@ -542,7 +543,7 @@ public function postLogin()
         // VIEW
         // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
         $titrePage = "modification formation (fiches)";
-        $this->show("pages/admin_formation_update", [ "id" => $id, "message" => $message, "message_upload" => $this->message, "titrePage" => $titrePage ]);
+        $this->show("pages/admin_formation_update", [ "id" => $id, "message" => $message, "titrePage" => $titrePage ]);
         $this->allowTo([ "admin", "super-admin" ]);
     }
 
@@ -564,10 +565,88 @@ public function postLogin()
     }// fin function blog
 
 
-    public function blog_detail()
+    public function blogDetail()
     {
-         $this->allowTo([ "admin", "super-admin" ]);
-    }// fin function blog-detail
+                // INITIALISE LA VALEUR DE LA VARIABLE 
+        $message = "";
+        $id = "";
+
+        if (isset($_REQUEST["operation"]) && ($_REQUEST["operation"] == "supprimer"))
+        {
+            // ON VEUT SUPPRIMER UNE LIGNE
+            // ON RECUPERE L'ID DU FORMULAIRE
+            // http://php.net/manual/fr/function.intval.php
+            $id = intval(trim($_REQUEST["id"]));
+
+            if ($id > 0)
+            {
+                // ESSAYER D'EFFACER LA LIGNE DANS LA TABLE MYSQL formation
+                // NE PAS OUBLIER DE FAIRE use
+                $objetArticleModel = new ArcticleModel;
+                $objetArticleModel->delete($id);
+            }
+        }
+        
+
+        if (isset($_POST["operation"]) && ($_POST["operation"] == "creer"))
+        {
+            // RECUPERER LES INFOS DU FORMULAIRE
+            $titre              = trim($_POST["titre_actualite"]);
+            $chapo              = trim($_POST["chapo_actualite"]);
+            $contenu            = trim($_POST["contenu_actualite"]);
+            $auteur             = trim($_POST["auteur_actualite"]);
+            $url                = trim($_POST["url"]);
+            
+            // $id_categorie       = trim($_POST["id_categorie"]);
+
+            // SECURITE
+            // VERIFIER QUE CHAQUE INFO EST CONFORME
+            // http://php.net/manual/en/function.mb-strlen.php
+            if (is_string($titre)        && ( mb_strlen($titre) > 0 ) 
+                    && is_string($chapo) && ( mb_strlen($chapo) > 0 ) 
+                    && is_string($contenu)        && ( mb_strlen($contenu) > 0 ) 
+                    && is_string($auteur)     && ( mb_strlen($auteur) > 0 ) 
+                    && is_string($url)       && ( mb_strlen($url) > 0 ) 
+                )
+            {
+                // OK ON A LES BONNES INFOS
+                // COMPLETER LES INFOS MANQUANTES
+
+                $id_auteur      = 1;     // DEBUG
+                //$dateCreation   = date("Y-m-d H:i:s");    // FORMAT DATETIME SQL
+                $img = $this->upload();
+                
+                // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
+                // JE CREE UN OBJET DE LA CLASSE FormationModel
+                // NE PAS OUBLIER DE FAIRE use
+                $objetArticleModel = new ArticleModel;
+                // JE PEUX UTILISER LA METHODE insert DE LA CLASSE \W\Model\Model
+                $objetArticleModel->insert([
+                        "img"                   => $img,
+                        "titre_actualite"       => $titre,
+                        "chapo_actualite"       => $chapo,
+                        "contenu_actualite"     => $contenu,
+                        "auteur_actualite"      => $auteur,
+                        "url"                   => $url,
+                    ]);
+                
+                // OK
+                $message = "L'article à bien été créé";
+            }
+            else
+            {
+                // KO
+                // UNE ERREUR
+                $message = "ERREUR lors de la création";
+            }
+        }
+        
+        // AFFICHER LA PAGE
+        // JE TRANSMETS LE MESSAGE A LA PARTIE VIEW
+        $titrePage = "Actualité";
+        $this->show("pages/admin_blog-detail", [ "message" => $message, "id" => $id, "titrePage" => $titrePage ]);
+        $this->allowTo([ "admin", "super-admin" ]);
+    }// fin function blogDetail
 
     public function contact()
     {

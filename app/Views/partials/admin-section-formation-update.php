@@ -94,7 +94,6 @@ if (!empty($tabFormation)) :
         
         <div class="message">
             <?php if (isset($message)) echo $message ?><br>
-            <?php if (isset($message_upload)) echo $message_upload ?><br>
         </div>
     </form>
     
