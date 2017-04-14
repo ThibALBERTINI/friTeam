@@ -31,8 +31,8 @@ if (!empty($tabProfil)) :
     <form method="POST" action="" enctype="multipart/form-data">
         
         <div class="form-group">   
-            <label for="img_profil">CHEMIN PHOTO</label><br>
-            <input type="text" name="img_profil" value="<?php echo $img ?>"><br>
+            <label for="img">PHOTO</label><br>
+            <input type="file" name="img" value="<?php echo $img ?>"><br>
         </div>
         <div class="form-group">   
             <label for="nom_profil">NOM</label><br>
