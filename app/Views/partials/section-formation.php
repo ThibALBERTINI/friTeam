@@ -39,7 +39,7 @@ if(!empty($tabResult))
 
     $href = $this->url("default_formation-detail", [ "url" => $url ]);
 
-    $cheminAsset = $this->assetUrl("../");
+    $cheminAsset = $this->assetUrl("");
 echo
 <<<CODEHTML
 

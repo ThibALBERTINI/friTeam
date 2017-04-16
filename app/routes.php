@@ -4,10 +4,10 @@
 	   // GET OU POST	URL NAVIGATEUR			CLASSE#METHODE					ID UNIQUE DE LA ROUTE
 		['GET|POST',    '/', 					'Default#home',     			'default_home'],     // UNE ROUTE
 		['GET|POST', 	'/friteam-equipe',		'Default#friteamEquipe', 		'default_friteam-equipe'], // UNE ROUTE
-		['GET|POST', 	'/formation', 			'Default#formation',			'default_formation'],  // UNE ROUTE
-		['GET|POST', 	'/formation/[:url]', 	'Default#formationDetail', 		'default_formation-detail'],  // UNE ROUTE
-		['GET|POST', 	'/accompagnement', 		'Default#accompagnement', 		'default_accompagnement'],  // UNE ROUTE
-		['GET|POST', 	'/accompagnement/[:url]','Default#accompagnementDetail','default_accompagnement-detail'],  // UNE ROUTE
+		['GET|POST', 	'/formation', 			'Default#formation',			'default_formation'],  // UNE ROUTE pour afficher toutes les formations proposées
+		['GET|POST', 	'/formation/[:url]', 	'Default#formationDetail', 		'default_formation-detail'],  // UNE ROUTE pour afficher le detail d'une formation
+		['GET|POST', 	'/accompagnement', 		'Default#accompagnement', 		'default_accompagnement'],  // UNE ROUTE pour afficher tous les accompagnements proposés
+		['GET|POST', 	'/accompagnement/[:url]','Default#accompagnementDetail','default_accompagnement-detail'],  // UNE ROUTE pour afficher le detail d'un accompagnement
 		['GET|POST', 	'/blog',				'Default#blog',					'default_blog'],  // UNE ROUTE
 		['GET|POST', 	'/blog/[:url]',			'Default#blogDetail',			'default_blog-detail'],  // UNE ROUTE
 		['GET|POST', 	'/contact', 			'Default#contact',  			'default_contact'],  // UNE ROUTE

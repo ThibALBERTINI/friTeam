@@ -3,6 +3,7 @@
 namespace Controller;
 
 use \W\Controller\Controller;
+use \Model\AccompagnementModel; //pas utilisé... a voir ou placer les fct..? on les laissent dans les pages? on les mets dans les model? dans le DefaultController?
 
 class DefaultController extends Controller
 {
@@ -180,5 +181,16 @@ class DefaultController extends Controller
 		$this->show("pages/default_formation-detail", [ "titrePage" => $titrePage, "url" => $url ]);
 	}
 
-	
+		public function accompagnement()
+	{
+		$titrePage = "accompagnement";
+		$this->show("pages/default_accompagnement", [ "titrePage" => $titrePage ]);
+	}
+
+		public function accompagnementDetail($url)
+	{
+		$titrePage = "accompagnement detail";
+		$this->show("pages/default_accompagnement-detail", [ "titrePage" => $titrePage, "url" => $url ]);
+	}
+
 }
