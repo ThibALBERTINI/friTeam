@@ -25,7 +25,7 @@
 
     <!-- Formulaire de Contact -->
     <div class="col-xs-12 col-md-5">
-      <form class="form-contact" action="" method="GET">
+      <form class="form-contact" action="" method="POST">
 
         <!-- Civilité -->
         <div class="form-group">

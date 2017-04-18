@@ -423,7 +423,7 @@ public function postLogin()
         //     $uploadOk = 0;
         // }
         // Verifier la taille de l'image uploadé
-        if ($_FILES["img_formation"]["size"] > 500000)
+        if ($_FILES["img"]["size"] > 500000)
         {
             $message = "Votre image est trop lourde. Taille maximale autorisée : 500 ko.";
             $uploadOk = 0;

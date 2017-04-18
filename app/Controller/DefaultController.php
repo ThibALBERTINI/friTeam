@@ -4,6 +4,7 @@ namespace Controller;
 
 use \W\Controller\Controller;
 use \Model\AccompagnementModel; //pas utilisé... a voir ou placer les fct..? on les laissent dans les pages? on les mets dans les model? dans le DefaultController?
+use \Model\ContactModel;
 
 class DefaultController extends Controller
 {
@@ -113,58 +114,58 @@ class DefaultController extends Controller
 
 	public function contact()
 	{
-		// //Initialise la valeur de la variable
-		// $message = "";
-		//
-		// //je peux traiter le formulaire (s'il y a un formulaire a traiter)
-		// if(isset($_REQUEST["operation"]))
-		// {
-		// 	//Récuperer les infos du formulaire
-		//
-		// 	$civilite 		= trim($_POST["civilite_contact"]);
-		// 	$nom 			= trim($_POST["nom_contact"]);
-		// 	$prenom 		= trim($_POST["prenom_contact"]);
-		// 	$email 			= trim($_POST["email_contact"]);
-		// 	$tel 			= trim($_POST["tel_contact"]);
-		// 	$adresse		= trim($_POST["adresse_contact"]);
-		// 	$cp				= trim($_POST["cp_contact"]);
-		// 	$ville			= trim($_POST["ville_contact"]);
-		// 	$message		= trim($_POST["message_contact"]);
-		//
-		// 	//Sécurité
-		// 	//Vérifier que chaque information est conforme
-		// 	if (is_string($civilite)	&& ( mb_strlen($civilite) > 0 )
-		// 		is_string($nom)			&& ( mb_strlen($nom) > 0 )
-		// 		is_string($prenom)		&& ( mb_strlen($prenom) > 0 )
-		// 		is_string($email)		&& ( mb_strlen($email) > 0 )
-		// 		is_string($tel)			&& ( mb_strlen($tel) > 0 )
-		// 		is_string($adresse)		&& ( mb_strlen($adresse) > 0 )
-		// 		is_string($cp)			&& ( mb_strlen($cp) > 0 )
-		// 		is_string($ville)		&& ( mb_strlen($ville) > 0 )
-		// 		is_string($message)		&& ( mb_strlen($message) > 0 )
-		// 		)
-		// 	{
-		// 		//Enregistrer les information receuillies par le formulaire dans la base de données
-		// 		//Création d'un objet de la classe ContatModel
-		// 		$objetContactModel = new ContactModel; //Si pb, le model Contact n'est peut etre pas créé
-		// 		$objetContactModel->insert([
-		// 			 	"civilite_contact"	=> $civilite,
-		// 				"nom_contact" 		=> $nom,
-		// 		 		"prenom_contact" 	=> $prenom,
-		// 	 			"email_contact" 	=> $email,
-		// 	 			"tel_contact" 		=> $tel,
-		// 				"adresse_contact" 	=> $adresse,
-		// 				"cp_contact" 		=> $cp,
-		// 				"ville_contact" 	=> $ville,
-		// 				"message_contact" 	=> $message,
-		// 			]);
-		// 		$message = "Formulaire envoyé a l'administrateur";
-		// 	}
-		// 	else
-		// 	{
-		// 		$message = "Erreur lors de l'enregistrement";
-		// 	}
-		// }
+		//Initialise la valeur de la variable
+		$message = "";
+		
+		//je peux traiter le formulaire (s'il y a un formulaire a traiter)
+		if(isset($_POST["operation"]))
+		{
+			//Récuperer les infos du formulaire
+		
+			$civilite 		= trim($_POST["civilite_contact"]);
+			$nom 			= trim($_POST["nom_contact"]);
+			$prenom 		= trim($_POST["prenom_contact"]);
+			$email 			= trim($_POST["email_contact"]);
+			$tel 			= trim($_POST["tel_contact"]);
+			$adresse		= trim($_POST["adresse_contact"]);
+			$cp				= trim($_POST["cp_contact"]);
+			$ville			= trim($_POST["ville_contact"]);
+			$message		= trim($_POST["message_contact"]);
+		
+			//Sécurité
+			//Vérifier que chaque information est conforme
+			if (($_POST["civilite_contact"] == "madame") || ($_POST["vivilite_contact"] == "monsieur")	&& ( mb_strlen($civilite) > 0 )
+				&& is_string($nom)																			&& ( mb_strlen($nom) > 0 )
+				&& is_string($prenom)																		&& ( mb_strlen($prenom) > 0 )
+				&& (filter_var($email, FILTER_VALIDATE_EMAIL) !== false)									&& !empty($email)
+				&& (is_numeric($tel) !== false)																		&& ( mb_strlen($tel) > 0 )
+				&& is_string($adresse)																		&& ( mb_strlen($adresse) > 0 )
+				&& (ctype_digit($cp))																			&& ( mb_strlen($cp) > 0 ) //ctype_digit vérifie qu'une chaîne est un entier
+				&& is_string($ville)																		&& ( mb_strlen($ville) > 0 )
+				&& is_string($message)																		&& ( mb_strlen($message) > 0 )
+				)
+			{
+				//Enregistrer les information receuillies par le formulaire dans la base de données
+				//Création d'un objet de la classe ContatModel
+				$objetContactModel = new ContactModel; //Si pb, le model Contact n'est peut etre pas créé
+				$objetContactModel->insert([
+					 	"civilite_contact"	=> $civilite,
+						"nom_contact" 		=> $nom,
+				 		"prenom_contact" 	=> $prenom,
+			 			"email_contact" 	=> $email,
+			 			"tel_contact" 		=> $tel,
+						"adresse_contact" 	=> $adresse,
+						"cp_contact" 		=> $cp,
+						"ville_contact" 	=> $ville,
+						"message_contact" 	=> $message,
+					]);
+				$message = "Formulaire envoyé a l'administrateur";
+			}
+			else
+			{
+				$message = "Erreur lors de l'enregistrement";
+			}
+		}
 		$titrePage = "contact";
 		$this->show("pages/default_contact", [ "message" => $message, "titrePage" => $titrePage ]);
 	}

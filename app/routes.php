@@ -10,6 +10,7 @@
 		['GET|POST', 	'/accompagnement/[:url]','Default#accompagnementDetail','default_accompagnement-detail'],  // UNE ROUTE pour afficher le detail d'un accompagnement
 		['GET|POST', 	'/blog',				'Default#blog',					'default_blog'],  // UNE ROUTE
 		['GET|POST', 	'/blog/[:url]',			'Default#blogDetail',			'default_blog-detail'],  // UNE ROUTE
+		
 		['GET|POST', 	'/contact', 			'Default#contact',  			'default_contact'],  // UNE ROUTE
 		// ROUTE AVEC PARAMETRE DYNAMIQUE
 		// EN GET CLASSIQUE
