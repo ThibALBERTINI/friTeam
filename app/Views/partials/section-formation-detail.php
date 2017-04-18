@@ -7,9 +7,6 @@ $tabResult = $objetFicheDetailModel->search(["url"=>$url]);
 // var_dump($url);
 // echo '</pre>';
 
-echo '<pre>';
-var_dump($tabResult);
-echo '</pre>';
 
   foreach ($tabResult as $index => $tabInfo)
   {
