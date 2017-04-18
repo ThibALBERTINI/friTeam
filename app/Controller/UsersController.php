@@ -14,6 +14,7 @@ class UsersController
         {
             // TRAITEMENT DU FORMULAIRE DE LOGIN
             $message = "";
+            $titrePage= "";
             
             // TRAITER LE FORMULAIRE DE LOGIN
             if (isset($_REQUEST["operation"]) && ($_REQUEST["operation"] == "login"))
@@ -61,13 +62,14 @@ class UsersController
             
             // VIEW
             $titrePage= "Se Connecter en tant qu'administrateur";
-            $this->show("pages/users_login", [ "message" => $message ], [ "titrePage" => $titrePage]);
+            $this->show("pages/users_login", [ "message" => $message, "titrePage" => $titrePage]);
         } // fin function login
 
       
     public function loosePass ()
     {
     $message = "";
+    $titrePage="";
 
         if(isset($_POST['btnSub']))
         {
@@ -136,7 +138,8 @@ class UsersController
 
              
         }//fin isset btnsub
-        $this->show("pages/users_loosePass", [ "message" => $message ]);
+        $titrePage="Mot de passe perdu";
+        $this->show("pages/users_loosePass", [ "message" => $message, "titrePage" => $titrePage]);
     } // fin loosePass
 
     public function newPass() //suite envoi mail et reception token

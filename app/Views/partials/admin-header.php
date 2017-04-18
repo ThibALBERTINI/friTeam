@@ -44,6 +44,7 @@
               <li><a class="menu4" href="<?php echo $this->url('admin_accompagnement') ?>">Notre accompagnement</a></li>
               <!-- <li><a class="menu5" href="#">Nos Évènements</a></li> ... Liens à former --> 
               <li><a class="menu6" href="<?php echo $this->url('admin_blog') ?>">Blog</a></li>
+              <li><a class="menu6" href="<?php echo $this->url('admin_creer-admin') ?>">Gestion admin</a></li>
               <li><a class="menu7" href="<?php echo $this->url('admin_logout') ?>">Se déconnecter</a></li>
             </ul>
           </div> <!-- Fin Navbar-collapse -->

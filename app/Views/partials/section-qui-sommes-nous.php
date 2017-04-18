@@ -1,5 +1,6 @@
 <div class="container carte-container">
     <h2>QUI SOMMES-NOUS ?</h2>
+    <h3>NOTRE EQUIPE </h3>
 
 
 <?php

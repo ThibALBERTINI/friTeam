@@ -21,7 +21,7 @@ class AdminController
     public function creerAdmin ()  // supprimer et modifier compris
     {
         $message = "";
-        $titrePage = "Créer un Administrateur";
+        $titrePage = "";
 
         if (isset($_REQUEST["operation"]) && ($_REQUEST["operation"] == "supprimer"))
         {
@@ -99,7 +99,7 @@ class AdminController
 
          //$this->allowTo([ "super-admin" ]);
 
-
+        $titrePage = "Créer / Supprimer un Administrateur";
         $this->show("pages/admin_creer-admin", ["message" => $message, "titrePage" => $titrePage ]);
     } // fin function creer admin
 
@@ -107,6 +107,7 @@ class AdminController
     {
         //$this->allowTo([ "admin", "super-admin" ]);
         $message = "";
+        $titrePage="";
 
         if(isset($_POST['btnSub']))
         {
@@ -162,7 +163,8 @@ class AdminController
                     }
 
         } // fin if isset btnsub
-        $this->show("pages/admin_modif_pass", ["message" => $message]);
+        $titrePage="Modifier son mot de passe";
+        $this->show("pages/admin_modif_pass", ["message" => $message, "titrePage"=> $titrePage]);
     } // fin function modifPass
 
 public function postLogin()
