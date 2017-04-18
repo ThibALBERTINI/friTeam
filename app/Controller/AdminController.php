@@ -21,6 +21,7 @@ class AdminController
     public function creerAdmin ()  // supprimer et modifier compris
     {
         $message = "";
+        $titrePage = "Créer un Administrateur";
 
         if (isset($_REQUEST["operation"]) && ($_REQUEST["operation"] == "supprimer"))
         {
@@ -99,7 +100,7 @@ class AdminController
          //$this->allowTo([ "super-admin" ]);
 
 
-        $this->show("pages/admin_creer-admin", ["message" => $message ]);
+        $this->show("pages/admin_creer-admin", ["message" => $message, "titrePage" => $titrePage ]);
     } // fin function creer admin
 
     public function modifPass ()
@@ -208,6 +209,7 @@ public function postLogin()
             //$img               = trim($_POST["img"]);
             $nom                = trim($_POST["nom_profil"]);
             $prenom             = trim($_POST["prenom_profil"]);
+            $ordre             = trim($_POST["ordre_apparition"]);
             $citation           = trim($_POST["citation_profil"]);
             $competence         = trim($_POST["competence_profil"]);
             $interets           = trim($_POST["interets_profil"]);
@@ -250,6 +252,7 @@ public function postLogin()
                         "img"                   => $img,
                         "nom_profil"            => $nom,
                         "prenom_profil"         => $prenom,
+                        "ordre_apparition"      => $ordre,
                         "citation_profil"       => $citation,
                         "competence_profil"     => $competence,
                         "interets_profil"       => $interets,
@@ -568,6 +571,7 @@ public function postLogin()
             //$img               = trim($_POST["img"]);
             $nom                = trim($_POST["nom_profil"]);
             $prenom             = trim($_POST["prenom_profil"]);
+            $ordre             = trim($_POST["ordre_apparition"]);            
             $citation           = trim($_POST["citation_profil"]);
             $competence         = trim($_POST["competence_profil"]);
             $interets           = trim($_POST["interets_profil"]);
@@ -610,6 +614,7 @@ public function postLogin()
                         "img"                   => $img,
                         "nom_profil"            => $nom,
                         "prenom_profil"         => $prenom,
+                        "ordre_apparition"      => $ordre,
                         "citation_profil"       => $citation,
                         "competence_profil"     => $competence,
                         "interets_profil"       => $interets,
@@ -628,7 +633,7 @@ public function postLogin()
             {
                 // KO
                 // UNE ERREUR
-                $message = "ERREUR lors de la mise à jour";
+                $message = "ERREUR lors de la mise à jour, tous les champs doivent être renseignés";
             }
         }
 

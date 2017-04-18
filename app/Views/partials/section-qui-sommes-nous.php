@@ -1,61 +1,63 @@
-<section>
-    
-    <div class="container carte-container">
+<div class="container carte-container">
     <h2>QUI SOMMES-NOUS ?</h2>
 
+
+<?php
+
+$objetFicheModel = new \Model\ProfilModel;
+$tabResult = $objetFicheModel->findAll("ordre_apparition", "ASC");
+
+if(!empty($tabResult))
+{
+  foreach ($tabResult as $index => $tabInfo)
+  {
+    $id = $tabInfo["id"];
+    $ordre = $tabInfo["ordre_apparition"];
+    $img = $tabInfo["img"];
+    $nom = $tabInfo["nom_profil"];
+    $prenom = $tabInfo["prenom_profil"];
+    $citation = $tabInfo["citation_profil"];
+    $motivation = $tabInfo["motivation_profil"];
+    $interets = $tabInfo["interets_profil"];
+    $vision = $tabInfo["vision_profil"];
+    $competence = $tabInfo["competence_profil"];
+    $domaines = $tabInfo["domaines_inter"];
+    $entreprise = $tabInfo["entreprise_profil"];
+    $linkedin = $tabInfo["linkedin"];
     
-        
 
-    <div class="row">
-       <div class="col-sm-2">
-         <img class="img-circle" src="<?php echo $this->assetUrl('img/identite.jpg') ?>">
+    
+echo
+<<<CODEHTML
+   <div class="row contient">
+        <div id="imgprof" class="col-xs-12 col-sm-2">
+            <img class="img-circle" src="$img">
         </div>
-       <div class="col-sm-6">
-         <h4>$prenom $nom</h4>
-         <div class="citation">
-            <p class="citation"> $citation </p>          
-        </div>
-        </div>
-    </div>
-
-    <div class="row row-centered">
-
-        <div class="col-xs-12 col-md-3 col-lg-3 col-centered img-profil">
+       
+        <div id="contenuprof" class="col-xs-12 col-sm-offset-2 col-sm-7">
+            <h4>$prenom $nom</h4>
+            <p class="citation"> Sa citation : $citation </p>   
+            <p class="competence"> Ses compétences : $competence </p> 
+            <p class="interets"> Ses centres d'intérêt : $interets </p>  
+            <p class="intervention"> Ses domaines d'intervention : $domaines </p>
+            <p class="motivation"> Sa motivation : $motivation </p>
+            <p class="vision"> Sa vision : $vision </p>
+            <p class="entreprise"> Entreprise(s) : $entreprise </p>
+           
+            <p class="linkedin"><a href="$linkedin"><i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i>  </a></p>
             
         </div>
-
-        <div class="ident col-xs-12 col-md-6 col-lg-9">
-          
-        </div>
     </div>
-
-    <div class="row row-centered">
         
-        <div class="competence">
-            <p class="competence"> $competence </p>          
-        </div>
-        <div class="interets">
-            <p class="interets"> $interets </p>          
-        </div>
-        <div class="intervention">
-            <p class="intervention"> $intervention </p>          
-        </div>
-        <div class="motivation">
-            <p class="motivation"> $motivation </p>          
-        </div>
-        <div class="vision">
-            <p class="vision"> $vision </p>          
-        </div>
-        <div class="entrerpise">
-            <p class="entreprise"> $entreprise </p>          
-        </div>
-        <div class="linkedin">
-            <p class="linkedin"> $linkedin </p>          
-        </div>
+CODEHTML;
+  }
+}
+?>
 
+<script>
+$(document).ready(function(){
+    $('div#imgprof:even').addClass("col-sm-push-9");
+    $('div#contenuprof:even').addClass("col-sm-pull-2");
+});
 
-    </div>
-  
-</div>
-
-</section>
+</script>

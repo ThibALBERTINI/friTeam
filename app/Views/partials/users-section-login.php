@@ -1,3 +1,7 @@
+<?php
+$titrePage="Se Connecter en tant qu'administrateur";
+?>
+
 <div class="container-fluid"> 
     <div class="row"> 
         <div class="col-xs-12 col-md-6 col-md-offset-3">

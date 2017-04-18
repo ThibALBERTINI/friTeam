@@ -52,7 +52,7 @@
 
       <!-- Header image + titre -->
       <div class="container-fluid header-principal text-center">
-        <h1 class="titre-page">ADMINISTRATION DE LA PAGE " <?php echo $titrePage ?> "</h1>
+        <h1 class="titre-page">ADMINISTRATION DE LA PAGE   <?php if(isset($titrePage)) echo $titrePage ?></h1>
       </div>
     </header>
 

@@ -45,6 +45,10 @@ if (!empty($tabProfil)) :
                         <label for="nom_profil">PRENOM</label><br>
                         <input type="text" name="prenom_profil" class="form-control" value="<?php echo $prenom_profil ?>"><br>
                     </div>
+                    <div class=form-group>   
+                        <label for="ordre_apparition">ORDRE D'APPARITION</label>
+                        <input type="number" name="ordre_apparition" id="ordre_apparition" class="form-control"><br>
+                    </div>
                     <div class="form-group">
                         <label for="citation_profil">CITATION PREFEREE</label><br>  
                         <input type="text" name="citation_profil" class="form-control" value="<?php echo $citation_profil ?>"><br>

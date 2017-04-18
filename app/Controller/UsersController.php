@@ -7,6 +7,7 @@ use \W\Controller\Controller;
 class UsersController 
         extends Controller
 {
+    public $titrePage="";
                     //  !!!  le logout se trouve dans adminController (à la fin)
 
     public function login ()
@@ -59,7 +60,8 @@ class UsersController
             }
             
             // VIEW
-            $this->show("pages/users_login", [ "message" => $message ]);
+            $titrePage= "Se Connecter en tant qu'administrateur";
+            $this->show("pages/users_login", [ "message" => $message ], [ "titrePage" => $titrePage]);
         } // fin function login
 
       
@@ -180,6 +182,9 @@ class UsersController
         }// fin ifisset btnsub
         $this->show("pages/users_newPass", [ "message" => $message, "login" => $login ]);
     }//fin function newPass
+
+
+
 
 
 

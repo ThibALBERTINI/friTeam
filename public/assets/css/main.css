@@ -778,17 +778,37 @@ PAGES ADMIN CMS
 
 
 /****************************************
-      PAGES EQUIPE PROFIL
+      PAGE EQUIPE PROFIL
 ********************************************/
-img.img-circle{
-  height : 200px;
-  width : 150px;
-  box-shadow: 3px 3px #BFBD3F;
- 
+h2{
+  text-align: center;
+  color: #2C9BD4;
+  font-size: 3em;
 }
 
+img.img-circle{
+  height : 150px;
+  width : 150px;
+  box-shadow: 3px 3px #BFBD3F;
+  
+ }
+
+.testdiv{
+  background-color: #2C9BD4;
+}
+
+.contient
+{
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
 
  .ident{
   margin: 0 auto;
 
+ }
+
+ h4{
+  color: #FFB420;
+  font-size: 2em; 
  }

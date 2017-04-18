@@ -1,10 +1,10 @@
 <!-- <?php 
 // ON VA ALLER CHERCHER LES INFOS DE LA FORMATION DANS LA TABLE MYSQL formation
 // APPROCHE PAR DELEGATION
-$objetFormationModel = new \Model\FormationModel;
-$tabFormation = $objetFormationModel->find($id);
+$objetProfilModel = new \Model\ProfilModel;
+$tabProfil = $objetProfilModel->find($id);
 
-//if (!empty($tabFormation)) :
+//if (!empty($tabProfil)) :
     // ON CREE DES VARIABLES LOCALES AVEC LE MEME NOM 
     // QUE LA CLE DANS LE TABLEAU ASSOCIATIF
     extract($tabFormation);
@@ -19,7 +19,7 @@ $tabFormation = $objetFormationModel->find($id);
                     <div class=form-group>   
                         <label for="img">CHEMIN PHOTO</label>
                         <input type="file" name="img" id="img" class="form-control"><br>
-                    </div>
+                    </div>                    
                     <div class=form-group>   
                         <label for="nom_profil">NOM</label>
                         <input type="text" name="nom_profil" id="nom_profil" class="form-control"><br>
@@ -27,6 +27,10 @@ $tabFormation = $objetFormationModel->find($id);
                     <div class=form-group>    
                         <label for="prenom_profil">PRENOM</label>
                         <input type="text" name="prenom_profil" id="prenom_profil" class="form-control"><br>
+                    </div>
+                    <div class=form-group>   
+                        <label for="ordre_apparition">ORDRE D'APPARITION DANS L'AFFICHAGE</label>
+                        <input type="number" name="ordre_apparition" id="ordre_apparition" class="form-control"><br>
                     </div>
                     <div class=form-group>
                         <label for="citation_profil">CITATION PREFEREE</label>  
