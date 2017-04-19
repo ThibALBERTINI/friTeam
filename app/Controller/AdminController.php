@@ -8,6 +8,11 @@ use \Model\FormationModel;
 use \Model\ProfilModel;
 use \Model\ActualiteModel;
 use \Model\AccompagnementModel;
+use \Model\HomeModel;
+use \Model\VideoModel;
+use \Model\PointModel;
+use \Model\TemoignageModel;
+use \Model\PartenaireModel;
 
 
 
@@ -171,15 +176,325 @@ public function postLogin()  // page affichée aprés s'être loggé
     {
         //$this->allowTo([ "admin", "super-admin" ]);
         $this->show("pages/admin_postLogin", ["message" => $message]);
-    }// fin function home
+    }// fin function postlogin
 
 
     public function home()
     {
-        //$this->allowTo([ "admin", "super-admin" ]);
-        $this->show("pages/admin_home");
+        // INITIALISE LA VALEUR DE LA VARIABLE
+        $message = "";
+        $id = "";
+
+        if (isset($_REQUEST["operation"]) && ($_REQUEST["operation"] == "supprimer"))
+        {
+            // ON VEUT SUPPRIMER UNE LIGNE
+            // ON RECUPERE L'ID DU FORMULAIRE
+            // http://php.net/manual/fr/function.intval.php
+            $id = intval(trim($_REQUEST["id"]));
+
+            if ($id > 0)
+            {
+                // ESSAYER D'EFFACER LA LIGNE DANS LA TABLE MYSQL formation
+                // NE PAS OUBLIER DE FAIRE use
+                $objetPartenaireModel = new PartenaireModel;
+                $objetPartenaireModel->delete($id);
+            }
+        }
+
+
+        if (isset($_POST["operation"]) && ($_POST["operation"] == "creer"))
+        {
+            // RECUPERER LES INFOS DU FORMULAIRE
+            // http://php.net/manual/en/function.trim.php
+            $lien             = trim($_POST["lien"]);
+            $alt           = trim($_POST["alt"]);
+            // SECURITE
+            // VERIFIER QUE CHAQUE INFO EST CONFORME
+            // http://php.net/manual/en/function.mb-strlen.php
+            if (is_string($lien)        && ( mb_strlen($lien) > 0 )
+                 && is_string($alt)        && ( mb_strlen($alt) > 0 )
+                )
+            {
+                // OK ON A LES BONNES INFOS
+                // COMPLETER LES INFOS MANQUANTES
+
+                // $id_auteur      = 1;      DEBUG
+                //$dateCreation   = date("Y-m-d H:i:s");    // FORMAT DATETIME SQL
+                $img = $this->upload();
+
+                // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
+                // JE CREE UN OBJET DE LA CLASSE FormationModel
+                // NE PAS OUBLIER DE FAIRE use
+                $objetPartenaireModel = new PartenaireModel;
+                // JE PEUX UTILISER LA METHODE insert DE LA CLASSE \W\Model\Model
+                $objetPartenaireModel->insert([
+                        "img"        => str_replace("assets/", "", $img),
+                        "lien"       => $lien,
+                        "alt"       => $alt,
+
+                    ], false);
+                // OK
+                $message = "Le partenaire à bien été créé";
+            }
+            else
+            {
+                // KO
+                // UNE ERREUR
+                $message = "ERREUR lors de la création";
+            }
+        }
+
+        // AFFICHER LA PAGE
+        // JE TRANSMETS LE MESSAGE A LA PARTIE VIEW
+        $titrePage = "accueil";
+        $this->show("pages/admin_home", [ "message" => $message, "id" => $id, "titrePage" => $titrePage ]);
+        $this->allowTo([ "admin", "super-admin" ]);
     }// fin function home
 
+    public function homeVideo($id)
+    {
+                $message = "";
+        // CONTROLLER
+        // ICI IL FAUDRA TRAITER LE FORMULAIRE DE UPDATE
+
+                // JE PEUX TRAITER LE FORMULAIRE
+        // (SI IL Y A UN FORMULAIRE A TRAITER)
+
+        if (isset($_POST["operation"]) && ($_POST["operation"] == "modifier"))
+        {
+            // RECUPERER LES INFOS DU FORMULAIRE
+            // http://php.net/manual/en/function.trim.php
+            //$img               = trim($_POST["img_formation"]);
+            $contenu_friteam        = trim($_POST["contenu_friteam"]);
+            $url_video              = trim($_POST["url_video"]);
+
+
+            // SECURITE
+            // VERIFIER QUE CHAQUE INFO EST CONFORME
+            // http://php.net/manual/en/function.mb-strlen.php
+            if (is_string($contenu_friteam)        && ( mb_strlen($contenu_friteam) > 0 )
+                    && is_string($url_video) && ( mb_strlen($url_video) > 0 )
+                )
+            {
+                // OK ON A LES BONNES INFOS
+                // COMPLETER LES INFOS MANQUANTES
+
+                // $id_auteur      = 1;     // DEBUG
+                //$dateCreation   = date("Y-m-d H:i:s");    // FORMAT DATETIME SQL
+
+                // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
+                // JE CREE UN OBJET DE LA CLASSE FormationModel
+                // NE PAS OUBLIER DE FAIRE use
+                $objetVideoModel = new videoModel;
+                // JE PEUX UTILISER LA METHODE update DE LA CLASSE \W\Model\Model
+                $objetVideoModel->update([
+                "contenu_friteam"       => $contenu_friteam,
+                "url_video"             => $url_video,
+                ],
+                $id);
+
+                // OK
+                $message = "Le bandeau FriTeam/Vidéo à été correctement modifiée";
+            }
+            else
+            {
+                // KO
+                // UNE ERREUR
+                $message = "ERREUR lors de la mise à jour";
+            }
+        }
+
+        // VIEW
+        // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
+        $titrePage = "modification bandeau FriTeam/Vidéo";
+        $this->show("pages/admin_home-video", [ "id" => $id, "message" => $message, "titrePage" => $titrePage ]);
+        $this->allowTo([ "admin", "super-admin" ]);
+    }
+
+    public function homePoint($id)
+    {
+                $message = "";
+        // CONTROLLER
+        // ICI IL FAUDRA TRAITER LE FORMULAIRE DE UPDATE
+
+                // JE PEUX TRAITER LE FORMULAIRE
+        // (SI IL Y A UN FORMULAIRE A TRAITER)
+
+        if (isset($_POST["operation"]) && ($_POST["operation"] == "modifier"))
+        {
+            // RECUPERER LES INFOS DU FORMULAIRE
+            // http://php.net/manual/en/function.trim.php
+            //$img               = trim($_POST["img_formation"]);
+            $titre_point        = trim($_POST["titre_point"]);
+            $contenu_point              = trim($_POST["contenu_point"]);
+
+            // SECURITE
+            // VERIFIER QUE CHAQUE INFO EST CONFORME
+            // http://php.net/manual/en/function.mb-strlen.php
+            if (is_string($titre_point)        && ( mb_strlen($titre_point) > 0 )
+                    && is_string($contenu_point) && ( mb_strlen($contenu_point) > 0 )
+                )
+            {
+                // OK ON A LES BONNES INFOS
+                // COMPLETER LES INFOS MANQUANTES
+
+                // $id_auteur      = 1;     // DEBUG
+                //$dateCreation   = date("Y-m-d H:i:s");    // FORMAT DATETIME SQL
+
+                // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
+                // JE CREE UN OBJET DE LA CLASSE FormationModel
+                // NE PAS OUBLIER DE FAIRE use
+                $objetPointModel = new pointModel;
+                // JE PEUX UTILISER LA METHODE update DE LA CLASSE \W\Model\Model
+                $objetPointModel->update([
+                "titre_point"       => $titre_point,
+                "contenu_point"             => $contenu_point,
+                ],
+                $id);
+
+                // OK
+                $message = "Le bandeau Points Fort à été correctement modifié";
+            }
+            else
+            {
+                // KO
+                // UNE ERREUR
+                $message = "ERREUR lors de la mise à jour";
+            }
+        }
+
+        // VIEW
+        // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
+        $titrePage = "modification bandeau Points Fort";
+        $this->show("pages/admin_home-point", [ "id" => $id, "message" => $message, "titrePage" => $titrePage ]);
+        $this->allowTo([ "admin", "super-admin" ]);
+    }
+
+    public function homeTemoignage($id)
+    {
+                $message = "";
+        // CONTROLLER
+        // ICI IL FAUDRA TRAITER LE FORMULAIRE DE UPDATE
+
+                // JE PEUX TRAITER LE FORMULAIRE
+        // (SI IL Y A UN FORMULAIRE A TRAITER)
+
+        if (isset($_POST["operation"]) && ($_POST["operation"] == "modifier"))
+        {
+            // RECUPERER LES INFOS DU FORMULAIRE
+            // http://php.net/manual/en/function.trim.php
+            //$img               = trim($_POST["img_formation"]);
+            $temoignage_temoignage      = trim($_POST["temoignage_temoignage"]);
+            $entreprise_temoignage      = trim($_POST["entreprise_temoignage"]);
+            $nom_temoignage             = trim($_POST["nom_temoignage"]);
+            $alt                        = trim($_POST["alt"]);
+            // SECURITE
+            // VERIFIER QUE CHAQUE INFO EST CONFORME
+            // http://php.net/manual/en/function.mb-strlen.php
+            if (is_string($temoignage_temoignage)        && ( mb_strlen($temoignage_temoignage) > 0 )
+                    && is_string($entreprise_temoignage) && ( mb_strlen($entreprise_temoignage) > 0 )
+                    && is_string($nom_temoignage)        && ( mb_strlen($nom_temoignage) > 0 )
+                    && is_string($alt)                   && ( mb_strlen($alt) > 0 )
+                )
+            {
+                // OK ON A LES BONNES INFOS
+                // COMPLETER LES INFOS MANQUANTES
+
+                // $id_auteur      = 1;     // DEBUG
+                //$dateCreation   = date("Y-m-d H:i:s");    // FORMAT DATETIME SQL
+
+                // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
+                // JE CREE UN OBJET DE LA CLASSE FormationModel
+                // NE PAS OUBLIER DE FAIRE use
+                $img = $this->upload();
+                $objetTemoignageModel = new temoignageModel;
+                // JE PEUX UTILISER LA METHODE update DE LA CLASSE \W\Model\Model
+                $objetTemoignageModel->update([
+                "img"                       => str_replace("assets/", "", $img),
+                "temoignage_temoignage"     => $temoignage_temoignage,
+                "entreprise_temoignage"     => $entreprise_temoignage,
+                "nom_temoignage"            => $nom_temoignage,
+                "alt"                       => $alt,
+                ],
+                $id);
+
+                // OK
+                $message = "Le bandeau témoignage à été correctement modifié";
+            }
+            else
+            {
+                // KO
+                // UNE ERREUR
+                $message = "ERREUR lors de la mise à jour";
+            }
+        }
+
+        // VIEW
+        // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
+        $titrePage = "modification bandeau témoignage";
+        $this->show("pages/admin_home-temoignage", [ "id" => $id, "message" => $message, "titrePage" => $titrePage ]);
+        $this->allowTo([ "admin", "super-admin" ]);
+    }
+
+    public function homePartenaire($id)
+    {
+        $message = "";
+        // CONTROLLER
+        // ICI IL FAUDRA TRAITER LE FORMULAIRE DE UPDATE
+
+                // JE PEUX TRAITER LE FORMULAIRE
+        // (SI IL Y A UN FORMULAIRE A TRAITER)
+
+        if (isset($_POST["operation"]) && ($_POST["operation"] == "modifier"))
+        {
+            // RECUPERER LES INFOS DU FORMULAIRE
+            // http://php.net/manual/en/function.trim.php
+            //$img               = trim($_POST["img_formation"]);
+            $lien      = trim($_POST["lien"]);
+            $alt       = trim($_POST["alt"]);
+            // SECURITE
+            // VERIFIER QUE CHAQUE INFO EST CONFORME
+            // http://php.net/manual/en/function.mb-strlen.php
+            if (is_string($lien)        && ( mb_strlen($lien) > 0 )
+                && is_string($alt)        && ( mb_strlen($alt) > 0 )
+                )
+            {
+                // OK ON A LES BONNES INFOS
+                // COMPLETER LES INFOS MANQUANTES
+
+                // $id_auteur      = 1;     // DEBUG
+                //$dateCreation   = date("Y-m-d H:i:s");    // FORMAT DATETIME SQL
+
+                // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
+                // JE CREE UN OBJET DE LA CLASSE FormationModel
+                // NE PAS OUBLIER DE FAIRE use
+                $img = $this->upload();
+                $objetPartenaireModel = new partenaireModel;
+                // JE PEUX UTILISER LA METHODE update DE LA CLASSE \W\Model\Model
+                $objetPartenaireModel->update([
+                "img"                       => str_replace("assets/", "", $img),
+                "lien"     => $lien,
+                "alt"     => $alt,
+                ],
+                $id);
+
+                // OK
+                $message = "Le bandeau Partenaire à été correctement modifié";
+            }
+            else
+            {
+                // KO
+                // UNE ERREUR
+                $message = "ERREUR lors de la mise à jour";
+            }
+        }
+
+        // VIEW
+        // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
+        $titrePage = "modification bandeau partenaire";
+        $this->show("pages/admin_home-partenaire", [ "id" => $id, "message" => $message, "titrePage" => $titrePage ]);
+        $this->allowTo([ "admin", "super-admin" ]);
+    }
 
     public function friteamEquipe()
     {
@@ -198,8 +513,8 @@ public function postLogin()  // page affichée aprés s'être loggé
             {
                 // ESSAYER D'EFFACER LA LIGNE DANS LA TABLE MYSQL formation
                 // NE PAS OUBLIER DE FAIRE use
-                $objetFormationModel = new ProfilModel;
-                $objetFormationModel->delete($id);
+                $objetProfilModel = new ProfilModel;
+                $objetProfilModel->delete($id);
             }
         }
 
@@ -220,6 +535,7 @@ public function postLogin()  // page affichée aprés s'être loggé
             $vision             = trim($_POST["vision_profil"]);
             $entreprise         = trim($_POST["entreprise_profil"]);
             $linkedin           = trim($_POST["linkedin"]);
+            $alt                = trim($_POST["alt"]);
 
 
             // SECURITE
@@ -235,6 +551,7 @@ public function postLogin()  // page affichée aprés s'être loggé
                     && is_string($vision)         && ( mb_strlen($vision) > 0 )
                     && is_string($entreprise)         && ( mb_strlen($entreprise) > 0 )
                     && is_string($linkedin)  && ( mb_strlen($linkedin) > 0 )
+                    && is_string($alt)  && ( mb_strlen($alt) > 0 )
                     // && is_numeric($id_categorie)
                 )
             {
@@ -248,10 +565,10 @@ public function postLogin()  // page affichée aprés s'être loggé
                 // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
                 // JE CREE UN OBJET DE LA CLASSE FormationModel
                 // NE PAS OUBLIER DE FAIRE use
-                $objetFormationModel = new ProfilModel;
+                $objetProfilModel = new ProfilModel;
                 // JE PEUX UTILISER LA METHODE insert DE LA CLASSE \W\Model\Model
-                $objetFormationModel->insert([
-                        "img"                   => $img,
+                $objetProfilModel->insert([
+                        "img"                   => str_replace("assets/", "", $img),
                         "nom_profil"            => $nom,
                         "prenom_profil"         => $prenom,
                         "ordre_apparition"      => $ordre,
@@ -263,6 +580,7 @@ public function postLogin()  // page affichée aprés s'être loggé
                         "vision_profil"         => $vision,
                         "entreprise_profil"     => $entreprise,
                         "linkedin"              => $linkedin,
+                        "alt"              => $alt,
                     ]);
 
                 // OK
@@ -283,13 +601,6 @@ public function postLogin()  // page affichée aprés s'être loggé
         $this->allowTo([ "admin", "super-admin" ]);
 
     }// fin function friteam-equipe
-
-
-    public function formation()
-    {
-         $this->allowTo([ "admin", "super-admin" ]);
-    }// fin function formation
-
 
     // LA METHODE ASSOCIEE A LA ROUTE /admin/formation/[:id]
     public function formationDetail()
@@ -334,6 +645,8 @@ public function postLogin()  // page affichée aprés s'être loggé
             $programme         = trim($_POST["programme_formation"]);
             $lien              = trim($_POST["lien_catalogue"]);
             $url               = trim($_POST["url"]);
+            $alt               = trim($_POST["alt"]);
+            $prix               = trim($_POST["prix"]);
 
             // $id_categorie       = trim($_POST["id_categorie"]);
 
@@ -353,6 +666,8 @@ public function postLogin()  // page affichée aprés s'être loggé
                     && is_string($programme)    && ( mb_strlen($programme) > 0 )
                     && is_string($lien)         && ( mb_strlen($lien) > 0 )
                     && is_string($url)          && ( mb_strlen($url) > 0 )
+                    && is_string($alt)          && ( mb_strlen($alt) > 0 )
+                    && is_string($prix)          && ( mb_strlen($prix) > 0 )
                     // && is_numeric($id_categorie)
                 )
             {
@@ -384,6 +699,8 @@ public function postLogin()  // page affichée aprés s'être loggé
                         "programme_formation"   => $programme,
                         "lien_catalogue"        => $lien,
                         "url"                   => $url,
+                        "alt"                   => $alt,
+                        "prix"                   => $prix,
                     ], false);
                 // OK
                 $message = "La Fiche Formation à bien été créée";
@@ -489,6 +806,8 @@ public function postLogin()  // page affichée aprés s'être loggé
             $programme         = trim($_POST["programme_formation"]);
             $lien              = trim($_POST["lien_catalogue"]);
             $url               = trim($_POST["url"]);
+            $alt               = trim($_POST["alt"]);
+            $prix               = trim($_POST["prix"]);
 
             //$id_categorie       = trim($_POST["id_categorie"]);
 
@@ -508,6 +827,8 @@ public function postLogin()  // page affichée aprés s'être loggé
                     && is_string($programme)    && ( mb_strlen($programme) > 0 )
                     && is_string($lien)         && ( mb_strlen($lien) > 0 )
                     && is_string($url)          && ( mb_strlen($url) > 0 )
+                    && is_string($alt)          && ( mb_strlen($alt) > 0 )
+                    && is_string($prix)          && ( mb_strlen($prix) > 0 )
                     //&& is_numeric($id_categorie)
                 )
             {
@@ -539,6 +860,8 @@ public function postLogin()  // page affichée aprés s'être loggé
                 "programme_formation"   => $programme,
                 "lien_catalogue"        => $lien,
                 "url"                   => $url,
+                "alt"                   => $alt,
+                "prix"                   => $prix,
                 ],
                 $id);
 
@@ -577,7 +900,7 @@ public function postLogin()  // page affichée aprés s'être loggé
             //$img               = trim($_POST["img"]);
             $nom                = trim($_POST["nom_profil"]);
             $prenom             = trim($_POST["prenom_profil"]);
-            $ordre             = trim($_POST["ordre_apparition"]);            
+            $ordre             = trim($_POST["ordre_apparition"]);
             $citation           = trim($_POST["citation_profil"]);
             $competence         = trim($_POST["competence_profil"]);
             $interets           = trim($_POST["interets_profil"]);
@@ -586,6 +909,7 @@ public function postLogin()  // page affichée aprés s'être loggé
             $vision             = trim($_POST["vision_profil"]);
             $entreprise         = trim($_POST["entreprise_profil"]);
             $linkedin           = trim($_POST["linkedin"]);
+            $alt           = trim($_POST["alt"]);
             print_r($_POST);
 
             // SECURITE
@@ -601,6 +925,7 @@ public function postLogin()  // page affichée aprés s'être loggé
                     && is_string($vision)       && ( mb_strlen($vision) > 0 )
                     && is_string($entreprise)   && ( mb_strlen($entreprise) > 0 )
                     && is_string($linkedin)     && ( mb_strlen($linkedin) > 0 )
+                    && is_string($alt)     && ( mb_strlen($alt) > 0 )
                     //&& is_numeric($id_categorie)
                 )
             {
@@ -617,7 +942,7 @@ public function postLogin()  // page affichée aprés s'être loggé
                 $objetProfilModel = new profilModel;
                 // JE PEUX UTILISER LA METHODE update DE LA CLASSE \W\Model\Model
                 $objetProfilModel->update([
-                        "img"                   => $img,
+                        "img"                   => str_replace("assets/", "", $img),
                         "nom_profil"            => $nom,
                         "prenom_profil"         => $prenom,
                         "ordre_apparition"      => $ordre,
@@ -629,6 +954,7 @@ public function postLogin()  // page affichée aprés s'être loggé
                         "vision_profil"         => $vision,
                         "entreprise_profil"     => $entreprise,
                         "linkedin"              => $linkedin,
+                        "alt"              => $alt,
                 ],
                 $id);
 
@@ -672,6 +998,7 @@ public function postLogin()  // page affichée aprés s'être loggé
             $formateur     = trim($_POST["formateur_acc"]);
             $utilite       = trim($_POST["utilite_acc"]);
             $url           = trim($_POST["url"]);
+            $alt           = trim($_POST["alt"]);
 
             //$id_categorie       = trim($_POST["id_categorie"]);
 
@@ -685,6 +1012,7 @@ public function postLogin()  // page affichée aprés s'être loggé
                     && is_string($formateur)       && ( mb_strlen($formateur) > 0 )
                     && is_string($utilite)    && ( mb_strlen($utilite) > 0 )
                     && is_string($url)          && ( mb_strlen($url) > 0 )
+                    && is_string($alt)          && ( mb_strlen($alt) > 0 )
                     // && is_numeric($id_categorie)
                 )
             {
@@ -703,6 +1031,7 @@ public function postLogin()  // page affichée aprés s'être loggé
                 $objetAccompagnementModel->update([
                         "img"               => str_replace("assets/", "", $img),
                         "titre_acc"         => $titre,
+                        "alt"               => $alt,
                         "citation_acc"      => $citation,
                         "resume_acc"        => $resume,
                         "presentation_acc"  => $presentation,
@@ -765,6 +1094,7 @@ public function postLogin()  // page affichée aprés s'être loggé
             $formateur     = trim($_POST["formateur_acc"]);
             $utilite       = trim($_POST["utilite_acc"]);
             $url           = trim($_POST["url"]);
+            $alt           = trim($_POST["alt"]);
 
             // SECURITE
             // VERIFIER QUE CHAQUE INFO EST CONFORME
@@ -776,6 +1106,7 @@ public function postLogin()  // page affichée aprés s'être loggé
                     && is_string($formateur)       && ( mb_strlen($formateur) > 0 )
                     && is_string($utilite)    && ( mb_strlen($utilite) > 0 )
                     && is_string($url)          && ( mb_strlen($url) > 0 )
+                    && is_string($alt)          && ( mb_strlen($alt) > 0 )
                     // && is_numeric($id_categorie)
                 )
             {
@@ -800,6 +1131,7 @@ public function postLogin()  // page affichée aprés s'être loggé
                         "formateur_acc"     => $formateur,
                         "utilite_acc"       => $utilite,
                         "url"               => $url,
+                        "alt"               => $alt,
                     ]);
 
                 // OK
@@ -840,6 +1172,7 @@ public function postLogin()  // page affichée aprés s'être loggé
             $contenu            = trim($_POST["contenu_actualite"]);
             $auteur             = trim($_POST["auteur_actualite"]);
             $url                = trim($_POST["url"]);
+            $alt                = trim($_POST["alt"]);
 
             //$id_categorie       = trim($_POST["id_categorie"]);
 
@@ -851,6 +1184,7 @@ public function postLogin()  // page affichée aprés s'être loggé
                     && is_string($contenu)  && ( mb_strlen($contenu) > 0 )
                     && is_string($auteur)   && ( mb_strlen($auteur) > 0 )
                     && is_string($url)      && ( mb_strlen($url) > 0 )
+                    && is_string($alt)      && ( mb_strlen($alt) > 0 )
                 )
             {
                 // OK ON A LES BONNES INFOS
@@ -872,6 +1206,7 @@ public function postLogin()  // page affichée aprés s'être loggé
                     "contenu_actualite"     => $contenu,
                     "auteur_actualite"      => $auteur,
                     "url"                   => $url,
+                    "alt"                   => $alt,
                 ],
                 $id);
 
@@ -925,6 +1260,7 @@ public function postLogin()  // page affichée aprés s'être loggé
             $contenu            = trim($_POST["contenu_actualite"]);
             $auteur             = trim($_POST["auteur_actualite"]);
             $url                = trim($_POST["url"]);
+            $alt                = trim($_POST["alt"]);
 
             // $id_categorie       = trim($_POST["id_categorie"]);
 
@@ -936,6 +1272,7 @@ public function postLogin()  // page affichée aprés s'être loggé
                     && is_string($contenu)        && ( mb_strlen($contenu) > 0 )
                     && is_string($auteur)     && ( mb_strlen($auteur) > 0 )
                     && is_string($url)       && ( mb_strlen($url) > 0 )
+                    && is_string($alt)       && ( mb_strlen($alt) > 0 )
                 )
             {
                 // OK ON A LES BONNES INFOS
@@ -957,6 +1294,7 @@ public function postLogin()  // page affichée aprés s'être loggé
                         "contenu_actualite"     => $contenu,
                         "auteur_actualite"      => $auteur,
                         "url"                   => $url,
+                        "alt"                   => $alt,
                     ]);
 
                 // OK

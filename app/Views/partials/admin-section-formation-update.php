@@ -25,6 +25,11 @@ if (!empty($tabFormation)) :
                     </div>
 
                     <div class="form-group">
+                        <label for="alt">Texte alternatif de l'image (référencement de l'image)</label><br>
+                        <input type="text" name="alt" id="alt" placeholder="Champs limité à 100 caractères" class="form-control"><br>
+                    </div>
+
+                    <div class="form-group">
                         <label for="title_formation">Titre de la formation</label><br>
                         <input type="text" name="titre_formation" id="titre_formation" class="form-control" required value="<?php echo $titre_formation ?>"><br>
                     </div>
@@ -48,7 +53,7 @@ if (!empty($tabFormation)) :
 
                     <div class="form-group">
                         <label for="objectif_formation">Objectifs</label><br>
-                        <input type="text" name="objectif_formation" id="objectif_formation" class="form-control" required value="<?php echo $objectif_formation ?>"><br>
+                        <textarea type="text" name="objectif_formation" id="objectif_formation" cols="60" rows="5" class="form-control" required value="<?php echo $objectif_formation ?>"></textarea><br>
                     </div>
 
                     <div class="form-group">
@@ -64,6 +69,11 @@ if (!empty($tabFormation)) :
                     <div class="form-group">
                         <label for="duree_formation">Durée</label><br>
                         <input type="text" name="duree_formation" id="duree_formation" class="form-control" required value="<?php echo $duree_formation ?>"><br>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prix">Prix</label><br>
+                        <textarea type="text" name="prix" id="prix" class="form-control" required cols="60" rows="5" value="<?php echo $prix ?>"></textarea><br>
                     </div>
 
                     <div class="form-group">

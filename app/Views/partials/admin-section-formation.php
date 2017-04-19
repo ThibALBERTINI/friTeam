@@ -22,6 +22,11 @@ $tabFormation = $objetFormationModel->find($id);
 					</div>
 
 					<div class="form-group">
+						<label for="alt">Texte alternatif de l'image (référencement de l'image)</label><br>
+						<input type="text" name="alt" id="alt" placeholder="Champs limité à 100 caractères" class="form-control"><br>
+					</div>
+
+					<div class="form-group">
 						<label for="titre_formation">Titre de la formation</label><br>
 						<input type="text" name="titre_formation" id="titre_formation" class="form-control" required><br>
 					</div>
@@ -46,7 +51,7 @@ $tabFormation = $objetFormationModel->find($id);
 
 					<div class="form-group">
 						<label for="objectif_formation">Objectifs</label><br>
-						<input type="text" name="objectif_formation" id="objectif_formation" class="form-control" required><br>
+						<textarea type="text" name="objectif_formation" id="objectif_formation" class="form-control" cols="60" rows="5" required></textarea><br>
 					</div>
 
 					<div class="form-group">
@@ -63,6 +68,11 @@ $tabFormation = $objetFormationModel->find($id);
 						<label for="duree_formation">Durée</label><br>
 						<input type="text" name="duree_formation" id="duree_formation" class="form-control" required><br>
 					</div>
+					
+                    <div class="form-group">
+                        <label for="prix">Prix</label><br>
+                        <textarea type="text" name="prix" id="prix" class="form-control" required cols="60" rows="5"></textarea><br>
+                    </div>
 
 					<div class="form-group">
 						<label for="date_formation">Date de formation</label><br>

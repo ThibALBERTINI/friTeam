@@ -134,7 +134,7 @@ class DefaultController extends Controller
 		
 			//Sécurité
 			//Vérifier que chaque information est conforme
-			if (($_POST["civilite_contact"] == "madame") || ($_POST["vivilite_contact"] == "monsieur")	&& ( mb_strlen($civilite) > 0 )
+			if (($_POST["civilite_contact"] == "madame") || ($_POST["vivilite_contact"] == "monsieur")	&& ( mb_strlen($civilite) > 0 ) //verif radio ok
 				&& is_string($nom)																			&& ( mb_strlen($nom) > 0 )
 				&& is_string($prenom)																		&& ( mb_strlen($prenom) > 0 )
 				&& (filter_var($email, FILTER_VALIDATE_EMAIL) !== false)									&& !empty($email)
@@ -158,7 +158,7 @@ class DefaultController extends Controller
 						"cp_contact" 		=> $cp,
 						"ville_contact" 	=> $ville,
 						"message_contact" 	=> $message,
-					]);
+					], true);
 				$message = "Formulaire envoyé a l'administrateur";
 			}
 			else

@@ -22,7 +22,7 @@
   <body>
     <header>
       <!-- Navbar -->
-      <nav class="navbar navbar-default navbar-fixed-top">
+      <nav class="navbar navbar-default navbar-fixed-top navigation">
         <div class="container-fluid">
           <!-- Menu Hamburger -->
           <div class="navbar-header">

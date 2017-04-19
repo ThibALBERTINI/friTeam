@@ -43,7 +43,7 @@
           <!-- Nom -->
           <div class="form-group">
             <label for="nom_contact">Nom</label>
-            <input type="text" name="nom_contact" id="nom_contact" class="form-control" placeholder="Entrez votre nom" />
+            <input type="text" name="nom_contact" id="nom_contact" class="form-control" required placeholder="Entrez votre nom" />
           </div>
 
           <!-- Prenom -->

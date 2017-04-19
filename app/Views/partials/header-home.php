@@ -22,7 +22,7 @@
   <body>
     <header>
       <!-- Navbar -->
-      <nav class="navbar navbar-default navbar-fixed-top">
+      <nav id="mainNav" class="navbar navbar-default navbar-fixed-top" data-spy="affix" data-offset-top="205">
         <div class="container-fluid">
           <!-- Menu Hamburger -->
           <div class="navbar-header">
@@ -40,14 +40,7 @@
             <ul class="nav navbar-nav navbar-right">
               <li><a class="menu1" href="<?php echo $this->url('default_home') ?>">Accueil</a></li>
               <li><a class="menu2" href="<?php echo $this->url('default_friteam-equipe') ?>">Qui sommes-nous ?</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle menu3" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Nos Formations <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="<?php echo $this->url('default_formation') ?>">Toutes Nos Formations</a></li> <!-- Liens à former -->
-                  <li><a href="#">Fri Team Formations</a></li> <!-- Liens à former -->
-                  <li><a href="#">Formations Complémentaires</a></li> <!-- Liens à former -->
-                </ul>
-              </li>
+              <li><a class="menu3" href="<?php echo $this->url('default_formation') ?>">Nos Formations</a></li>
               <li><a class="menu4" href="<?php echo $this->url('default_accompagnement') ?>">Notre accompagnement</a></li>
               <li><a class="menu5" href="#">Nos Évènements</a></li> <!-- Liens à former -->
               <li><a class="menu6" href="<?php echo $this->url('default_blog') ?>">Blog</a></li>
@@ -62,6 +55,10 @@
         <h1 class="animated fadeIn">FRI TEAM</h1>
         <p class="animated bounceIn">Fédérer - Réussir - Innover En Equipe</p>
         <a class="btn btn-default page-scroll" href="#qui-sommes-nous" role="button">Nous Connaître</a>
+
+        <div class="arrow bounce">
+          <i class="fa fa-arrow-down fa-2x"></i>
+        </div>
       </div>
     </header>
 

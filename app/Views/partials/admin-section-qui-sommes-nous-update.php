@@ -37,50 +37,67 @@ if (!empty($tabProfil)) :
                         <label for="img">PHOTO</label><br>
                         <input type="file" name="img" class="form-control" value="<?php echo $img ?>"><br>
                     </div>
+
+                    <div class="form-group">
+                        <label for="alt">Texte alternatif de l'image (référencement de l'image)</label><br>
+                        <input type="text" name="alt" id="alt" placeholder="Champs limité à 100 caractères" class="form-control"><br>
+                    </div>
+
                     <div class="form-group">   
                         <label for="nom_profil">NOM</label><br>
                         <input type="text" name="nom_profil" class="form-control" value="<?php echo $nom_profil ?>"><br>
                     </div>
+
                     <div class="form-group">    
                         <label for="nom_profil">PRENOM</label><br>
                         <input type="text" name="prenom_profil" class="form-control" value="<?php echo $prenom_profil ?>"><br>
                     </div>
+
                     <div class=form-group>   
                         <label for="ordre_apparition">ORDRE D'APPARITION</label>
                         <input type="number" name="ordre_apparition" id="ordre_apparition" class="form-control"><br>
                     </div>
+
                     <div class="form-group">
                         <label for="citation_profil">CITATION PREFEREE</label><br>  
                         <input type="text" name="citation_profil" class="form-control" value="<?php echo $citation_profil ?>"><br>
                     </div>
+
                     <div class="form-group">
                         <label for="competence_profil">COMPETENCES</label><br>
                         <input type="text" name="competence_profil" class="form-control" value="<?php echo $competence_profil?>"><br>
                     </div>
+
                     <div class="form-group">
                         <label for="interets_profil">CENTRES D'INTERET</label><br>
                         <input type="text" name="interets_profil" class="form-control" value="<?php echo $interets_profil ?>"><br>
                     </div>
+
                     <div class="form-group">
                         <label for="domaines_inter">DOMAINES D'INTERVENTION</label><br>
                         <input type="text" name="domaines_inter" class="form-control" value="<?php echo $domaines_inter ?>"><br>
                     </div>
+
                     <div class="form-group">
                         <label for="motivation_profil">MOTIVATION</label><br>
                         <input type="text" name="motivation_profil" class="form-control" value="<?php echo $motivation_profil ?>"><br>
                     </div>
+
                     <div class="form-group">
                         <label for="vision_profil">VISION</label><br>
                         <input type="text" name="vision_profil" class="form-control" value="<?php echo $vision_profil ?>"><br>
                     </div>
+
                     <div class="form-group">
                         <label for="entreprise_profil">ENTREPRISE</label><br>
                         <input type="text" name="entreprise_profil" class="form-control" value="<?php echo $entreprise_profil ?>"><br>
                     </div>
+
                     <div class="form-group">
                         <label for="linkedin">LINKEDIN</label><br>
                         <input type="text" name="linkedin" class="form-control" value="<?php echo $linkedin ?>"><br>
                     </div>
+                    
                     <div class="form-group">
                         <button type="submit">MODIFIER LE PROFIL</button>
                     </div>        

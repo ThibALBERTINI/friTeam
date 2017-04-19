@@ -1,3 +1,24 @@
+<?php
+
+  $objetVideoModel = new \Model\VideoModel;
+  $tabResult = $objetVideoModel->findAll("id", "ASC");
+
+  if(!empty($tabResult))
+  {
+    foreach ($tabResult as $index => $tabInfo)
+    {
+      $contenu_friteam = $tabInfo["contenu_friteam"];
+      $url_video       = $tabInfo["url_video"];
+    }
+  }
+
+  // echo "<pre>";
+  // var_dump($url_video);
+  // echo "</pre>";
+
+?>
+
+
     <!-- Qui Sommes-Nous ? -->
     <div class="container-fluid qui-sommes-nous" id="qui-sommes-nous">
       <div class="row">
@@ -8,16 +29,9 @@
 
           <div class="ligne"></div>
 
-          <p>
-            Fort de son expérience en crowdfunding, Provence Booster évolue pour devenir un cluster de réussite collective fédérant une équipe d’indépendants, mobilisant leurs énergies et leurs compétences complémentaires pour une même vision avec des valeurs partagées. Nous tous nous appuyons sur la méthode FRI Team : Fédérer, Réussir, Innover en équipe.
-          </p>
-          <p>
-            Notre ambitieux objectif est d’accompagner tout projet dans la dimension humaine, économique, et sociétale, d’étendre la capacité à travailler collectivement pour un même but de manière harmonieuse en redonnant du sens individuel et collectif.
-          </p>
-          <p>
-            12 Fri teamers avec des compétences complémentaires et une réelle énergie positive 1 parcours FRI  team innovant. <br />
-            Des offres  complètes de réussite collective et spécifiques pour les  TPE/PME, Grands Comptes, Associations, Start Up et Collectivités Territoriales
-          </p>
+          <div>
+            <?php echo $contenu_friteam; ?>
+          </div>
 
           <!-- Bouton -->
           <div class="text-center bouton-formation">
@@ -28,11 +42,15 @@
 
         <!-- Video Friteam -->
         <div class="video col-xs-12 col-md-6 col-lg-5">
-          <iframe class="popup" src="https://www.youtube.com/embed/Jc8VaMQ5aOo" frameborder="0" allowfullscreen></iframe>
+          <iframe class="popup" src="<?php echo $url_video; ?>" frameborder="0" allowfullscreen></iframe>
         </div>
 
       </div>
     </div>
+
+
+
+
 
     <!-- Nos Points Forts -->
     <div class="container-fluid points-forts">
@@ -42,87 +60,70 @@
 
         <div class="ligne"></div>
 
+        <?php
+
+        $objetPointModel = new \Model\PointModel;
+        $tabResult = $objetPointModel->findAll("id", "ASC");
+
+        if(!empty($tabResult))
+        {
+          foreach($tabResult as $index => $tabInfo)
+          {
+            $titre_point = $tabInfo["titre_point"];
+            $contenu_point = $tabInfo["contenu_point"];
+
+            echo
+<<<CODEHTML
+
+
+
         <!-- Les Points Forts -->
         <div class="col-xs-12 col-md-4 point-fort">
           <span><i class="fa fa-briefcase" aria-hidden="true"></i></span>
-          <h3>Lorem Ipsum</h3>
+          <h3>$titre_point</h3>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam ipsum, obcaecati delectus vitae corrupti nostrum placeat magni, exercitationem, iure quaerat, modi reprehenderit numquam recusandae officia repudiandae illo. Consequuntur tempore placeat, suscipit dolores reiciendis fugit omnis.
+            $contenu_point
           </p>
         </div>
+CODEHTML;
+          }
+        }
 
-        <div class="col-xs-12 col-md-4 point-fort">
-          <span><i class="fa fa-check-square-o" aria-hidden="true"></i></span>
-          <h3>Lorem Ipsum</h3>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam ipsum, obcaecati delectus vitae corrupti nostrum placeat magni, exercitationem, iure quaerat, modi reprehenderit numquam recusandae officia repudiandae illo. Consequuntur tempore placeat, suscipit dolores reiciendis fugit omnis.
-          </p>
-        </div>
-
-        <div class="col-xs-12 col-md-4 point-fort">
-          <span><i class="fa fa-comments" aria-hidden="true"></i></span>
-          <h3>Lorem Ipsum</h3>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam ipsum, obcaecati delectus vitae corrupti nostrum placeat magni, exercitationem, iure quaerat, modi reprehenderit numquam recusandae officia repudiandae illo. Consequuntur tempore placeat, suscipit dolores reiciendis fugit omnis.
-          </p>
-        </div>
-
-        <div class="col-xs-12 col-md-4 point-fort">
-          <span><i class="fa fa-hand-peace-o" aria-hidden="true"></i></span>
-          <h3>Lorem Ipsum</h3>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam ipsum, obcaecati delectus vitae corrupti nostrum placeat magni, exercitationem, iure quaerat, modi reprehenderit numquam recusandae officia repudiandae illo. Consequuntur tempore placeat, suscipit dolores reiciendis fugit omnis.
-          </p>
-        </div>
-
-        <div class="col-xs-12 col-md-4 point-fort">
-          <span><i class="fa fa-heart" aria-hidden="true"></i></span>
-          <h3>Lorem Ipsum</h3>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam ipsum, obcaecati delectus vitae corrupti nostrum placeat magni, exercitationem, iure quaerat, modi reprehenderit numquam recusandae officia repudiandae illo. Consequuntur tempore placeat, suscipit dolores reiciendis fugit omnis.
-          </p>
-        </div>
-
-        <div class="col-xs-12 col-md-4 point-fort">
-          <span><i class="fa fa-tv" aria-hidden="true"></i></span>
-          <h3>Un jour on ira conquérir le monde</h3>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam ipsum, obcaecati delectus vitae corrupti nostrum placeat magni, exercitationem, iure quaerat, modi reprehenderit numquam recusandae officia repudiandae illo. Consequuntur tempore placeat, suscipit dolores reiciendis fugit omnis.
-          </p>
-        </div>
+        ?>
       </div>
     </div>
 
 
     <!-- NEWSLETTER -->
 
-		<section>
-			<h2>h2 de Views/partials/section-home</h2>
-		</section>
+   <section>
+     <!-- <h2>h2 de Views/partials/section-home</h2> -->
 
-		<div class="container-fluid newsletter">
-			<div class="centrer">
-		    <h2 class="h3-section-home">Notre catalogue de formation</h2>
 
-				<div class="ligne"></div>
+     <div class="container-fluid newsletter">
+        <div class="centrer">
+           <h2 class="h3-section-home text-center">Notre catalogue de formation</h2>
 
-		    <p>
-					Pour recevoir notre catalogue, veuillez remplir le formulaire ci-dessous
-				</p>
+           <div class="ligne"></div>
 
-		    <form class="form-ajax col-md-6" method="GET" action="piege-a-hacker.php">
-		    	<div class="form-group">
-						<label for="email">Email</label>
-		        <input type="email" name="email" required placeholder="Entrez une adresse mail valide" class="form-control" id="email">
-	        </div>
-		       <button type="submit">Recevoir le catalogue !</button>
+           <p class="text-center">
+              Pour recevoir notre catalogue, veuillez remplir le formulaire ci-dessous
+           </p>
 
-		        <!-- INFOS TECHNIQUES -->
-		        <input type="hidden" name="operation" value="newsletter">
-		        <div class="message"></div>
-		    </form>
-			</div>
-		</div>
+           <form class="form-ajax col-xs-12 col-md-6 col-md-offset-3 form-contact" method="GET" action="piege-a-hacker.php">
+              <div class="form-group">
+               <label for="email"></label>
+               <input type="email" name="email" required placeholder="Entrez une adresse mail valide" class="form-control" id="email">
+              </div>
+             <button type="submit">Recevoir le catalogue !</button>
+
+           <!-- INFOS TECHNIQUES -->
+           <input type="hidden" name="operation" value="newsletter">
+           <div class="message"></div>
+       </form>
+     </div>
+   </div>
+   </section>
 
 
 
@@ -142,68 +143,125 @@
                         <li data-target="#quote-carousel" data-slide-to="0" class="active"></li>
                         <li data-target="#quote-carousel" data-slide-to="1"></li>
                         <li data-target="#quote-carousel" data-slide-to="2"></li>
+                        <li data-target="#quote-carousel" data-slide-to="3"></li>
                     </ol>
 
                     <!-- Carousel Slides / Quotes -->
-                    <div class="carousel-inner">
+                    <div class="carousel-inner" role="listbox">
 
-                        <!-- Quote 1 -->
-                        <div class="item active">
+                      <?php
+
+                      $objetTemoignageModel = new \Model\TemoignageModel;
+                      $tabResult = $objetTemoignageModel->findAll("id", "ASC");
+
+                      if(!empty($tabResult))
+                      {
+                        $i = 0 ;
+                        foreach($tabResult as $index => $tabInfo)
+                        {
+                          $img = $tabInfo["img"];
+                          $temoignage_temoignage = $tabInfo["temoignage_temoignage"];
+                          $entreprise_temoignage = $tabInfo["entreprise_temoignage"];
+                          $nom_temoignage = $tabInfo["nom_temoignage"];
+                          $alt = $tabInfo["alt"];
+
+                          $cheminAsset = $this->assetUrl("/");
+                          if($i==0)
+                          {
+                            ?>
+
+                          <div class="item active">
                             <blockquote>
                               <div class="row">
                                 <div class="col-sm-3 text-center">
-                                  <img class="img-circle" src="http://www.reactiongifs.com/r/overbite.gif">
-                                  <!--<img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/128.jpg" style="width: 100px;height:100px;">-->
+                                  <img class="img-circle" src="<?php echo $cheminAsset. "/" .$img; ?>" alt="<?php echo $alt; ?>">
                                 </div>
                                 <div class="col-sm-9">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis quasi facilis laudantium eum culpa, vitae recusandae rem, hic consectetur animi tempore iusto, sed necessitatibus eos. Repellat magni modi exercitationem incidunt, nemo, vero nisi dolores possimus, aperiam, quod adipisci. Cupiditate iste dicta eos, numquam sequi a eum esse repudiandae, laborum. Odit.</p>
-                                    <div class="etoiles"><i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> </div>
-                                    <span class="nom">Meryl Streep</span>
-                                    <span class="companie">Meryl Company</span>
+                                  <p><?php echo $temoignage_temoignage; ?></p>
+                                  <span class="nom"><?php echo $nom_temoignage; ?></span>
+                                  <span class="companie"><?php echo $entreprise_temoignage; ?></span>
                                 </div>
-                            </div>
-                        </blockquote>
-                    </div>
+                              </div>
+                            </blockquote>
+                          </div>
 
-                    <!-- Quote 2 -->
-                    <div class="item">
-                        <blockquote>
-                            <div class="row">
+                          <?php
+
+                          $i++;
+                          }
+                          else
+                          {
+
+                          ?>
+
+                          <div class="item">
+                            <blockquote>
+                              <div class="row">
                                 <div class="col-sm-3 text-center">
-                                    <img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/mijustin/128.jpg">
+                                  <img class="img-circle" src="<?php echo $cheminAsset. '/' .$img; ?>" alt="<?php echo $alt; ?>">
                                 </div>
                                 <div class="col-sm-9">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis quasi facilis laudantium eum culpa, vitae recusandae rem, hic consectetur animi tempore iusto, sed necessitatibus eos. Repellat magni modi exercitationem incidunt, nemo, vero nisi dolores possimus, aperiam, quod adipisci. Cupiditate iste dicta eos, numquam sequi a eum esse repudiandae, laborum. Odit.</p>
-                                    <div class="etoiles"><i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> </div>
-                                    <span class="nom">Meryl Streep</span>
-                                    <span class="companie">Meryl Company</span>
+                                  <p><?php echo $temoignage_temoignage; ?></p>
+                                  <span class="nom"><?php echo $nom_temoignage; ?></span>
+                                  <span class="companie"><?php echo $entreprise_temoignage; ?></span>
                                 </div>
-                            </div>
-                        </blockquote>
+                              </div>
+                            </blockquote>
+                          </div>
+<?php
+
+                          }
+                        }
+                      }
+?>
                     </div>
 
-          <!-- Quote 3 -->
-          <div class="item">
-            <blockquote>
-              <div class="row">
-                <div class="col-sm-3 text-center">
-                  <img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/keizgoesboom/128.jpg">
-                </div>
-                <div class="col-sm-9">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis quasi facilis laudantium eum culpa, vitae recusandae rem, hic consectetur animi tempore iusto, sed necessitatibus eos. Repellat magni modi exercitationem incidunt, nemo, vero nisi dolores possimus, aperiam, quod adipisci. Cupiditate iste dicta eos, numquam sequi a eum esse repudiandae, laborum. Odit.</p>
-                                    <div class="etoiles"><i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> </div>
-                                    <span class="nom">Meryl Streep</span>
-                                    <span class="companie">Meryl Company</span>
-                                </div>
-              </div>
-            </blockquote>
-          </div>
-        </div>
 
         <!-- Carousel Buttons Next/Prev -->
-        <a data-slide="prev" href="#quote-carousel" class="left carousel-control"><i class="fa fa-chevron-left"></i></a>
-        <a data-slide="next" href="#quote-carousel" class="right carousel-control"><i class="fa fa-chevron-right"></i></a>
+        <a data-slide="prev" href="#quote-carousel" class="left carousel-control"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
+        <a data-slide="next" href="#quote-carousel" class="right carousel-control"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
       </div>
     </div>
   </div>
 </div>
+
+<div class="ligne"></div>
+
+<!-- partenaires -->
+<section>
+  <div class="container-fluid temoignages">
+      <h2 class="text-center">Nos Partenaires</h2>
+
+      <div class="ligne"></div>
+
+      <div class="row row-centered">
+        <?php
+        $objetPartenaireModel = new \Model\PartenaireModel;
+        $tabResult = $objetPartenaireModel->findAll("id", "ASC");
+
+        if(!empty($tabResult))
+        {
+          foreach ($tabResult as $index => $tabInfo)
+          {
+            $img = $tabInfo["img"];
+            $lien = $tabInfo["lien"];
+            $alt = $tabInfo["alt"];
+
+            $cheminAsset = $this->assetUrl("/");
+
+        ?>
+
+        <div class="col-xs-12 col-md-4 col-centered">
+          <div class="partenaire-img">
+            <a href="<?php echo $lien; ?>"><img src="<?php echo $cheminAsset. "/" .$img; ?>" alt="<?php echo $alt; ?>"></a>
+          </div>
+        </div>
+
+        <?php
+
+      }
+    }
+
+        ?>
+      </div>
+</section>

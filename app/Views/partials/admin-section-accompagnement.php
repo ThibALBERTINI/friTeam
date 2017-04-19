@@ -22,6 +22,11 @@ $tabFormation = $objetFormationModel->find($id);
 		</div>
 
 		<div class="form-group">
+			<label for="alt">Texte alternatif de l'image (référencement de l'image)</label><br>
+			<input type="text" name="alt" id="alt" placeholder="Champs limité à 100 caractères" class="form-control"><br>
+		</div>
+
+		<div class="form-group">
 			<label for="titre_acc">Entête de la Section Accompagnement</label><br>
 			<input type="text" name="titre_acc" id="titre_acc" class="form-control" required><br>
 		</div>
@@ -38,7 +43,7 @@ $tabFormation = $objetFormationModel->find($id);
 
 		<div class="form-group">
 			<label for="presentation_acc">Comment ça marche ?</label><br>
-			<input type="text" name="presentation_acc" id="presentation_acc" class="form-control" required><br>
+			<textarea type="text" name="presentation_acc" id="presentation_acc" class="form-control" required cols="60" rows="5"></textarea><br>
 		</div>
 
 		<div class="form-group">
