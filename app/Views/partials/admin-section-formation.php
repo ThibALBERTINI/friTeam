@@ -22,6 +22,11 @@ $tabFormation = $objetFormationModel->find($id);
 					</div>
 
 					<div class="form-group">
+						<label for="alt">Texte alternatif de l'image (référencement de l'image)</label><br>
+						<input type="text" name="alt" id="alt" placeholder="Champs limité à 100 caractères" class="form-control"><br>
+					</div>
+
+					<div class="form-group">
 						<label for="titre_formation">Titre de la formation</label><br>
 						<input type="text" name="titre_formation" id="titre_formation" class="form-control" required><br>
 					</div>

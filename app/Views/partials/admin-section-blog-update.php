@@ -24,6 +24,11 @@ if (!empty($tabActualite)) :
                     </div>
 
                     <div class="form-group">
+                        <label for="alt">Texte alternatif de l'image (référencement de l'image)</label><br>
+                        <input type="text" name="alt" id="alt" placeholder="Champs limité à 100 caractères" class="form-control"><br>
+                    </div>
+
+                    <div class="form-group">
                         <label for="titre_actualite">Titre de l'article'</label><br>
                         <input type="text" name="titre_actualite" id="titre_actualite" class="form-control" required value="<?php echo $titre_actualite ?>"><br>
                     </div>

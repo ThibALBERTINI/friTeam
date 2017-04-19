@@ -23,6 +23,7 @@ $tabResult = $objetFicheDetailModel->search(["url"=>$url]);
     $intervenant = $tabInfo["intervenant_formation"];
     $programme = $tabInfo["programme_formation"];
     $catalogue = $tabInfo["programme_formation"];
+    $alt = $tabInfo["alt"];
 
     // var_dump($img);
 
@@ -73,7 +74,7 @@ echo
   <!-- Image -->
   <div class="row">
     <div class="col-xs-12 col-md-10 col-md-offset-1 image-formation">
-      <img src="$cheminAsset/$img" alt="developper-son-activite-par-le-crowdfunding">
+      <img src="$cheminAsset/$img" alt="$alt">
     </div>
   </div>
 

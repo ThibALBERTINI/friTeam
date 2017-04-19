@@ -22,9 +22,13 @@ if (!empty($tabAccompagnement)) :
 
                     <div class="form-group">
                         <label for="img">Illustration</label><br>
-                        <input type="file" name="img" id="img" class="form-control" value="Choissisez une autre image"><br>
+                        <input type="file" name="img" id="img" class="form-control" value="<?php echo $img; ?>"><br>
                     </div>
 
+                    <div class="form-group">
+                        <label for="alt">Texte alternatif de l'image (référencement de l'image)</label><br>
+                        <input type="text" name="alt" id="alt" placeholder="Champs limité à 100 caractères" class="form-control"><br>
+                    </div>
 
                     <div class="form-group">
                         <label for="titre_acc">Entête de la Section Accompagnement</label><br>

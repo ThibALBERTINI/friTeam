@@ -23,6 +23,7 @@ if(!empty($tabResult))
     $domaines = $tabInfo["domaines_inter"];
     $entreprise = $tabInfo["entreprise_profil"];
     $linkedin = $tabInfo["linkedin"];
+    $alt = $tabInfo["alt"];
 
     $cheminAsset = $this->assetUrl("/");
 
@@ -33,7 +34,7 @@ if(!empty($tabResult))
 <!-- Petit Format -->
 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 carte-profil">
     <div class="img-circle img-profil">
-      <img src="<?php echo $cheminAsset . "/" . $img; ?>" alt="img-profil">
+      <img src="<?php echo $cheminAsset . "/" . $img; ?>" alt="<?php echo $alt; ?>">
     </div>
 
     <div class="profil">
@@ -66,7 +67,7 @@ if(!empty($tabResult))
                     </div>
                     <div class="modal-body">
                         <div class="img-circle img-popup">
-                            <img src="<?php echo $cheminAsset . "/" . $img; ?>" alt="img-profil">
+                            <img src="<?php echo $cheminAsset . "/" . $img; ?>" alt="<?php echo $alt; ?>">
                         </div>
 
                         <h4 class="titre-profil">Citation</h4>

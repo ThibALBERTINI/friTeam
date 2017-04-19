@@ -207,10 +207,12 @@ public function postLogin()
             // RECUPERER LES INFOS DU FORMULAIRE
             // http://php.net/manual/en/function.trim.php
             $lien             = trim($_POST["lien"]);
+            $alt           = trim($_POST["alt"]);
             // SECURITE
             // VERIFIER QUE CHAQUE INFO EST CONFORME
             // http://php.net/manual/en/function.mb-strlen.php
             if (is_string($lien)        && ( mb_strlen($lien) > 0 )
+                 && is_string($alt)        && ( mb_strlen($alt) > 0 )
                 )
             {
                 // OK ON A LES BONNES INFOS
@@ -228,6 +230,7 @@ public function postLogin()
                 $objetPartenaireModel->insert([
                         "img"        => str_replace("assets/", "", $img),
                         "lien"       => $lien,
+                        "alt"       => $alt,
 
                     ], false);
                 // OK
@@ -264,6 +267,7 @@ public function postLogin()
             //$img               = trim($_POST["img_formation"]);
             $contenu_friteam        = trim($_POST["contenu_friteam"]);
             $url_video              = trim($_POST["url_video"]);
+
 
             // SECURITE
             // VERIFIER QUE CHAQUE INFO EST CONFORME
@@ -383,12 +387,14 @@ public function postLogin()
             $temoignage_temoignage      = trim($_POST["temoignage_temoignage"]);
             $entreprise_temoignage      = trim($_POST["entreprise_temoignage"]);
             $nom_temoignage             = trim($_POST["nom_temoignage"]);
+            $alt                        = trim($_POST["alt"]);
             // SECURITE
             // VERIFIER QUE CHAQUE INFO EST CONFORME
             // http://php.net/manual/en/function.mb-strlen.php
             if (is_string($temoignage_temoignage)        && ( mb_strlen($temoignage_temoignage) > 0 )
                     && is_string($entreprise_temoignage) && ( mb_strlen($entreprise_temoignage) > 0 )
                     && is_string($nom_temoignage)        && ( mb_strlen($nom_temoignage) > 0 )
+                    && is_string($alt)                   && ( mb_strlen($alt) > 0 )
                 )
             {
                 // OK ON A LES BONNES INFOS
@@ -408,6 +414,7 @@ public function postLogin()
                 "temoignage_temoignage"     => $temoignage_temoignage,
                 "entreprise_temoignage"     => $entreprise_temoignage,
                 "nom_temoignage"            => $nom_temoignage,
+                "alt"                       => $alt,
                 ],
                 $id);
 
@@ -444,10 +451,12 @@ public function postLogin()
             // http://php.net/manual/en/function.trim.php
             //$img               = trim($_POST["img_formation"]);
             $lien      = trim($_POST["lien"]);
+            $alt       = trim($_POST["alt"]);
             // SECURITE
             // VERIFIER QUE CHAQUE INFO EST CONFORME
             // http://php.net/manual/en/function.mb-strlen.php
             if (is_string($lien)        && ( mb_strlen($lien) > 0 )
+                && is_string($alt)        && ( mb_strlen($alt) > 0 )
                 )
             {
                 // OK ON A LES BONNES INFOS
@@ -465,6 +474,7 @@ public function postLogin()
                 $objetPartenaireModel->update([
                 "img"                       => str_replace("assets/", "", $img),
                 "lien"     => $lien,
+                "alt"     => $alt,
                 ],
                 $id);
 
@@ -503,8 +513,8 @@ public function postLogin()
             {
                 // ESSAYER D'EFFACER LA LIGNE DANS LA TABLE MYSQL formation
                 // NE PAS OUBLIER DE FAIRE use
-                $objetFormationModel = new ProfilModel;
-                $objetFormationModel->delete($id);
+                $objetProfilModel = new ProfilModel;
+                $objetProfilModel->delete($id);
             }
         }
 
@@ -525,6 +535,7 @@ public function postLogin()
             $vision             = trim($_POST["vision_profil"]);
             $entreprise         = trim($_POST["entreprise_profil"]);
             $linkedin           = trim($_POST["linkedin"]);
+            $alt                = trim($_POST["alt"]);
 
 
             // SECURITE
@@ -540,6 +551,7 @@ public function postLogin()
                     && is_string($vision)         && ( mb_strlen($vision) > 0 )
                     && is_string($entreprise)         && ( mb_strlen($entreprise) > 0 )
                     && is_string($linkedin)  && ( mb_strlen($linkedin) > 0 )
+                    && is_string($alt)  && ( mb_strlen($alt) > 0 )
                     // && is_numeric($id_categorie)
                 )
             {
@@ -553,9 +565,9 @@ public function postLogin()
                 // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
                 // JE CREE UN OBJET DE LA CLASSE FormationModel
                 // NE PAS OUBLIER DE FAIRE use
-                $objetFormationModel = new ProfilModel;
+                $objetProfilModel = new ProfilModel;
                 // JE PEUX UTILISER LA METHODE insert DE LA CLASSE \W\Model\Model
-                $objetFormationModel->insert([
+                $objetProfilModel->insert([
                         "img"                   => str_replace("assets/", "", $img),
                         "nom_profil"            => $nom,
                         "prenom_profil"         => $prenom,
@@ -568,6 +580,7 @@ public function postLogin()
                         "vision_profil"         => $vision,
                         "entreprise_profil"     => $entreprise,
                         "linkedin"              => $linkedin,
+                        "alt"              => $alt,
                     ]);
 
                 // OK
@@ -631,6 +644,7 @@ public function postLogin()
             $programme         = trim($_POST["programme_formation"]);
             $lien              = trim($_POST["lien_catalogue"]);
             $url               = trim($_POST["url"]);
+            $alt               = trim($_POST["alt"]);
 
             // $id_categorie       = trim($_POST["id_categorie"]);
 
@@ -650,6 +664,7 @@ public function postLogin()
                     && is_string($programme)    && ( mb_strlen($programme) > 0 )
                     && is_string($lien)         && ( mb_strlen($lien) > 0 )
                     && is_string($url)          && ( mb_strlen($url) > 0 )
+                    && is_string($alt)          && ( mb_strlen($alt) > 0 )
                     // && is_numeric($id_categorie)
                 )
             {
@@ -680,6 +695,7 @@ public function postLogin()
                         "programme_formation"   => $programme,
                         "lien_catalogue"        => $lien,
                         "url"                   => $url,
+                        "alt"                   => $alt,
                     ], false);
                 // OK
                 $message = "La Fiche Formation à bien été créée";
@@ -784,6 +800,7 @@ public function postLogin()
             $programme         = trim($_POST["programme_formation"]);
             $lien              = trim($_POST["lien_catalogue"]);
             $url               = trim($_POST["url"]);
+            $alt               = trim($_POST["alt"]);
 
             //$id_categorie       = trim($_POST["id_categorie"]);
 
@@ -803,6 +820,7 @@ public function postLogin()
                     && is_string($programme)    && ( mb_strlen($programme) > 0 )
                     && is_string($lien)         && ( mb_strlen($lien) > 0 )
                     && is_string($url)          && ( mb_strlen($url) > 0 )
+                    && is_string($alt)          && ( mb_strlen($alt) > 0 )
                     //&& is_numeric($id_categorie)
                 )
             {
@@ -833,6 +851,7 @@ public function postLogin()
                 "programme_formation"   => $programme,
                 "lien_catalogue"        => $lien,
                 "url"                   => $url,
+                "alt"                   => $alt,
                 ],
                 $id);
 
@@ -880,6 +899,7 @@ public function postLogin()
             $vision             = trim($_POST["vision_profil"]);
             $entreprise         = trim($_POST["entreprise_profil"]);
             $linkedin           = trim($_POST["linkedin"]);
+            $alt           = trim($_POST["alt"]);
             print_r($_POST);
 
             // SECURITE
@@ -895,6 +915,7 @@ public function postLogin()
                     && is_string($vision)       && ( mb_strlen($vision) > 0 )
                     && is_string($entreprise)   && ( mb_strlen($entreprise) > 0 )
                     && is_string($linkedin)     && ( mb_strlen($linkedin) > 0 )
+                    && is_string($alt)     && ( mb_strlen($alt) > 0 )
                     //&& is_numeric($id_categorie)
                 )
             {
@@ -923,6 +944,7 @@ public function postLogin()
                         "vision_profil"         => $vision,
                         "entreprise_profil"     => $entreprise,
                         "linkedin"              => $linkedin,
+                        "alt"              => $alt,
                 ],
                 $id);
 
@@ -966,6 +988,7 @@ public function postLogin()
             $formateur     = trim($_POST["formateur_acc"]);
             $utilite       = trim($_POST["utilite_acc"]);
             $url           = trim($_POST["url"]);
+            $alt           = trim($_POST["alt"]);
 
             //$id_categorie       = trim($_POST["id_categorie"]);
 
@@ -979,6 +1002,7 @@ public function postLogin()
                     && is_string($formateur)       && ( mb_strlen($formateur) > 0 )
                     && is_string($utilite)    && ( mb_strlen($utilite) > 0 )
                     && is_string($url)          && ( mb_strlen($url) > 0 )
+                    && is_string($alt)          && ( mb_strlen($alt) > 0 )
                     // && is_numeric($id_categorie)
                 )
             {
@@ -997,6 +1021,7 @@ public function postLogin()
                 $objetAccompagnementModel->update([
                         "img"               => str_replace("assets/", "", $img),
                         "titre_acc"         => $titre,
+                        "alt"               => $alt,
                         "citation_acc"      => $citation,
                         "resume_acc"        => $resume,
                         "presentation_acc"  => $presentation,
@@ -1059,6 +1084,7 @@ public function postLogin()
             $formateur     = trim($_POST["formateur_acc"]);
             $utilite       = trim($_POST["utilite_acc"]);
             $url           = trim($_POST["url"]);
+            $alt           = trim($_POST["alt"]);
 
             // SECURITE
             // VERIFIER QUE CHAQUE INFO EST CONFORME
@@ -1070,6 +1096,7 @@ public function postLogin()
                     && is_string($formateur)       && ( mb_strlen($formateur) > 0 )
                     && is_string($utilite)    && ( mb_strlen($utilite) > 0 )
                     && is_string($url)          && ( mb_strlen($url) > 0 )
+                    && is_string($alt)          && ( mb_strlen($alt) > 0 )
                     // && is_numeric($id_categorie)
                 )
             {
@@ -1094,6 +1121,7 @@ public function postLogin()
                         "formateur_acc"     => $formateur,
                         "utilite_acc"       => $utilite,
                         "url"               => $url,
+                        "alt"               => $alt,
                     ]);
 
                 // OK
@@ -1134,6 +1162,7 @@ public function postLogin()
             $contenu            = trim($_POST["contenu_actualite"]);
             $auteur             = trim($_POST["auteur_actualite"]);
             $url                = trim($_POST["url"]);
+            $alt                = trim($_POST["alt"]);
 
             //$id_categorie       = trim($_POST["id_categorie"]);
 
@@ -1145,6 +1174,7 @@ public function postLogin()
                     && is_string($contenu)  && ( mb_strlen($contenu) > 0 )
                     && is_string($auteur)   && ( mb_strlen($auteur) > 0 )
                     && is_string($url)      && ( mb_strlen($url) > 0 )
+                    && is_string($alt)      && ( mb_strlen($alt) > 0 )
                 )
             {
                 // OK ON A LES BONNES INFOS
@@ -1166,6 +1196,7 @@ public function postLogin()
                     "contenu_actualite"     => $contenu,
                     "auteur_actualite"      => $auteur,
                     "url"                   => $url,
+                    "alt"                   => $alt,
                 ],
                 $id);
 
@@ -1219,6 +1250,7 @@ public function postLogin()
             $contenu            = trim($_POST["contenu_actualite"]);
             $auteur             = trim($_POST["auteur_actualite"]);
             $url                = trim($_POST["url"]);
+            $alt                = trim($_POST["alt"]);
 
             // $id_categorie       = trim($_POST["id_categorie"]);
 
@@ -1230,6 +1262,7 @@ public function postLogin()
                     && is_string($contenu)        && ( mb_strlen($contenu) > 0 )
                     && is_string($auteur)     && ( mb_strlen($auteur) > 0 )
                     && is_string($url)       && ( mb_strlen($url) > 0 )
+                    && is_string($alt)       && ( mb_strlen($alt) > 0 )
                 )
             {
                 // OK ON A LES BONNES INFOS
@@ -1251,6 +1284,7 @@ public function postLogin()
                         "contenu_actualite"     => $contenu,
                         "auteur_actualite"      => $auteur,
                         "url"                   => $url,
+                        "alt"                   => $alt,
                     ]);
 
                 // OK

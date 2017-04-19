@@ -249,6 +249,8 @@ $tabFormation = $objetFormationModel->find($id);
     // QUE LA CLE DANS LE TABLEAU ASSOCIATIF
     extract($tabFormation);
 ?> -->
+
+<!-- Affichage des infos pour le bandeau partenaires -->
 <section>
 	<div class="container-fluid">
 		<div class="row">
@@ -260,6 +262,11 @@ $tabFormation = $objetFormationModel->find($id);
 						<label for="img">Logo</label><br>
 						<input type="file" name="img" id="img" class="form-control"><br>
 					</div>
+
+					<div class="form-group">
+                        <label for="alt">Texte alternatif de l'image (référencement de l'image)</label><br>
+                        <input type="text" name="alt" id="alt" placeholder="Champs limité à 100 caractères" class="form-control"><br>
+                    </div>
 
 					<div class="form-group">
 						<label for="lien">Lien vers le site web du partenaire</label><br>

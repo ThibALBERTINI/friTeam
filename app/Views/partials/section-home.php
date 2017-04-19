@@ -163,6 +163,7 @@ CODEHTML;
                           $temoignage_temoignage = $tabInfo["temoignage_temoignage"];
                           $entreprise_temoignage = $tabInfo["entreprise_temoignage"];
                           $nom_temoignage = $tabInfo["nom_temoignage"];
+                          $alt = $tabInfo["alt"];
 
                           $cheminAsset = $this->assetUrl("/");
                           if($i==0)
@@ -173,7 +174,7 @@ CODEHTML;
                             <blockquote>
                               <div class="row">
                                 <div class="col-sm-3 text-center">
-                                  <img class="img-circle" src="<?php echo $cheminAsset. "/" .$img; ?>">
+                                  <img class="img-circle" src="<?php echo $cheminAsset. "/" .$img; ?>" alt="<?php echo $alt; ?>">
                                 </div>
                                 <div class="col-sm-9">
                                   <p><?php echo $temoignage_temoignage; ?></p>
@@ -197,7 +198,7 @@ CODEHTML;
                             <blockquote>
                               <div class="row">
                                 <div class="col-sm-3 text-center">
-                                  <img class="img-circle" src="<?php echo $cheminAsset. "/" .$img; ?>">
+                                  <img class="img-circle" src="<?php echo $cheminAsset. '/' .$img; ?>" alt="<?php echo $alt; ?>">
                                 </div>
                                 <div class="col-sm-9">
                                   <p><?php echo $temoignage_temoignage; ?></p>
@@ -244,6 +245,7 @@ CODEHTML;
           {
             $img = $tabInfo["img"];
             $lien = $tabInfo["lien"];
+            $alt = $tabInfo["alt"];
 
             $cheminAsset = $this->assetUrl("/");
 
@@ -251,7 +253,7 @@ CODEHTML;
 
         <div class="col-xs-12 col-md-4 col-centered">
           <div class="partenaire-img">
-            <a href="<?php echo $lien; ?>"><img src="<?php echo $cheminAsset. "/" .$img; ?>" alt=""></a>
+            <a href="<?php echo $lien; ?>"><img src="<?php echo $cheminAsset. "/" .$img; ?>" alt="<?php echo $alt; ?>"></a>
           </div>
         </div>
 

@@ -19,51 +19,68 @@ $tabProfil = $objetProfilModel->find($id);
                     <div class=form-group>   
                         <label for="img">CHEMIN PHOTO</label>
                         <input type="file" name="img" id="img" class="form-control"><br>
-                    </div>                    
+                    </div>
+
+                    <div class="form-group">
+                        <label for="alt">Texte alternatif de l'image (référencement de l'image)</label><br>
+                        <input type="text" name="alt" id="alt" placeholder="Champs limité à 100 caractères" class="form-control"><br>
+                    </div>
+
                     <div class=form-group>   
                         <label for="nom_profil">NOM</label>
                         <input type="text" name="nom_profil" id="nom_profil" class="form-control"><br>
                     </div>
+
                     <div class=form-group>    
                         <label for="prenom_profil">PRENOM</label>
                         <input type="text" name="prenom_profil" id="prenom_profil" class="form-control"><br>
                     </div>
+
                     <div class=form-group>   
                         <label for="ordre_apparition">ORDRE D'APPARITION DANS L'AFFICHAGE</label>
                         <input type="number" name="ordre_apparition" id="ordre_apparition" class="form-control"><br>
                     </div>
+
                     <div class=form-group>
                         <label for="citation_profil">CITATION PREFEREE</label>  
                         <input type="text" name="citation_profil" id="citation_profil" class="form-control"><br>
                     </div>
+
                     <div class=form-group>
                         <label for="competence_profil">COMPETENCES</label>
                         <input type="text" name="competence_profil" id="competence_profil" class="form-control"><br>
                     </div>
+
                     <div class=form-group>
                         <label for="interets_profil">CENTRES D'INTERET</label>
                         <input type="text" name="interets_profil" id="interets_profil" class="form-control"><br>
                     </div>
+
                     <div class=form-group>
                         <label for="domaines_inter">DOMAINES D'INTERVENTION</label>
                         <input type="text" name="domaines_inter" id="domaines_profil" class="form-control"><br>
                     </div>
+
                     <div class=form-group>
                         <label for="motivation_profil">MOTIVATION</label>
                         <input type="text" name="motivation_profil" id="motivation_profil" class="form-control"><br>
                     </div>
+
                     <div class=form-group>
                         <label for="vision_profil">VISION</label>
                         <input type="text" name="vision_profil" id="vision_profil" class="form-control"><br>
                     </div>
+
                     <div class=form-group>
                         <label for="entreprise_profil">ENTREPRISE</label>
                         <input type="text" name="entreprise_profil" id="entreprise_profil" class="form-control"><br>
                     </div>
+
                     <div class=form-group>
                         <label for="linkedin">LINKEDIN</label>
                         <input type="text" name="linkedin" id="linkedin" class="form-control"><br>
                     </div>
+
                     <div class=form-group>
                         <button type="submit">CREER LE PROFIL</button>
                     </div>

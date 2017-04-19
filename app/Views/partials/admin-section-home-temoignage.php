@@ -25,6 +25,11 @@ if (!empty($tabResult)) :
                     </div>
 
                     <div class="form-group">
+                        <label for="alt">Texte alternatif de l'image (référencement de l'image)</label><br>
+                        <input type="text" name="alt" id="alt" placeholder="Champs limité à 100 caractères" class="form-control"><br>
+                    </div>
+
+                    <div class="form-group">
                         <label for="temoignage_temoignage">Contenu de "FriTeam c'est quoi ?"</label><br>
                         <textarea type="text" name="temoignage_temoignage" id="temoignage_temoignage" class="form-control" required cols="60" rows="5" placeholder="<?php echo $temoignage_temoignage ?>"></textarea><br>
                     </div>

@@ -13,6 +13,7 @@ $tabResult = $objetAccompagnementModel->search(["url"=>$url]);
     $formateur = $tabInfo["formateur_acc"];
     $utilite = $tabInfo["utilite_acc"];
     $url = $tabInfo["url"];
+    $alt = $tabInfo["alt"];
 
     // var_dump($img);
 
@@ -53,7 +54,7 @@ echo
   <!-- Image -->
   <div class="row">
     <div class="col-xs-12 col-md-10 col-md-offset-1 image-formation">
-      <img src="$cheminAsset/$img" alt="developper-son-activite-par-le-crowdfunding">
+      <img src="$cheminAsset/$img" alt="$alt">
     </div>
   </div>
 

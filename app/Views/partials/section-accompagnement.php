@@ -41,6 +41,8 @@ if(!empty($tabResult))
     $utilite = $tabInfo["utilite_acc"];
     // Pas utilisée ici
     $url = $tabInfo["url"];
+    $alt = $tabInfo["alt"];
+
 
     $href = $this->url("default_accompagnement-detail", [ "url" => $url ]);
 
@@ -50,7 +52,7 @@ echo
 
       <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 carte-formation col-centered">
         <div class="image">
-          <img src="$cheminAsset/$img" alt="image-carte">
+          <img src="$cheminAsset/$img" alt="$alt">
         </div>
 
         <div class="contenu">
