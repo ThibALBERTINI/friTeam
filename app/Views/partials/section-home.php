@@ -3,14 +3,14 @@
   $objetVideoModel = new \Model\VideoModel;
   $tabResult = $objetVideoModel->findAll("id", "ASC");
 
-  if(!empty($tabResult)) 
+  if(!empty($tabResult))
   {
     foreach ($tabResult as $index => $tabInfo)
     {
       $contenu_friteam = $tabInfo["contenu_friteam"];
       $url_video       = $tabInfo["url_video"];
     }
-  } 
+  }
 
   // echo "<pre>";
   // var_dump($url_video);
@@ -60,7 +60,7 @@
 
         <div class="ligne"></div>
 
-        <?php 
+        <?php
 
         $objetPointModel = new \Model\PointModel;
         $tabResult = $objetPointModel->findAll("id", "ASC");
@@ -74,8 +74,8 @@
 
             echo
 <<<CODEHTML
-         
-        
+
+
 
         <!-- Les Points Forts -->
         <div class="col-xs-12 col-md-4 point-fort">
@@ -96,30 +96,34 @@ CODEHTML;
 
     <!-- NEWSLETTER -->
 
+   <section>
+     <!-- <h2>h2 de Views/partials/section-home</h2> -->
 
-		<div class="container-fluid newsletter">
-			<div class="centrer">
-		    <h2 class="h3-section-home">Notre catalogue de formation</h2>
 
-				<div class="ligne"></div>
+     <div class="container-fluid newsletter">
+        <div class="centrer">
+           <h2 class="h3-section-home text-center">Notre catalogue de formation</h2>
 
-		    <p>
-					Pour recevoir notre catalogue, veuillez remplir le formulaire ci-dessous
-				</p>
+           <div class="ligne"></div>
 
-		    <form class="form-ajax col-md-6" method="GET" action="piege-a-hacker.php">
-		    	<div class="form-group">
-						<label for="email">Email</label>
-		        <input type="email" name="email" required placeholder="Entrez une adresse mail valide" class="form-control" id="email">
-	        </div>
-		       <button type="submit">Recevoir le catalogue !</button>
+           <p class="text-center">
+              Pour recevoir notre catalogue, veuillez remplir le formulaire ci-dessous
+           </p>
 
-		        <!-- INFOS TECHNIQUES -->
-		        <input type="hidden" name="operation" value="newsletter">
-		        <div class="message"></div>
-		    </form>
-			</div>
-		</div>
+           <form class="form-ajax col-xs-12 col-md-6 col-md-offset-3 form-contact" method="GET" action="piege-a-hacker.php">
+              <div class="form-group">
+               <label for="email"></label>
+               <input type="email" name="email" required placeholder="Entrez une adresse mail valide" class="form-control" id="email">
+              </div>
+             <button type="submit">Recevoir le catalogue !</button>
+
+           <!-- INFOS TECHNIQUES -->
+           <input type="hidden" name="operation" value="newsletter">
+           <div class="message"></div>
+       </form>
+     </div>
+   </div>
+   </section>
 
 
 
@@ -145,7 +149,7 @@ CODEHTML;
                     <!-- Carousel Slides / Quotes -->
                     <div class="carousel-inner" role="listbox">
 
-                      <?php 
+                      <?php
 
                       $objetTemoignageModel = new \Model\TemoignageModel;
                       $tabResult = $objetTemoignageModel->findAll("id", "ASC");
@@ -161,7 +165,7 @@ CODEHTML;
                           $nom_temoignage = $tabInfo["nom_temoignage"];
 
                           $cheminAsset = $this->assetUrl("/");
-                          if($i==0) 
+                          if($i==0)
                           {
                             ?>
 
@@ -183,8 +187,8 @@ CODEHTML;
                           <?php
 
                           $i++;
-                          } 
-                          else 
+                          }
+                          else
                           {
 
                           ?>
@@ -219,3 +223,43 @@ CODEHTML;
     </div>
   </div>
 </div>
+
+<div class="ligne"></div>
+
+<!-- partenaires -->
+<section>
+  <div class="container-fluid temoignages">
+      <h2 class="text-center">Nos Partenaires</h2>
+
+      <div class="ligne"></div>
+
+      <div class="row row-centered">
+        <?php
+        $objetPartenaireModel = new \Model\PartenaireModel;
+        $tabResult = $objetPartenaireModel->findAll("id", "ASC");
+
+        if(!empty($tabResult))
+        {
+          foreach ($tabResult as $index => $tabInfo)
+          {
+            $img = $tabInfo["img"];
+            $lien = $tabInfo["lien"];
+
+            $cheminAsset = $this->assetUrl("/");
+
+        ?>
+
+        <div class="col-xs-12 col-md-4 col-centered">
+          <div class="partenaire-img">
+            <a href="<?php echo $lien; ?>"><img src="<?php echo $cheminAsset. "/" .$img; ?>" alt=""></a>
+          </div>
+        </div>
+
+        <?php
+
+      }
+    }
+
+        ?>
+      </div>
+</section>

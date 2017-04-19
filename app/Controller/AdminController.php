@@ -556,7 +556,7 @@ public function postLogin()
                 $objetFormationModel = new ProfilModel;
                 // JE PEUX UTILISER LA METHODE insert DE LA CLASSE \W\Model\Model
                 $objetFormationModel->insert([
-                        "img"                   => $img,
+                        "img"                   => str_replace("assets/", "", $img),
                         "nom_profil"            => $nom,
                         "prenom_profil"         => $prenom,
                         "ordre_apparition"      => $ordre,
@@ -871,7 +871,7 @@ public function postLogin()
             //$img               = trim($_POST["img"]);
             $nom                = trim($_POST["nom_profil"]);
             $prenom             = trim($_POST["prenom_profil"]);
-            $ordre             = trim($_POST["ordre_apparition"]);            
+            $ordre             = trim($_POST["ordre_apparition"]);
             $citation           = trim($_POST["citation_profil"]);
             $competence         = trim($_POST["competence_profil"]);
             $interets           = trim($_POST["interets_profil"]);
@@ -911,7 +911,7 @@ public function postLogin()
                 $objetProfilModel = new profilModel;
                 // JE PEUX UTILISER LA METHODE update DE LA CLASSE \W\Model\Model
                 $objetProfilModel->update([
-                        "img"                   => $img,
+                        "img"                   => str_replace("assets/", "", $img),
                         "nom_profil"            => $nom,
                         "prenom_profil"         => $prenom,
                         "ordre_apparition"      => $ordre,

@@ -26,7 +26,7 @@ $tabResult = $objetFicheDetailModel->search(["url"=>$url]);
 
     // var_dump($img);
 
-    $cheminAsset = $this->assetUrl("");
+    $cheminAsset = $this->assetUrl("/");
 echo
 
 <<<CODEHTML
@@ -127,7 +127,7 @@ echo
       </p>
 
       <div class="text-center">
-        <a href="" class="btn btn-default inscription-formation">Se Préinscrire</a>
+        <a href="" class="btn btn-default inscription-formation" data-toggle="modal" data-target="#myModal">Se Préinscrire</a>
       </div>
     </div>
   </div>
@@ -138,3 +138,99 @@ CODEHTML;
 }
 
 ?>
+
+<div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-md">
+
+          <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Formulaire de préinscription</h4>
+              </div>
+              <div class="modal-body">
+                <form class="form-contact" action="" method="GET">
+
+                 <!-- Civilité -->
+                <div class="form-group">
+                  <label>Civilité</label>
+                <div>
+                  <input type="radio" name="civilite_contact" id="civilite_madame" value="madame" required />
+                  <label for="civilite_madame">Madame</label>
+                </div>
+                <div>
+                  <input type="radio" name="civilite_contact" id="civilite_monsieur" value="monsieur" required />
+                  <label for="civilite_monsieur">Monsieur</label>
+                </div>
+              </div>
+
+              <!-- Nom -->
+              <div class="form-group">
+                <label for="nom_contact">Nom</label>
+                <input type="text" name="nom_contact" id="nom_contact" class="form-control" placeholder="Entrez votre nom" />
+              </div>
+
+              <!-- Prenom -->
+              <div class="form-group">
+                <label for="prenom_contact">Prénom</label>
+                <input type="text" name="prenom_contact" id="prenom_contact" class="form-control" required placeholder="Entrez votre prénom" />
+              </div>
+
+              <!-- Adresse Mail -->
+              <div class="form-group">
+                <label for="email_contact">E-mail</label>
+                <input type="email" name="email_contact" id="email_contact" class="form-control" required placeholder="Entrez une adresse mail valide" />
+              </div>
+
+              <!-- Numéro de téléphone -->
+              <div class="form-group">
+                <label for="tel_contact">Téléphone</label>
+                <input type="text" name="tel_contact" id="tel_contact" class="form-control" required placeholder="Entrez un numéro de téléphone valide" />
+              </div>
+
+              <!-- Adresse-->
+              <div class="form-group">
+                <label for="adresse_contact">Adresse</label>
+                <input type="text" name="adresse_contact" id="adresse_contact" required class="form-control" required placeholder="Entrez une adresse valide" />
+              </div>
+
+              <!-- Code Postal-->
+              <div class="form-group">
+                <label for="cp_contact">Code Postal</label>
+                <input type="text" name="cp_contact" id="cp_contact" required class="form-control" required placeholder="Entrez un code postal" />
+              </div>
+
+              <!-- Ville-->
+              <div class="form-group">
+                <label for="ville_contact">Ville</label>
+                <input type="text" name="ville_contact" id="ville_contact" required class="form-control" required placeholder="Entrez le nom de votre ville" />
+              </div>
+
+              <!-- Message -->
+              <div class="form-group">
+                <label for="message_contact">Message</label>
+                <textarea rows="4" cols="10" name="message_contact" id="message_contact" class="form-control" required placeholder="Entrez votre message" /></textarea>
+              </div>
+
+              <!-- Bouton Envoyer -->
+              <div class="form-group">
+                <input type="submit" name="btnSub" value="Envoyer" class="btn btn-default btnSub" />
+              </div>
+
+              <!-- INFOS TECHNIQUES -->
+              <input type="hidden" name="operation" value="contact">
+
+              <div class="message">
+                <?php if(isset($message)) echo $message ?>
+              </div>
+            </form>
+
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
