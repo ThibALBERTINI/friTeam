@@ -17,6 +17,13 @@
     <link rel="stylesheet" type="text/css" href="<?php echo $this->assetUrl('font-awesome/css/font-awesome.css') ?>">
     <!-- Roboto Font -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+    <style>
+      <?php if (isset($background)) : ?>
+        .header-principal {
+          background-image: url("<?php echo $background; ?>");
+        }
+      <?php endif; ?>
+    </style>
   </head>
 
   <body>

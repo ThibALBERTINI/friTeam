@@ -175,7 +175,7 @@ class AdminController
 public function postLogin()  // page affichée aprés s'être loggé
     {
         //$this->allowTo([ "admin", "super-admin" ]);
-        $this->show("pages/admin_postLogin", ["message" => $message]);
+        $this->show("pages/admin_postLogin");
     }// fin function postlogin
 
 
@@ -723,15 +723,15 @@ public function postLogin()  // page affichée aprés s'être loggé
     public function upload()
     {
         $repertoire = "assets/img/"; //repertoire où le fichier va être stocké
-        $fichier = $repertoire . basename($_FILES["img"]["name"]); //chemin du fichier uploadé
+        $fichier = "";
         $uploadOk = 1;
-        $imageFileType = pathinfo($fichier,PATHINFO_EXTENSION); //récupère l'extension du fichier
         // Verifier que l'image existe dans l'upload
         if(isset($_POST["submit"]))
         {
             $check = getimagesize($_FILES["img"]["tmp_name"]);
             if($check !== false)
             {
+                $fichier = $repertoire . basename($_FILES["img"]["name"]); //chemin du fichier uploadé
                 $message = "Le fichier uploadé est une image - " . $check["mime"] . ".";
                 $uploadOk = 1;
             } else
@@ -752,6 +752,7 @@ public function postLogin()  // page affichée aprés s'être loggé
             $message = "Votre image est trop lourde. Taille maximale autorisée : 500 ko.";
             $uploadOk = 0;
         }
+        $imageFileType = pathinfo($fichier,PATHINFO_EXTENSION); //récupère l'extension du fichier
         // Formats acceptés
         if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" )
         {
@@ -775,12 +776,32 @@ public function postLogin()  // page affichée aprés s'être loggé
         }
 
         $this->message = $message;
+        echo $fichier;
         return $fichier;
+    }
+
+    public function suppr_accents($str, $encoding='utf-8')
+    {
+        // transformer les caractères accentués en entités HTML
+        $str = htmlentities($str, ENT_NOQUOTES, $encoding);
+     
+        // remplacer les entités HTML pour avoir juste le premier caractères non accentués
+        // Exemple : "&ecute;" => "e", "&Ecute;" => "E", "Ã " => "a" ...
+        $str = preg_replace('#&([A-za-z])(?:acute|grave|cedil|circ|orn|ring|slash|th|tilde|uml);#', '\1', $str);
+     
+        // Remplacer les ligatures tel que : Œ, Æ ...
+        // Exemple "Å“" => "oe"
+        $str = preg_replace('#&([A-za-z]{2})(?:lig);#', '\1', $str);
+        // Supprimer tout le reste
+        $str = preg_replace('#&[^;]+;#', '', $str);
+     
+        return $str;
     }
 
     public function formationUpdate($id)
     {
-        $message = "";
+        $messageOK = "";
+        $messageKO = "";
         // CONTROLLER
         // ICI IL FAUDRA TRAITER LE FORMULAIRE DE UPDATE
 
@@ -809,6 +830,9 @@ public function postLogin()  // page affichée aprés s'être loggé
             $alt               = trim($_POST["alt"]);
             $prix               = trim($_POST["prix"]);
 
+            $url = $this->suppr_accents($url);
+            $url = str_replace( " ", "-", $url);
+            $url = preg_replace( "/[^a-zA-Z0-9]/", "-", $url);
             //$id_categorie       = trim($_POST["id_categorie"]);
 
             // SECURITE
@@ -843,9 +867,7 @@ public function postLogin()  // page affichée aprés s'être loggé
                 // NE PAS OUBLIER DE FAIRE use
                 $img = $this->upload();
                 $objetFormationModel = new formationModel;
-                // JE PEUX UTILISER LA METHODE update DE LA CLASSE \W\Model\Model
-                $objetFormationModel->update([
-                "img"                   => str_replace("assets/", "", $img),
+                $tabUpdate = [
                 "titre_formation"       => $titre,
                 "categorie_formation"   => $categorie,
                 "presentation_formation"=> $presentation,
@@ -861,25 +883,32 @@ public function postLogin()  // page affichée aprés s'être loggé
                 "lien_catalogue"        => $lien,
                 "url"                   => $url,
                 "alt"                   => $alt,
-                "prix"                   => $prix,
-                ],
+                "prix"                  => $prix,
+                ];
+                if ($img != "")
+                {
+                    $tabUpdate["img"] = str_replace("assets/", "", $img);
+                }
+                // JE PEUX UTILISER LA METHODE update DE LA CLASSE \W\Model\Model
+                $objetFormationModel->update($tabUpdate,
                 $id);
 
                 // OK
-                $message = "La fiche à été correctement modifiée";
+                $messageOK = "La fiche à été correctement modifiée";
+
             }
             else
             {
                 // KO
                 // UNE ERREUR
-                $message = "ERREUR lors de la mise à jour";
+                $messageKO = "ERREUR lors de la mise à jour";
             }
         }
 
         // VIEW
         // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
         $titrePage = "modification formation (fiches)";
-        $this->show("pages/admin_formation_update", [ "id" => $id, "message" => $message, "titrePage" => $titrePage ]);
+        $this->show("pages/admin_formation_update", [ "id" => $id, "messageKO" => $messageKO, "messageOK" => $messageOK, "titrePage" => $titrePage ]);
         $this->allowTo([ "admin", "super-admin" ]);
     } // fin function formationUpdate($id)
 

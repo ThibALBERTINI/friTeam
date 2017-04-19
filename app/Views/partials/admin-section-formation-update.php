@@ -16,7 +16,15 @@ if (!empty($tabFormation)) :
         <div class="row">
             <div class="col-xs-12 col-md-6 col-md-offset-3">
                 <h3>FORMULAIRE DE MISE A JOUR DES FICHES FORMATION</h3>
-                <h4>app/partials/admin-section-formation-update</h4>
+
+                    <div class="message classe-ok">
+                        <?php if (isset($messageOK)) echo $messageOK; ?><br> 
+                    </div>
+                    <div class="message classe-ko">
+                         <?php if (isset($messageKO)) echo $messageKO; ?><br>
+                    </div>
+                    <a href="<?php echo $this->url("admin_formation_detail"); ?>">Retour</a>
+
                 <form method="POST" action="" enctype="multipart/form-data">
 
                     <div class="form-group">
@@ -31,7 +39,7 @@ if (!empty($tabFormation)) :
 
                     <div class="form-group">
                         <label for="title_formation">Titre de la formation</label><br>
-                        <input type="text" name="titre_formation" id="titre_formation" class="form-control" required value="<?php echo $titre_formation ?>"><br>
+                        <input type="text" name="titre_formation" id="titre_formation" class="form-control"  value="<?php echo $titre_formation ?>"><br>
                     </div>
                     <div class="form-group">
                         <label for="categorie_formation">Catégorie</label>
@@ -73,7 +81,7 @@ if (!empty($tabFormation)) :
 
                     <div class="form-group">
                         <label for="prix">Prix</label><br>
-                        <textarea type="text" name="prix" id="prix" class="form-control" required cols="60" rows="5" value="<?php echo $prix ?>"></textarea><br>
+                        <textarea type="text" name="prix" id="prix" class="form-control ckeditor" required cols="60" rows="5" value="<?php echo $prix ?>"></textarea><br>
                     </div>
 
                     <div class="form-group">
@@ -93,7 +101,7 @@ if (!empty($tabFormation)) :
 
                     <div class="form-group">
                         <label for="programme_formation">Programme</label><br>
-                        <textarea type="text" name="programme_formation" id="programme_formation" class="form-control" required cols="60" rows="5"><?php echo $programme_formation ?></textarea><br>
+                        <textarea type="text" name="programme_formation" id="programme_formation" class="form-control ckeditor" required cols="60" rows="5"><?php echo $programme_formation ?></textarea><br>
                     </div>
 
                     <div class="form-group">
@@ -106,15 +114,11 @@ if (!empty($tabFormation)) :
                         <input type="text" name="url" id="url" class="form-control" required value="<?php echo $url ?>"><br>
                     </div>
 
-                    <button type="submit">Modifier la Fiche Formation</button>
+                    <button type="submit" name="submit">Modifier la Fiche Formation</button>
                     
                     <!-- INFO TECHNIQUE POUR PRECISER L'ACTION QUE LE VISITEUR VEUT REALISER -->
                     <input type="hidden" name="id" value="<?php echo $id ?>">
-                    <input type="hidden" name="operation" value="modifier">
-                    
-                    <div class="message">
-                        <?php if (isset($message)) echo $message ?><br>
-                    </div>
+                    <input type="hidden" name="operation" value="modifier">                    
                 </form>
             </div>
         </div>

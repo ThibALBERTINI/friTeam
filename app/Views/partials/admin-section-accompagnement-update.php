@@ -42,12 +42,12 @@ if (!empty($tabAccompagnement)) :
 
                     <div class="form-group">
                         <label for="resume_acc">C'est Quoi ?</label><br>
-                        <textarea type="text" name="resume_acc" id="resume_acc" class="form-control" required cols="60" rows="5"><?php echo $resume_acc ?></textarea><br>
+                        <textarea type="text" name="resume_acc" id="resume_acc" class="form-control ckeditor" required cols="60" rows="5"><?php echo $resume_acc ?></textarea><br>
                     </div>
 
                     <div class="form-group">
                         <label for="presentation_acc">Comment ça marche ?</label><br>
-                        <textarea type="text" name="presentation_acc" id="presentation_acc" class="form-control" required cols="60" rows="5" value="<?php echo $presentation_acc ?>"></textarea><br>
+                        <textarea type="text" name="presentation_acc" id="presentation_acc" class="form-control ckeditor" required cols="60" rows="5" value="<?php echo $presentation_acc ?>"></textarea><br>
                     </div>
 
                     <div class="form-group">

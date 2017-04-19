@@ -20,7 +20,7 @@ if (!empty($tabResult)) :
 
                     <div class="form-group">
                         <label for="contenu_friteam">Contenu "POURQUOI FRI TEAM"</label><br>
-                        <textarea type="text" name="contenu_friteam" id="contenu_friteam" class="form-control" required cols="60" rows="5" placeholder="<?php echo $contenu_friteam ?>"></textarea><br>
+                        <textarea type="text" name="contenu_friteam" id="contenu_friteam" class="form-control ckeditor" required cols="60" rows="5"><?php echo $contenu_friteam ?></textarea><br>
                     </div>
 
                     <div class="form-group">

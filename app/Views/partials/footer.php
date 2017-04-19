@@ -42,25 +42,6 @@
         </script>
         <script type="text/javascript" src="<?php echo $this->assetUrl('js/jquery-3.2.0.min.js') ?>"></script>
         <script src="http://cdn.ckeditor.com/4.6.2/standard-all/ckeditor.js"></script>
-
-        <script>
-      		CKEDITOR.replace( 'programme_formation',
-          {
-      			height: 200,
-      			// By default, some basic text styles buttons are removed in the Standard preset.
-      			// The code below resets the default config.removeButtons setting.
-      			removeButtons: ''
-      		} );
-
-          CKEDITOR.replace( 'resume_acc',
-          {
-            height: 200,
-            // By default, some basic text styles buttons are removed in the Standard preset.
-            // The code below resets the default config.removeButtons setting.
-            removeButtons: ''
-          } );
-	       </script>
-
         <script type="text/javascript" src="<?php echo $this->assetUrl('js/jquery.easing.min.js') ?>"></script>
         <script type="text/javascript" src="<?php echo $this->assetUrl('js/bootstrap.js') ?>"></script>
         <script type="text/javascript" src="<?php echo $this->assetUrl('js/script.js') ?>"></script>

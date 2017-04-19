@@ -1195,3 +1195,23 @@ div.encard-droit {
   border: 1px solid #056396;
   transition: all ease-in-out 300ms;
 }
+
+ /*****************************************
+ PAGE ADMIN FORMATION DETAIL UPDATE
+ *****************************************/
+
+ div.classe-ok {
+  text-transform: uppercase;
+  font-weight: bolder;
+  font-size: 1.5em;
+  text-align: center;
+  color: LimeGreen;
+ }
+
+ div.classe-ko {
+  text-transform: uppercase;
+  font-weight: bolder;
+  font-size: 1.5em;
+  text-align: center;
+  color: FireBrick;
+ }
