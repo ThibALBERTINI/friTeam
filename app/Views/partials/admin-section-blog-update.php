@@ -40,7 +40,7 @@ if (!empty($tabActualite)) :
 
                     <div class="form-group">
                         <label for="contenu_actualite">Corps de l'article</label><br>
-                        <input type="text" name="contenu_actualite" id="contenu_actualite" class="form-control" required value="<?php echo $contenu_actualite ?>"><br>
+                        <textarea type="text" name="contenu_actualite" id="contenu_actualite" class="form-control" required cols="60" rows="5" value="<?php echo $contenu_actualite ?>"></textarea><br>
                     </div>
 
                     <div class="form-group">

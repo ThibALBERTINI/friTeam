@@ -645,6 +645,7 @@ public function postLogin()
             $lien              = trim($_POST["lien_catalogue"]);
             $url               = trim($_POST["url"]);
             $alt               = trim($_POST["alt"]);
+            $prix               = trim($_POST["prix"]);
 
             // $id_categorie       = trim($_POST["id_categorie"]);
 
@@ -665,6 +666,7 @@ public function postLogin()
                     && is_string($lien)         && ( mb_strlen($lien) > 0 )
                     && is_string($url)          && ( mb_strlen($url) > 0 )
                     && is_string($alt)          && ( mb_strlen($alt) > 0 )
+                    && is_string($prix)          && ( mb_strlen($prix) > 0 )
                     // && is_numeric($id_categorie)
                 )
             {
@@ -696,6 +698,7 @@ public function postLogin()
                         "lien_catalogue"        => $lien,
                         "url"                   => $url,
                         "alt"                   => $alt,
+                        "prix"                   => $prix,
                     ], false);
                 // OK
                 $message = "La Fiche Formation à bien été créée";
@@ -801,6 +804,7 @@ public function postLogin()
             $lien              = trim($_POST["lien_catalogue"]);
             $url               = trim($_POST["url"]);
             $alt               = trim($_POST["alt"]);
+            $prix               = trim($_POST["prix"]);
 
             //$id_categorie       = trim($_POST["id_categorie"]);
 
@@ -821,6 +825,7 @@ public function postLogin()
                     && is_string($lien)         && ( mb_strlen($lien) > 0 )
                     && is_string($url)          && ( mb_strlen($url) > 0 )
                     && is_string($alt)          && ( mb_strlen($alt) > 0 )
+                    && is_string($prix)          && ( mb_strlen($prix) > 0 )
                     //&& is_numeric($id_categorie)
                 )
             {
@@ -852,6 +857,7 @@ public function postLogin()
                 "lien_catalogue"        => $lien,
                 "url"                   => $url,
                 "alt"                   => $alt,
+                "prix"                   => $prix,
                 ],
                 $id);
 

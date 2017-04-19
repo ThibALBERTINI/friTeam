@@ -24,6 +24,7 @@ $tabResult = $objetFicheDetailModel->search(["url"=>$url]);
     $programme = $tabInfo["programme_formation"];
     $catalogue = $tabInfo["programme_formation"];
     $alt = $tabInfo["alt"];
+    $prix = $tabInfo["prix"];
 
     // var_dump($img);
 
@@ -109,7 +110,7 @@ echo
 
       <h4 class="titre-col-droite">Tarifs</h4>
       <p>
-        a rajouter dans la base de données
+        $prix
       </p>
 
       <h4 class="titre-col-droite">Conditions</h4>

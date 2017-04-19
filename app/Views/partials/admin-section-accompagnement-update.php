@@ -47,7 +47,7 @@ if (!empty($tabAccompagnement)) :
 
                     <div class="form-group">
                         <label for="presentation_acc">Comment ça marche ?</label><br>
-                        <input type="text" name="presentation_acc" id="presentation_acc" class="form-control" required value="<?php echo $presentation_acc ?>"><br>
+                        <textarea type="text" name="presentation_acc" id="presentation_acc" class="form-control" required cols="60" rows="5" value="<?php echo $presentation_acc ?>"></textarea><br>
                     </div>
 
                     <div class="form-group">

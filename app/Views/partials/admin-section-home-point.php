@@ -25,7 +25,7 @@ if (!empty($tabResult)) :
                     </div>
 
                     <div class="form-group">
-                        <label for="contenu_point">Contenu de "FriTeam c'est quoi ?"</label><br>
+                        <label for="contenu_point">Contenu du point fort</label><br>
                         <textarea type="text" name="contenu_point" id="contenu_point" class="form-control" required cols="60" rows="5" placeholder="<?php echo $contenu_point ?>"></textarea><br>
                     </div>
 

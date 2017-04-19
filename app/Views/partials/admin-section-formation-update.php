@@ -46,7 +46,7 @@ if (!empty($tabFormation)) :
 
                     <div class="form-group">
                         <label for="objectif_formation">Objectifs</label><br>
-                        <input type="text" name="objectif_formation" id="objectif_formation" class="form-control" required value="<?php echo $objectif_formation ?>"><br>
+                        <textarea type="text" name="objectif_formation" id="objectif_formation" cols="60" rows="5" class="form-control" required value="<?php echo $objectif_formation ?>"></textarea><br>
                     </div>
 
                     <div class="form-group">
@@ -62,6 +62,11 @@ if (!empty($tabFormation)) :
                     <div class="form-group">
                         <label for="duree_formation">Durée</label><br>
                         <input type="text" name="duree_formation" id="duree_formation" class="form-control" required value="<?php echo $duree_formation ?>"><br>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prix">Prix</label><br>
+                        <textarea type="text" name="prix" id="prix" class="form-control" required cols="60" rows="5" value="<?php echo $prix ?>"></textarea><br>
                     </div>
 
                     <div class="form-group">

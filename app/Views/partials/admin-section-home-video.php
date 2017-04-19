@@ -19,7 +19,7 @@ if (!empty($tabResult)) :
                 <form method="POST" action="" enctype="multipart/form-data">
 
                     <div class="form-group">
-                        <label for="contenu_friteam">Contenu de "FriTeam c'est quoi ?"</label><br>
+                        <label for="contenu_friteam">Contenu "POURQUOI FRI TEAM"</label><br>
                         <textarea type="text" name="contenu_friteam" id="contenu_friteam" class="form-control" required cols="60" rows="5" placeholder="<?php echo $contenu_friteam ?>"></textarea><br>
                     </div>
 
