@@ -144,30 +144,82 @@ class DefaultController extends Controller
 				&& is_string($ville)																		&& ( mb_strlen($ville) > 0 )
 				&& is_string($message)																		&& ( mb_strlen($message) > 0 )
 				)
-			{
-				//Enregistrer les information receuillies par le formulaire dans la base de données
-				//Création d'un objet de la classe ContatModel
-				$objetContactModel = new ContactModel; //Si pb, le model Contact n'est peut etre pas créé
-				$objetContactModel->insert([
-					 	"civilite_contact"	=> $civilite,
-						"nom_contact" 		=> $nom,
-				 		"prenom_contact" 	=> $prenom,
-			 			"email_contact" 	=> $email,
-			 			"tel_contact" 		=> $tel,
-						"adresse_contact" 	=> $adresse,
-						"cp_contact" 		=> $cp,
-						"ville_contact" 	=> $ville,
-						"message_contact" 	=> $message,
-					], true);
-				$message = "Formulaire envoyé a l'administrateur";
-			}
-			else
-			{
-				$message = "Erreur lors de l'enregistrement";
-			}
+				{
+					$mail = new \PHPMailer(); //création d'un objet de type mail
+					$mail->CharSet = 'UTF-8'; // codage du message pour prise en compte des accents et caractères spéciaux
+					$mail->isSMTP(); //connexion directe au serveur SMTP
+					$mail->SMTPDebug=0;
+					$mail->isHTML(true); //utilisation du format HTML pour le message
+					$mail->Host = "smtp.gmail.com"; //le serveur SMTP pour envoyer
+					$mail->Port = 465; //le port obligatoire de google
+					$mail->SMTPAuth = true; //on va fournir un login/password au serveur
+					$mail->SMTPSecure = 'ssl'; //certificat SSL
+					$mail->Username = 'thibaut.albertini@gmail.com';
+					$mail->Password = 'ALB-thi1';
+					// $mail->setFrom($mailUser);
+			    	$mail->setFrom('thibaut.albertini@gmail.com'); // l'expéditeur
+			    	$mail->FromName='muriel.villain@friteam.com'; // apparence de l'expéditeur
+			    	// $mail->addAddress($mailUser);
+			    	$mail->addAddress('thauvin.elo@gmail.com'); // l'adresse mail de celui qui a perdu son mdp
+					$mail->Subject = "Nouveau contact sur le site friteam"; //objet du mail
+					$mail->Body = '<table>
+									<tr>
+										<td><b>Vous avez reçu un nouveau message sur le site Friteam !</b></td>
+									</tr>
+									<br/>
+									<tr>
+										<td>Salut Elo !</td>
+										<td>Vois tu les info ci dessous ?</td>
+									</tr>
+									<tr>
+										<td>$civilite</td>
+										<td>$nom</td>
+										<td>$prenom</td>
+										<td>$email</td>
+										<td>$tel</td>
+										<td>$adresse</td>
+										<td>$cp</td>
+										<td>$ville</td>
+										<td>$message</td>
+									</tr>
+									<br/>
+									<tr>
+										<td>Votre lien personnalisé : '.$link.'</td>
+									</tr>
+								</table>';
+					//Enregistrer les information receuillies par le formulaire dans la base de données
+					//Création d'un objet de la classe ContatModel
+					$objetContactModel = new ContactModel; //Si pb, le model Contact n'est peut etre pas créé
+					$objetContactModel->insert([
+						 	"civilite_contact"	=> $civilite,
+							"nom_contact" 		=> $nom,
+					 		"prenom_contact" 	=> $prenom,
+				 			"email_contact" 	=> $email,
+				 			"tel_contact" 		=> $tel,
+							"adresse_contact" 	=> $adresse,
+							"cp_contact" 		=> $cp,
+							"ville_contact" 	=> $ville,
+							"message_contact" 	=> $message,
+						], true);
+					$message = "Formulaire envoyé a l'administrateur";
+			    	if(!$mail->send()){
+				    		$message2 = "Email non-envoyé ! (erreur envoi ".$mail->ErrorInfo.")";
+					    	}
+					    	else{
+								// on crée une variable pour récupérer seulement l'ID de l'utilisateur
+								$idUser =  $tabUser["id"];
+								// on réutilise l'objet créé précédemment afin de pouvoir utiliser cette fois la méthode "update"
+
+					    		$message2 = "Merci de vérifier votre boite mail.<br/>Votre mot de passe pourra être réinitialisé grâce au lien qui vous a été adressé.";
+					    	}
+				}
+				else
+				{
+					$message = "Erreur lors de l'enregistrement";
+				}
 		}
 		$titrePage = "contact";
-		$this->show("pages/default_contact", [ "message" => $message, "titrePage" => $titrePage ]);
+		$this->show("pages/default_contact", [ "message" => $message, "titrePage" => $titrePage, "message2" => $message2 ]);
 	}
 
 	public function formation()

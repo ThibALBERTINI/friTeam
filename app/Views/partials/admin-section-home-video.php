@@ -16,6 +16,8 @@ if (!empty($tabResult)) :
         <div class="row">
             <div class="col-xs-12 col-md-6 col-md-offset-3">
                 <h3>FORMULAIRE DE MISE A JOUR DU BANDEAU VIDEO/FRITEAM C'EST QUOI ?</h3>
+
+                <a href="<?php echo $this->url("admin_home"); ?>">Retour</a>
                 <form method="POST" action="" enctype="multipart/form-data">
 
                     <div class="form-group">

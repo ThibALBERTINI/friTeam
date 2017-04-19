@@ -48,7 +48,7 @@
               <li><a class="menu1" href="<?php echo $this->url('admin_home') ?>">Accueil</a></li>
               <li><a class="menu2" href="<?php echo $this->url('admin_friteam-equipe') ?>">Qui sommes-nous ?</a></li>
               <li><a class="menu3" href="<?php echo $this->url('admin_formation_detail') ?>">Les formation</a></li>
-              <li><a class="menu4" href="<?php echo $this->url('admin_accompagnement') ?>">Notre accompagnement</a></li>
+              <li><a class="menu4" href="<?php echo $this->url('admin_accompagnement-detail') ?>">Notre accompagnement</a></li>
               <!-- <li><a class="menu5" href="#">Nos Évènements</a></li> ... Liens à former --> 
               <li><a class="menu6" href="<?php echo $this->url('admin_blog') ?>">Blog</a></li>
               <li><a class="menu6" href="<?php echo $this->url('admin_creer-admin') ?>">Gestion admin</a></li>

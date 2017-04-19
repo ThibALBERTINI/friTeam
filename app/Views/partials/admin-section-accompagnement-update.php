@@ -16,7 +16,8 @@ if (!empty($tabAccompagnement)) :
         <div class="row">
             <div class="col-xs-12 col-md-6 col-md-offset-3">
                 <h3>FORMULAIRE DE MISE A JOUR DES FICHES ACCOMPAGNEMENT</h3>
-                <h4>app/partials/admin-section-accompagnement-update</h4>
+
+                <a href="<?php echo $this->url("admin_accompagnement-detail"); ?>">Retour</a>
                 <form method="POST" action="" enctype="multipart/form-data">
 
 
