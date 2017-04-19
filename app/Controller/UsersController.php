@@ -183,7 +183,8 @@ class UsersController
                     $message = '<p class="erreur"> vous n\'avez pas été identifié, merci de recommencer l\'étape de modification du mot de passe </p>';
                 }
         }// fin ifisset btnsub
-        $this->show("pages/users_newPass", [ "message" => $message, "login" => $login ]);
+        $titrePage = "Changer son mot de passe";
+        $this->show("pages/users_newPass", [ "message" => $message, "login" => $login, "titrePage"=> $titrePage ]);
     }//fin function newPass
 
 

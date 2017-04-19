@@ -1,4 +1,8 @@
-<!-- Texte d'introduction -->
+
+<?php 
+
+?>
+
 <div class="container-fluid">
   <div class="row row-centered">
     <div class="col-xs-12 col-md-8  col-centered">
@@ -7,69 +11,71 @@
   </div>
 </div>
 
-<!-- Onglets recherche par catégories -->
-<div class="onglets-categories text-center">
-  <ul>
-    <li>Toutes les Formations</li>
-    <li>Formations FRI TEAM</li>
-    <li>Formations Complémentaires</li>
-  </ul>
-</div>
+<form method="get" class="container formation text-center formation">
+        <input type="text" class="form-control" name="recherche" id="recherche" placeholder="Chercher une formation"/><br>
+        <button type="submit" class="btn btn-info">Rechercher</button><br><br>
+        <a href="<?php echo $this->url('default_formation') ?>">Revenir au catalogue complet </a>
+</form>
+
+
+ <!--On créé nos boutons pour filtrer les formations en fonction des categories-->
+    <nav class="filtres container formation">
+        <!-- chaque categorie, on créé le bouton qui correspond avec un attribut data-filter=".friteam" par exemple -->
+        <span class="recherche">Formations : </span>
+         <button data-filter="*" type="button" class="btn btn-default">Toutes</button>
+                <?php foreach($categs as $categ): ?>
+        
+         <button data-filter=".<?php echo strtolower($categ); ?>" type="button" class="btn btn-default"><?= $categ ?></button> 
+        <?php endforeach; ?>
+    </nav>
 
 <div class="container carte-container">
   <div class="row row-centered">
+        <main class="formations">
+                <?php foreach($tabResult as $formations => $formation): ?>
+                    <!-- Attention, pour chaque <div> on rajoute les classes qui correspondent aux categories -->
+                    <div class="formation <?php echo strtolower($formation['categorie_formation']); ?>">
+                      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 carte-formation col-centered">
+                        
+                        <div class="image">
+                          <img src="<?php echo $this->assetUrl($formation['img']); ?>" alt="image-carte">
+                        </div>
 
+                        <div class="contenu">
+                          <h4><a href="$href"><?php echo $formation['titre_formation']; ?></a></h4>
+                          <span class="icon"><i class="fa fa-calendar" aria-hidden="true"></i> <?php echo $formation['date_formation']; ?></span>
+                          <span class="icon"><i class="fa fa-clock-o" aria-hidden="true"></i> <?php echo $formation['duree_formation']; ?></span>
+                          <div class="ligne"></div>
+                          <p class="resume"><?php echo $formation['chapo_formation']; ?></p>
+                          <span class="icon"><i class="fa fa-map-marker" aria-hidden="true"></i><?php echo $formation['lieu_formation']; ?></span>
+                          <div class="text-center bouton-container">
+                          <a class="bouton" href="<?php echo $this->url("default_formation-detail", ["url"=>$formation['url']]); ?>">En Savoir Plus</a>
+                          </div>
+                        </div>
 
-<?php
-
-$objetFicheModel = new \Model\FormationModel;
-$tabResult = $objetFicheModel->findAll("date_formation", "ASC");
-
-if(!empty($tabResult))
-{
-  foreach ($tabResult as $index => $tabInfo)
-  {
-    $titre = $tabInfo["titre_formation"];
-    $img = $tabInfo["img"];
-    $date = $tabInfo["date_formation"];
-    $duree = $tabInfo["duree_formation"];
-    $chapo = $tabInfo["chapo_formation"];
-    $lieu = $tabInfo["lieu_formation"];
-    $url = $tabInfo["url"];
-
-    $href = $this->url("default_formation-detail", [ "url" => $url ]);
-
-    $cheminAsset = $this->assetUrl("");
-echo
-<<<CODEHTML
-
-      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 carte-formation col-centered">
-        <div class="image">
-          <img src="$cheminAsset/$img" alt="image-carte">
-        </div>
-
-        <div class="contenu">
-          <h4><a href="$href">$titre</a></h4>
-
-          <span class="icon"><i class="fa fa-calendar" aria-hidden="true"></i> $date</span>
-          <span class="icon"><i class="fa fa-clock-o" aria-hidden="true"></i> $duree</span>
-
-          <div class="ligne"></div>
-
-          <p class="resume">$chapo</p>
-
-          <span class="icon"><i class="fa fa-map-marker" aria-hidden="true"></i>$lieu</span>
-
-          <div class="text-center bouton-container">
-            <a class="bouton" href="$href">En Savoir Plus</a>
-          </div>
-        </div>
-    </div>
-CODEHTML;
-  }
-}
-
-?>
-
+                      </div>
+                    </div>
+                <?php endforeach; ?>
+        </main>
+  </div>
 </div>
-</div>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.1/jquery.autocomplete.min.js"></script>
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+ <script>
+
+        // Utilisation de Isotope, on créé une variable $grid qui permet de gérer la liste des formations
+        // avec isotope
+        var $grid = $('.formations').isotope();
+        
+        // On dit que lorsqu'on clique sur les boutons qui se trouvent dans la nav qui a la classe filtres
+        $('nav.filtres').on( 'click', 'button', function() {
+           
+            // On récupère la donnée qui est dans "data-filter" ("".friteam" ou ".complementaire" par exemple)
+            var filterValue = $(this).attr('data-filter');
+            // On demande à $grid (notre liste de formations gérée avec Isotope) de filtrer les formations
+            // avec la catégorie demandée ( )
+            $grid.isotope({ filter: filterValue });
+        });
+    </script>
+

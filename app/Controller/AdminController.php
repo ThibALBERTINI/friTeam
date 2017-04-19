@@ -167,7 +167,7 @@ class AdminController
         $this->show("pages/admin_modif_pass", ["message" => $message, "titrePage"=> $titrePage]);
     } // fin function modifPass
 
-public function postLogin()
+public function postLogin()  // page affichée aprés s'être loggé
     {
         //$this->allowTo([ "admin", "super-admin" ]);
         $this->show("pages/admin_postLogin", ["message" => $message]);
@@ -322,6 +322,7 @@ public function postLogin()
             //$img               = trim($_POST["img_formation"]);
             $titre             = trim($_POST["titre_formation"]);
             $presentation      = trim($_POST["presentation_formation"]);
+            $categorie         = trim($_POST["categorie_formation"]);
             $chapo             = trim($_POST["chapo_formation"]);
             $objectif          = trim($_POST["objectif_formation"]);
             $public            = trim($_POST["public_formation"]);
@@ -371,6 +372,7 @@ public function postLogin()
                         "img"                   => str_replace("assets/", "", $img),
                         "titre_formation"       => $titre,
                         "presentation_formation"=> $presentation,
+                        "categorie_formation"   => $categorie,
                         "chapo_formation"       => $chapo,
                         "objectif_formation"    => $objectif,
                         "public_formation"      => $public,
@@ -475,6 +477,7 @@ public function postLogin()
             //$img               = trim($_POST["img_formation"]);
             $titre             = trim($_POST["titre_formation"]);
             $presentation      = trim($_POST["presentation_formation"]);
+            $categorie         = trim($_POST["categorie_formation"]);
             $chapo             = trim($_POST["chapo_formation"]);
             $objectif          = trim($_POST["objectif_formation"]);
             $public            = trim($_POST["public_formation"]);
@@ -523,6 +526,7 @@ public function postLogin()
                 $objetFormationModel->update([
                 "img"                   => str_replace("assets/", "", $img),
                 "titre_formation"       => $titre,
+                "categorie_formation"   => $categorie,
                 "presentation_formation"=> $presentation,
                 "chapo_formation"       => $chapo,
                 "objectif_formation"    => $objectif,

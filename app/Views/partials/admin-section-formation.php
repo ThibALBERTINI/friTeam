@@ -27,6 +27,14 @@ $tabFormation = $objetFormationModel->find($id);
 					</div>
 
 					<div class="form-group">
+						<label for="categorie_formation">Catégorie</label>
+						<select name="categorie_formation" id="categorie_formation" class="form-control" required>
+							<option value="categFriteam">Friteam</option>
+							<option value="categComplementaire">Complémentaire</option>
+						</select>
+					</div>
+
+					<div class="form-group">
 						<label for="presentation_formation">Présentation</label><br>
 						<textarea type="text" name="presentation_formation" id="presentation_formation" class="form-control" required cols="60" rows="5"></textarea><br>
 					</div>

@@ -172,9 +172,69 @@ class DefaultController extends Controller
 
 	public function formation()
 	{
+		if(isset($_GET['recherche']) && strlen($_GET['recherche']) >= 2)
+		{
+			$objetFormationModel = new \Model\FormationModel;
+			$tabResult= $objetFormationModel->rechercheFormation();
+			
+		}
+		else
+		{
+			$objetFormationModel = new \Model\FormationModel;
+			$tabResult= $objetFormationModel->selectFormations ();
+		}
+
+		if(!empty($tabResult))
+			{
+			  foreach ($tabResult as $index => $tabInfo)
+			  {
+			    $titre = $tabInfo["titre_formation"];
+			    $img = $tabInfo["img"];
+			    $date = $tabInfo["date_formation"];
+			    $duree = $tabInfo["duree_formation"];
+			    $chapo = $tabInfo["chapo_formation"];
+			    $lieu = $tabInfo["lieu_formation"];
+			    $categorie = $tabInfo["categorie_formation"];
+			    $conditions = $tabInfo["conditions_formation"];
+			    $intervenant = $tabInfo["intervenant_formation"];
+			    $lien = $tabInfo["lien_catalogue"];
+			    $ojectif = $tabInfo["objectif_formation"];
+			    $presentation = $tabInfo["presentation_formation"];
+			    $programme = $tabInfo["programme_formation"];
+			    $public = $tabInfo["public_formation"];
+			    $url = $tabInfo["url"];
+
+			    //$href = $this->url("default_formation-detail", [ "url" => $url ]);
+
+			    //$cheminAsset = $this->assetUrl("/");
+			  }
+			}
+
+			$objetFormationModel = new \Model\FormationModel;
+			$tabFormations= $objetFormationModel->findAll (); 
+
+					// On créé un tableau vide qui va contenir les categories
+			$categs = [];
+
+			// Pour chaque resultats de notre recherche des catégories
+			foreach($tabFormations as $resultat)  
+			{
+			    // On créé un tableau $specialites qui va contenir les specialites de la formation qu'on analyse
+			    $categorie = $resultat['categorie_formation'];
+			    // Pour chaque categ de la formation (categFriteam, categComplementaire)
+			      // Si la specialité n'existe pas dans le tableau des categories
+			        if(!in_array($categorie, $categs))
+			        {
+			            // On ajoute au tableau des marques la specialités
+			            array_push($categs, $categorie);
+			        }
+			    
+			}
+
+
 		$titrePage = "formation";
-		$this->show("pages/default_formation", [ "titrePage" => $titrePage ]);
-	}
+		$this->show("pages/default_formation", [ "titrePage" => $titrePage, "categs"=> $categs, "tabResult" => $tabResult, "tabFormations" =>$tabFormations ]);
+	} // fin function formation
 
 	public function formationDetail($url)
 	{

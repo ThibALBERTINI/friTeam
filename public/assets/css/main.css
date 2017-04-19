@@ -698,6 +698,20 @@ div a.bouton:hover {
   transition: all ease-in-out 300ms;
 }
 
+nav.formation
+{
+  margin-top: 50px;
+  margin-bottom: 40px;
+}
+
+form.formation{
+  margin-top: 30px;
+}
+
+span.recherche{
+  color: #FFB420;
+  font-size: 2em;
+}
 
 
 /****************

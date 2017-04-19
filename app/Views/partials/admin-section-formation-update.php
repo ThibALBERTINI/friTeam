@@ -28,6 +28,13 @@ if (!empty($tabFormation)) :
                         <label for="title_formation">Titre de la formation</label><br>
                         <input type="text" name="titre_formation" id="titre_formation" class="form-control" required value="<?php echo $titre_formation ?>"><br>
                     </div>
+                    <div class="form-group">
+                        <label for="categorie_formation">Catégorie</label>
+                        <select name="categorie_formation" id="categorie_formation" class="form-control" required value="<?php echo $categorie_formation ?>">>
+                            <option value="Friteam">Friteam</option>
+                            <option value="Complementaire">Complémentaire</option>
+                        </select>
+                    </div>
 
                     <div class="form-group">
                         <label for="presentation_formation">Présentation</label><br>
