@@ -45,7 +45,7 @@
         <script type="text/javascript" src="<?php echo $this->assetUrl('js/jquery.easing.min.js') ?>"></script>
         <script type="text/javascript" src="<?php echo $this->assetUrl('js/bootstrap.js') ?>"></script>
         <script type="text/javascript" src="<?php echo $this->assetUrl('js/script.js') ?>"></script>
-        
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.1/jquery.autocomplete.min.js"></script>
         <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
     </body>

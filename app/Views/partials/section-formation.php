@@ -17,24 +17,25 @@
         <a href="<?php echo $this->url('default_formation') ?>">Revenir au catalogue complet </a>
 </form>
 
-
+<div class="container carte-container">
+  <div class="row row-centered">
  <!--On créé nos boutons pour filtrer les formations en fonction des categories-->
     <nav class="filtres container formation">
         <!-- chaque categorie, on créé le bouton qui correspond avec un attribut data-filter=".friteam" par exemple -->
-        <span class="recherche">Formations : </span>
-         <button data-filter="*" type="button" class="btn btn-default">Toutes</button>
+        <!-- <span class="recherche">Formations : </span> -->
+         <button data-filter="*" type="button" class="btn btn-default btn-formation">Toutes nos formations</button>
                 <?php foreach($categs as $categ): ?>
 
-         <button data-filter=".<?php echo strtolower($categ); ?>" type="button" class="btn btn-default"><?= $categ ?></button>
+         <button data-filter=".<?php echo strtolower($categ); ?>" type="button" class="btn btn-default btn-formation"><?= $categ ?></button>
         <?php endforeach; ?>
     </nav>
 
-<div class="container carte-container">
-  <div class="row row-centered">
-        <section class="formations">
+
+        <section class="formations text-center">
                 <?php foreach($tabResult as $formations => $formation): ?>
                     <!-- Attention, pour chaque <div> on rajoute les classes qui correspondent aux categories -->
                     <div class="formation <?php echo strtolower($formation['categorie_formation']); ?>">
+                      <div class="row row-centered">
                       <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 carte-formation col-centered">
 
                         <div class="image">
@@ -52,7 +53,7 @@
                           <a class="bouton" href="<?php echo $this->url("default_formation-detail", ["url"=>$formation['url']]); ?>">En Savoir Plus</a>
                           </div>
                         </div>
-
+                      </div>
                       </div>
                     </div>
                 <?php endforeach; ?>

@@ -12,7 +12,7 @@
     <!-- Animate.css -->
     <link rel="stylesheet" type="text/css" href="<?php echo $this->assetUrl('css/animate.css') ?>">
     <!-- Style CSS Personnel -->
-    <link rel="stylesheet" type="text/css" href="<?php echo $this->assetUrl('css/main.css') ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo $this->assetUrl('css/style.css') ?>">
     <!-- Font Awesome -->
     <link rel="stylesheet" type="text/css" href="<?php echo $this->assetUrl('font-awesome/css/font-awesome.css') ?>">
     <!-- Roboto Font -->
