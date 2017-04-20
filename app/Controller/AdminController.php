@@ -21,6 +21,8 @@ class AdminController
 {
     //PROPRIETE
     public $message = "";
+    public $messageOK = "";
+    public $messageKO = "";
     public $titrePage = "";
 
     public function creerAdmin ()  // supprimer et modifier compris
@@ -183,6 +185,8 @@ public function postLogin()  // page affichée aprés s'être loggé
     {
         // INITIALISE LA VALEUR DE LA VARIABLE
         $message = "";
+        $messageOK = "";
+        $messageKO = "";
         $id = "";
 
         if (isset($_REQUEST["operation"]) && ($_REQUEST["operation"] == "supprimer"))
@@ -234,26 +238,28 @@ public function postLogin()  // page affichée aprés s'être loggé
 
                     ], false);
                 // OK
-                $message = "Le partenaire à bien été créé";
+                $messageOK = "Le partenaire à bien été créé";
             }
             else
             {
                 // KO
                 // UNE ERREUR
-                $message = "ERREUR lors de la création";
+                $messageKO = "ERREUR lors de la création";
             }
         }
 
         // AFFICHER LA PAGE
         // JE TRANSMETS LE MESSAGE A LA PARTIE VIEW
         $titrePage = "accueil";
-        $this->show("pages/admin_home", [ "message" => $message, "id" => $id, "titrePage" => $titrePage ]);
+        $this->show("pages/admin_home", [ "messageOK" => $messageOK, "messageKO" => $messageKO, "id" => $id, "titrePage" => $titrePage ]);
         $this->allowTo([ "admin", "super-admin" ]);
     }// fin function home
 
     public function homeVideo($id)
     {
                 $message = "";
+                $messageOK = "";
+                $messageKO = "";
         // CONTROLLER
         // ICI IL FAUDRA TRAITER LE FORMULAIRE DE UPDATE
 
@@ -294,26 +300,28 @@ public function postLogin()  // page affichée aprés s'être loggé
                 $id);
 
                 // OK
-                $message = "Le bandeau FriTeam/Vidéo à été correctement modifiée";
+                $messageOK = "Le bandeau FriTeam/Vidéo à été correctement modifiée";
             }
             else
             {
                 // KO
                 // UNE ERREUR
-                $message = "ERREUR lors de la mise à jour";
+                $messageKO = "ERREUR lors de la mise à jour";
             }
         }
 
         // VIEW
         // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
         $titrePage = "modification bandeau FriTeam/Vidéo";
-        $this->show("pages/admin_home-video", [ "id" => $id, "message" => $message, "titrePage" => $titrePage ]);
+        $this->show("pages/admin_home-video", [ "id" => $id, "messageOK" => $messageOK, "messageKO" => $messageKO, "titrePage" => $titrePage ]);
         $this->allowTo([ "admin", "super-admin" ]);
     }
 
     public function homePoint($id)
     {
                 $message = "";
+                $messageOK = "";
+                $messageKO = "";
         // CONTROLLER
         // ICI IL FAUDRA TRAITER LE FORMULAIRE DE UPDATE
 
@@ -353,26 +361,28 @@ public function postLogin()  // page affichée aprés s'être loggé
                 $id);
 
                 // OK
-                $message = "Le bandeau Points Fort à été correctement modifié";
+                $messageOK = "Le bandeau Points Fort à été correctement modifié";
             }
             else
             {
                 // KO
                 // UNE ERREUR
-                $message = "ERREUR lors de la mise à jour";
+                $messageKO = "ERREUR lors de la mise à jour";
             }
         }
 
         // VIEW
         // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
         $titrePage = "modification bandeau Points Fort";
-        $this->show("pages/admin_home-point", [ "id" => $id, "message" => $message, "titrePage" => $titrePage ]);
+        $this->show("pages/admin_home-point", [ "id" => $id, "messageOK" => $messageOK, "messageKO" => $messageKO, "titrePage" => $titrePage ]);
         $this->allowTo([ "admin", "super-admin" ]);
     }
 
     public function homeTemoignage($id)
     {
                 $message = "";
+                $messageOK = "";
+                $messageKO = "";
         // CONTROLLER
         // ICI IL FAUDRA TRAITER LE FORMULAIRE DE UPDATE
 
@@ -406,39 +416,45 @@ public function postLogin()  // page affichée aprés s'être loggé
                 // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
                 // JE CREE UN OBJET DE LA CLASSE FormationModel
                 // NE PAS OUBLIER DE FAIRE use
-                $img = $this->upload();
+                $img = $this->uploadUpdate();
                 $objetTemoignageModel = new temoignageModel;
-                // JE PEUX UTILISER LA METHODE update DE LA CLASSE \W\Model\Model
-                $objetTemoignageModel->update([
-                "img"                       => str_replace("assets/", "", $img),
+                $tabUpdate = [
+                //"img"                       => str_replace("assets/", "", $img),
                 "temoignage_temoignage"     => $temoignage_temoignage,
                 "entreprise_temoignage"     => $entreprise_temoignage,
                 "nom_temoignage"            => $nom_temoignage,
                 "alt"                       => $alt,
-                ],
-                $id);
+                ];
+                if ( $img != "" )
+                {
+                    $tabUpdate["img"] = str_replace("assets/", "", $img);
+                }
+                // JE PEUX UTILISER LA METHODE update DE LA CLASSE \W\Model\Model
+                $objetTemoignageModel->update($tabUpdate, $id);
 
                 // OK
-                $message = "Le bandeau témoignage à été correctement modifié";
+                $messageOK = "Le bandeau témoignage à été correctement modifié";
             }
             else
             {
                 // KO
                 // UNE ERREUR
-                $message = "ERREUR lors de la mise à jour";
+                $messageKO = "ERREUR lors de la mise à jour";
             }
         }
 
         // VIEW
         // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
         $titrePage = "modification bandeau témoignage";
-        $this->show("pages/admin_home-temoignage", [ "id" => $id, "message" => $message, "titrePage" => $titrePage ]);
+        $this->show("pages/admin_home-temoignage", [ "id" => $id, "messageOK" => $messageOK, "messageKO" => $messageKO, "titrePage" => $titrePage ]);
         $this->allowTo([ "admin", "super-admin" ]);
     }
 
     public function homePartenaire($id)
     {
         $message = "";
+        $messageOK = "";
+        $messageKO = "";
         // CONTROLLER
         // ICI IL FAUDRA TRAITER LE FORMULAIRE DE UPDATE
 
@@ -468,31 +484,35 @@ public function postLogin()  // page affichée aprés s'être loggé
                 // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
                 // JE CREE UN OBJET DE LA CLASSE FormationModel
                 // NE PAS OUBLIER DE FAIRE use
-                $img = $this->upload();
+                $img = $this->uploadUpdate();
                 $objetPartenaireModel = new partenaireModel;
-                // JE PEUX UTILISER LA METHODE update DE LA CLASSE \W\Model\Model
-                $objetPartenaireModel->update([
-                "img"                       => str_replace("assets/", "", $img),
+                $tabUpdate = [
+                //"img"                       => str_replace("assets/", "", $img),
                 "lien"     => $lien,
                 "alt"     => $alt,
-                ],
-                $id);
+                ];
+                if ( $img != "" )
+                {
+                    $tabUpdate["img"] = str_replace("assets/", "", $img);
+                }
+                // JE PEUX UTILISER LA METHODE update DE LA CLASSE \W\Model\Model
+                $objetPartenaireModel->update($tabUpdate, $id);
 
                 // OK
-                $message = "Le bandeau Partenaire à été correctement modifié";
+                $messageOK = "Le bandeau Partenaire à été correctement modifié";
             }
             else
             {
                 // KO
                 // UNE ERREUR
-                $message = "ERREUR lors de la mise à jour";
+                $messageKO = "ERREUR lors de la mise à jour";
             }
         }
 
         // VIEW
         // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
         $titrePage = "modification bandeau partenaire";
-        $this->show("pages/admin_home-partenaire", [ "id" => $id, "message" => $message, "titrePage" => $titrePage ]);
+        $this->show("pages/admin_home-partenaire", [ "id" => $id, "messageOK" => $messageOK, "messageKO" => $messageKO, "titrePage" => $titrePage ]);
         $this->allowTo([ "admin", "super-admin" ]);
     }
 
@@ -500,6 +520,8 @@ public function postLogin()  // page affichée aprés s'être loggé
     {
          // INITIALISE LA VALEUR DE LA VARIABLE
         $message = "";
+        $messageOK = "";
+        $messageKO = "";
         $id = "";
 
         if (isset($_REQUEST["operation"]) && ($_REQUEST["operation"] == "supprimer"))
@@ -584,20 +606,20 @@ public function postLogin()  // page affichée aprés s'être loggé
                     ]);
 
                 // OK
-                $message = "La Fiche Profil à bien été créée";
+                $messageOK = "La Fiche Profil à bien été créée";
             }
             else
             {
                 // KO
                 // UNE ERREUR
-                $message = "ERREUR lors de la création";
+                $messageKO = "ERREUR lors de la création";
             }
         }
 
         // AFFICHER LA PAGE
         // JE TRANSMETS LE MESSAGE A LA PARTIE VIEW
         $titrePage = "qui-sommes nous ?";
-        $this->show("pages/admin_friteam-equipe", [ "message" => $message, "id" => $id, "titrePage" => $titrePage ]);
+        $this->show("pages/admin_friteam-equipe", [ "messageOK" => $messageOK, "messageKO" => $messageKO, "id" => $id, "titrePage" => $titrePage ]);
         $this->allowTo([ "admin", "super-admin" ]);
 
     }// fin function friteam-equipe
@@ -607,6 +629,8 @@ public function postLogin()  // page affichée aprés s'être loggé
     {
         // INITIALISE LA VALEUR DE LA VARIABLE
         $message = "";
+        $messageOK = "";
+        $messageKO = "";
         $id = "";
 
         if (isset($_REQUEST["operation"]) && ($_REQUEST["operation"] == "supprimer"))
@@ -703,24 +727,24 @@ public function postLogin()  // page affichée aprés s'être loggé
                         "prix"                   => $prix,
                     ], false);
                 // OK
-                $message = "La Fiche Formation à bien été créée";
+                $messageOK = "La Fiche Formation à bien été créée";
             }
             else
             {
                 // KO
                 // UNE ERREUR
-                $message = "ERREUR lors de la création";
+                $messageKO = "ERREUR lors de la création";
             }
         }
 
         // AFFICHER LA PAGE
         // JE TRANSMETS LE MESSAGE A LA PARTIE VIEW
         $titrePage = "formation";
-        $this->show("pages/admin_formation_detail", [ "message" => $message, "id" => $id, "titrePage" => $titrePage ]);
+        $this->show("pages/admin_formation_detail", [ "messageOK" => $messageOK, "messageKO" => $messageKO, "id" => $id, "titrePage" => $titrePage ]);
         $this->allowTo([ "admin", "super-admin" ]);
     }// fin function formationDetail
 
-    public function upload()
+    public function uploadUpdate()
     {
         $repertoire = "assets/img/"; //repertoire où le fichier va être stocké
         $fichier = "";
@@ -728,10 +752,73 @@ public function postLogin()  // page affichée aprés s'être loggé
         // Verifier que l'image existe dans l'upload
         if(isset($_POST["submit"]))
         {
+            if(isset($_FILES["img"]) && $_FILES["img"]["size"] > 0)
+            {
+                $check = getimagesize($_FILES["img"]["tmp_name"]);
+                if($check !== false)
+                {
+                    $fichier = $repertoire . basename($_FILES["img"]["name"]); //chemin du fichier uploadé
+                    $message = "Le fichier uploadé est une image - " . $check["mime"] . ".";
+                    $uploadOk = 1;
+                } else
+                {
+                    $message = "Le fichier uploadé n'est pas une image.";
+                    $uploadOk = 0;
+                }
+                // // Verifier si le fichier existe déjà
+                // if (file_exists($fichier))
+                // {
+                //     echo "Désolé, le fichier existe déjà.";
+                //     $uploadOk = 0;
+                // }
+                // Verifier la taille de l'image uploadé
+                if ($_FILES["img"]["size"] > 500000)
+                {
+                    $message = "Votre image est trop lourde. Taille maximale autorisée : 500 ko.";
+                    $uploadOk = 0;
+                }
+                $imageFileType = pathinfo($fichier,PATHINFO_EXTENSION); //récupère l'extension du fichier
+                // Formats acceptés
+                if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" )
+                {
+                    $message = "Le fichier doit être au format .jpg ou .png ou .jpeg ou .gif";
+                    $uploadOk = 0;
+                }
+            }
+        }
+        // Vérifier si $uploadOk est à 0 à cause d'une erreur
+        if ($uploadOk == 0)
+        {
+            $message = "Désolé, votre fichier n'a pas pu être chargé.";
+            // if everything is ok, try to upload file
+        } else
+        {
+            if (move_uploaded_file($_FILES["img"]["tmp_name"], $fichier))
+            {
+                $message = "Votre fichier : ". basename( $_FILES["img"]["name"]). " à été enregistré.";
+            } else
+            {
+                $message = "Désolé, votre fichier : ". basename( $_FILES["img"]["name"]). " n'a pas pu être téléchargé.";
+            }
+        }
+
+        $this->message = $message;
+        //echo $fichier;
+        return $fichier;
+    }
+
+    public function upload()
+    {
+        $repertoire = "assets/img/"; //repertoire où le fichier va être stocké
+        $fichier = $repertoire . basename($_FILES["img"]["name"]); //chemin du fichier uploadé
+        $uploadOk = 1;
+        $imageFileType = pathinfo($fichier,PATHINFO_EXTENSION); //récupère l'extension du fichier
+        // Verifier que l'image existe dans l'upload
+        if(isset($_POST["submit"]))
+        {
             $check = getimagesize($_FILES["img"]["tmp_name"]);
             if($check !== false)
             {
-                $fichier = $repertoire . basename($_FILES["img"]["name"]); //chemin du fichier uploadé
                 $message = "Le fichier uploadé est une image - " . $check["mime"] . ".";
                 $uploadOk = 1;
             } else
@@ -752,7 +839,6 @@ public function postLogin()  // page affichée aprés s'être loggé
             $message = "Votre image est trop lourde. Taille maximale autorisée : 500 ko.";
             $uploadOk = 0;
         }
-        $imageFileType = pathinfo($fichier,PATHINFO_EXTENSION); //récupère l'extension du fichier
         // Formats acceptés
         if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" )
         {
@@ -776,7 +862,6 @@ public function postLogin()  // page affichée aprés s'être loggé
         }
 
         $this->message = $message;
-        echo $fichier;
         return $fichier;
     }
 
@@ -865,7 +950,7 @@ public function postLogin()  // page affichée aprés s'être loggé
                 // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
                 // JE CREE UN OBJET DE LA CLASSE FormationModel
                 // NE PAS OUBLIER DE FAIRE use
-                $img = $this->upload();
+                $img = $this->uploadUpdate();
                 $objetFormationModel = new formationModel;
                 $tabUpdate = [
                 "titre_formation"       => $titre,
@@ -885,13 +970,13 @@ public function postLogin()  // page affichée aprés s'être loggé
                 "alt"                   => $alt,
                 "prix"                  => $prix,
                 ];
+
                 if ($img != "")
                 {
                     $tabUpdate["img"] = str_replace("assets/", "", $img);
                 }
                 // JE PEUX UTILISER LA METHODE update DE LA CLASSE \W\Model\Model
-                $objetFormationModel->update($tabUpdate,
-                $id);
+                $objetFormationModel->update($tabUpdate, $id);
 
                 // OK
                 $messageOK = "La fiche à été correctement modifiée";
@@ -916,6 +1001,8 @@ public function postLogin()  // page affichée aprés s'être loggé
     public function friteamEquipeUpdate($id)
     {
         $message = "";
+        $messageOK = "";
+        $messageKO = "";
         // CONTROLLER
         // ICI IL FAUDRA TRAITER LE FORMULAIRE DE UPDATE
 
@@ -938,8 +1025,8 @@ public function postLogin()  // page affichée aprés s'être loggé
             $vision             = trim($_POST["vision_profil"]);
             $entreprise         = trim($_POST["entreprise_profil"]);
             $linkedin           = trim($_POST["linkedin"]);
-            $alt           = trim($_POST["alt"]);
-            print_r($_POST);
+            $alt                = trim($_POST["alt"]);
+
 
             // SECURITE
             // VERIFIER QUE CHAQUE INFO EST CONFORME
@@ -967,11 +1054,9 @@ public function postLogin()  // page affichée aprés s'être loggé
                 // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
                 // JE CREE UN OBJET DE LA CLASSE ProfilModel
                 // NE PAS OUBLIER DE FAIRE use
-                $img = $this->upload();
+                $img = $this->uploadUpdate();
                 $objetProfilModel = new profilModel;
-                // JE PEUX UTILISER LA METHODE update DE LA CLASSE \W\Model\Model
-                $objetProfilModel->update([
-                        "img"                   => str_replace("assets/", "", $img),
+                $tabUpdate = [
                         "nom_profil"            => $nom,
                         "prenom_profil"         => $prenom,
                         "ordre_apparition"      => $ordre,
@@ -983,25 +1068,31 @@ public function postLogin()  // page affichée aprés s'être loggé
                         "vision_profil"         => $vision,
                         "entreprise_profil"     => $entreprise,
                         "linkedin"              => $linkedin,
-                        "alt"              => $alt,
-                ],
-                $id);
+                        "alt"                   => $alt,
+                ];
+
+                if ( $img != "" )
+                {
+                    $tabUpdate["img"] = $img; //
+                }
+                // JE PEUX UTILISER LA METHODE update DE LA CLASSE \W\Model\Model
+                $objetProfilModel->update($tabUpdate, $id);
 
                 // OK
-                $message = "La fiche à été correctement modifiée";
+                $messageOK = "La fiche à été correctement modifiée";
             }
             else
             {
                 // KO
                 // UNE ERREUR
-                $message = "ERREUR lors de la mise à jour, tous les champs doivent être renseignés";
+                $messageKO = "ERREUR lors de la mise à jour, tous les champs doivent être renseignés";
             }
         }
 
         // VIEW
         // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
         $titrePage = "modification profil (fiches)";
-        $this->show("pages/admin_friteam-equipe-update", [ "id" => $id, "message" => $message, "message_upload" => $this->message, "titrePage" => $titrePage ]);
+        $this->show("pages/admin_friteam-equipe-update", [ "id" => $id, "messageOK" => $messageOK, "messageKO" => $messageKO, "message_upload" => $this->message, "titrePage" => $titrePage ]);
         $this->allowTo([ "admin", "super-admin" ]);
     } // fin function friteamEquipeUpdate($id)
 
@@ -1009,6 +1100,8 @@ public function postLogin()  // page affichée aprés s'être loggé
     public function accompagnement($id)
     {
         $message = "";
+        $messageOK = "";
+        $messageKO = "";
         // CONTROLLER
         // ICI IL FAUDRA TRAITER LE FORMULAIRE DE UPDATE
 
@@ -1054,11 +1147,10 @@ public function postLogin()  // page affichée aprés s'être loggé
                 // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
                 // JE CREE UN OBJET DE LA CLASSE FormationModel
                 // NE PAS OUBLIER DE FAIRE use
-                $img = $this->upload();
+                $img = $this->uploadUpdate();
                 $objetAccompagnementModel = new AccompagnementModel;
-                // JE PEUX UTILISER LA METHODE update DE LA CLASSE \W\Model\Model
-                $objetAccompagnementModel->update([
-                        "img"               => str_replace("assets/", "", $img),
+                $tabUpdate = [
+                        //"img"               => str_replace("assets/", "", $img),
                         "titre_acc"         => $titre,
                         "alt"               => $alt,
                         "citation_acc"      => $citation,
@@ -1067,24 +1159,29 @@ public function postLogin()  // page affichée aprés s'être loggé
                         "formateur_acc"     => $formateur,
                         "utilite_acc"       => $utilite,
                         "url"               => $url,
-                ],
-                $id);
+                ];
+                if ($img != "")
+                {
+                    $tabUpdate["img"] = str_replace("assets/", "", $img);
+                }
+                // JE PEUX UTILISER LA METHODE update DE LA CLASSE \W\Model\Model
+                $objetAccompagnementModel->update($tabUpdate, $id);
 
                 // OK
-                $message = "La fiche accompagnement à été correctement modifiée";
+                $messageOK = "La fiche accompagnement à été correctement modifiée";
             }
             else
             {
                 // KO
                 // UNE ERREUR
-                $message = "ERREUR lors de la mise à jour";
+                $messageKO = "ERREUR lors de la mise à jour";
             }
         }
 
         // VIEW
         // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
         $titrePage = "modification accompagnement (fiches)";
-        $this->show("pages/admin_accompagnement", [ "id" => $id, "message" => $message, "titrePage" => $titrePage ]);
+        $this->show("pages/admin_accompagnement", [ "id" => $id, "messageOK" => $messageOK, "messageKO" => $messageKO, "titrePage" => $titrePage ]);
         $this->allowTo([ "admin", "super-admin" ]);
     } // fin function accompagnement
 
@@ -1093,6 +1190,8 @@ public function postLogin()  // page affichée aprés s'être loggé
     {
                 // INITIALISE LA VALEUR DE LA VARIABLE
         $message = "";
+        $messageOK = "";
+        $messageKO = "";
         $id = "";
 
         if (isset($_REQUEST["operation"]) && ($_REQUEST["operation"] == "supprimer"))
@@ -1164,20 +1263,20 @@ public function postLogin()  // page affichée aprés s'être loggé
                     ]);
 
                 // OK
-                $message = "La Fiche Accompagnement à bien été créée";
+                $messageOK = "La Fiche Accompagnement à bien été créée";
            }
             else
             {
                 // KO
                 // UNE ERREUR
-                $message = "ERREUR lors de la création";
+                $messageKO = "ERREUR lors de la création";
             }
         }
 
         // AFFICHER LA PAGE
         // JE TRANSMETS LE MESSAGE A LA PARTIE VIEW
         $titrePage = "accompagnement";
-        $this->show("pages/admin_accompagnement-detail", [ "message" => $message, "id" => $id, "titrePage" => $titrePage ]);
+        $this->show("pages/admin_accompagnement-detail", [ "messageOK" => $messageOK, "messageKO" => $messageKO, "id" => $id, "titrePage" => $titrePage ]);
         $this->allowTo([ "admin", "super-admin" ]);
     }// fin function accompagnement-detail
 
@@ -1185,6 +1284,8 @@ public function postLogin()  // page affichée aprés s'être loggé
     public function blog($id)
     {
         $message = "";
+        $messageOK = "";
+        $messageKO = "";
         // CONTROLLER
         // ICI IL FAUDRA TRAITER LE FORMULAIRE DE UPDATE
 
@@ -1240,20 +1341,20 @@ public function postLogin()  // page affichée aprés s'être loggé
                 $id);
 
                 // OK
-                $message = "L'article' à été correctement modifié";
+                $messageOK = "L'article' à été correctement modifié";
             }
             else
             {
                 // KO
                 // UNE ERREUR
-                $message = "ERREUR lors de la mise à jour";
+                $messageKO = "ERREUR lors de la mise à jour";
             }
         }
 
         // VIEW
         // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
         $titrePage = "modification d'un article";
-        $this->show("pages/admin_blog", [ "id" => $id, "message" => $message, "titrePage" => $titrePage ]);
+        $this->show("pages/admin_blog", [ "id" => $id, "messageOK" => $messageOK, "messageKO" => $messageKO, "titrePage" => $titrePage ]);
         $this->allowTo([ "admin", "super-admin" ]);
     }// fin function blog
 
@@ -1263,6 +1364,8 @@ public function postLogin()  // page affichée aprés s'être loggé
                 // INITIALISE LA VALEUR DE LA VARIABLE
         $message = "";
         $id = "";
+        $messageOK = "";
+        $messageKO = "";
 
         if (isset($_REQUEST["operation"]) && ($_REQUEST["operation"] == "supprimer"))
         {
@@ -1327,20 +1430,20 @@ public function postLogin()  // page affichée aprés s'être loggé
                     ]);
 
                 // OK
-                $message = "L'article à bien été créé";
+                $messageOK = "L'article à bien été créé";
             }
             else
             {
                 // KO
                 // UNE ERREUR
-                $message = "ERREUR lors de la création";
+                $messageKO = "ERREUR lors de la création";
             }
         }
 
         // AFFICHER LA PAGE
         // JE TRANSMETS LE MESSAGE A LA PARTIE VIEW
         $titrePage = "Actualité";
-        $this->show("pages/admin_blog-detail", [ "message" => $message, "id" => $id, "titrePage" => $titrePage ]);
+        $this->show("pages/admin_blog-detail", [ "messageOK" => $messageOK, "messageKO" => $messageKO, "id" => $id, "titrePage" => $titrePage ]);
         $this->allowTo([ "admin", "super-admin" ]);
     }// fin function blogDetail
 

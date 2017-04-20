@@ -17,6 +17,13 @@ if (!empty($tabAccompagnement)) :
             <div class="col-xs-12 col-md-6 col-md-offset-3">
                 <h3>FORMULAIRE DE MISE A JOUR DES FICHES ACCOMPAGNEMENT</h3>
 
+                    <div class="message classe-ok">
+                        <?php if (isset($messageOK)) echo $messageOK; ?><br> 
+                    </div>
+                    <div class="message classe-ko">
+                         <?php if (isset($messageKO)) echo $messageKO; ?><br>
+                    </div>
+                    
                 <a href="<?php echo $this->url("admin_accompagnement-detail"); ?>">Retour</a>
                 <form method="POST" action="" enctype="multipart/form-data">
 
@@ -66,15 +73,12 @@ if (!empty($tabAccompagnement)) :
                         <input type="text" name="url" id="url" class="form-control" required value="<?php echo $url ?>"><br>
                     </div>
 
-                    <button type="submit">Modifier la Fiche Accompagnement</button>
+                    <button type="submit" name="submit">Modifier la Fiche Accompagnement</button>
                     
                     <!-- INFO TECHNIQUE POUR PRECISER L'ACTION QUE LE VISITEUR VEUT REALISER -->
                     <input type="hidden" name="id" value="<?php echo $id ?>">
                     <input type="hidden" name="operation" value="modifier">
                     
-                    <div class="message">
-                        <?php if (isset($message)) echo $message ?><br>
-                    </div>
                 </form>
             </div>
         </div>

@@ -14,6 +14,14 @@ $tabFormation = $objetFormationModel->find($id);
 		<div class="row">
 			<div class="col-xs-12 col-md-6 col-md-offset-3">
 				<h2>AJOUT D'UNE FICHE FORMATION</h2>
+
+                <div class="message classe-ok">
+                    <?php if (isset($messageOK)) echo $messageOK; ?><br> 
+                </div>
+                <div class="message classe-ko">
+                     <?php if (isset($messageKO)) echo $messageKO; ?><br>
+                </div>
+
 				<form action="" method="POST" enctype="multipart/form-data">
 
 					<div class="form-group">
@@ -108,10 +116,6 @@ $tabFormation = $objetFormationModel->find($id);
 
 					<!-- Info technique pour préciser l'action que le visiteur veut réaliser -->
 					<input type="hidden" name="operation" value="creer">
-
-					<div class="message">
-						<?php if (isset($message)) echo $message ?>
-					</div>
 
 				</form>
 			</div>

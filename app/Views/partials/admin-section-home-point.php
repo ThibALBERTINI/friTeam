@@ -17,6 +17,13 @@ if (!empty($tabResult)) :
             <div class="col-xs-12 col-md-6 col-md-offset-3">
                 <h3>FORMULAIRE DE MISE A JOUR DU BANDEAU "LES POINTS FORTS"</h3>
 
+                <div class="message classe-ok">
+                    <?php if (isset($messageOK)) echo $messageOK; ?><br> 
+                </div>
+                <div class="message classe-ko">
+                     <?php if (isset($messageKO)) echo $messageKO; ?><br>
+                </div>
+
                 <a href="<?php echo $this->url("admin_home"); ?>">Retour</a>
                 <form method="POST" action="" enctype="multipart/form-data">
 
@@ -37,9 +44,6 @@ if (!empty($tabResult)) :
                     <input type="hidden" name="id" value="<?php echo $id ?>">
                     <input type="hidden" name="operation" value="modifier">
                     
-                    <div class="message">
-                        <?php if (isset($message)) echo $message ?><br>
-                    </div>
                 </form>
             </div>
         </div>

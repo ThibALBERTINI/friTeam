@@ -32,6 +32,13 @@ if (!empty($tabProfil)) :
             <div class="col-xs-12 col-md-6 col-md-offset-3">
                 <h3>FORMULAIRE DE MISE A JOUR DE L'EQUIPE</h3>
 
+                <div class="message classe-ok">
+                    <?php if (isset($messageOK)) echo $messageOK; ?><br> 
+                </div>
+                <div class="message classe-ko">
+                     <?php if (isset($messageKO)) echo $messageKO; ?><br>
+                </div>
+
                 <a href="<?php echo $this->url("admin_friteam-equipe"); ?>">Retour</a>
                 <form method="POST" action="" enctype="multipart/form-data">
                     
@@ -101,17 +108,13 @@ if (!empty($tabProfil)) :
                     </div>
                     
                     <div class="form-group">
-                        <button type="submit">MODIFIER LE PROFIL</button>
+                        <button type="submit" name="submit">MODIFIER LE PROFIL</button>
                     </div>        
                     
                     <!-- INFO TECHNIQUE POUR PRECISER L'ACTION QUE LE VISITEUR VEUT REALISER -->
                     <input type="hidden" name="id" value="<?php echo $id ?>">
                     <input type="hidden" name="operation" value="modifier">
                     
-                    <div class="message">
-                        <?php if (isset($message)) echo $message ?><br>
-                        <?php if (isset($message_upload)) echo $message_upload ?><br>
-                    </div>
                 </form>
             </div>
         </div>
