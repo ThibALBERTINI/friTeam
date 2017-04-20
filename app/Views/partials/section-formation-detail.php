@@ -25,10 +25,13 @@ $tabResult = $objetFicheDetailModel->search(["url"=>$url]);
     $catalogue = $tabInfo["programme_formation"];
     $alt = $tabInfo["alt"];
     $prix = $tabInfo["prix"];
+    $url = $tabInfo["url"];
+
 
     // var_dump($img);
 
-    $cheminAsset = $this->assetUrl("/");
+$cheminAsset = $this->assetUrl("/");
+$catalogue = $cheminAsset . "pdf/" . $url . ".pdf";
 echo
 
 <<<CODEHTML

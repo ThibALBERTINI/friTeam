@@ -296,8 +296,7 @@ public function postLogin()  // page affichée aprés s'être loggé
                 $objetVideoModel->update([
                 "contenu_friteam"       => $contenu_friteam,
                 "url_video"             => $url_video,
-                ],
-                $id);
+                ], $id, false);
 
                 // OK
                 $messageOK = "Le bandeau FriTeam/Vidéo à été correctement modifiée";
@@ -357,8 +356,7 @@ public function postLogin()  // page affichée aprés s'être loggé
                 $objetPointModel->update([
                 "titre_point"       => $titre_point,
                 "contenu_point"             => $contenu_point,
-                ],
-                $id);
+                ], $id, false);
 
                 // OK
                 $messageOK = "Le bandeau Points Fort à été correctement modifié";

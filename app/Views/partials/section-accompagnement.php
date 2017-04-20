@@ -1,19 +1,23 @@
 <!-- Texte d'introduction -->
 <div class="container-fluid">
   <div class="row row-centered">
-    <div class="col-xs-12 col-md-8  col-centered">
-      <p class="introduction-formation">affichage ?</p>
-    </div>
+  <section>
+      <div class="col-xs-12 col-md-8 col-md-offset-2 philosophie">
+          <h2 class="text-center">Notre Philosophie</h2>
+          
+          <div class="ligne"></div>
+              
+          <h3>Accompagnement</h3>
+          <p>
+              Un nouveau monde émerge, dynamisé par les réseaux sociaux, l'innovation et la culture du partage. L’heure de la troisième révolution industrielle a-t-elle sonné ?
+          </p>
+          <p>
+            Les organisations et les femmes et hommes qui la composent ont une formidable opportunité d’inventer leur propre modèle remettant l’humain au coeur des dispositifs tout en s’appuyant sur des technologies innovantes. 
+            Nous mettons à disposition nos compétences pour vous accompagner dans cette évolution 
+          </p>
+      </div>
+  </section>
   </div>
-</div>
-
-<!-- Onglets recherche par catégories -->
-<div class="onglets-categories text-center">
-  <ul>
-    <li>Touts les Accompagnements</li>
-    <li>CATEGORIE 1</li>
-    <li>CATEGORIE 2</li>
-  </ul>
 </div>
 
 <div class="container carte-container">

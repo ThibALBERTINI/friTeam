@@ -32,7 +32,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">FRI TEAM</a>
+            <a class="navbar-brand" href="<?php echo $this->url('default_home') ?>">FRI TEAM</a>
           </div>
 
           <!-- Menu default écran ordi -->

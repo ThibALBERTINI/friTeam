@@ -35,7 +35,7 @@
 
           <!-- Bouton -->
           <div class="text-center bouton-formation">
-            <a class="btn btn-default" href="#" role="button">Voir Nos Formations</a>
+            <a class="btn btn-default" href="<?php echo $this->url('default_formation') ?>" role="button">Voir Nos Formations</a>
           </div>
         </div>
 

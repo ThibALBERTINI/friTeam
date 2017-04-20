@@ -32,7 +32,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">FRI TEAM</a>
+            <a class="navbar-brand" href="<?php echo $this->url('default_home') ?>">FRI TEAM</a>
           </div>
 
           <!-- Menu default écran ordi -->
@@ -41,12 +41,7 @@
               <li><a class="menu1" href="<?php echo $this->url('default_home') ?>">Accueil</a></li>
               <li><a class="menu2" href="<?php echo $this->url('default_friteam-equipe') ?>">Qui sommes-nous ?</a></li>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle menu3" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Nos Formations <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="<?php echo $this->url('default_formation') ?>">Toutes Nos Formations</a></li> <!-- Liens à former -->
-                  <li><a href="#">Fri Team Formations</a></li> <!-- Liens à former -->
-                  <li><a href="#">Formations Complémentaires</a></li> <!-- Liens à former -->
-                </ul>
+                <a href="<?php echo $this->url('default_formation') ?>" class="menu3">Nos Formations</a>
               </li>
               <li><a class="menu4" href="<?php echo $this->url('default_accompagnement') ?>">Notre accompagnement</a></li>
               <li><a class="menu5" href="#">Nos Évènements</a></li> <!-- Liens à former -->

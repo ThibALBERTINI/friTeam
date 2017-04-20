@@ -6,10 +6,10 @@
     <div class="row">
       <div class="footer-top">
         <ul class="list-inline text-center">
-          <li><a class="btn social-icon" href="#" role="button"><i class="fa fa-facebook"></i></a></li>
-          <li><a class="btn social-icon" href="#" role="button"><i class="fa fa-twitter"></i></a></li>
-          <li><a class="btn social-icon" href="#" role="button"><i class="fa fa-instagram"></i></a></li>
-          <li><a class="btn social-icon" href="#" role="button"><i class="fa fa-youtube-play"></i></a></li>
+          <li><a class="btn social-icon" href="https://www.facebook.com/Friteam/?fref=ts" target="_blank" role="button"><i class="fa fa-facebook"></i></a></li>
+          <li><a class="btn social-icon" href="https://twitter.com/provencebooster?lang=fr" target="_blank" role="button"><i class="fa fa-twitter"></i></a></li>
+          <li><a class="btn social-icon" href="https://www.instagram.com/provence_booster/" target="_blank" role="button"><i class="fa fa-instagram"></i></a></li>
+          <li><a class="btn social-icon" href="https://www.youtube.com/channel/UCavDn2zM6Hc9HwpHpiTdT9w" target="_blank" role="button"><i class="fa fa-youtube-play"></i></a></li>
         </ul>
       </div>
 

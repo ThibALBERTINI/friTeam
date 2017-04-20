@@ -31,32 +31,33 @@
     </nav>
 
 
-        <section class="formations text-center">
+        <section class="text-center">
+                    <div class="formation">
+                        <div class="row formations">
                 <?php foreach($tabResult as $formations => $formation): ?>
                     <!-- Attention, pour chaque <div> on rajoute les classes qui correspondent aux categories -->
-                    <div class="formation <?php echo strtolower($formation['categorie_formation']); ?>">
-                      <div class="row row-centered">
-                      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 carte-formation col-centered">
+                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 <?php echo strtolower($formation['categorie_formation']); ?>">
+                              <div class="carte-formation">
+                                  <div class="image">
+                                    <img src="<?php echo $this->assetUrl($formation['img']); ?>" alt="image-carte">
+                                  </div>
 
-                        <div class="image">
-                          <img src="<?php echo $this->assetUrl($formation['img']); ?>" alt="image-carte">
-                        </div>
-
-                        <div class="contenu">
-                          <h4><a href="$href"><?php echo $formation['titre_formation']; ?></a></h4>
-                          <span class="icon"><i class="fa fa-calendar" aria-hidden="true"></i> <?php echo $formation['date_formation']; ?></span>
-                          <span class="icon"><i class="fa fa-clock-o" aria-hidden="true"></i> <?php echo $formation['duree_formation']; ?></span>
-                          <div class="ligne"></div>
-                          <p class="resume"><?php echo $formation['chapo_formation']; ?></p>
-                          <span class="icon"><i class="fa fa-map-marker" aria-hidden="true"></i><?php echo $formation['lieu_formation']; ?></span>
-                          <div class="text-center bouton-container">
-                          <a class="bouton" href="<?php echo $this->url("default_formation-detail", ["url"=>$formation['url']]); ?>">En Savoir Plus</a>
-                          </div>
-                        </div>
-                      </div>
-                      </div>
-                    </div>
+                                  <div class="contenu">
+                                    <h4><a href="$href"><?php echo $formation['titre_formation']; ?></a></h4>
+                                    <span class="icon"><i class="fa fa-calendar" aria-hidden="true"></i> <?php echo $formation['date_formation']; ?></span>
+                                    <span class="icon"><i class="fa fa-clock-o" aria-hidden="true"></i> <?php echo $formation['duree_formation']; ?></span>
+                                    <div class="ligne"></div>
+                                    <p class="resume"><?php echo $formation['chapo_formation']; ?></p>
+                                    <span class="icon"><i class="fa fa-map-marker" aria-hidden="true"></i><?php echo $formation['lieu_formation']; ?></span>
+                                    <div class="text-center bouton-container">
+                                      <a class="bouton" href="<?php echo $this->url("default_formation-detail", ["url"=>$formation['url']]); ?>">En Savoir Plus</a>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
                 <?php endforeach; ?>
+                        </div>
+                    </div>
         </section>
   </div>
 </div>
@@ -78,4 +79,5 @@
             // avec la catégorie demandée ( )
             $grid.isotope({ filter: filterValue });
         });
+    
     </script>

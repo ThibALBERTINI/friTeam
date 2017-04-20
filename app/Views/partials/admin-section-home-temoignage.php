@@ -15,7 +15,7 @@ if (!empty($tabResult)) :
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-12 col-md-6 col-md-offset-3">
-                <h3>FORMULAIRE DE MISE A JOUR DU BANDEAU "LES POINTS FORTS"</h3>
+                <h3>FORMULAIRE DE MISE A JOUR DU BANDEAU "TEMOIGNAGE"</h3>
 
                 <div class="message classe-ok">
                     <?php if (isset($messageOK)) echo $messageOK; ?><br> 
