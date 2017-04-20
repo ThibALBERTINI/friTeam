@@ -763,15 +763,18 @@ span.companie {
     display:inline-block;
     float:none;
     /* reset the text-align */
-    text-align:center;
+    text-align:left;
     /* inline-block space fix */
-    margin-right:-4px;
+    margin-right:-4px !important;
 }
 
 /*Mis en forme des cartes Formations*/
 div.carte-container {
   margin: 0 auto;
-  /*width: 100%;*/
+}
+
+div.carte-formation {
+  border: 1px solid #EFEFEF !important;
 }
 
 div.carte-formation {
@@ -971,14 +974,39 @@ PAGES ADMIN CMS
 /****************************************
       PAGES EQUIPE PROFIL
 ********************************************/
+/*Philosophie*/
+div.philosophie div.ligne {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #2C9BD4;
+    opacity: 1;
+    width: 70px;
+}
+
+div.philosophie h2 {
+    color: #2C9BD4;
+    text-transform: uppercase;
+}
+
+div.philosophie h3 {
+    text-transform: uppercase;
+    font-size: 1.5em;
+}
+
 .profil-container {
   margin-top: 30px;
   margin-bottom: 15px;
 }
 
 .profil {
+  border: 1px solid #EFEFEF;
+  height: 33ffprm0px;
+}
+
+.profil {
   background-color: transparent;
   width: 360px;
+    height: 310px;
   border-radius: 20px;
   padding-top: 30px;
   padding-bottom: 20px;
@@ -1016,6 +1044,12 @@ box-shadow: 0px -2px 26px 1px rgba(184,184,184,0.2);
   color: #2C9BD4;
 }
 
+.profil-container blockquote {
+    font-style: italic;
+    font-weight: 100;
+    padding-right: 10px;
+}
+
 
 /*Pop Up*/
 .img-popup {
@@ -1031,7 +1065,7 @@ box-shadow: 0px -2px 26px 1px rgba(184,184,184,0.2);
 .carte-profil a i {
   margin-left: 10px;
   margin-right: 10px;
-  font-size: 1.1em;
+  font-size: 1.4em;
 }
 
 .bouton-popup {
@@ -1045,11 +1079,11 @@ box-shadow: 0px -2px 26px 1px rgba(184,184,184,0.2);
 }
 
 .bouton-popup:hover {
-  color: #FFB420;
+  color: black;
 }
 
 .bouton-popup:focus {
-  box-shadow: none;
+  outline-style: none;
 }
 
 
@@ -1095,6 +1129,7 @@ p.explication-formation {
 /*Image Formation*/
 .image-formation {
   padding: 0;
+  border-radius: 30px;
 }
 
 .detail-formation img {
@@ -1103,6 +1138,7 @@ p.explication-formation {
   margin: 0;
   margin-bottom: 20px;
   padding: 0;
+    border-radius: 30px;
 }
 
 /*Colonne Gauche*/

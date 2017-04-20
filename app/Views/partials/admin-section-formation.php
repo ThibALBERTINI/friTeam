@@ -71,7 +71,7 @@ $tabFormation = $objetFormationModel->find($id);
 					
                     <div class="form-group">
                         <label for="prix">Prix</label><br>
-                        <textarea type="text" name="prix" id="prix" class="form-control" required cols="60" rows="5"></textarea><br>
+                        <textarea type="text" name="prix" id="prix" class="form-control ckeditor" required cols="60" rows="5"></textarea><br>
                     </div>
 
 					<div class="form-group">
@@ -91,7 +91,7 @@ $tabFormation = $objetFormationModel->find($id);
 
 					<div class="form-group">
 						<label for="programme_formation">Programme</label><br>
-						<textarea type="text" name="programme_formation" id="programme_formation" class="form-control" required cols="60" rows="5"></textarea><br>
+						<textarea type="text" name="programme_formation" id="programme_formation" class="form-control ckeditor" required cols="60" rows="5"></textarea><br>
 					</div>
 
 					<div class="form-group">

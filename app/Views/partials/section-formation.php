@@ -1,5 +1,5 @@
 
-<?php 
+<?php
 
 ?>
 
@@ -24,19 +24,19 @@
         <span class="recherche">Formations : </span>
          <button data-filter="*" type="button" class="btn btn-default">Toutes</button>
                 <?php foreach($categs as $categ): ?>
-        
-         <button data-filter=".<?php echo strtolower($categ); ?>" type="button" class="btn btn-default"><?= $categ ?></button> 
+
+         <button data-filter=".<?php echo strtolower($categ); ?>" type="button" class="btn btn-default"><?= $categ ?></button>
         <?php endforeach; ?>
     </nav>
 
 <div class="container carte-container">
   <div class="row row-centered">
-        <main class="formations">
+        <section class="formations">
                 <?php foreach($tabResult as $formations => $formation): ?>
                     <!-- Attention, pour chaque <div> on rajoute les classes qui correspondent aux categories -->
                     <div class="formation <?php echo strtolower($formation['categorie_formation']); ?>">
                       <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 carte-formation col-centered">
-                        
+
                         <div class="image">
                           <img src="<?php echo $this->assetUrl($formation['img']); ?>" alt="image-carte">
                         </div>
@@ -56,7 +56,7 @@
                       </div>
                     </div>
                 <?php endforeach; ?>
-        </main>
+        </section>
   </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -67,10 +67,10 @@
         // Utilisation de Isotope, on créé une variable $grid qui permet de gérer la liste des formations
         // avec isotope
         var $grid = $('.formations').isotope();
-        
+
         // On dit que lorsqu'on clique sur les boutons qui se trouvent dans la nav qui a la classe filtres
         $('nav.filtres').on( 'click', 'button', function() {
-           
+
             // On récupère la donnée qui est dans "data-filter" ("".friteam" ou ".complementaire" par exemple)
             var filterValue = $(this).attr('data-filter');
             // On demande à $grid (notre liste de formations gérée avec Isotope) de filtrer les formations
@@ -78,4 +78,3 @@
             $grid.isotope({ filter: filterValue });
         });
     </script>
-
