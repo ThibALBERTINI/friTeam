@@ -112,7 +112,7 @@
 
     echo
 <<<CODEHTML
-    <td><a href="$hrefSupprimer" class="supp">SUPPRIMER</a></td>
+    <td><a href="$hrefSupprimer" class="suppAd">SUPPRIMER</a></td>
     </tr>
 CODEHTML;
 

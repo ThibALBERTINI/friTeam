@@ -27,6 +27,7 @@ class AdminController
 
     public function creerAdmin ()  // supprimer et modifier compris
     {
+        $this->allowTo([ "super-admin" ]);  // si pas autorisé le fichier config renvoie vers le login
         $message = "";
         $titrePage = "";
 
@@ -104,8 +105,7 @@ class AdminController
 
         }// fin if ISSET CREER
 
-         //$this->allowTo([ "super-admin" ]);
-
+        
         $titrePage = "Créer / Supprimer un Administrateur";
         $this->show("pages/admin_creer-admin", ["message" => $message, "titrePage" => $titrePage ]);
     } // fin function creer admin
@@ -183,6 +183,7 @@ public function postLogin()  // page affichée aprés s'être loggé
 
     public function home()
     {
+        $this->allowTo([ "admin", "super-admin" ]);
         // INITIALISE LA VALEUR DE LA VARIABLE
         $message = "";
         $messageOK = "";
@@ -252,11 +253,11 @@ public function postLogin()  // page affichée aprés s'être loggé
         // JE TRANSMETS LE MESSAGE A LA PARTIE VIEW
         $titrePage = "accueil";
         $this->show("pages/admin_home", [ "messageOK" => $messageOK, "messageKO" => $messageKO, "id" => $id, "titrePage" => $titrePage ]);
-        $this->allowTo([ "admin", "super-admin" ]);
     }// fin function home
 
     public function homeVideo($id)
     {
+        $this->allowTo([ "admin", "super-admin" ]);
                 $message = "";
                 $messageOK = "";
                 $messageKO = "";
@@ -313,11 +314,12 @@ public function postLogin()  // page affichée aprés s'être loggé
         // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
         $titrePage = "modification bandeau FriTeam/Vidéo";
         $this->show("pages/admin_home-video", [ "id" => $id, "messageOK" => $messageOK, "messageKO" => $messageKO, "titrePage" => $titrePage ]);
-        $this->allowTo([ "admin", "super-admin" ]);
+        
     }
 
     public function homePoint($id)
     {
+        $this->allowTo([ "admin", "super-admin" ]);
                 $message = "";
                 $messageOK = "";
                 $messageKO = "";
@@ -373,11 +375,12 @@ public function postLogin()  // page affichée aprés s'être loggé
         // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
         $titrePage = "modification bandeau Points Fort";
         $this->show("pages/admin_home-point", [ "id" => $id, "messageOK" => $messageOK, "messageKO" => $messageKO, "titrePage" => $titrePage ]);
-        $this->allowTo([ "admin", "super-admin" ]);
+        
     }
 
     public function homeTemoignage($id)
     {
+        $this->allowTo([ "admin", "super-admin" ]);
                 $message = "";
                 $messageOK = "";
                 $messageKO = "";
@@ -445,11 +448,11 @@ public function postLogin()  // page affichée aprés s'être loggé
         // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
         $titrePage = "modification bandeau témoignage";
         $this->show("pages/admin_home-temoignage", [ "id" => $id, "messageOK" => $messageOK, "messageKO" => $messageKO, "titrePage" => $titrePage ]);
-        $this->allowTo([ "admin", "super-admin" ]);
     }
 
     public function homePartenaire($id)
     {
+        $this->allowTo([ "admin", "super-admin" ]);
         $message = "";
         $messageOK = "";
         $messageKO = "";
@@ -511,11 +514,12 @@ public function postLogin()  // page affichée aprés s'être loggé
         // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
         $titrePage = "modification bandeau partenaire";
         $this->show("pages/admin_home-partenaire", [ "id" => $id, "messageOK" => $messageOK, "messageKO" => $messageKO, "titrePage" => $titrePage ]);
-        $this->allowTo([ "admin", "super-admin" ]);
+        
     }
 
     public function friteamEquipe()
     {
+        $this->allowTo([ "admin", "super-admin" ]);
          // INITIALISE LA VALEUR DE LA VARIABLE
         $message = "";
         $messageOK = "";
@@ -618,13 +622,13 @@ public function postLogin()  // page affichée aprés s'être loggé
         // JE TRANSMETS LE MESSAGE A LA PARTIE VIEW
         $titrePage = "qui-sommes nous ?";
         $this->show("pages/admin_friteam-equipe", [ "messageOK" => $messageOK, "messageKO" => $messageKO, "id" => $id, "titrePage" => $titrePage ]);
-        $this->allowTo([ "admin", "super-admin" ]);
-
+        
     }// fin function friteam-equipe
 
     // LA METHODE ASSOCIEE A LA ROUTE /admin/formation/[:id]
     public function formationDetail()
     {
+        $this->allowTo([ "admin", "super-admin" ]);
         // INITIALISE LA VALEUR DE LA VARIABLE
         $message = "";
         $messageOK = "";
@@ -743,11 +747,12 @@ public function postLogin()  // page affichée aprés s'être loggé
         // JE TRANSMETS LE MESSAGE A LA PARTIE VIEW
         $titrePage = "formation";
         $this->show("pages/admin_formation_detail", [ "messageOK" => $messageOK, "messageKO" => $messageKO, "id" => $id, "titrePage" => $titrePage ]);
-        $this->allowTo([ "admin", "super-admin" ]);
+        
     }// fin function formationDetail
 
     public function uploadUpdate()
     {
+        $this->allowTo([ "admin", "super-admin" ]);
         $repertoire = "assets/img/"; //repertoire où le fichier va être stocké
         $fichier = "";
         $uploadOk = 1;
@@ -811,6 +816,7 @@ public function postLogin()  // page affichée aprés s'être loggé
 
     public function upload()
     {
+        $this->allowTo([ "admin", "super-admin" ]);
         $repertoire = "assets/img/"; //repertoire où le fichier va être stocké
         $fichier = $repertoire . basename($_FILES["img"]["name"]); //chemin du fichier uploadé
         $uploadOk = 1;
@@ -887,6 +893,7 @@ public function postLogin()  // page affichée aprés s'être loggé
 
     public function formationUpdate($id)
     {
+        $this->allowTo([ "admin", "super-admin" ]);
         $messageOK = "";
         $messageKO = "";
         // CONTROLLER
@@ -996,12 +1003,13 @@ public function postLogin()  // page affichée aprés s'être loggé
         // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
         $titrePage = "modification formation (fiches)";
         $this->show("pages/admin_formation_update", [ "id" => $id, "messageKO" => $messageKO, "messageOK" => $messageOK, "titrePage" => $titrePage ]);
-        $this->allowTo([ "admin", "super-admin" ]);
+       
     } // fin function formationUpdate($id)
 
 
     public function friteamEquipeUpdate($id)
     {
+        $this->allowTo([ "admin", "super-admin" ]);
         $message = "";
         $messageOK = "";
         $messageKO = "";
@@ -1095,12 +1103,13 @@ public function postLogin()  // page affichée aprés s'être loggé
         // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
         $titrePage = "modification profil (fiches)";
         $this->show("pages/admin_friteam-equipe-update", [ "id" => $id, "messageOK" => $messageOK, "messageKO" => $messageKO, "message_upload" => $this->message, "titrePage" => $titrePage ]);
-        $this->allowTo([ "admin", "super-admin" ]);
+       
     } // fin function friteamEquipeUpdate($id)
 
 
     public function accompagnement($id)
     {
+        $this->allowTo([ "admin", "super-admin" ]);
         $message = "";
         $messageOK = "";
         $messageKO = "";
@@ -1188,12 +1197,13 @@ public function postLogin()  // page affichée aprés s'être loggé
         // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
         $titrePage = "modification accompagnement (fiches)";
         $this->show("pages/admin_accompagnement", [ "id" => $id, "messageOK" => $messageOK, "messageKO" => $messageKO, "titrePage" => $titrePage ]);
-        $this->allowTo([ "admin", "super-admin" ]);
+        
     } // fin function accompagnement
 
 
     public function accompagnementDetail()
     {
+        $this->allowTo([ "admin", "super-admin" ]);
                 // INITIALISE LA VALEUR DE LA VARIABLE
         $message = "";
         $messageOK = "";
@@ -1287,12 +1297,13 @@ public function postLogin()  // page affichée aprés s'être loggé
         // JE TRANSMETS LE MESSAGE A LA PARTIE VIEW
         $titrePage = "accompagnement";
         $this->show("pages/admin_accompagnement-detail", [ "messageOK" => $messageOK, "messageKO" => $messageKO, "id" => $id, "titrePage" => $titrePage ]);
-        $this->allowTo([ "admin", "super-admin" ]);
+      
     }// fin function accompagnement-detail
 
 
     public function blog($id)
     {
+        $this->allowTo([ "admin", "super-admin" ]);
         $message = "";
         $messageOK = "";
         $messageKO = "";
@@ -1369,12 +1380,13 @@ public function postLogin()  // page affichée aprés s'être loggé
         // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
         $titrePage = "modification d'un article";
         $this->show("pages/admin_blog", [ "id" => $id, "messageOK" => $messageOK, "messageKO" => $messageKO, "titrePage" => $titrePage ]);
-        $this->allowTo([ "admin", "super-admin" ]);
+      
     }// fin function blog
 
 
     public function blogDetail()
     {
+        $this->allowTo([ "admin", "super-admin" ]);
                 // INITIALISE LA VALEUR DE LA VARIABLE
         $message = "";
         $id = "";
@@ -1462,15 +1474,10 @@ public function postLogin()  // page affichée aprés s'être loggé
         // JE TRANSMETS LE MESSAGE A LA PARTIE VIEW
         $titrePage = "Actualité";
         $this->show("pages/admin_blog-detail", [ "messageOK" => $messageOK, "messageKO" => $messageKO, "id" => $id, "titrePage" => $titrePage ]);
-        $this->allowTo([ "admin", "super-admin" ]);
+      
     }// fin function blogDetail
 
-    public function contact()
-    {
-         $this->allowTo([ "admin", "super-admin" ]);
-    } // fin function contact
-
-
+    
     public function users()
     {
          $this->allowTo([ "admin", "super-admin" ]);

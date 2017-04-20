@@ -19,7 +19,7 @@
       <p class="nom-contact">Muriel Villain</p>
       <p class="adresse-contact">2 rue Marc Donadille<br />13013 Marseille</p>
       <p class="telephone-contact"> 01.02.03.04.05</p>
-      <p class="adresse-mail-contact"><a>muriel-villain@friteam.com</a></p>
+      
     </div>
 
 

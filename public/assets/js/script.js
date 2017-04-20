@@ -45,18 +45,21 @@ $(function(){
         ;
     });
 });
-
-$(function(){
+/***********************************
+Fonctions pour les alertes avant suppression
+**************************************/
+// supp admin Ad
+$(function(){  
     // CETTE FONCTION SERA APPELEE PAR JQUERY
     // QUAND LA PAGE SERA PRETE
 
     // JE VEUX BLOQUER LE FONCTIONNEMENT CLASSIQUE DU FORMULAIRE
-    // QUI A LA CLASSE .form-ajax
-    $(".supp").on("click", function(event){
+    // QUI A LA CLASSE .suppAd
+    $(".suppAd").on("click", function(event){
         // LE CODE DE CETTE FONCTION EST ACTIVE
         // QUAND LE VISITEUR CLIQUE SUR LE BOUTON SUBMIT
-        var supp = confirm("êtes vous certain de vouloir supprimer cet administrateur ?")
-        if(!supp) //si la personne ne veut pas, je bloque l'action
+        var suppAd = confirm("êtes vous certain de vouloir supprimer cet administrateur ?")
+        if(!suppAd) //si la personne ne veut pas, je bloque l'action
         {
         event.preventDefault();  // bloque le fonctionnement classique
         }
@@ -65,6 +68,77 @@ $(function(){
 
 
 
+    });
+});
+
+// supp blogDetail B
+$(function(){
+    
+    $(".suppB").on("click", function(event){
+        // LE CODE DE CETTE FONCTION EST ACTIVE
+        // QUAND LE VISITEUR CLIQUE SUR LE lien supprimer
+        var suppB = confirm("êtes vous certain de vouloir supprimer ce Blog ?")
+        if(!suppB) //si la personne ne veut pas, je bloque l'action
+        {
+        event.preventDefault();  // bloque le fonctionnement classique
+        }
+    });
+});
+
+// supp Accompagnement Ac
+$(function(){
+    
+    $(".suppAc").on("click", function(event){
+        // LE CODE DE CETTE FONCTION EST ACTIVE
+        // QUAND LE VISITEUR CLIQUE SUR LE lien supprimer
+        var suppAc = confirm("êtes vous certain de vouloir supprimer cet Accompagnement ?")
+        if(!suppAc) //si la personne ne veut pas, je bloque l'action
+        {
+        event.preventDefault();  // bloque le fonctionnement classique
+        }
+    });
+});
+
+// supp Formation Detail Fd
+$(function(){
+    
+    $(".suppFd").on("click", function(event){
+        // LE CODE DE CETTE FONCTION EST ACTIVE
+        // QUAND LE VISITEUR CLIQUE SUR LE lien supprimer
+        var suppFd = confirm("êtes vous certain de vouloir supprimer cette Formation ?")
+        if(!suppFd) //si la personne ne veut pas, je bloque l'action
+        {
+        event.preventDefault();  // bloque le fonctionnement classique
+        }
+    });
+});
+
+// supp Profil friteam Pf
+$(function(){
+    
+    $(".suppPf").on("click", function(event){
+        // LE CODE DE CETTE FONCTION EST ACTIVE
+        // QUAND LE VISITEUR CLIQUE SUR LE lien supprimer
+        var suppPf = confirm("êtes vous certain de vouloir supprimer ce Profil ?")
+        if(!suppPf) //si la personne ne veut pas, je bloque l'action
+        {
+        event.preventDefault();  // bloque le fonctionnement classique
+        }
+    });
+});
+
+
+// supp Partenaire (home)
+$(function(){
+    
+    $(".suppP").on("click", function(event){
+        // LE CODE DE CETTE FONCTION EST ACTIVE
+        // QUAND LE VISITEUR CLIQUE SUR LE lien supprimer
+        var suppP = confirm("êtes vous certain de vouloir supprimer ce Partenaire ?")
+        if(!suppP) //si la personne ne veut pas, je bloque l'action
+        {
+        event.preventDefault();  // bloque le fonctionnement classique
+        }
     });
 });
 
