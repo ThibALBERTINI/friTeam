@@ -10,10 +10,10 @@ $titrePage="Se Connecter en tant qu'administrateur";
                 <h3 id="login" class="text-center">FORMULAIRE DE LOGIN</h3>
                 <h4 class="text-center">Attention cette section est réservée aux administrateurs</h4>
                 <form method="POST">
-                    <div class="form-group">
+                    <div id="pass" class="form-group">
                     <input type="text"  name="login" required placeholder="PSEUDO" class="form-control"><br>
                     </div>
-                    <div class="form-group">
+                    <div id="pass" class="form-group">
                     <input type="password"  name="password" required placeholder="PASSWORD" class="form-control"><br>
                     </div>
                     <div class="form-group text-center">

@@ -110,12 +110,12 @@ class UsersController
                     $link = '<a href="http://localhost/friTeam/public/users/newPass?token='.$token.'">Reinitialiser mon mot de passe</a>'; //le lien à cliquer dans le mail
                     $mail->Body = '<html>
                                                  <head>
-                                                 <meta charset="utf-8"/>
+                                                 <meta charset="UTF-8">
                                                  <style> h1{color: green;} </style>
                                                  </head>
                                                  <body>
                                                  <h1>Mot de passe perdu</h1>
-                                                 <p>Vous avez signalé votre mot de passe comme perdu...</p>
+                                                 <p>Votre demande de modification de mot de passe...</p>
                                                  '.$link.'
                                                  </body>
                                                  </html>';
@@ -156,10 +156,11 @@ class UsersController
                 $objetAdminModel = new \Model\AdminModel;
                 $tabToken=$objetAdminModel->findBy("token", $token);
                 $login=$tabToken['login'];
-                $passwordN=$tabToken['password'];
+                //$passwordN=$tabToken['password'];
                 $id=$tabToken['id'];
 
-                if($_POST["passwordNew"] == $_POST["confirmPasswordNew"])
+                if($_POST["passwordNew"] == $_POST["confirmPasswordNew"]
+                    && is_string($_POST["passwordNew"])  && ( mb_strlen($_POST["passwordNew"]) > 4))
                 {
                     $passwordN=password_hash($_POST["passwordNew"], PASSWORD_DEFAULT);
                     $passChanged=$objetAdminModel->update(array("password"=>$passwordN), $id);
@@ -170,12 +171,12 @@ class UsersController
                     }
                     else
                     {
-                        $message = '<p class="succes">Votre mot de passe a été mis à jour </p>';
+                        $message = '<p class="succes">Votre mot de passe a été mis à jour. <br> Vous pouvez de nouveau vous connecter via le lien de connexion (ci-dessous). </p>';
                     }
                 }// fin pasword = confirmpassword
                 else
                 {
-                    $message = '<p class="erreur">erreur de saisie les mots de passe sont différents </p>';
+                    $message = '<p class="erreur">erreur de saisie les mots de passe sont différents ou comprennent moins de 5 caractères.</p>';
                 }
                       
             }// fin if isset token

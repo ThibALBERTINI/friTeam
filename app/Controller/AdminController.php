@@ -91,13 +91,13 @@ class AdminController
 
                 else
                 {
-                   $message= "ERREUR : INFO INCORRECTE Attention aux tailles mini";
+                   $message= '<p class="erreur"> ERREUR : INFO INCORRECTE Attention aux tailles mini';
                 }
 
             }
             else
             {
-                $message= "Login ou adresse mail déjà utilisé(e)";
+                $message= '<p class="erreur"> Login ou adresse mail déjà utilisé(e)';
 
                 // UNE ERREUR transmettre à la partie view (en dessous $this->show)
             }
@@ -112,7 +112,7 @@ class AdminController
 
     public function modifPass ()
     {
-        //$this->allowTo([ "admin", "super-admin" ]);
+        $this->allowTo([ "admin", "super-admin" ]);
         $message = "";
         $titrePage="";
 
@@ -147,26 +147,26 @@ class AdminController
 
                             if(!$passChanged)
                             {
-                                $message = 'Désolé le mot de passe n\'a pas été changé, merci de recommencer la procédure';
+                                $message = '<p class="erreur"> Désolé le mot de passe n\'a pas été changé, merci de recommencer la procédure';
                             }
                             else
                             {
-                                $message = 'Votre mot de passe a été mis à jour';
+                                $message = '<p class="succes"> Votre mot de passe a été mis à jour';
                             }
                         }// fin pasword = confirmpassword
                         else
                         {
-                            $message = 'erreur de saisie les mots de passe sont différents';
+                            $message = '<p class="erreur"> Erreur de saisie les mots de passe sont différents';
                         }
                     }// fin if mdp ok
                     else
                     {
-                        $message= 'Votre mot de passe est incorrect, si vous l\'avez oublié utilisez la procédure mot de passe oublié';
+                        $message= '<p class="erreur"> Votre mot de passe est incorrect, si vous l\'avez oublié utilisez la procédure "Mot de passe perdu?" (cliquer sur se déconnecter en haut à droite).';
                     }
                 } // fin if string login et password
                 else
                     {
-                     $message= 'Les données ne sont pas exploitables merci de les saisir à nouveau';
+                     $message= '<p class="erreur"> Les données ne sont pas exploitables merci de les saisir à nouveau';
                     }
 
         } // fin if isset btnsub
@@ -176,7 +176,7 @@ class AdminController
 
 public function postLogin()  // page affichée aprés s'être loggé
     {
-        //$this->allowTo([ "admin", "super-admin" ]);
+        $this->allowTo([ "admin", "super-admin" ]);
         $this->show("pages/admin_postLogin");
     }// fin function postlogin
 

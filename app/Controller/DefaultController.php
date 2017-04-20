@@ -50,7 +50,7 @@ class DefaultController extends Controller
 				//		id		INT		PRIMARY_KEY	A_I
 				//		email	VARCHAR(255)
 				// PENSER A AJOUTER use \Model\NewsletterModel AU DEBUT DU FICHIER
-				$objetmailing_clientModel = new \Model\mailing_clientModel;
+				$objetmailing_clientModel = new \Model\Mailing_clientModel;
 				// ON FAIT UNE RECHERCHE PAR LA COLONNE "email"
 				$tabLigne = $objetmailing_clientModel->findBy("mail_mailing_client", $email);
 				if (empty($tabLigne))
@@ -59,18 +59,54 @@ class DefaultController extends Controller
 					// ON VA AJOUTER LA LIGNE DANS LA TABLE MYSQL newsletter
 					$objetmailing_clientModel->insert([ "mail_mailing_client" => $email ]);
 					// OK
-					$message = "MERCI DE VOTRE INSCRIPTION ($email)";
+					$message = '<p class="succes"> MERCI DE VOTRE INSCRIPTION '.$email.'! ';
+
+					$mail = new \PHPMailer(); //création d'un objet de type mail
+					$mail->CharSet = 'UTF-8'; // codage du message pour prise en compte des accents et caractères spéciaux
+					$mail->isSMTP(); //connexion directe au serveur SMTP
+					$mail->SMTPDebug=0;
+					$mail->isHTML(true); //utilisation du format HTML pour le message
+					$mail->Host = "smtp.gmail.com"; //le serveur SMTP pour envoyer
+					$mail->Port = 465; //le port obligatoire de google
+					$mail->SMTPAuth = true; //on va fournir un login/password au serveur
+					$mail->SMTPSecure = 'ssl'; //certificat SSL
+					$mail->Username = 'wf3marseille@gmail.com';
+					$mail->Password = 'Azerty1234';
+					// $mail->setFrom($mailUser);
+			    	$mail->setFrom('wf3marseille@gmail.com'); // l'expéditeur
+			    	$mail->FromName='Contact'; // apparence de l'expéditeur
+			    	// $mail->addAddress($mailUser);
+			    	$mail->addAddress('f.gauer@yahoo.fr'); // l'adresse mail (Friteam) de celui qui recevra le mail
+					$mail->Subject = "Nouvelle demande de catalogue sur le site friteam"; //objet du mail
+					$mail->Body = '<table>
+									<tr>
+										<td><b>Vous avez reçu une nouvelle demande de catalogue sur votre site Friteam !</b></td>
+									</tr>
+									</table>									
+										
+										<p> Merci d\'envoyer un catalogue à : '.$email.' .
+										</p>'
+										;
+					if(!$mail->send()) //si problème pendant l'envoi
+                    {
+                        $message = '<p class="erreur"> erreur envoi '.$mail->ErrorInfo. ' La demande de catalogue a échoué, merci de nous adresser un mail via l\'onglet contact.</p>';
+                    }
+                    else
+                    {
+                    	$message = '<p class="succes"> Votre demande de catalogue a bien été transmise.';
+                    }
+
 				}
 				else
 				{
 					// EMAIL EST DEJA PRESENT
-					$message = "EMAIL DEJA INSCRIT ($email)";
+					$message = '<p class="erreur"> L\'EMAIL '.$email. ' EXISTE DEJA ';
 				}
 			}
 			else
 			{
 				// KO
-				$message = "EMAIL INCORRECT ($email)";
+				$message = '<p class="erreur"> EMAIL INCORRECT '.$email.' ! ' ;
 			}
 		}
 		// JE VAIS TRANSMETTRE DANS LA PROPRIETE LA VALEUR DE LA VARIABLE LOCALE
@@ -134,15 +170,15 @@ class DefaultController extends Controller
 		
 			//Sécurité
 			//Vérifier que chaque information est conforme
-			if (($_POST["civilite_contact"] == "madame") || ($_POST["vivilite_contact"] == "monsieur")	&& ( mb_strlen($civilite) > 0 ) //verif radio ok
-				&& is_string($nom)																			&& ( mb_strlen($nom) > 0 )
-				&& is_string($prenom)																		&& ( mb_strlen($prenom) > 0 )
-				&& (filter_var($email, FILTER_VALIDATE_EMAIL) !== false)									&& !empty($email)
-				&& (is_numeric($tel) !== false)																		&& ( mb_strlen($tel) > 0 )
-				&& is_string($adresse)																		&& ( mb_strlen($adresse) > 0 )
-				&& (ctype_digit($cp))																			&& ( mb_strlen($cp) > 0 ) //ctype_digit vérifie qu'une chaîne est un entier
-				&& is_string($ville)																		&& ( mb_strlen($ville) > 0 )
-				&& is_string($message)																		&& ( mb_strlen($message) > 0 )
+			if (($_POST["civilite_contact"] == "madame") || ($_POST["civilite_contact"] == "monsieur")	 //verif radio ok
+				&& (is_string($nom))																			&& ( mb_strlen($nom) > 1 )
+				&& (is_string($prenom))																		&& ( mb_strlen($prenom) > 1 )
+				&& (filter_var($email, FILTER_VALIDATE_EMAIL) !== false)									&& (!empty($email))
+				&& (is_numeric($tel) !== false)																		&& ( mb_strlen($tel) > 9 )
+				&& (is_string($adresse))																		&& ( mb_strlen($adresse) > 0 )
+				&& (ctype_digit($cp))																			&& ( mb_strlen($cp) > 3 ) //ctype_digit vérifie qu'une chaîne est un entier
+				&& (is_string($ville))																		&& ( mb_strlen($ville) > 0 )
+				&& (is_string($message))																		&& ( mb_strlen($message) > 2 )
 				)
 				{
 					$mail = new \PHPMailer(); //création d'un objet de type mail
@@ -154,43 +190,29 @@ class DefaultController extends Controller
 					$mail->Port = 465; //le port obligatoire de google
 					$mail->SMTPAuth = true; //on va fournir un login/password au serveur
 					$mail->SMTPSecure = 'ssl'; //certificat SSL
-					$mail->Username = 'thibaut.albertini@gmail.com';
-					$mail->Password = 'ALB-thi1';
+					$mail->Username = 'wf3marseille@gmail.com';
+					$mail->Password = 'Azerty1234';
 					// $mail->setFrom($mailUser);
-			    	$mail->setFrom('thibaut.albertini@gmail.com'); // l'expéditeur
-			    	$mail->FromName='muriel.villain@friteam.com'; // apparence de l'expéditeur
+			    	$mail->setFrom('wf3marseille@gmail.com'); // l'expéditeur
+			    	$mail->FromName='Contact'; // apparence de l'expéditeur
 			    	// $mail->addAddress($mailUser);
-			    	$mail->addAddress('thauvin.elo@gmail.com'); // l'adresse mail de celui qui a perdu son mdp
+			    	$mail->addAddress('f.gauer@yahoo.fr'); // l'adresse mail de celui qui recevra le mail
 					$mail->Subject = "Nouveau contact sur le site friteam"; //objet du mail
 					$mail->Body = '<table>
 									<tr>
 										<td><b>Vous avez reçu un nouveau message sur le site Friteam !</b></td>
 									</tr>
-									<br/>
-									<tr>
-										<td>Salut Elo !</td>
-										<td>Vois tu les info ci dessous ?</td>
-									</tr>
-									<tr>
-										<td>$civilite</td>
-										<td>$nom</td>
-										<td>$prenom</td>
-										<td>$email</td>
-										<td>$tel</td>
-										<td>$adresse</td>
-										<td>$cp</td>
-										<td>$ville</td>
-										<td>$message</td>
-									</tr>
-									<br/>
-									<tr>
-										<td>Votre lien personnalisé : '.$link.'</td>
-									</tr>
-								</table>';
+									</table>									
+										<p>'.$civilite.' '.$nom.' '.$prenom.' </p>
+										<p> Dont les coordonnées sont : '.$email.' tel :'
+										.$tel.'</p>
+										<p> Adresse : '.$adresse.' CP : '.$cp.' Ville :
+										'.$ville.' </p> 
+										<p> Vous adresse ce message : '.$message.'</p><br>';
 					//Enregistrer les information receuillies par le formulaire dans la base de données
 					//Création d'un objet de la classe ContatModel
 					$objetContactModel = new ContactModel; //Si pb, le model Contact n'est peut etre pas créé
-					$objetContactModel->insert([
+					$tabUser=$objetContactModel->insert([
 						 	"civilite_contact"	=> $civilite,
 							"nom_contact" 		=> $nom,
 					 		"prenom_contact" 	=> $prenom,
@@ -201,7 +223,7 @@ class DefaultController extends Controller
 							"ville_contact" 	=> $ville,
 							"message_contact" 	=> $message,
 						], true);
-					$message = "Formulaire envoyé a l'administrateur";
+					$message = "Votre formulaire a bien été envoyé a l'administrateur, merci.";
 			    	if(!$mail->send()){
 				    		$message2 = "Email non-envoyé ! (erreur envoi ".$mail->ErrorInfo.")";
 					    	}
@@ -215,7 +237,7 @@ class DefaultController extends Controller
 				}
 				else
 				{
-					$message = "Erreur lors de l'enregistrement";
+					$message = '<p class="erreur">Erreur lors de l\'enregistrement';
 				}
 		}
 		$titrePage = "contact";

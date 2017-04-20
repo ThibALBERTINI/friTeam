@@ -16,14 +16,18 @@
     <div class="ligne"></div>
 
     <div class="col-xs-12 col-md-5 text-center">
-      <p class="nom-contact">Murielle Villain</p>
+      <p class="nom-contact">Muriel Villain</p>
       <p class="adresse-contact">2 rue Marc Donadille<br />13013 Marseille</p>
       <p class="telephone-contact"> 01.02.03.04.05</p>
-      <p class="adresse-mail-contact"><a>murielle-villain@friteam.com</a></p>
+      <p class="adresse-mail-contact"><a>muriel-villain@friteam.com</a></p>
     </div>
 
 
     <!-- Formulaire de Contact -->
+    <div class="message">
+            <?php if(isset($message)) echo $message ?> 
+            
+          </div>
     <div class="col-xs-12 col-md-5">
       <form class="form-contact" action="" method="POST">
 
@@ -61,7 +65,7 @@
           <!-- Numéro de téléphone -->
           <div class="form-group">
             <label for="tel_contact">Téléphone</label>
-            <input type="text" name="tel_contact" id="tel_contact" class="form-control" required placeholder="Entrez un numéro de téléphone valide" />
+            <input type="number" name="tel_contact" id="tel_contact" class="form-control" required placeholder="Entrez un numéro de téléphone valide" />
           </div>
 
           <!-- Adresse-->
@@ -73,7 +77,7 @@
           <!-- Code Postal-->
           <div class="form-group">
             <label for="cp_contact">Code Postal</label>
-            <input type="text" name="cp_contact" id="cp_contact" required class="form-control" required placeholder="Entrez un code postal" />
+            <input type="number" name="cp_contact" id="cp_contact" required class="form-control" required placeholder="Entrez un code postal" />
           </div>
 
           <!-- Ville-->
@@ -96,9 +100,7 @@
           <!-- INFOS TECHNIQUES -->
 	        <input type="hidden" name="operation" value="contact">
 
-	        <div class="message">
-	        	<?php if(isset($message)) echo $message ?>
-	        </div>
+	        
         </form>
     </div>
   </div>

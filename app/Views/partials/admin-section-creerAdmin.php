@@ -4,7 +4,7 @@
 			
 			<form id="creerlogin" method="post">
 				<div class="form-group">
-					<label for="login">Login <span>(mini 5 lettres ou chiffres )</span> </label>
+					<label for="login">Login <span class="minil">(mini 5 lettres ou chiffres )</span> </label>
 					<input type="text" name="login" id="login" 
 								 class="form-control" required />
 				</div>
@@ -16,7 +16,7 @@
 				</div>
 
 				<div class="form-group">
-					<label for="password">Mot de Passe <span>(mini 5 lettres ou chiffres)</span></label>
+					<label for="password">Mot de Passe <span class="minip">(mini 5 lettres ou chiffres)</span></label>
 					<input type="password" name="password" id="password" 
 								 class="form-control"  required/>
 				</div>
@@ -129,8 +129,21 @@ CODEHTML;
 </div>
 
 <script>
-	$('#login:focus').css('font-size', '1.5em');
-	$('#password:focus').css('font-size', '1.5em');
+	$('#login').on('focus', function(){
+		$('.minil').css('font-size', '1.5em');
+		
+	});
+	$('#login').on('focusout', function(){
+		$('.minil').css('font-size', '1em');
+	});
+
+	$('#password').on('focus', function(){
+		$('.minip').css('font-size', '1.5em');
+			});
+	$('#password').on('focusout', function(){
+		$('.minip').css('font-size', '1em');
+	});
+	
 
 
 </script>

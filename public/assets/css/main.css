@@ -2,6 +2,17 @@
 * {
   font-family: 'Roboto', sans-serif;
 }
+/***********************
+***********************
+MAIN pour que le footer soit tjs en bas
+***********************/
+
+main{
+  min-height: 55vh;
+
+}
+
+
 
 /**************
     NAVBAR
@@ -945,8 +956,8 @@ PAGE CONTACT
 }
 
 /*Message D'erreur*/
-.erreur {
-  color: firebrick;
+p.erreur {
+  color: firebrick !important;
 }
 
 p.succes {
@@ -1013,6 +1024,15 @@ div#bonjour{
   margin-top: 40px;
   margin-bottom: 40px;
 
+}
+
+div#pass{
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+div#pass span, .minip{
+  color: #FFB420;
 }
 
 
