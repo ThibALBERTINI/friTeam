@@ -7,7 +7,7 @@ $titrePage="Se Connecter en tant qu'administrateur";
         <div class="col-xs-12 col-md-6 col-md-offset-3">
 
             <section>
-                <h3 class="text-center">FORMULAIRE DE LOGIN</h3>
+                <h3 id="login" class="text-center">FORMULAIRE DE LOGIN</h3>
                 <h4 class="text-center">Attention cette section est réservée aux administrateurs</h4>
                 <form method="POST">
                     <div class="form-group">

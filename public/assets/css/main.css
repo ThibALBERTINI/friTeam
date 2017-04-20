@@ -969,6 +969,47 @@ PAGES ADMIN CMS
 }
 
 
+/******************************
+******************************
+PAGES LOGIN
+*****************************
+****************************/
+h3#login {
+  color: #FFB420;
+  margin-top: 80px;
+}
+
+h2#poslogin{
+  color: #FFB420;
+  margin-top: 80px;
+}
+
+p#postlogin{
+
+  margin-top: 50px;
+  margin-bottom: 50px;
+  font-size: 1.5em;
+}
+
+form#creerlogin{
+  margin-top: 40px;
+}
+
+form#creerlogin span{
+  color: #FFB420;
+}
+
+#listeadmin{
+  color: #FFB420;
+}
+
+div#bonjour{
+  font-size: 1.5em;
+  color: #FFB420;
+  margin-top: 40px;
+  margin-bottom: 40px;
+
+}
 
 
 /****************************************

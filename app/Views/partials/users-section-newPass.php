@@ -1,7 +1,7 @@
 <div class="container-fluid"> 
 	<div class="row"> 
 		<div class="col-xs-12 col-md-6 col-md-offset-3">
-			<div> <?php if (isset($login)) {echo "<p> Bonjour ".$login. "!</p>";} ?> </div>
+			<div id="bonjour"> <?php if (isset($login)) {echo "<p> Bonjour ".$login. "!</p>";} ?> </div>
 				<form method="post">
 					<!-- < ? = est équivalent à < ? php echo -->
 					<input type="hidden" name="idClient" value="<?= $idClient; ?>" />

@@ -2,9 +2,9 @@
     <div class="row"> 
         <div class="col-xs-12 col-md-6 col-md-offset-3">
 			
-			<form method="post">
+			<form id="creerlogin" method="post">
 				<div class="form-group">
-					<label for="login">Login (mini 5 lettres ou chiffres ) : </label>
+					<label for="login">Login <span>(mini 5 lettres ou chiffres )</span> </label>
 					<input type="text" name="login" id="login" 
 								 class="form-control" required />
 				</div>
@@ -16,7 +16,7 @@
 				</div>
 
 				<div class="form-group">
-					<label for="password">Mot de Passe (mini 5 lettres ou chiffres)</label>
+					<label for="password">Mot de Passe <span>(mini 5 lettres ou chiffres)</span></label>
 					<input type="password" name="password" id="password" 
 								 class="form-control"  required/>
 				</div>
@@ -27,13 +27,13 @@
 						<option value="admin">Administrateur</option>
 						<option value="super-admin">Super Administrateur</option>
 					</select>
-					<p>Note : Le super-administrateur peut créer, modifier et supprimer les administrateurs</p>
+					<p>Note : Le super-administrateur pourra créer, modifier et supprimer les administrateurs</p>
 				</div>
 				
 					
 				<div class="form-group text-center">
 					<input type="submit" name="btnSub" value="Ajouter"
-								 class="btn btn-success" />
+								 class="btn btn-info" />
 				</div>
 			<!--INFORMATION TECHNIQUE la valeur operation=creer part au submit (vers UsersController)-->
 			    	 <input type="hidden" name="operation" value="creer"> 
@@ -53,7 +53,7 @@
     <div class="row"> 
         <div class="col-xs-12 col-md-6 col-md-offset-3">
 			<section>
-				<h2>Liste des administrateurs</h2>
+				<h2 id="listeadmin">Liste des administrateurs</h2>
 				<table class="table table-striped scroll-table">
 					
 
@@ -127,3 +127,11 @@ CODEHTML;
 </div>
 </div>
 </div>
+
+<script>
+	$('#login:focus').css('font-size', '1.5em');
+	$('#password:focus').css('font-size', '1.5em');
+
+
+</script>
+

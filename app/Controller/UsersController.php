@@ -110,6 +110,7 @@ class UsersController
                     $link = '<a href="http://localhost/friTeam/public/users/newPass?token='.$token.'">Reinitialiser mon mot de passe</a>'; //le lien à cliquer dans le mail
                     $mail->Body = '<html>
                                                  <head>
+                                                 <meta charset="utf-8"/>
                                                  <style> h1{color: green;} </style>
                                                  </head>
                                                  <body>
@@ -183,6 +184,15 @@ class UsersController
                     $message = '<p class="erreur"> vous n\'avez pas été identifié, merci de recommencer l\'étape de modification du mot de passe </p>';
                 }
         }// fin ifisset btnsub
+        if(($login == "")&& isset($_GET['token'])){
+            $token = strip_tags($_GET['token']);
+            if(isset($token))
+            {
+                $objetAdminModel = new \Model\AdminModel;
+                $tabToken=$objetAdminModel->findBy("token", $token);
+                $login=$tabToken['login'];
+            }
+        }
         $titrePage = "Changer son mot de passe";
         $this->show("pages/users_newPass", [ "message" => $message, "login" => $login, "titrePage"=> $titrePage ]);
     }//fin function newPass
