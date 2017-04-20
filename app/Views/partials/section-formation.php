@@ -6,7 +6,7 @@
 <div class="container-fluid">
   <div class="row row-centered">
     <div class="col-xs-12 col-md-8  col-centered">
-      <p class="introduction-formation">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti, accusantium atque ex iste sint dicta. Amet delectus, libero voluptatum odit cum ipsum repudiandae praesentium! Mollitia, ex! Vitae, cum eos corporis repellendus lorem ipsum dolor si. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti, accusantium atque ex iste sint dicta. Amet delectus, libero voluptatum odit cum ipsum repudiandae praesentium! Mollitia, ex! Vitae, cum eos corporis repellendus lorem ipsum dolor si.</p>
+      <p class="introduction-formation"></p>
     </div>
   </div>
 </div>

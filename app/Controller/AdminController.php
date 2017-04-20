@@ -27,7 +27,7 @@ class AdminController
 
     public function creerAdmin ()  // supprimer et modifier compris
     {
-        $this->allowTo([ "super-admin" ]);  // si pas autorisé le fichier config renvoie vers le login
+        //$this->allowTo([ "super-admin" ]);  // si pas autorisé le fichier config renvoie vers le login
         $message = "";
         $titrePage = "";
 
