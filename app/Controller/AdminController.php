@@ -672,6 +672,10 @@ public function postLogin()  // page affichée aprés s'être loggé
             $alt               = trim($_POST["alt"]);
             $prix               = trim($_POST["prix"]);
 
+            $url = $this->suppr_accents($url);
+            $url = str_replace( " ", "-", $url);
+            $url = preg_replace( "/[^a-zA-Z0-9]/", "-", $url);
+
             // $id_categorie       = trim($_POST["id_categorie"]);
 
             // SECURITE
@@ -1122,6 +1126,10 @@ public function postLogin()  // page affichée aprés s'être loggé
             $url           = trim($_POST["url"]);
             $alt           = trim($_POST["alt"]);
 
+            $url = $this->suppr_accents($url);
+            $url = str_replace( " ", "-", $url);
+            $url = preg_replace( "/[^a-zA-Z0-9]/", "-", $url);            
+
             //$id_categorie       = trim($_POST["id_categorie"]);
 
             // SECURITE
@@ -1224,6 +1232,10 @@ public function postLogin()  // page affichée aprés s'être loggé
             $url           = trim($_POST["url"]);
             $alt           = trim($_POST["alt"]);
 
+            $url = $this->suppr_accents($url);
+            $url = str_replace( " ", "-", $url);
+            $url = preg_replace( "/[^a-zA-Z0-9]/", "-", $url);            
+
             // SECURITE
             // VERIFIER QUE CHAQUE INFO EST CONFORME
             // http://php.net/manual/en/function.mb-strlen.php
@@ -1303,6 +1315,10 @@ public function postLogin()  // page affichée aprés s'être loggé
             $auteur             = trim($_POST["auteur_actualite"]);
             $url                = trim($_POST["url"]);
             $alt                = trim($_POST["alt"]);
+
+            $url = $this->suppr_accents($url);
+            $url = str_replace( " ", "-", $url);
+            $url = preg_replace( "/[^a-zA-Z0-9]/", "-", $url);
 
             //$id_categorie       = trim($_POST["id_categorie"]);
 
@@ -1393,6 +1409,10 @@ public function postLogin()  // page affichée aprés s'être loggé
             $auteur             = trim($_POST["auteur_actualite"]);
             $url                = trim($_POST["url"]);
             $alt                = trim($_POST["alt"]);
+
+            $url = $this->suppr_accents($url);
+            $url = str_replace( " ", "-", $url);
+            $url = preg_replace( "/[^a-zA-Z0-9]/", "-", $url);            
 
             // $id_categorie       = trim($_POST["id_categorie"]);
 
