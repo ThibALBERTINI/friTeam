@@ -79,7 +79,7 @@
 
         <!-- Les Points Forts -->
         <div class="col-xs-12 col-md-4 point-fort">
-          <span><i class="fa fa-briefcase" aria-hidden="true"></i></span>
+          <span><i class="fa fa-star" aria-hidden="true"></i></span>
           <h3>$titre_point</h3>
           <p>
             $contenu_point
@@ -115,7 +115,7 @@ CODEHTML;
                <label for="email"></label>
                <input type="email" name="email" required placeholder="Entrez une adresse mail valide" class="form-control" id="email">
               </div>
-             <button type="submit">Recevoir le catalogue !</button>
+             <button class="catalogue-newsletter" type="submit">Recevoir le catalogue !</button>
 
            <!-- INFOS TECHNIQUES -->
            <input type="hidden" name="operation" value="newsletter">
@@ -251,9 +251,11 @@ CODEHTML;
 
         ?>
 
-        <div class="col-xs-12 col-md-4 col-centered">
-          <div class="partenaire-img">
-            <a href="<?php echo $lien; ?>"><img src="<?php echo $cheminAsset. "/" .$img; ?>" alt="<?php echo $alt; ?>"></a>
+        <div class="col-xs-12 col-md-4">
+        <div class="test">
+            <div class="partenaire-img">
+              <a href="<?php echo $lien; ?>"><img src="<?php echo $cheminAsset. "/" .$img; ?>" alt="<?php echo $alt; ?>"></a>
+            </div>
           </div>
         </div>
 

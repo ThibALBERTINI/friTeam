@@ -779,7 +779,7 @@ public function postLogin()  // page affichée aprés s'être loggé
                 //     $uploadOk = 0;
                 // }
                 // Verifier la taille de l'image uploadé
-                if ($_FILES["img"]["size"] > 500000)
+                if ($_FILES["img"]["size"] > 500000000)
                 {
                     $message = "Votre image est trop lourde. Taille maximale autorisée : 500 ko.";
                     $uploadOk = 0;
@@ -842,7 +842,7 @@ public function postLogin()  // page affichée aprés s'être loggé
         //     $uploadOk = 0;
         // }
         // Verifier la taille de l'image uploadé
-        if ($_FILES["img"]["size"] > 500000)
+        if ($_FILES["img"]["size"] > 500000000)
         {
             $message = "Votre image est trop lourde. Taille maximale autorisée : 500 ko.";
             $uploadOk = 0;
@@ -985,7 +985,7 @@ public function postLogin()  // page affichée aprés s'être loggé
                     $tabUpdate["img"] = str_replace("assets/", "", $img);
                 }
                 // JE PEUX UTILISER LA METHODE update DE LA CLASSE \W\Model\Model
-                $objetFormationModel->update($tabUpdate, $id);
+                $objetFormationModel->update($tabUpdate, $id, false);
 
                 // OK
                 $messageOK = "La fiche à été correctement modifiée";

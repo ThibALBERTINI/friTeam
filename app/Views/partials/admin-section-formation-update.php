@@ -34,7 +34,7 @@ if (!empty($tabFormation)) :
 
                     <div class="form-group">
                         <label for="alt">Texte alternatif de l'image (référencement de l'image)</label><br>
-                        <input type="text" name="alt" id="alt" placeholder="Champs limité à 100 caractères" class="form-control"><br>
+                        <input type="text" name="alt" id="alt" placeholder="Champs limité à 100 caractères" class="form-control" value="<?php echo $alt ?>"><br>
                     </div>
 
                     <div class="form-group">
@@ -61,7 +61,7 @@ if (!empty($tabFormation)) :
 
                     <div class="form-group">
                         <label for="objectif_formation">Objectifs</label><br>
-                        <textarea type="text" name="objectif_formation" id="objectif_formation" cols="60" rows="5" class="form-control" required value="<?php echo $objectif_formation ?>"></textarea><br>
+                        <textarea type="text" name="objectif_formation" id="objectif_formation" cols="60" rows="5" class="form-control" required><?php echo $objectif_formation ?></textarea><br>
                     </div>
 
                     <div class="form-group">
@@ -81,7 +81,7 @@ if (!empty($tabFormation)) :
 
                     <div class="form-group">
                         <label for="prix">Prix</label><br>
-                        <textarea type="text" name="prix" id="prix" class="form-control ckeditor" required cols="60" rows="5" value="<?php echo $prix ?>"></textarea><br>
+                        <textarea type="text" name="prix" id="prix" class="form-control ckeditor" required cols="60" rows="5"><?php echo $prix ?></textarea><br>
                     </div>
 
                     <div class="form-group">

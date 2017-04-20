@@ -75,7 +75,7 @@ if(!empty($tabResult))
         </blockquote>
 
         <div class="text-center">
-            <a href="<?php echo $linkedin; ?>"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
+            <a href="<?php echo $linkedin; ?>" target="_blank"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
             <a href=""><i class="fa fa-instagram" aria-hidden="true"></i></a>
             <a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a>
         </div>

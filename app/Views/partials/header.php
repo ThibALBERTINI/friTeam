@@ -13,10 +13,23 @@
     <link rel="stylesheet" type="text/css" href="<?php echo $this->assetUrl('css/animate.css') ?>">
     <!-- Style CSS Personnel -->
     <link rel="stylesheet" type="text/css" href="<?php echo $this->assetUrl('css/style.css') ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo $this->assetUrl('css/fullcalendar.css') ?>">
     <!-- Font Awesome -->
     <link rel="stylesheet" type="text/css" href="<?php echo $this->assetUrl('font-awesome/css/font-awesome.css') ?>">
     <!-- Roboto Font -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i,900,900i" rel="stylesheet">
+    <style>
+      <?php if (isset($background)) : ?>
+        .header-principal {
+          background-image: url("<?php echo $background; ?>");
+          width: 100%;
+        }
+        body {
+          margin: 0 auto;
+        }
+    <?php endif; ?>
+    </style>
   </head>
 
   <body>
@@ -53,7 +66,7 @@
       </nav>
 
       <!-- Header image + titre -->
-      <div class="container-fluid header-principal text-center">
+      <div class="container-fluid header-principal">
         <h1 class="titre-page"><?php echo $titrePage ?></h1>
       </div>
     </header>

@@ -42,8 +42,8 @@ $tabFormation = $objetFormationModel->find($id);
 					<div class="form-group">
 						<label for="categorie_formation">Catégorie</label>
 						<select name="categorie_formation" id="categorie_formation" class="form-control" required>
-							<option value="categFriteam">Friteam</option>
-							<option value="categComplementaire">Complémentaire</option>
+							<option value="Friteam">Friteam</option>
+							<option value="Complementaire">Complémentaire</option>
 						</select>
 					</div>
 

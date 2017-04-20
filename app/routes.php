@@ -4,7 +4,7 @@
 	   // GET OU POST	URL NAVIGATEUR			CLASSE#METHODE					ID UNIQUE DE LA ROUTE
 
 		// ROUTES POUR LES PAGES AFFICHEES
-		['GET|POST',    '/', 						'Default#home',     			'default_home'],     // UNE ROUTE pour l'affichage de la page d'acceuil
+		['GET|POST',    '/', 						'Default#home',     			'default_home'],     // UNE ROUTE pour l'affichage de la page d'accueil
 		['GET|POST', 	'/friteam-equipe',			'Default#friteamEquipe', 		'default_friteam-equipe'], // UNE ROUTE pour afficher la page équipe
 		['GET|POST', 	'/formation', 				'Default#formation',			'default_formation'],  // UNE ROUTE pour afficher toutes les formations proposées
 		['GET|POST', 	'/formation/[:url]', 		'Default#formationDetail', 		'default_formation-detail'],  // UNE ROUTE pour afficher le detail d'une formation
@@ -12,11 +12,12 @@
 		['GET|POST', 	'/accompagnement/[:url]',	'Default#accompagnementDetail','default_accompagnement-detail'],  // UNE ROUTE pour afficher le detail d'un accompagnement
 		['GET|POST', 	'/blog',					'Default#blog',					'default_blog'],  // UNE ROUTE
 		['GET|POST', 	'/blog/[:url]',				'Default#blogDetail',			'default_blog-detail'],  // UNE ROUTE
+		['GET|POST', 	'/evenement',				'Default#evenement',			'default_evenement'],  // UNE ROUTE
 		['GET|POST', 	'/contact', 				'Default#contact',  			'default_contact'],  // UNE ROUTE
 
 		// ROUTE POUR LES PAGES D'ADMINISTRATION DU CONTENU		
 
-		//PAGE D'ACCEUIL
+		//PAGE D'ACCUEIL
 		['GET|POST',    '/admin/', 								'Admin#home',     				'admin_home'],     // UNE ROUTE
 		['GET|POST',    '/admin/video/[:id]', 					'Admin#homeVideo',     			'admin_home-video'],     // UNE ROUTE pour modifier le bandeau friteam c'est quoi et le lien vers la vidéo
 		['GET|POST',    '/admin/point/[:id]', 					'Admin#homePoint',     			'admin_home-point'],     // UNE ROUTE pour modifier le bandeau points forts

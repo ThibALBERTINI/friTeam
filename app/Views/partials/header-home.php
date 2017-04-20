@@ -12,11 +12,13 @@
     <!-- Animate.css -->
     <link rel="stylesheet" type="text/css" href="<?php echo $this->assetUrl('css/animate.css') ?>">
     <!-- Style CSS Personnel -->
-    <link rel="stylesheet" type="text/css" href="<?php echo $this->assetUrl('css/main.css') ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo $this->assetUrl('css/style.css') ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo $this->assetUrl('css/fullcalendar.css') ?>">
     <!-- Font Awesome -->
     <link rel="stylesheet" type="text/css" href="<?php echo $this->assetUrl('font-awesome/css/font-awesome.css') ?>">
     <!-- Roboto Font -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i,900,900i" rel="stylesheet">
   </head>
 
   <body>
@@ -42,7 +44,7 @@
               <li><a class="menu2" href="<?php echo $this->url('default_friteam-equipe') ?>">Qui sommes-nous ?</a></li>
               <li><a class="menu3" href="<?php echo $this->url('default_formation') ?>">Nos Formations</a></li>
               <li><a class="menu4" href="<?php echo $this->url('default_accompagnement') ?>">Notre accompagnement</a></li>
-              <li><a class="menu5" href="#">Nos Évènements</a></li> <!-- Liens à former -->
+              <li><a class="menu5" href="<?php echo $this->url('default_evenement') ?>">Nos Évènements</a></li> <!-- Liens à former -->
               <li><a class="menu6" href="<?php echo $this->url('default_blog') ?>">Blog</a></li>
               <li><a class="menu7" href="<?php echo $this->url('default_contact') ?>">Contact</a></li>
             </ul>

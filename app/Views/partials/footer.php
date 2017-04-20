@@ -40,13 +40,28 @@
           // PASSER DES INFOS DE PHP VERS JAVASCRIPT
           var urlAjax = '<?php echo $this->url("default_ajax"); ?>';
         </script>
-        <script type="text/javascript" src="<?php echo $this->assetUrl('js/jquery-3.2.0.min.js') ?>"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="http://cdn.ckeditor.com/4.6.2/standard-all/ckeditor.js"></script>
         <script type="text/javascript" src="<?php echo $this->assetUrl('js/jquery.easing.min.js') ?>"></script>
         <script type="text/javascript" src="<?php echo $this->assetUrl('js/bootstrap.js') ?>"></script>
         <script type="text/javascript" src="<?php echo $this->assetUrl('js/script.js') ?>"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+        <script type="text/javascript" src="<?php echo $this->assetUrl('js/fullcalendar.js') ?>"></script>
+        <script type="text/javascript" src="<?php echo $this->assetUrl('js/gcal.js') ?>"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.1/jquery.autocomplete.min.js"></script>
         <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+
+        <script>
+    $(document).ready(function() {
+    $('#calendar').fullCalendar({
+        googleCalendarApiKey: 'AIzaSyAj1Zrf1ckdml8FaC8GokT0Zg4XALHay6Q',
+        events: {
+            googleCalendarId: 'cmne630u9fcbuq5k1ve69ukbfg@group.calendar.google.com',
+            className: 'gcal-event'
+        }
+    });
+});
+  </script>
     </body>
 </html>

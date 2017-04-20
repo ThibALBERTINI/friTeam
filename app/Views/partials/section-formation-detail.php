@@ -31,7 +31,8 @@ $tabResult = $objetFicheDetailModel->search(["url"=>$url]);
     // var_dump($img);
 
 $cheminAsset = $this->assetUrl("/");
-$catalogue = $cheminAsset . "pdf/" . $url . ".pdf";
+//$catalogue = $cheminAsset . "pdf/" . $url . ".pdf";
+$catalogue = $cheminAsset . "pdf/essai.pdf";
 echo
 
 <<<CODEHTML

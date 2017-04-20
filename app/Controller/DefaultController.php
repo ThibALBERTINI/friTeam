@@ -328,4 +328,11 @@ class DefaultController extends Controller
 		$this->show("pages/default_accompagnement-detail", [ "titrePage" => $titrePage, "url" => $url ]);
 	}
 
+			public function evenement()
+	{
+		$titrePage = "Calendrier Evenement";
+		$this->show("pages/default_evenement", [ "titrePage" => $titrePage ]);
+	}
+
+
 }

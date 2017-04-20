@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo $this->assetUrl('font-awesome/css/font-awesome.css') ?>">
     <!-- Roboto Font -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i,900,900i" rel="stylesheet">
     <style>
       <?php if (isset($background)) : ?>
         .header-principal {
@@ -30,7 +31,7 @@
   <body>
     <header>
       <!-- Navbar -->
-      <nav class="navbar navbar-default navbar-fixed-top">
+      <nav class="navbar navbar-default navbar-fixed-top navigation">
         <div class="container-fluid">
           <!-- Menu Hamburger -->
           <div class="navbar-header">

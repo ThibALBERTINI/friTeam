@@ -3,6 +3,10 @@
   font-family: 'Roboto', sans-serif;
 }
 
+html, body {
+  height: 100% !important;
+}
+
 /**************
     NAVBAR
 **************/
@@ -326,14 +330,17 @@ Header pour toutes les autres pages
   background-image: url("../img/header-img2.jpg");
   background-size: cover;
   height: 250px;
+  width: 100%;
 }
 
 .titre-page {
   text-align: left;
-  margin-top: 190px;
+  margin-top: 120px;
   margin-left: 25px;
   color: #FFFFFF;
   font-weight: bolder;
+  text-transform: uppercase;
+  font-family: 'Playfair Display', serif;
 }
 
 
@@ -525,7 +532,7 @@ div.point-fort p {
 ***********/
 
 .newsletter {
-  background-image: url("../img/marigold-calendula-orange-blossom-158507.jpeg");
+  background-image: url("../img/newsletter.jpeg");
   background-size: cover;
   background-attachment: fixed;
   padding-top: 40px;
@@ -551,11 +558,12 @@ div.newsletter h2 {
 }
 
 .newsletter input {
-  background-color: transparent;
+  background-color: #FFFFFF;
+  border: 1px solid #FFFFFF !important;
 }
 
 .newsletter input:focus {
-  color: #FFFFFF;
+  color: #000000;
   border-color: #FFFFFF !important;
 }
 
@@ -573,10 +581,27 @@ div.newsletter h2 {
 
 .newsletter input::placeholder {
   color: #FFFFFF;
-  opacity: 0.8;
+  opacity: 1;
   font-style: italic;
 }
 
+/* Bouton Newsletter */
+.catalogue-newsletter {
+  background-color: #FFFFFF;
+  border: 1px solid #FFFFFF;
+  color: #000000 !important;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 20px;
+  transition: all ease-in-out 300ms;
+}
+
+.catalogue-newsletter:hover {
+  background-color: transparent;
+  color: #FFFFFF !important;
+  transition: all ease-in-out 300ms;
+}
 
 /*********************
   CAROUSEL TEMOIGNAGES
@@ -604,6 +629,7 @@ div.newsletter h2 {
 }
 
 .temoignages p {
+    /* margin-right: 30px; */
     font-family: 'Roboto', sans-serif;
     font-style: italic;
     font-weight: 100;
@@ -738,13 +764,17 @@ span.companie {
 ***************/
 .partenaire-img {
   padding: 0;
-  margin: 0 auto;
+  margin: 0;
   height: 90px;
-  width: 180px;
-}
+  /* width: 180px;
+   */}
 
 .partenaire-img img {
   max-height: 100%;
+}
+
+.test img {
+  max-width: 75%;
 }
 
 
