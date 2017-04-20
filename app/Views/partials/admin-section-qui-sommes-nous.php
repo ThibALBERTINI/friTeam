@@ -173,7 +173,7 @@ $tabProfil = $objetProfilModel->find($id);
                         echo
 <<<CODEHTML
     <td><a href="$hrefModifier">MODIFIER</a></td>
-    <td><a href="$hrefSupprimer">SUPPRIMER</a></td>
+    <td><a href="$hrefSupprimer" class="suppPf">SUPPRIMER</a></td>
     </tr>
 CODEHTML;
 

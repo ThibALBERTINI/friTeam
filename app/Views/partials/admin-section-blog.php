@@ -147,7 +147,7 @@ $tabFormation = $objetFormationModel->find($id);
 						echo 
 <<<CODEHTML
 	<td><a href="$hrefModifier">MODIFIER</td>
- 	<td><a href="$hrefSupprimer">SUPPRIMER</td>
+ 	<td><a href="$hrefSupprimer" class="suppB">SUPPRIMER</td>
  	</tr>
 CODEHTML;
 
