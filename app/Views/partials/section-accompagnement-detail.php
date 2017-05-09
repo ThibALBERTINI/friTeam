@@ -61,15 +61,12 @@ echo
   <!-- Colonne de Gauche  -->
   <div class="row">
     <div class="col-xs-12 col-md-6 col-md-offset-1 colonne-gauche">
-      <p class="explication-formation">
-        $presentation
-      </p>
 
       <h3>$resume</h3>
 
       <div class="ligne"></div>
 
-      <p>
+      <p class="explication-formation">
         $presentation
       </p>
 

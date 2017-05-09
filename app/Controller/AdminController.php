@@ -1180,7 +1180,7 @@ public function postLogin()  // page affichée aprés s'être loggé
                     $tabUpdate["img"] = str_replace("assets/", "", $img);
                 }
                 // JE PEUX UTILISER LA METHODE update DE LA CLASSE \W\Model\Model
-                $objetAccompagnementModel->update($tabUpdate, $id);
+                $objetAccompagnementModel->update($tabUpdate, $id, false);
 
                 // OK
                 $messageOK = "La fiche accompagnement à été correctement modifiée";
@@ -1280,7 +1280,7 @@ public function postLogin()  // page affichée aprés s'être loggé
                         "utilite_acc"       => $utilite,
                         "url"               => $url,
                         "alt"               => $alt,
-                    ]);
+                    ], false);
 
                 // OK
                 $messageOK = "La Fiche Accompagnement à bien été créée";
