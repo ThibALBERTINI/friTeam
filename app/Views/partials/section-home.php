@@ -7,6 +7,7 @@
   {
     foreach ($tabResult as $index => $tabInfo)
     {
+      $titre_friteam = $tabInfo["titre_friteam"];
       $contenu_friteam = $tabInfo["contenu_friteam"];
       $url_video       = $tabInfo["url_video"];
     }
@@ -25,7 +26,7 @@
 
         <!-- Texte Friteam -->
         <div class="col-sm-12 col-md-6">
-          <h2 class="text-center">FRI TEAM C'est Quoi ?</h2>
+          <h2 class="text-center"><?php echo $titre_friteam ?></h2>
 
           <div class="ligne"></div>
 

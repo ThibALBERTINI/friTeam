@@ -106,7 +106,7 @@ if (!empty($tabFormation)) :
 
                     <div class="form-group">
                         <label for="lien_catalogue">Lien vers Catalogue en ligne</label><br>
-                        <input type="text" name="lien_catalogue" id="lien_catalogue" class="form-control" required value="<?php echo $lien_catalogue ?>"><br>
+                        <input type="file" name="lien_catalogue" id="lien_catalogue" class="form-control" required value="<?php echo $lien_catalogue ?>"><br>
                     </div>
 
                     <div class="form-group">

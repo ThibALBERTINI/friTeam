@@ -5,7 +5,7 @@ $objetFormationModel = new \Model\FormationModel;
 $tabFormation = $objetFormationModel->find($id);
 
 //if (!empty($tabFormation)) :
-    // ON CREE DES VARIABLES LOCALES AVEC LE MEME NOM 
+    // ON CREE DES VARIABLES LOCALES AVEC LE MEME NOM
     // QUE LA CLE DANS LE TABLEAU ASSOCIATIF
     extract($tabFormation);
 ?> -->
@@ -41,10 +41,11 @@ $tabFormation = $objetFormationModel->find($id);
 
 					<div class="form-group">
 						<label for="categorie_formation">Catégorie</label>
-						<select name="categorie_formation" id="categorie_formation" class="form-control" required>
+						<input type="text" name="categorie_formation" id="categorie_formation" class="form-control" required><br>
+<!-- 						<select name="categorie_formation" id="categorie_formation" class="form-control" required>
 							<option value="Friteam">Friteam</option>
 							<option value="Complementaire">Complémentaire</option>
-						</select>
+						</select> -->
 					</div>
 
 					<div class="form-group">
@@ -104,7 +105,7 @@ $tabFormation = $objetFormationModel->find($id);
 
 					<div class="form-group">
 						<label for="lien_catalogue">Lien vers Catalogue en ligne</label><br>
-						<input type="text" name="lien_catalogue" id="lien_catalogue" class="form-control" required><br>
+						<input type="file" name="lien_catalogue" id="lien_catalogue" class="form-control" required><br>
 					</div>
 
 					<div class="form-group">

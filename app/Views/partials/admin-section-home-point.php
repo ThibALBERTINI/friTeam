@@ -53,7 +53,7 @@ if (!empty($tabResult)) :
 <?php else: ?>
 
 <section>
-    <h3> PROBLEME NOUVEAU TU AS UN</h3>
+    <h3> Erreur lors de l'affichage, contacter le webmaster du dit site</h3>
 </section>
 
 <?php endif; ?>

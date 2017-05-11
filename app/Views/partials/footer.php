@@ -1,3 +1,33 @@
+<?php
+
+  $objetMentionModel = new \Model\MentionModel;
+  $tabResult = $objetMentionModel->findAll("id", "ASC");
+
+  if(!empty($tabResult))
+  {
+    foreach ($tabResult as $index => $tabInfo)
+    {
+      $contenu_mention = $tabInfo["contenu_mention"];
+    }
+  }
+
+  $objetCguModel = new \Model\CguModel;
+  $tabResult = $objetCguModel->findAll("id", "ASC");
+
+  if(!empty($tabResult))
+  {
+    foreach ($tabResult as $index => $tabInfo)
+    {
+      $contenu_cgu = $tabInfo["contenu_cgu"];
+    }
+  }
+
+  // echo "<pre>";
+  // var_dump($url_video);
+  // echo "</pre>";
+
+?>
+
 </main>
 
 <!-- Footer -->
@@ -10,6 +40,7 @@
           <li><a class="btn social-icon" href="https://twitter.com/provencebooster?lang=fr" target="_blank" role="button"><i class="fa fa-twitter"></i></a></li>
           <li><a class="btn social-icon" href="https://www.instagram.com/provence_booster/" target="_blank" role="button"><i class="fa fa-instagram"></i></a></li>
           <li><a class="btn social-icon" href="https://www.youtube.com/channel/UCavDn2zM6Hc9HwpHpiTdT9w" target="_blank" role="button"><i class="fa fa-youtube-play"></i></a></li>
+          <li><a class="btn social-icon" href="#" target="_blank" role="button"><i class="fa fa-linkedin"></i></a></li>
         </ul>
       </div>
 
@@ -17,9 +48,48 @@
 
       <div class="footer-bottom text-center">
         <ul class="list-inline text-center">
-          <li><a class="text-footer" href="#" role="button">Nos Partenaires</a></li>
-          <li><a class="text-footer" href="#" role="button">Termes Et Conditions</a></li>
-          <li><a class="text-footer" href="#" role="button">Mentions Légales</a></li>
+          <li><a class="text-footer" href="#" role="button" data-toggle="modal" data-target="#myModal1">Conditions générales d'utilisation</a></li>
+
+          <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title" id="myModalLabel">Conditions générales d'utilisation</h4>
+                </div>
+                <div class="modal-body">
+                <?php echo $contenu_cgu ?>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <li><a class="text-footer" href="#" role="button" data-toggle="modal" data-target="#myModal">Mentions Légales</a></li>
+
+          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title" id="myModalLabel">Mentions Légales</h4>
+                </div>
+                <div class="modal-body">
+                <?php echo $contenu_mention ?>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </ul>
         <ul class="list-inline text-center">
           <li><a class="text-footer" href="<?php echo $this->url('users_login') ?>" role="button">Connexion Administrateurs</a></li>

@@ -158,27 +158,25 @@ class DefaultController extends Controller
 		{
 			//Récuperer les infos du formulaire
 		
-			$civilite 		= trim($_POST["civilite_contact"]);
+			// $civilite 		= trim($_POST["civilite_contact"]);
 			$nom 			= trim($_POST["nom_contact"]);
 			$prenom 		= trim($_POST["prenom_contact"]);
 			$email 			= trim($_POST["email_contact"]);
 			$tel 			= trim($_POST["tel_contact"]);
 			$adresse		= trim($_POST["adresse_contact"]);
-			$cp				= trim($_POST["cp_contact"]);
+			// $cp				= trim($_POST["cp_contact"]);
 			$ville			= trim($_POST["ville_contact"]);
 			$message		= trim($_POST["message_contact"]);
 		
 			//Sécurité
 			//Vérifier que chaque information est conforme
-			if (($_POST["civilite_contact"] == "madame") || ($_POST["civilite_contact"] == "monsieur")	 //verif radio ok
-				&& (is_string($nom))																			&& ( mb_strlen($nom) > 1 )
-				&& (is_string($prenom))																		&& ( mb_strlen($prenom) > 1 )
-				&& (filter_var($email, FILTER_VALIDATE_EMAIL) !== false)									&& (!empty($email))
-				&& (is_numeric($tel) !== false)																		&& ( mb_strlen($tel) > 9 )
-				&& (is_string($adresse))																		&& ( mb_strlen($adresse) > 0 )
-				&& (ctype_digit($cp))																			&& ( mb_strlen($cp) > 3 ) //ctype_digit vérifie qu'une chaîne est un entier
-				&& (is_string($ville))																		&& ( mb_strlen($ville) > 0 )
-				&& (is_string($message))																		&& ( mb_strlen($message) > 2 )
+			if ((is_string($nom))											&& ( mb_strlen($nom) > 1 )
+				&& (is_string($prenom))										&& ( mb_strlen($prenom) > 1 )
+				&& (filter_var($email, FILTER_VALIDATE_EMAIL) !== false)	&& (!empty($email))
+				&& (is_numeric($tel) !== false)								&& ( mb_strlen($tel) > 9 )
+				&& (is_string($adresse))									&& (  mb_strlen($adresse) > 1 )
+				&& (is_string($ville))										&& (  mb_strlen($ville) > 1 )
+				&& (is_string($message))									&& ( mb_strlen($message) > 2 )
 				)
 				{
 					$mail = new \PHPMailer(); //création d'un objet de type mail
@@ -196,31 +194,27 @@ class DefaultController extends Controller
 			    	$mail->setFrom('wf3marseille@gmail.com'); // l'expéditeur
 			    	$mail->FromName='Contact'; // apparence de l'expéditeur
 			    	// $mail->addAddress($mailUser);
-			    	$mail->addAddress('f.gauer@yahoo.fr'); // l'adresse mail de celui qui recevra le mail
+			    	$mail->addAddress('thibaut.albertini@gmail.com'); // l'adresse mail de celui qui recevra le mail
 					$mail->Subject = "Nouveau contact sur le site friteam"; //objet du mail
 					$mail->Body = '<table>
 									<tr>
 										<td><b>Vous avez reçu un nouveau message sur le site Friteam !</b></td>
 									</tr>
 									</table>									
-										<p>'.$civilite.' '.$nom.' '.$prenom.' </p>
-										<p> Dont les coordonnées sont : '.$email.' tel :'
-										.$tel.'</p>
-										<p> Adresse : '.$adresse.' CP : '.$cp.' Ville :
-										'.$ville.' </p> 
+										<p>'.$nom.' '.$prenom.' </p>
+										<p> Dont l\'adresse mail est : <strong>'.$email.'</strong> et le numéro de tel : <strong>'.$tel.'</strong></p>
+										<p> Son adresse (rien n\'apparait si le champs n\'a pas été saisi) : '.$adresse.' et sa ville '.$ville.'</p>
 										<p> Vous adresse ce message : '.$message.'</p><br>';
 					//Enregistrer les information receuillies par le formulaire dans la base de données
 					//Création d'un objet de la classe ContatModel
 					$objetContactModel = new ContactModel; //Si pb, le model Contact n'est peut etre pas créé
 					$tabUser=$objetContactModel->insert([
-						 	"civilite_contact"	=> $civilite,
 							"nom_contact" 		=> $nom,
 					 		"prenom_contact" 	=> $prenom,
 				 			"email_contact" 	=> $email,
 				 			"tel_contact" 		=> $tel,
-							"adresse_contact" 	=> $adresse,
-							"cp_contact" 		=> $cp,
-							"ville_contact" 	=> $ville,
+				 			"adresse_contact" 	=> $adresse,
+				 			"ville_contact" 	=> $ville,
 							"message_contact" 	=> $message,
 						], true);
 					$message = "Votre formulaire a bien été envoyé a l'administrateur, merci.";
@@ -237,11 +231,11 @@ class DefaultController extends Controller
 				}
 				else
 				{
-					$message = '<p class="erreur">Erreur lors de l\'enregistrement';
+					$message = '<p class="erreur">Erreur lors de l\'enregistrement cest ici ??';
 				}
 		}
 		$titrePage = "contact";
-		$this->show("pages/default_contact", [ "message" => $message, "titrePage" => $titrePage, "message2" => $message2 ]);
+		$this->show("pages/default_contact", [ "message" => $message, "titrePage" => $titrePage]);
 	}
 
 	public function formation()
@@ -306,7 +300,7 @@ class DefaultController extends Controller
 			}
 
 
-		$titrePage = "formation";
+		$titrePage = "Formation";
 		$this->show("pages/default_formation", [ "titrePage" => $titrePage, "categs"=> $categs, "tabResult" => $tabResult, "tabFormations" =>$tabFormations ]);
 	} // fin function formation
 
@@ -333,6 +327,13 @@ class DefaultController extends Controller
 		$titrePage = "Calendrier Evenement";
 		$this->show("pages/default_evenement", [ "titrePage" => $titrePage ]);
 	}
+
+			public function blog()
+	{
+		$titrePage = "Blog";
+		$this->show("pages/default_blog", [ "titrePage" => $titrePage ]);
+	}
+
 
 
 }

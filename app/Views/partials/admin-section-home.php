@@ -20,6 +20,7 @@
 						{
 							switch ($nomColonne)
 							{
+				    			case "titre_friteam":
 				    			case "contenu_friteam":
 				    			case "url_video":
 				        			echo "<th>$nomColonne</th>";
@@ -49,6 +50,7 @@
 						{
 							switch ($nomColonne)
 							{
+				    			case "titre_friteam":
 				    			case "contenu_friteam":
 				    			case "url_video":
 				        			echo "<td>$valeurColonne</td>";
@@ -371,6 +373,162 @@ CODEHTML;
 
 				}
 
+				?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section> <!-- Affichage des infos pour le bandeau video -->
+	<div class="container-fluid table-admin">
+		<div class="row">
+			<div class="col-xs-12 col-md-8 col-md-offset-2 ">
+				<h2>Mentions Légales</h2>
+				<div class="scroll-table">	
+					<table class="table table-striped table-responsive">
+						<thead>
+				<?php
+					//création d'un nouvel objet
+					$objetMentionModel = new \Model\MentionModel;
+					//fincAll renvoie un tableau associatif de l'objet créé
+					$tabResult = $objetMentionModel->findAll("id", "DESC", 1);
+					//exploitation du tableau associatif avec boucle pour chaque ligne trouvée
+					foreach($tabResult as $tabLigne)
+					{
+						echo "<tr>";
+						//BOucle pour parcourir les colonnes
+						foreach($tabLigne as $nomColonne => $valeurColonne)
+						{
+							switch ($nomColonne)
+							{
+				    			case "contenu_mention":
+				        			echo "<th>$nomColonne</th>";
+				        			break;
+							}
+							//affichage de la colonne
+							//echo "<th>$nomColonne</th>";
+						}
+						//Ajouter les colonnes MODIFIER SUPPRIMER
+						echo "<th>MODIFIER</th>";
+
+						echo "</tr>";
+					}
+
+				 ?>
+						</thead>
+						<tbody>
+				<?php 
+					//acces a la table
+					$tabResult = $objetMentionModel->findAll("id", "DESC");
+					//Boucle pour parcourir chaque ligne
+					foreach($tabResult as $tabLigne)
+					{
+						echo "<tr>";
+						//boucle pour parcourir chaque colonne
+						foreach($tabLigne as $nomColonne => $valeurColonne)
+						{
+							switch ($nomColonne)
+							{
+				    			case "contenu_mention":
+				        			echo "<td>$valeurColonne</td>";
+				        			break;
+							}
+							//echo "<td>$valeurColonne</td>";
+						}
+
+						//je recupere l'id de la ligne courante
+						$id = $tabLigne["id"];
+
+						$hrefModifier = $this->url("admin_home-mention", [ "id" => $id ]);
+
+						//Ajouter les colonnes MODIFIER et SUPPRIMER
+						echo 
+<<<CODEHTML
+	<td><a href="$hrefModifier">MODIFIER</td>
+ 	</tr>
+CODEHTML;
+				}
+				?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section> <!-- Affichage des infos pour le bandeau video -->
+	<div class="container-fluid table-admin">
+		<div class="row">
+			<div class="col-xs-12 col-md-8 col-md-offset-2 ">
+				<h2>Conditions Générales d'Utilisation</h2>
+				<div class="scroll-table">	
+					<table class="table table-striped table-responsive">
+						<thead>
+				<?php
+					//création d'un nouvel objet
+					$objetCguModel = new \Model\CguModel;
+					//fincAll renvoie un tableau associatif de l'objet créé
+					$tabResult = $objetCguModel->findAll("id", "DESC", 1);
+					//exploitation du tableau associatif avec boucle pour chaque ligne trouvée
+					foreach($tabResult as $tabLigne)
+					{
+						echo "<tr>";
+						//BOucle pour parcourir les colonnes
+						foreach($tabLigne as $nomColonne => $valeurColonne)
+						{
+							switch ($nomColonne)
+							{
+				    			case "contenu_cgu":
+				        			echo "<th>$nomColonne</th>";
+				        			break;
+							}
+							//affichage de la colonne
+							//echo "<th>$nomColonne</th>";
+						}
+						//Ajouter les colonnes MODIFIER SUPPRIMER
+						echo "<th>MODIFIER</th>";
+
+						echo "</tr>";
+					}
+
+				 ?>
+						</thead>
+						<tbody>
+				<?php 
+					//acces a la table
+					$tabResult = $objetCguModel->findAll("id", "DESC");
+					//Boucle pour parcourir chaque ligne
+					foreach($tabResult as $tabLigne)
+					{
+						echo "<tr>";
+						//boucle pour parcourir chaque colonne
+						foreach($tabLigne as $nomColonne => $valeurColonne)
+						{
+							switch ($nomColonne)
+							{
+				    			case "contenu_cgu":
+				        			echo "<td>$valeurColonne</td>";
+				        			break;
+							}
+							//echo "<td>$valeurColonne</td>";
+						}
+
+						//je recupere l'id de la ligne courante
+						$id = $tabLigne["id"];
+
+						$hrefModifier = $this->url("admin_home-cgu", [ "id" => $id ]);
+
+						//Ajouter les colonnes MODIFIER et SUPPRIMER
+						echo 
+<<<CODEHTML
+	<td><a href="$hrefModifier">MODIFIER</td>
+ 	</tr>
+CODEHTML;
+				}
 				?>
 						</tbody>
 					</table>

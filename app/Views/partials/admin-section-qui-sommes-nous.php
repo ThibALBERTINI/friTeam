@@ -1,14 +1,81 @@
-<!-- <?php 
-// ON VA ALLER CHERCHER LES INFOS DE LA FORMATION DANS LA TABLE MYSQL formation
-// APPROCHE PAR DELEGATION
-$objetProfilModel = new \Model\ProfilModel;
-$tabProfil = $objetProfilModel->find($id);
+<section> <!-- Affichage des infos pour le bandeau video -->
+    <div class="container-fluid table-admin">
+        <div class="row">
+            <div class="col-xs-12 col-md-8 col-md-offset-2 ">
+                <h2>Contenu du texte de présentation "Notre Philosophie"</h2>
+                <div class="scroll-table">  
+                    <table class="table table-striped table-responsive">
+                        <thead>
+                <?php
+                    //création d'un nouvel objet
+                    $objetPhilosophieModel = new \Model\PhilosophieModel;
+                    //fincAll renvoie un tableau associatif de l'objet créé
+                    $tabResult = $objetPhilosophieModel->findAll("id", "DESC", 1);
+                    //exploitation du tableau associatif avec boucle pour chaque ligne trouvée
+                    foreach($tabResult as $tabLigne)
+                    {
+                        echo "<tr>";
+                        //BOucle pour parcourir les colonnes
+                        foreach($tabLigne as $nomColonne => $valeurColonne)
+                        {
+                            switch ($nomColonne)
+                            {
+                                case "contenu_philosophie":
+                                    echo "<th>$nomColonne</th>";
+                                    break;
+                            }
+                            //affichage de la colonne
+                            //echo "<th>$nomColonne</th>";
+                        }
+                        //Ajouter les colonnes MODIFIER SUPPRIMER
+                        echo "<th>MODIFIER</th>";
 
-//if (!empty($tabProfil)) :
-    // ON CREE DES VARIABLES LOCALES AVEC LE MEME NOM 
-    // QUE LA CLE DANS LE TABLEAU ASSOCIATIF
-    extract($tabFormation);
-?> -->
+                        echo "</tr>";
+                    }
+
+                 ?>
+                        </thead>
+                        <tbody>
+                <?php 
+                    //acces a la table
+                    $tabResult = $objetPhilosophieModel->findAll("id", "DESC");
+                    //Boucle pour parcourir chaque ligne
+                    foreach($tabResult as $tabLigne)
+                    {
+                        echo "<tr>";
+                        //boucle pour parcourir chaque colonne
+                        foreach($tabLigne as $nomColonne => $valeurColonne)
+                        {
+                            switch ($nomColonne)
+                            {
+                                case "contenu_philosophie":
+                                    echo "<td>$valeurColonne</td>";
+                                    break;
+                            }
+                            //echo "<td>$valeurColonne</td>";
+                        }
+
+                        //je recupere l'id de la ligne courante
+                        $id = $tabLigne["id"];
+
+                        $hrefModifier = $this->url("admin_qui-sommes-nous-philosophie", [ "id" => $id ]);
+
+                        //Ajouter les colonnes MODIFIER et SUPPRIMER
+                        echo 
+<<<CODEHTML
+    <td><a href="$hrefModifier">MODIFIER</td>
+    </tr>
+CODEHTML;
+                }
+                ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section>
     <div class="container-fluid">
         <div class="row">

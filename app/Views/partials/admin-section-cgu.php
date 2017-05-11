@@ -1,8 +1,8 @@
 <?php
 // ON VA ALLER CHERCHER LES INFOS DE LA FORMATION DANS LA TABLE MYSQL formation
 // APPROCHE PAR DELEGATION
-$objetVideoModel = new \Model\VideoModel;
-$tabResult = $objetVideoModel->find($id);
+$objetCguModel = new \Model\CguModel;
+$tabResult = $objetCguModel->find($id);
 
 if (!empty($tabResult)) :
     // ON CREE DES VARIABLES LOCALES AVEC LE MEME NOM 
@@ -15,7 +15,7 @@ if (!empty($tabResult)) :
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-12 col-md-6 col-md-offset-3">
-                <h3>FORMULAIRE DE MISE A JOUR DU BANDEAU VIDEO/FRITEAM EXPLICATION DU CONCEPT ?</h3>
+                <h3>FORMULAIRE DE MISE A JOUR DES CONDITIONS GENERALES D'UTILISATION</h3>
 
                 <div class="message classe-ok">
                     <?php if (isset($messageOK)) echo $messageOK; ?><br> 
@@ -28,21 +28,11 @@ if (!empty($tabResult)) :
                 <form method="POST" action="" enctype="multipart/form-data">
 
                     <div class="form-group">
-                        <label for="titre_friteam">Contenu TITRE de la partie "POURQUOI FRI TEAM"</label><br>
-                        <textarea type="text" name="titre_friteam" id="titre_friteam" class="form-control" required cols="60" rows="5"><?php echo $titre_friteam ?></textarea><br>
+                        <label for="contenu_cgu">Contenu "Conditions générales d'utilisation"</label><br>
+                        <textarea type="text" name="contenu_cgu" id="contenu_cgu" class="form-control ckeditor" required cols="60" rows="5"><?php echo $contenu_cgu ?></textarea><br>
                     </div>
 
-                    <div class="form-group">
-                        <label for="contenu_friteam">Contenu "POURQUOI FRI TEAM"</label><br>
-                        <textarea type="text" name="contenu_friteam" id="contenu_friteam" class="form-control ckeditor" required cols="60" rows="5"><?php echo $contenu_friteam ?></textarea><br>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="url_video">Url de la vidéo</label><br>
-                        <input type="text" name="url_video" id="url_video" class="form-control" required value="<?php echo $url_video ?>"><br>
-                    </div>
-
-                    <button type="submit">Modifier le Bandeau</button>
+                    <button type="submit">Modifier les Conditions générales d'utilisation</button>
                     
                     <!-- INFO TECHNIQUE POUR PRECISER L'ACTION QUE LE VISITEUR VEUT REALISER -->
                     <input type="hidden" name="id" value="<?php echo $id ?>">
@@ -57,7 +47,7 @@ if (!empty($tabResult)) :
 <?php else: ?>
 
 <section>
-    <h3>TU AS UN PROBLEME</h3>
+    <h3>Erreur Lors de l'affichage de la page, contacter le webMaster du dit site</h3>
 </section>
 
 <?php endif; ?>

@@ -23,10 +23,14 @@
 		['GET|POST',    '/admin/point/[:id]', 					'Admin#homePoint',     			'admin_home-point'],     // UNE ROUTE pour modifier le bandeau points forts
 		['GET|POST',    '/admin/temoignage/[:id]', 				'Admin#homeTemoignage',     	'admin_home-temoignage'],     // UNE ROUTE pour modifier le bandeau temoignage
 		['GET|POST',    '/admin/partenaire/[:id]', 				'Admin#homePartenaire',     	'admin_home-partenaire'],     // UNE ROUTE pour modifier le bandeau temoignage
+		['GET|POST',    '/admin/mentionslegales/[:id]', 				'Admin#homeMention',     	'admin_home-mention'],     // UNE ROUTE pour modifier le bandeau temoignage
+		['GET|POST',    '/admin/cgu/[:id]', 				'Admin#homeCgu',     	'admin_home-cgu'],     // UNE ROUTE pour modifier le bandeau temoignage
 
 		//PAGE QUI-SOMMES-NOUS?
 		['GET|POST', 	'/admin/friteam-equipe',				'Admin#friteamEquipe', 			'admin_friteam-equipe'], // UNE ROUTE
 		['GET|POST', 	'/admin/friteam-equipe-update/[:id]',	'Admin#friteamEquipeUpdate', 	'admin_friteam-equipe-update'], // UNE ROUTE
+
+		['GET|POST', 	'/admin/qui-sommes-nous-philosophie/[:id]',	'Admin#philosophie', 	'admin_qui-sommes-nous-philosophie'], // UNE ROUTE
 
 		['GET|POST', 	'/admin/formation', 					'Admin#formationDetail', 		'admin_formation_detail'],  // UNE ROUTE pour la créa et l'aff des formations enreg ds bad
 		['GET|POST', 	'/admin/formation/update/[:id]',		'Admin#formationUpdate',  		'admin_formation_update'], // UNE ROUTE pour la mise à jour des formation (récupérée par l'id)

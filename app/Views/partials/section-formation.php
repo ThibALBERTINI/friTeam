@@ -43,7 +43,7 @@
                                   </div>
 
                                   <div class="contenu">
-                                    <h4><a href="$href"><?php echo $formation['titre_formation']; ?></a></h4>
+                                    <h4><a href="<?php echo $this->url("default_formation-detail", ["url"=>$formation['url']]); ?>"><?php echo $formation['titre_formation']; ?></a></h4>
                                     <span class="icon"><i class="fa fa-calendar" aria-hidden="true"></i> <?php echo $formation['date_formation']; ?></span>
                                     <span class="icon"><i class="fa fa-clock-o" aria-hidden="true"></i> <?php echo $formation['duree_formation']; ?></span>
                                     <div class="ligne"></div>

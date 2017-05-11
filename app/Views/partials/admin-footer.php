@@ -17,8 +17,7 @@
 
       <div class="footer-bottom text-center">
         <ul class="list-inline text-center">
-          <li><a class="text-footer" href="#" role="button">Nos Partenaires</a></li>
-          <li><a class="text-footer" href="#" role="button">Termes Et Conditions</a></li>
+          <li><a class="text-footer" href="#" role="button">Conditions générales d'utilisation</a></li>
           <li><a class="text-footer" href="#" role="button">Mentions Légales</a></li>
         </ul>
       </div>

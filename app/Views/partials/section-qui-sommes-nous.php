@@ -1,3 +1,22 @@
+<?php
+
+  $objetPhilosophieModel = new \Model\PhilosophieModel;
+  $tabResult = $objetPhilosophieModel->findAll("id", "ASC");
+
+  if(!empty($tabResult))
+  {
+    foreach ($tabResult as $index => $tabInfo)
+    {
+      $contenu_philosophie = $tabInfo["contenu_philosophie"];
+    }
+  }
+
+  // echo "<pre>";
+  // var_dump($url_video);
+  // echo "</pre>";
+
+?>
+
 <div class="container profil-container">
   <div class="row">
   
@@ -6,23 +25,9 @@
           <h2 class="text-center">Notre Philosophie</h2>
           
           <div class="ligne"></div>
-              
-          <h3>Pourquoi ?</h3>
-          <p>
-              Un nouveau monde émerge, dynamisé par les réseaux sociaux, l'innovation et la culture du partage. L’heure de la troisième révolution industrielle a-t-elle sonné ?
-          </p>
-          <p>
-            Les organisations et les femmes et hommes qui la composent ont une formidable opportunité d’inventer leur propre modèle remettant l’humain au coeur des dispositifs tout en s’appuyant sur des technologies innovantes. 
-            Nous mettons à disposition nos compétences pour vous accompagner dans cette évolution 
-          </p>
-          
-          <h3>Comment ?</h3>
-          <p>
-            A l’aide de la méthodologie FRI TEAM : <br />
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i> Une méthodologie en 7 étapes et basée sur 3 dimensions : humaine, organisationnelle et l’écosystème<br />
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i> Des outils ludiques et innovants d’intelligence collective,<br />
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i> La volonté de Fédérer,  Réussir, et  Innover Ensemble<br />
-          </p>
+
+          <div><?php echo $contenu_philosophie ?></div>              
+
       </div>
   </section>
   

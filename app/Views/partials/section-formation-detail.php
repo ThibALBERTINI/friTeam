@@ -22,7 +22,7 @@ $tabResult = $objetFicheDetailModel->search(["url"=>$url]);
     $conditions = $tabInfo["conditions_formation"];
     $intervenant = $tabInfo["intervenant_formation"];
     $programme = $tabInfo["programme_formation"];
-    $catalogue = $tabInfo["programme_formation"];
+    $lien_catalogue = $tabInfo["lien_catalogue"];
     $alt = $tabInfo["alt"];
     $prix = $tabInfo["prix"];
     $url = $tabInfo["url"];
@@ -32,7 +32,7 @@ $tabResult = $objetFicheDetailModel->search(["url"=>$url]);
 
 $cheminAsset = $this->assetUrl("/");
 //$catalogue = $cheminAsset . "pdf/" . $url . ".pdf";
-$catalogue = $cheminAsset . "pdf/essai.pdf";
+$lien_catalogue = $cheminAsset . $lien_catalogue;
 echo
 
 <<<CODEHTML
@@ -99,7 +99,7 @@ echo
       </p>
 
       <div class="text-center">
-        <a href="$catalogue" class="btn btn-default brochure-formation">Telecharger la brochure</a>
+        <a href="$lien_catalogue" class="btn btn-default brochure-formation">Telecharger la brochure</a>
       </div>
 
     </div>

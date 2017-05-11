@@ -23,7 +23,7 @@
       <form class="form-contact" action="" method="POST">
 
         <!-- Civilité -->
-        <div class="form-group">
+<!--         <div class="form-group">
           <label>Civilité</label>
           <div>
             <input type="radio" name="civilite_contact" id="civilite_madame" value="madame" required />
@@ -34,6 +34,7 @@
             <label for="civilite_monsieur">Monsieur</label>
           </div>
         </div>
+-->
 
           <!-- Nom -->
           <div class="form-group">
@@ -59,28 +60,27 @@
             <input type="number" name="tel_contact" id="tel_contact" class="form-control" required placeholder="Entrez un numéro de téléphone valide" />
           </div>
 
-          <!-- Adresse-->
           <div class="form-group">
             <label for="adresse_contact">Adresse</label>
-            <input type="text" name="adresse_contact" id="adresse_contact" required class="form-control" required placeholder="Entrez une adresse valide" />
+            <input type="text" name="adresse_contact" id="adresse_contact" class="form-control" required placeholder="Entrez une adresse valide" />
           </div>
 
-          <!-- Code Postal-->
+<!-- 
           <div class="form-group">
             <label for="cp_contact">Code Postal</label>
             <input type="number" name="cp_contact" id="cp_contact" required class="form-control" required placeholder="Entrez un code postal" />
-          </div>
-
-          <!-- Ville-->
+          </div> 
+-->
+   
           <div class="form-group">
             <label for="ville_contact">Ville</label>
-            <input type="text" name="ville_contact" id="ville_contact" required class="form-control" required placeholder="Entrez le nom de votre ville" />
+            <input type="text" name="ville_contact" id="ville_contact" class="form-control" required placeholder="Entrez le nom de votre ville" />
           </div>
 
           <!-- Message -->
           <div class="form-group">
             <label for="message_contact">Message</label>
-            <textarea rows="4" cols="10" name="message_contact" id="message_contact" class="form-control" required placeholder="Entrez votre message" /></textarea>
+            <textarea rows="4" cols="10" name="message_contact" id="message_contact" class="form-control "placeholder="Entrez votre message" /></textarea>
           </div>
 
           <!-- Bouton Envoyer -->

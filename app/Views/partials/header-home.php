@@ -2,6 +2,9 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <meta name="description" content="<?php echo $contenuMeta ?>">
+    <meta name="keywords" content="<?php echo $keywords ?>">
+    <meta http-equiv="Content-Language" content="Fr-Ca">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
@@ -42,9 +45,7 @@
             <ul class="nav navbar-nav navbar-right">
               <li><a class="menu1" href="<?php echo $this->url('default_home') ?>">Accueil</a></li>
               <li><a class="menu2" href="<?php echo $this->url('default_friteam-equipe') ?>">Qui sommes-nous ?</a></li>
-              <li><a class="menu3" href="<?php echo $this->url('default_formation') ?>">Nos Formations</a></li>
-              <li><a class="menu4" href="<?php echo $this->url('default_accompagnement') ?>">Notre accompagnement</a></li>
-              <li><a class="menu5" href="<?php echo $this->url('default_evenement') ?>">Nos Évènements</a></li> <!-- Liens à former -->
+              <li><a class="menu3" href="<?php echo $this->url('default_formation') ?>">Nos Offres</a></li>
               <li><a class="menu6" href="<?php echo $this->url('default_blog') ?>">Blog</a></li>
               <li><a class="menu7" href="<?php echo $this->url('default_contact') ?>">Contact</a></li>
             </ul>

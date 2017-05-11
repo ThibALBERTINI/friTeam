@@ -13,7 +13,9 @@ use \Model\VideoModel;
 use \Model\PointModel;
 use \Model\TemoignageModel;
 use \Model\PartenaireModel;
-
+use \Model\MentionModel;
+use \Model\CguModel;
+use \Model\PhilosophieModel;
 
 
 class AdminController
@@ -174,7 +176,7 @@ class AdminController
         $this->show("pages/admin_modif_pass", ["message" => $message, "titrePage"=> $titrePage]);
     } // fin function modifPass
 
-public function postLogin()  // page affichée aprés s'être loggé
+    public function postLogin()  // page affichée aprés s'être loggé
     {
         $this->allowTo([ "admin", "super-admin" ]);
         $this->show("pages/admin_postLogin");
@@ -272,6 +274,7 @@ public function postLogin()  // page affichée aprés s'être loggé
             // RECUPERER LES INFOS DU FORMULAIRE
             // http://php.net/manual/en/function.trim.php
             //$img               = trim($_POST["img_formation"]);
+            $titre_friteam        = trim($_POST["titre_friteam"]);
             $contenu_friteam        = trim($_POST["contenu_friteam"]);
             $url_video              = trim($_POST["url_video"]);
 
@@ -280,6 +283,7 @@ public function postLogin()  // page affichée aprés s'être loggé
             // VERIFIER QUE CHAQUE INFO EST CONFORME
             // http://php.net/manual/en/function.mb-strlen.php
             if (is_string($contenu_friteam)        && ( mb_strlen($contenu_friteam) > 0 )
+                    && is_string($titre_friteam) && ( mb_strlen($titre_friteam) > 0 )
                     && is_string($url_video) && ( mb_strlen($url_video) > 0 )
                 )
             {
@@ -295,6 +299,7 @@ public function postLogin()  // page affichée aprés s'être loggé
                 $objetVideoModel = new videoModel;
                 // JE PEUX UTILISER LA METHODE update DE LA CLASSE \W\Model\Model
                 $objetVideoModel->update([
+                "titre_friteam"       => $titre_friteam,
                 "contenu_friteam"       => $contenu_friteam,
                 "url_video"             => $url_video,
                 ], $id, false);
@@ -314,6 +319,183 @@ public function postLogin()  // page affichée aprés s'être loggé
         // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
         $titrePage = "modification bandeau FriTeam/Vidéo";
         $this->show("pages/admin_home-video", [ "id" => $id, "messageOK" => $messageOK, "messageKO" => $messageKO, "titrePage" => $titrePage ]);
+        
+    }
+
+    public function homeMention($id)
+    {
+        $this->allowTo([ "admin", "super-admin" ]);
+                $message = "";
+                $messageOK = "";
+                $messageKO = "";
+        // CONTROLLER
+        // ICI IL FAUDRA TRAITER LE FORMULAIRE DE UPDATE
+
+                // JE PEUX TRAITER LE FORMULAIRE
+        // (SI IL Y A UN FORMULAIRE A TRAITER)
+
+        if (isset($_POST["operation"]) && ($_POST["operation"] == "modifier"))
+        {
+            // RECUPERER LES INFOS DU FORMULAIRE
+            // http://php.net/manual/en/function.trim.php
+            //$img               = trim($_POST["img_formation"]);
+            $contenu_mention        = trim($_POST["contenu_mention"]);
+
+
+            // SECURITE
+            // VERIFIER QUE CHAQUE INFO EST CONFORME
+            // http://php.net/manual/en/function.mb-strlen.php
+            if (is_string($contenu_mention)        && ( mb_strlen($contenu_mention) > 0 )
+                )
+            {
+                // OK ON A LES BONNES INFOS
+                // COMPLETER LES INFOS MANQUANTES
+
+                // $id_auteur      = 1;     // DEBUG
+                //$dateCreation   = date("Y-m-d H:i:s");    // FORMAT DATETIME SQL
+
+                // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
+                // JE CREE UN OBJET DE LA CLASSE FormationModel
+                // NE PAS OUBLIER DE FAIRE use
+                $objetMentionModel = new MentionModel;
+                // JE PEUX UTILISER LA METHODE update DE LA CLASSE \W\Model\Model
+                $objetMentionModel->update([
+                "contenu_mention"       => $contenu_mention,
+                ], $id, false);
+
+                // OK
+                $messageOK = "Les mentions légales ont été correctement modifiée";
+            }
+            else
+            {
+                // KO
+                // UNE ERREUR
+                $messageKO = "ERREUR lors de la mise à jour";
+            }
+        }
+
+        // VIEW
+        // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
+        $titrePage = "modification des mentions légales";
+        $this->show("pages/admin_home-mention", [ "id" => $id, "messageOK" => $messageOK, "messageKO" => $messageKO, "titrePage" => $titrePage ]);
+        
+    }
+
+    public function homeCgu($id)
+    {
+        $this->allowTo([ "admin", "super-admin" ]);
+                $message = "";
+                $messageOK = "";
+                $messageKO = "";
+        // CONTROLLER
+        // ICI IL FAUDRA TRAITER LE FORMULAIRE DE UPDATE
+
+                // JE PEUX TRAITER LE FORMULAIRE
+        // (SI IL Y A UN FORMULAIRE A TRAITER)
+
+        if (isset($_POST["operation"]) && ($_POST["operation"] == "modifier"))
+        {
+            // RECUPERER LES INFOS DU FORMULAIRE
+            // http://php.net/manual/en/function.trim.php
+            //$img               = trim($_POST["img_formation"]);
+            $contenu_cgu        = trim($_POST["contenu_cgu"]);
+
+
+            // SECURITE
+            // VERIFIER QUE CHAQUE INFO EST CONFORME
+            // http://php.net/manual/en/function.mb-strlen.php
+            if (is_string($contenu_cgu)        && ( mb_strlen($contenu_cgu) > 0 )
+                )
+            {
+                // OK ON A LES BONNES INFOS
+                // COMPLETER LES INFOS MANQUANTES
+
+                // $id_auteur      = 1;     // DEBUG
+                //$dateCreation   = date("Y-m-d H:i:s");    // FORMAT DATETIME SQL
+
+                // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
+                // JE CREE UN OBJET DE LA CLASSE FormationModel
+                // NE PAS OUBLIER DE FAIRE use
+                $objetCguModel = new CguModel;
+                // JE PEUX UTILISER LA METHODE update DE LA CLASSE \W\Model\Model
+                $objetCguModel->update([
+                "contenu_cgu"       => $contenu_cgu,
+                ], $id, false);
+
+                // OK
+                $messageOK = "Les CGU ont été correctement modifiée";
+            }
+            else
+            {
+                // KO
+                // UNE ERREUR
+                $messageKO = "ERREUR lors de la mise à jour";
+            }
+        }
+
+        // VIEW
+        // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
+        $titrePage = "modification des mentions légales";
+        $this->show("pages/admin_home-cgu", [ "id" => $id, "messageOK" => $messageOK, "messageKO" => $messageKO, "titrePage" => $titrePage ]);
+        
+    }
+
+    public function philosophie($id)
+    {
+        $this->allowTo([ "admin", "super-admin" ]);
+                $message = "";
+                $messageOK = "";
+                $messageKO = "";
+        // CONTROLLER
+        // ICI IL FAUDRA TRAITER LE FORMULAIRE DE UPDATE
+
+                // JE PEUX TRAITER LE FORMULAIRE
+        // (SI IL Y A UN FORMULAIRE A TRAITER)
+
+        if (isset($_POST["operation"]) && ($_POST["operation"] == "modifier"))
+        {
+            // RECUPERER LES INFOS DU FORMULAIRE
+            // http://php.net/manual/en/function.trim.php
+            //$img               = trim($_POST["img_formation"]);
+            $contenu_philosophie        = trim($_POST["contenu_philosophie"]);
+
+
+            // SECURITE
+            // VERIFIER QUE CHAQUE INFO EST CONFORME
+            // http://php.net/manual/en/function.mb-strlen.php
+            if (is_string($contenu_philosophie)        && ( mb_strlen($contenu_philosophie) > 0 )
+                )
+            {
+                // OK ON A LES BONNES INFOS
+                // COMPLETER LES INFOS MANQUANTES
+
+                // $id_auteur      = 1;     // DEBUG
+                //$dateCreation   = date("Y-m-d H:i:s");    // FORMAT DATETIME SQL
+
+                // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
+                // JE CREE UN OBJET DE LA CLASSE FormationModel
+                // NE PAS OUBLIER DE FAIRE use
+                $objetPhilosophieModel = new PhilosophieModel;
+                // JE PEUX UTILISER LA METHODE update DE LA CLASSE \W\Model\Model
+                $objetPhilosophieModel->update([
+                "contenu_philosophie"       => $contenu_philosophie,
+                ], $id, false);
+
+                // OK
+                $messageOK = "Le Contenu a été correctement modifiée";
+            }
+            else
+            {
+                // KO
+                // UNE ERREUR
+                $messageKO = "ERREUR lors de la mise à jour";
+            }
+        }
+
+        // VIEW
+        // AFFICHER LA PAGE QUI PERMET DE MODIFIER UNE FORMATION
+        $titrePage = 'modification du contenu de la partie "Notre Philosophie"';
+        $this->show("pages/admin_qui-sommes-nous-philosophie", [ "id" => $id, "messageOK" => $messageOK, "messageKO" => $messageKO, "titrePage" => $titrePage ]);
         
     }
 
@@ -669,7 +851,7 @@ public function postLogin()  // page affichée aprés s'être loggé
             $lieu              = trim($_POST["lieu_formation"]);
             $intervenant       = trim($_POST["intervenant_formation"]);
             $programme         = trim($_POST["programme_formation"]);
-            $lien              = trim($_POST["lien_catalogue"]);
+            // $lien              = trim($_POST["lien_catalogue"]);
             $url               = trim($_POST["url"]);
             $alt               = trim($_POST["alt"]);
             $prix               = trim($_POST["prix"]);
@@ -694,7 +876,7 @@ public function postLogin()  // page affichée aprés s'être loggé
                     && is_string($lieu)         && ( mb_strlen($lieu) > 0 ) // a voir : dans html, le type="date" de la balise <input> doit renvoyer un champs text sur certains navigateur
                     && is_string($intervenant)  && ( mb_strlen($intervenant) > 0 )
                     && is_string($programme)    && ( mb_strlen($programme) > 0 )
-                    && is_string($lien)         && ( mb_strlen($lien) > 0 )
+                    //&& is_string($lien_catalogue)         && ( mb_strlen($lien_catalogue) > 0 )
                     && is_string($url)          && ( mb_strlen($url) > 0 )
                     && is_string($alt)          && ( mb_strlen($alt) > 0 )
                     && is_string($prix)          && ( mb_strlen($prix) > 0 )
@@ -707,6 +889,7 @@ public function postLogin()  // page affichée aprés s'être loggé
                 $id_auteur      = 1;     // DEBUG
                 //$dateCreation   = date("Y-m-d H:i:s");    // FORMAT DATETIME SQL
                 $img = $this->upload();
+                $lien_catalogue = $this->uploadPdf();
 
                 // ENREGISTRER LA LIGNE DANS LA TABLE MYSQL formation
                 // JE CREE UN OBJET DE LA CLASSE FormationModel
@@ -727,7 +910,7 @@ public function postLogin()  // page affichée aprés s'être loggé
                         "lieu_formation"        => $lieu,
                         "intervenant_formation" => $intervenant,
                         "programme_formation"   => $programme,
-                        "lien_catalogue"        => $lien,
+                        "lien_catalogue"        => str_replace("assets/", "", $lien_catalogue),
                         "url"                   => $url,
                         "alt"                   => $alt,
                         "prix"                   => $prix,
@@ -872,7 +1055,132 @@ public function postLogin()  // page affichée aprés s'être loggé
         $this->message = $message;
         return $fichier;
     }
+// ********************************************************************************************************************
 
+    public function uploadUpdatePdf()
+    {
+        $this->allowTo([ "admin", "super-admin" ]);
+        $repertoire = "assets/pdf/"; //repertoire où le fichier va être stocké
+        $fichier = "";
+        $uploadOk = 1;
+        // Verifier que l'image existe dans l'upload
+        if(isset($_POST["submit"]))
+        {
+            if(isset($_FILES["lien_catalogue"]) && $_FILES["lien_catalogue"]["size"] > 0)
+            {
+                $check = filesize($_FILES["lien_catalogue"]["tmp_name"]);
+                if($check !== false)
+                {
+                    $fichier = $repertoire . basename($_FILES["lien_catalogue"]["name"]); //chemin du fichier uploadé
+                    $message = "Le fichier uploadé est un pdf - " . $check["mime"] . ".";
+                    $uploadOk = 1;
+                } else
+                {
+                    $message = "Le fichier uploadé n'est pas un pdf.";
+                    $uploadOk = 0;
+                }
+                // // Verifier si le fichier existe déjà
+                // if (file_exists($fichier))
+                // {
+                //     echo "Désolé, le fichier existe déjà.";
+                //     $uploadOk = 0;
+                // }
+                // Verifier la taille de l'image uploadé
+                if ($_FILES["lien_catalogue"]["size"] > 50000)
+                {
+                    $message = "Votre pdf est trop lourd. Taille maximale autorisée : 5 Mo.";
+                    $uploadOk = 0;
+                }
+                $fileType = pathinfo($fichier,PATHINFO_EXTENSION); //récupère l'extension du fichier
+                // Formats acceptés
+                if($fileType != "pdf" )
+                {
+                    $message = "Le fichier doit être au format .pdf";
+                    $uploadOk = 0;
+                }
+            }
+        }
+        // Vérifier si $uploadOk est à 0 à cause d'une erreur
+        if ($uploadOk == 0)
+        {
+            $message = "Désolé, votre fichier n'a pas pu être chargé.";
+            // if everything is ok, try to upload file
+        } else
+        {
+            if (move_uploaded_file($_FILES["lien_catalogue"]["tmp_name"], $fichier))
+            {
+                $message = "Votre fichier : ". basename( $_FILES["lien_catalogue"]["name"]). " à été enregistré.";
+            } else
+            {
+                $message = "Désolé, votre fichier : ". basename( $_FILES["lien_catalogue"]["name"]). " n'a pas pu être téléchargé.";
+            }
+        }
+
+        $this->message = $message;
+        //echo $fichier;
+        return $fichier;
+    }
+
+    public function uploadPdf()
+    {
+        $this->allowTo([ "admin", "super-admin" ]);
+        $repertoire = "assets/pdf/"; //repertoire où le fichier va être stocké
+        $fichier = $repertoire . basename($_FILES["lien_catalogue"]["name"]); //chemin du fichier uploadé
+        $uploadOk = 1;
+        $fileType = pathinfo($fichier,PATHINFO_EXTENSION); //récupère l'extension du fichier
+        // Verifier que l'image existe dans l'upload
+        if(isset($_POST["submit"]))
+        {
+            $check = filesize($_FILES["lien_catalogue"]["tmp_name"]);
+            if($check !== false)
+            {
+                $message = "Le fichier uploadé est un pdf - " . $check["mime"] . ".";
+                $uploadOk = 1;
+            } else
+            {
+                $message = "Le fichier uploadé n'est pas un pdf.";
+                $uploadOk = 0;
+            }
+        }
+        // // Verifier si le fichier existe déjà
+        // if (file_exists($fichier))
+        // {
+        //     echo "Désolé, le fichier existe déjà.";
+        //     $uploadOk = 0;
+        // }
+        // Verifier la taille de l'image uploadé
+        if ($_FILES["lien_catalogue"]["size"] > 50000)
+        {
+            $message = "Votre fichier est trop lourd. Taille maximale autorisée : 5 Mo.";
+            $uploadOk = 0;
+        }
+        // Formats acceptés
+        if($fileType != "pdf")
+        {
+            $message = "Le fichier doit être au format .pdf";
+            $uploadOk = 0;
+        }
+        // Vérifier si $uploadOk est à 0 à cause d'une erreur
+        if ($uploadOk == 0)
+        {
+            $message = "Désolé, votre fichier n'a pas pu être chargé.";
+            // if everything is ok, try to upload file
+        } else
+        {
+            if (move_uploaded_file($_FILES["lien_catalogue"]["tmp_name"], $fichier))
+            {
+                $message = "Votre fichier : ". basename( $_FILES["lien_catalogue"]["name"]). " à été enregistré.";
+            } else
+            {
+                $message = "Désolé, votre fichier : ". basename( $_FILES["lien_catalogue"]["name"]). " n'a pas pu être téléchargé.";
+            }
+        }
+
+        $this->message = $message;
+        return $fichier;
+    }
+
+// ********************************************************************************************************************
     public function suppr_accents($str, $encoding='utf-8')
     {
         // transformer les caractères accentués en entités HTML
@@ -919,7 +1227,7 @@ public function postLogin()  // page affichée aprés s'être loggé
             $lieu              = trim($_POST["lieu_formation"]);
             $intervenant       = trim($_POST["intervenant_formation"]);
             $programme         = trim($_POST["programme_formation"]);
-            $lien              = trim($_POST["lien_catalogue"]);
+            //$lien              = trim($_POST["lien_catalogue"]);
             $url               = trim($_POST["url"]);
             $alt               = trim($_POST["alt"]);
             $prix               = trim($_POST["prix"]);
@@ -943,7 +1251,7 @@ public function postLogin()  // page affichée aprés s'être loggé
                     && is_string($lieu)         && ( mb_strlen($lieu) > 0 ) // a voir : dans html, le type="date" de la balise <input> doit renvoyer un champs text sur certains navigateur
                     && is_string($intervenant)  && ( mb_strlen($intervenant) > 0 )
                     && is_string($programme)    && ( mb_strlen($programme) > 0 )
-                    && is_string($lien)         && ( mb_strlen($lien) > 0 )
+                    //&& is_string($lien)         && ( mb_strlen($lien) > 0 )
                     && is_string($url)          && ( mb_strlen($url) > 0 )
                     && is_string($alt)          && ( mb_strlen($alt) > 0 )
                     && is_string($prix)          && ( mb_strlen($prix) > 0 )
@@ -960,6 +1268,7 @@ public function postLogin()  // page affichée aprés s'être loggé
                 // JE CREE UN OBJET DE LA CLASSE FormationModel
                 // NE PAS OUBLIER DE FAIRE use
                 $img = $this->uploadUpdate();
+                $lien_catalogue = $this->uploadUpdatePdf();
                 $objetFormationModel = new formationModel;
                 $tabUpdate = [
                 "titre_formation"       => $titre,
@@ -974,7 +1283,7 @@ public function postLogin()  // page affichée aprés s'être loggé
                 "lieu_formation"        => $lieu,
                 "intervenant_formation" => $intervenant,
                 "programme_formation"   => $programme,
-                "lien_catalogue"        => $lien,
+                "lien_catalogue"        => $lien_catalogue,
                 "url"                   => $url,
                 "alt"                   => $alt,
                 "prix"                  => $prix,
@@ -983,6 +1292,11 @@ public function postLogin()  // page affichée aprés s'être loggé
                 if ($img != "")
                 {
                     $tabUpdate["img"] = str_replace("assets/", "", $img);
+                }
+
+                if ($lien_catalogue != "")
+                {
+                    $tabUpdate["lien_catalogue"] = str_replace("assets/", "", $lien_catalogue);
                 }
                 // JE PEUX UTILISER LA METHODE update DE LA CLASSE \W\Model\Model
                 $objetFormationModel->update($tabUpdate, $id, false);
