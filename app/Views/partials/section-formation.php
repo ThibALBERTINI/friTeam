@@ -5,17 +5,29 @@
 
 <div class="container-fluid">
   <div class="row row-centered">
-    <div class="col-xs-12 col-md-8  col-centered">
-      <p class="introduction-formation"></p>
-    </div>
+      <div class="col-xs-12 col-md-8  col-centered">
+         <p class="introduction-formation"></p>
+      </div>
   </div>
 </div>
 
-<form method="get" class="container formation text-center formation">
-        <input type="text" class="form-control" name="recherche" id="recherche" placeholder="Chercher une formation"/><br>
-        <button type="submit" class="btn btn-info">Rechercher</button><br><br>
-        <a href="<?php echo $this->url('default_formation') ?>">Revenir au catalogue complet </a>
-</form>
+<!-- Barre de recherche -->
+<div class="container-fluid">
+	<div class="row row-centered">
+		<div class="col-xs-12">
+			<form method="get" class="col-xs-12 form-inline container formation text-center formation">
+				<div class="form-group">
+					<!-- Champ Recherche -->
+					<input type="text" class="form-control champ-recherche" name="recherche" id="recherche" placeholder="Recherche">
+					<!-- Bouton Recherche -->
+					<button type="submit" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i></button>
+				</div>
+				<!-- Revenir au Catalogue Complet -->
+				<p><a href="<?php echo $this->url('default_formation') ?>">Revenir au catalogue complet </a></p>
+			</form>
+		</div>
+	</div>
+</div>
 
 <div class="container carte-container">
   <div class="row row-centered">
@@ -23,7 +35,7 @@
     <nav class="filtres container formation">
         <!-- chaque categorie, on créé le bouton qui correspond avec un attribut data-filter=".friteam" par exemple -->
         <!-- <span class="recherche">Formations : </span> -->
-         <button data-filter="*" type="button" class="btn btn-default btn-formation">Toutes nos formations</button>
+         <button data-filter="*" type="button" class="btn btn-default btn-formation">Toutes nos offres</button>
                 <?php foreach($categs as $categ): ?>
 
          <button data-filter=".<?php echo strtolower($categ); ?>" type="button" class="btn btn-default btn-formation"><?= $categ ?></button>

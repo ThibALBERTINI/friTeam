@@ -212,6 +212,7 @@ ul.dropdown-menu {
 .dropdown-menu li a:hover {
   background-color: #FFFFFF !important;
 }
+
 /*******************************
 Image fond Header page Accueil
 *******************************/
@@ -374,7 +375,7 @@ ul li a.social-icon {
 }
 
 ul li a.social-icon:hover {
-  color: #BFBD3F;
+  color: #123E54;
   transition: all ease-in-out 300ms;
 }
 
@@ -389,7 +390,7 @@ ul li a.text-footer {
 }
 
 ul li a.text-footer:hover {
-  color: #BFBD3F;
+  color: #123E54;
   transition: all ease-in-out 300ms;
 }
 
@@ -798,6 +799,18 @@ span.companie {
     margin-right:10px !important;
 }
 
+/* Champ et Bouton Recherche */
+input.champ-recherche {
+  width: 300px !important;
+  border: 1px solid #CFCFCF;
+  border-radius: 0px;
+  box-shadow: none;
+}
+
+input.champ-recherche:active {
+  outline: none !important;
+}
+
 /*Bouton Isotope Formation*/
 .btn-formation {
   background-color: #FFFFFF;
@@ -805,7 +818,7 @@ span.companie {
   color: #BFBD3F;
   border: 1px solid #BFBD3F;
   transition: all ease 300ms !important;
-  border-radius: 20px;
+  border-radius: 5px;
 }
 
 .btn-formation:hover {
@@ -827,6 +840,13 @@ span.companie {
   border: 1px solid #BFBD3F;
 }
 
+.btn-formation:active {
+  outline: none !important;
+  background-color: #BFBD3F !important;
+  color: white !important;
+  border: 1px solid #BFBD3F !important;
+}
+
 /*Mis en forme des cartes Formations*/
 div.carte-container {
   margin: 0 auto !important;
@@ -837,6 +857,7 @@ div.carte-formation {
 }
 
 div.carte-formation {
+  position: relative;
   margin: 0 auto;
   padding: 0;
   margin-top: 10px;
@@ -855,17 +876,25 @@ div.carte-formation {
   filter:progid:DXImageTransform.Microsoft.Shadow(color=rgba(194,194,194,0.2);, Direction=165, Strength=8);
 }
 
+div.image {
+  overflow: inherit;
+  height: 200px;
+}
+
 div.image img {
   overflow: hidden;
-  height: 200px;
-  min-width: 100%;
+  position: relative;
+  height: auto;
+  width: 100%;
   /*border-top-left-radius: 20px;
   border-top-right-radius: 20px;*/
 }
 
 div.contenu h4 {
+  text-align: left !important;
   padding-top: 15px;
   width: 250px;
+  height: 3.8em;
   text-transform: uppercase;
   font-size: 15px;
   padding-left: 20px;
@@ -901,10 +930,11 @@ div.ligne {
   margin-bottom: 15px;
   width: 90%;
   border-bottom: 1px solid lightgrey;
-  opacity: 0.5
+  opacity: 0.5;
 }
 
 p.resume {
+  text-align: left !important;
   padding-left: 20px;
   padding-right: 20px;
   color: grey;
@@ -913,6 +943,13 @@ p.resume {
 
 div.bouton-container {
   padding-top: 20px;
+  position: absolute;
+  bottom: 32px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 }
 
 div a.bouton {
@@ -966,7 +1003,7 @@ PAGE CONTACT
 
 .form-contact label {
   font-weight: 100;
-  color: #AFAFAF;
+  color: grey;
 }
 
 .form-contact input, .form-contact textarea {
@@ -983,11 +1020,15 @@ PAGE CONTACT
 
 .form-contact input::placeholder, .form-contact textarea::placeholder {
   font-style: italic;
-  color: #DFDFDF;
+  color: #lightgrey;
 }
 
 .form-contact input.btnSub {
-  color: grey;
+  background-color: grey;
+  border: 1px solid grey;
+  color: white;
+  padding-left: 40px;
+  padding-right: 40px;
   transition: all ease 300ms;
 }
 
@@ -996,6 +1037,14 @@ PAGE CONTACT
   border: 1px solid #2C9BD4;
   color: #FFFFFF;
   transition: all ease 300ms;
+}
+
+form.form-contact input.btnSub:focus {
+  outiline: 0px;
+}
+
+form.form-contact input.btnSub:active {
+  outiline: 0px;
 }
 
 /*Message D'erreur*/
@@ -1148,147 +1197,197 @@ box-shadow: 0px -2px 26px 1px rgba(184,184,184,0.2);
  /*****************************************
  PAGE FORMATION DETAIL
  *****************************************/
-
- /*Onglets Catégories formation*/
-div.onglets-categories {
-  margin-bottom: 20px;
-  margin-top: 30px;
+.flexitivite {
+  display: flex;
+  flex-wrap: wrap;
 }
 
-div.onglets-categories ul li{
-    list-style-type: none;
-    display: inline;
-    text-transform: uppercase;
-    margin-left: 10px;
- }
-
- /*Texte Introduction page Formation*/
- div.text-intro-formation {
-  margin-top: 30px;
- }
+.flexitivite div.row {
+  display: flex;
+  height: 100%;
+}
 
 .detail-formation {
-  margin-top: 50px;
-  margin-bottom: 60px;
+  margin-top: 35px;
+  margin-bottom: 50px;
+  width: 75%;
 }
 
-/*Titre Programme*/
-.detail-formation h3 {
-  font-size: 1.4em;
-  color: #2C9BD4;
-  text-transform: uppercase;
+/*Titre de la Formation*/
+.detail-formation h2 {
+  /*text-transform: uppercase;*/
+  font-size: 1.9em;
+  /*color: #2C9BD4;*/
 }
 
-/*Explication Formation*/
-p.explication-formation {
-  font-weight: bolder;
-}
-
-/*Image Formation*/
-.image-formation {
-  padding: 0;
-  border-radius: 30px;
-}
-
-.detail-formation img {
-  height: 500px;
-  width: 100%;
-  margin: 0;
-  margin-bottom: 20px;
-  padding: 0;
-    border-radius: 30px;
-}
-
-/*Colonne Gauche*/
-.colonne-gauche {
-  padding-right: 30px;
-}
-
-div.encard p.info {
-  display: inline;
-}
-
+/*Ligne de Séparation*/
 .detail-formation div.ligne {
+  border-bottom: 2px solid #2C9BD4;
+  margin-right: 0;
+  margin-left: 0;
+  margin-bottom: 0px;
   width: 100%;
-  border: 1px solid #2C9BD4;
 }
-
-div.icon-formation span.icon {
+/*Icones Date / Durée / Lieu*/
+span.icon {
   padding: 0;
 }
 
-div.icon-formation {
+.icon-formation {
+  padding-left: 0;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+/*Texte à côté des icons*/
+.text-icon {
   padding: 0;
-  padding-bottom: 10px;
+}
+
+.icon-formation p {
+  display: inline;
+  margin-left: 3px;
   font-style: italic;
 }
 
-div.icon-formation p {
-  display: inline;
+/*Image de la Formation*/
+.img {
+  padding-right: 0;
 }
 
-/*colonne droite*/
-div.encard-droit {
-  border: 2px solid #FFB420;
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-top: 50px;
-  padding-bottom: 50px;
+.image-formation {
+  overflow: hidden;
+  margin-bottom: 15px;
+  background-color: white;
+  height: 300px;
 }
 
-.titre-col-droite {
-  text-transform: uppercase;
-  color: #FFB420;
+.image-formation img {
+  width: 100%;
+
 }
 
-.programme-formation {
-  margin-bottom: 20px;
+/*Media Queries pour l'image*/
+@media (max-width: 535px) {
+  .image-formation {
+    height: 200px;
+  }
 }
 
+/*Colonne de Gauche*/
+.colonne-gauche {
+  padding-right: 15px;
+}
 
-/*Bouton Préinscription*/
-.inscription-formation {
-  margin-top: 10px;
-  border: 1px solid #FFB420;
-  background-color: #FFB420;
-  border-radius: 50px;
+/*Texte d'introduction de la formation*/
+.explication-formation {
+  font-weight: 200;
+  font-style: italic;
+  padding-right: 10px;
+}
+
+/*Titre Programme*/
+div.colonne-gauche h3.programme {
+  font-size: 2em;
+  margin-bottom: 15px;
   padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
-  color: #FFFFFF;
+}
+
+/*Titres sections programme*/
+.colonne-gauche h3 {
   text-transform: uppercase;
-  transition: all ease-in-out 300ms;
+  color: #2C9BD4;
+  font-size: 1.5em;
+  margin-bottom: 3px;
 }
 
-.inscription-formation:hover {
-  background-color: #D78F01;
-  color: #FFFFFF;
-  border: 1px solid #D78F01;
-  transition: all ease-in-out 300ms;
-}
-
-/*Bouton brochure*/
+/*Bouton Brochure de la formation*/
 .brochure-formation {
-  margin-bottom: 20px;
-  border: 1px solid #2C9BD4;
-  background-color: #2C9BD4;
-  border-radius: 50px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
-  color: #FFFFFF;
   text-transform: uppercase;
-  transition: all ease-in-out 300ms;
+  border-bottom: 1px solid black;
+  border-radius: 0;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-right: 0;
+  padding-left: 0;
+  color: black;
+  transition: all ease 300ms;
 }
 
 .brochure-formation:hover {
-  background-color: #056396;
-  color: #FFFFFF;
-  border: 1px solid #056396;
-  transition: all ease-in-out 300ms;
+  color: #2C9BD4;
+  border-bottom: 1px solid #2C9BD4;
+  transition: all ease 300ms;
 }
+
+/*Colonne de Droite*/
+.encard-droit {
+  height: 100%;
+ /* background-color: #FFB420;*/
+  border: 2px solid #FFB420;
+  padding-top: 50px;
+  padding-bottom: 70px;
+  padding-right: 30px;
+  padding-left: 30px;
+}
+
+/*Titres parties Droite*/
+.encard-droit h4 {
+  text-transform: uppercase;
+  color: #FFB420;
+  font-size: 1.5em;
+  margin-bottom: 3px;
+  margin-top: 25px;
+}
+
+.encard-droit p {
+  font-size: 1em;
+}
+
+/*Bouton de Préinscription*/
+.inscription-formation {
+  margin-bottom: 25px;
+  background-color: #FFB420;
+  color: white;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 50px;
+  padding: 17px 30px;
+  transition: all ease 300ms;
+}
+
+.inscription-formation:hover {
+  background-color: #2C9BD4;
+  color: #FFFFFF;
+  transition: all ease 300ms;
+}
+
+.inscription-formation:focus {
+  background-color: #FFB420;
+  color: #FFFFFF;
+  outline: 0px;
+}
+
+div.encard-droit div button.inscription-formation:active {
+  background-color: #FFB420;
+  color: #FFFFFF;
+  outline: 0px;
+}
+
+/******************************************
+          MODAL DETAIL FORMATION
+******************************************/
+div.ma-modal div.modal-contenu {
+  border-radius: 0px;
+  width: 90%;
+}
+
+/*Champ Civilité dans le pop-up*/
+.mister-miss label {
+  margin-right: 20px;
+}
+
+
 
  /*****************************************
  PAGE ADMIN FORMATION DETAIL UPDATE
@@ -1369,5 +1468,3 @@ div#pass{
 div#pass span, .minip{
   color: #FFB420;
 }
-
-

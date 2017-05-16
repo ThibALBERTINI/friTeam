@@ -46,8 +46,8 @@
               <li><a class="menu1" href="<?php echo $this->url('default_home') ?>">Accueil</a></li>
               <li><a class="menu2" href="<?php echo $this->url('default_friteam-equipe') ?>">Qui sommes-nous ?</a></li>
               <li><a class="menu3" href="<?php echo $this->url('default_formation') ?>">Nos Offres</a></li>
-              <li><a class="menu6" href="<?php echo $this->url('default_blog') ?>">Blog</a></li>
-              <li><a class="menu7" href="<?php echo $this->url('default_contact') ?>">Contact</a></li>
+              <li><a class="menu4" href="<?php echo $this->url('default_blog') ?>">Blog</a></li>
+              <li><a class="menu5" href="<?php echo $this->url('default_contact') ?>">Contact</a></li>
             </ul>
           </div> <!-- Fin Navbar-collapse -->
         </div> <!-- Fin container-fluid -->
