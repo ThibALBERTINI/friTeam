@@ -113,7 +113,7 @@ CODEHTML;
 
                     <div class=form-group>   
                         <label for="ordre_apparition">ORDRE D'APPARITION DANS L'AFFICHAGE</label>
-                        <input type="number" name="ordre_apparition" id="ordre_apparition" class="form-control"><br>
+                        <input type="number" min="0" name="ordre_apparition" id="ordre_apparition" class="form-control"><br>
                     </div>
 
                     <div class=form-group>
@@ -154,6 +154,16 @@ CODEHTML;
                     <div class=form-group>
                         <label for="linkedin">LINKEDIN</label>
                         <input type="text" name="linkedin" id="linkedin" class="form-control"><br>
+                    </div>
+
+                    <div class=form-group>
+                        <label for="twitter">TWITTER</label>
+                        <input type="text" name="twitter" id="twitter" class="form-control"><br>
+                    </div>
+
+                    <div class=form-group>
+                        <label for="instagram">INSTAGRAM</label>
+                        <input type="text" name="instagram" id="instagram" class="form-control"><br>
                     </div>
 
                     <div class=form-group>

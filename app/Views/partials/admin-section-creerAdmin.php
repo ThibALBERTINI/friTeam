@@ -1,3 +1,11 @@
+<h2>
+	Formulaire de création d'administrateur
+</h2>
+<p>
+	Bienvenue. Grace a ce simple formulaire, vous pouvez créer des administrateur, qui auront accès à la partie adminstrateur du site. <br>
+	Un "administrateur" peut modifier les contenus du site. <br>
+	Un"super administrateur" peut lui aussi modifier les contenus du site mais il a égalment la possibilité de créer, modifier ou supprimer des administrateurs.
+</p>
 <div class="container-fluid"> 
     <div class="row"> 
         <div class="col-xs-12 col-md-6 col-md-offset-3">

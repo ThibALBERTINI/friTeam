@@ -29,12 +29,12 @@ if (!empty($tabFormation)) :
 
                     <div class="form-group">
                         <label for="img">Illustration</label><br>
-                        <input type="file" name="img" id="img" class="form-control" value="Choissisez une autre image"><br>
+                        <input type="file" name="img" id="img" class="form-control"><br>
                     </div>
 
                     <div class="form-group">
                         <label for="alt">Texte alternatif de l'image (référencement de l'image)</label><br>
-                        <input type="text" name="alt" id="alt" placeholder="Champs limité à 100 caractères" class="form-control" value="<?php echo $alt ?>"><br>
+                        <input type="text" name="alt" id="alt" class="form-control" value="<?php echo $alt ?>"><br>
                     </div>
 
                     <div class="form-group">
@@ -106,7 +106,7 @@ if (!empty($tabFormation)) :
 
                     <div class="form-group">
                         <label for="lien_catalogue">Lien vers Catalogue en ligne</label><br>
-                        <input type="file" name="lien_catalogue" id="lien_catalogue" class="form-control" required value="<?php echo $lien_catalogue ?>"><br>
+                        <input type="file" name="lien_catalogue" id="lien_catalogue" class="form-control" value="<?php echo $lien_catalogue ?>"><br>
                     </div>
 
                     <div class="form-group">
