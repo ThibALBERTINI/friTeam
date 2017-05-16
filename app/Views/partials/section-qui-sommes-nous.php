@@ -60,6 +60,8 @@ if(!empty($tabResult))
     $domaines = $tabInfo["domaines_inter"];
     $entreprise = $tabInfo["entreprise_profil"];
     $linkedin = $tabInfo["linkedin"];
+    $twitter = $tabInfo["twitter"];
+    $instagram = $tabInfo["instagram"];
     $alt = $tabInfo["alt"];
 
     $cheminAsset = $this->assetUrl("/");
@@ -81,8 +83,8 @@ if(!empty($tabResult))
 
         <div class="text-center">
             <a href="<?php echo $linkedin; ?>" target="_blank"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
-            <a href=""><i class="fa fa-instagram" aria-hidden="true"></i></a>
-            <a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a href="<?php echo $instagram; ?>" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+            <a href="<?php echo $twitter; ?>" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
         </div>
 
         <!-- Trigger the modal with a button -->

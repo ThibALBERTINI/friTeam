@@ -741,6 +741,8 @@ class AdminController
             $vision             = trim($_POST["vision_profil"]);
             $entreprise         = trim($_POST["entreprise_profil"]);
             $linkedin           = trim($_POST["linkedin"]);
+            $twitter           = trim($_POST["twitter"]);
+            $instagram           = trim($_POST["instagram"]);
             $alt                = trim($_POST["alt"]);
 
 
@@ -757,6 +759,8 @@ class AdminController
                     && is_string($vision)         && ( mb_strlen($vision) > 0 )
                     && is_string($entreprise)         && ( mb_strlen($entreprise) > 0 )
                     && is_string($linkedin)  && ( mb_strlen($linkedin) > 0 )
+                    && is_string($twitter)  && ( mb_strlen($twitter) > 0 )
+                    && is_string($instagram)  && ( mb_strlen($instagram) > 0 )
                     && is_string($alt)  && ( mb_strlen($alt) > 0 )
                     // && is_numeric($id_categorie)
                 )
@@ -786,7 +790,9 @@ class AdminController
                         "vision_profil"         => $vision,
                         "entreprise_profil"     => $entreprise,
                         "linkedin"              => $linkedin,
-                        "alt"              => $alt,
+                        "twitter"              => $twitter,
+                        "instagram"              => $instagram,
+                        "alt"                   => $alt,
                     ]);
 
                 // OK
@@ -1086,7 +1092,7 @@ class AdminController
                 //     $uploadOk = 0;
                 // }
                 // Verifier la taille de l'image uploadé
-                if ($_FILES["lien_catalogue"]["size"] > 50000)
+                if ($_FILES["lien_catalogue"]["size"] > 5000000)
                 {
                     $message = "Votre pdf est trop lourd. Taille maximale autorisée : 5 Mo.";
                     $uploadOk = 0;
@@ -1149,7 +1155,7 @@ class AdminController
         //     $uploadOk = 0;
         // }
         // Verifier la taille de l'image uploadé
-        if ($_FILES["lien_catalogue"]["size"] > 50000)
+        if ($_FILES["lien_catalogue"]["size"] > 5000000)
         {
             $message = "Votre fichier est trop lourd. Taille maximale autorisée : 5 Mo.";
             $uploadOk = 0;
@@ -1283,7 +1289,7 @@ class AdminController
                 "lieu_formation"        => $lieu,
                 "intervenant_formation" => $intervenant,
                 "programme_formation"   => $programme,
-                "lien_catalogue"        => $lien_catalogue,
+                //"lien_catalogue"        => $lien_catalogue,
                 "url"                   => $url,
                 "alt"                   => $alt,
                 "prix"                  => $prix,
@@ -1349,6 +1355,8 @@ class AdminController
             $vision             = trim($_POST["vision_profil"]);
             $entreprise         = trim($_POST["entreprise_profil"]);
             $linkedin           = trim($_POST["linkedin"]);
+            $twitter           = trim($_POST["twitter"]);
+            $instagram           = trim($_POST["instagram"]);
             $alt                = trim($_POST["alt"]);
 
 
@@ -1365,6 +1373,8 @@ class AdminController
                     && is_string($vision)       && ( mb_strlen($vision) > 0 )
                     && is_string($entreprise)   && ( mb_strlen($entreprise) > 0 )
                     && is_string($linkedin)     && ( mb_strlen($linkedin) > 0 )
+                    && is_string($twitter)     && ( mb_strlen($twitter) > 0 )
+                    && is_string($instagram)     && ( mb_strlen($instagram) > 0 )
                     && is_string($alt)     && ( mb_strlen($alt) > 0 )
                     //&& is_numeric($id_categorie)
                 )
@@ -1392,6 +1402,8 @@ class AdminController
                         "vision_profil"         => $vision,
                         "entreprise_profil"     => $entreprise,
                         "linkedin"              => $linkedin,
+                        "twitter"              => $twitter,
+                        "instagram"              => $instagram,
                         "alt"                   => $alt,
                 ];
 

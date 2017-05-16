@@ -49,7 +49,7 @@ if (!empty($tabProfil)) :
 
                     <div class="form-group">
                         <label for="alt">Texte alternatif de l'image (référencement de l'image)</label><br>
-                        <input type="text" name="alt" id="alt" placeholder="Champs limité à 100 caractères" class="form-control"><br>
+                        <input type="text" name="alt" id="alt" value="<?php echo $alt ?>" class="form-control"><br>
                     </div>
 
                     <div class="form-group">   
@@ -64,7 +64,7 @@ if (!empty($tabProfil)) :
 
                     <div class=form-group>   
                         <label for="ordre_apparition">ORDRE D'APPARITION</label>
-                        <input type="number" name="ordre_apparition" id="ordre_apparition" class="form-control"><br>
+                        <input type="number" min="0" placeholder="<?php echo $ordre_apparition ?>" value="<?php echo $ordre_apparition ?>" name="ordre_apparition" id="ordre_apparition" class="form-control"><br>
                     </div>
 
                     <div class="form-group">
@@ -107,6 +107,16 @@ if (!empty($tabProfil)) :
                         <input type="text" name="linkedin" class="form-control" value="<?php echo $linkedin ?>"><br>
                     </div>
                     
+                    <div class="form-group">
+                        <label for="twitter">TWITTER</label><br>
+                        <input type="text" name="twitter" class="form-control" value="<?php echo $twitter ?>"><br>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="instagram">INSTAGRAM</label><br>
+                        <input type="text" name="instagram" class="form-control" value="<?php echo $instagram ?>"><br>
+                    </div>                    
+
                     <div class="form-group">
                         <button type="submit" name="submit">MODIFIER LE PROFIL</button>
                     </div>        
